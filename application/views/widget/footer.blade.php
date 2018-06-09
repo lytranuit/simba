@@ -66,10 +66,6 @@ Footer
                         <i class="ion-ios-email-outline">
                         </i>
                         info@example.com
-                        <br>
-                        </br>
-                        </br>
-                        </br>
                     </p>
                     <div class="social-links">
                         <a class="twitter" href="#">
@@ -94,7 +90,7 @@ Footer
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 footer-newsletter" id="contact">
+                <div class="col-lg-6 col-md-12 footer-newsletter" id="contact">
                     <h4>
                         Our Newsletter
                     </h4>

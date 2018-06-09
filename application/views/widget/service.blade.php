@@ -51,7 +51,7 @@
                             <div class="space">
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <ul class="list-icons">
                                         <li>
                                             <i class="fa fa-check pr-10">
@@ -90,7 +90,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere hic qui non placeat ad explicabo dignissimos amet iusto veniam!
                                     </p>
@@ -110,7 +110,7 @@
                             <div class="space">
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <ul class="list-icons">
                                         <li>
                                             <i class="fa fa-check pr-10">
@@ -149,7 +149,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <p>
                                         Dolor sit amet, consectetur adipisicing elit. Facere hic qui non placeat ad explicabo dignissimos amet iusto veniam!
                                     </p>
@@ -169,7 +169,7 @@
                             <div class="space">
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <ul class="list-icons">
                                         <li>
                                             <i class="fa fa-check pr-10">
@@ -208,7 +208,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <p>
                                         Ipsum dolor sit amet, consectetur adipisicing elit. Facere hic qui non placeat ad explicabo dignissimos amet iusto veniam!
                                     </p>
@@ -228,7 +228,7 @@
                             <div class="space">
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <ul class="list-icons">
                                         <li>
                                             <i class="fa fa-check pr-10">
@@ -267,7 +267,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-sm-12">
                                     <p>
                                         Sit amet, consectetur adipisicing elit. Facere hic qui non placeat ad explicabo dignissimos amet iusto veniam!
                                     </p>

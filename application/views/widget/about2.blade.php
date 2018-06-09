@@ -13,18 +13,17 @@
                     </p>
                 </header>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <h5 class="title">
                             <b>
                                 IDea - Responsive Website Theme
                             </b>
                         </h5>
                         <div class="row">
-                            <div class="col-md-6">
-                                <img alt="" src="<?= base_url(); ?>public/img/about-mission.jpg" width="270px">
-                                </img>
+                            <div class="col-lg-6 col-sm-12">
+                                <img alt="" src="<?= base_url(); ?>public/img/about-mission.jpg" class='img-fluid'>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6 col-sm-12">
                                 <p>
                                     Quo soluta provident, quod reiciendis. Dolores nam totam aut illum ex ratione harum molestias maxime minima tempore, possimus, laudantium. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 </p>
@@ -39,7 +38,7 @@
                         <div class="space hidden-md hidden-lg">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="panel-group panel-dark" id="accordion">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
