@@ -74,14 +74,14 @@
                         </span>
                     </a>
                 </li>
-                <li class="menu-has-children" id="language">
+                <li class="menu-has-children">
                     <a href="">
                         <?= $language_list[language_current()] ?>
                     </a>
-                    <ul>
+                    <ul id="language">
                         <?php foreach ($language_list as $key => $lang): ?>
-                            <li data='<?= $key ?>'>
-                                <a href="#">
+                            <li>
+                                <a href="#" data='<?= $key ?>'>
                                     <?= $lang ?>
                                 </a>
                             </li>

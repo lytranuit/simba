@@ -9,7 +9,7 @@ class MY_Controller extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->library(array('ion_auth', 'form_validation', 'widget'));
-        $this->lang->load('auth');
+        $this->lang->load(array('auth', 'home'));
         $this->load->model("page_model");
 //        echo language_current();
         ////// set langue

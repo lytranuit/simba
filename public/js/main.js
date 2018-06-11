@@ -2,7 +2,7 @@
 $(window).scroll();
 jQuery(document).ready(function ($) {
     // Back to top button
-    $("#language li").click(function () {
+    $(document).off("click", "#language li a").on("click", "#language li a", function () {
         var language = $(this).attr("data");
         $.ajax({
             url: 'ajax/setlanguage',
@@ -13,6 +13,13 @@ jQuery(document).ready(function ($) {
             }
         });
     })
+    $(".hc-tabs .nav-link").click(function () {
+        var tab = $(this).attr("href");
+        $(".hc-tabs-top img").hide();
+        var img = $(".hc-tabs-top img[data-tab='" + tab + "']");
+        img.fadeIn(1000)
+    });
+    $(".hc-tabs .nav-link.active").trigger("click")
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
             $('.back-to-top').fadeIn('slow');
@@ -189,8 +196,8 @@ jQuery(document).ready(function ($) {
 
     // Clients carousel (uses the Owl Carousel library)
     $(".clients-carousel").owlCarousel({
-        autoplay: true,
-        dots: true,
+        autoplay: false,
+        dots: false,
         loop: true,
         responsive: {0: {items: 2}, 768: {items: 4}, 900: {items: 6}
         }

@@ -6,12 +6,12 @@
             <div class="col-md-12">
                 <div class="vertical hc-tabs">
                     <!-- Tabs Top -->
-                    <div class="hc-tabs-top">
-                        <img alt="IDea" class="current-img show fadeInRightSmall animated" data-tab="#tab1" data-tab-animation-effect="fadeInRightSmall" src="images/section-image-1.png">
-                        <img alt="IDea" class="" data-tab="#tab2" data-tab-animation-effect="fadeInRightSmall" src="images/section-image-2.png">
-                        <img alt="IDea" class="" data-tab="#tab3" data-tab-animation-effect="fadeInRightSmall" src="images/section-image-3.png">
-                        <img alt="IDea" class="" data-tab="#tab4" data-tab-animation-effect="fadeInRightSmall" src="images/section-image-4.png">
-                        <div class="space">
+                    <div class="row justify-content-center">
+                        <div class="hc-tabs-top col-6 mb-3 text-center">
+                            <img alt="IDea" class="current-img img-fluid" data-tab="#tab1" src="<?= base_url(); ?>public/img/intro-carousel/2.jpg">
+                            <img alt="IDea" class="img-fluid" data-tab="#tab2" src="<?= base_url(); ?>public/img/intro-carousel/3.jpg">
+                            <img alt="IDea" class="img-fluid" data-tab="#tab3" src="<?= base_url(); ?>public/img/intro-carousel/map.png">
+                            <img alt="IDea" class="img-fluid" data-tab="#tab4" src="<?= base_url(); ?>public/img/about-bg.jpg">
                         </div>
                     </div>
                     <!-- Tabs Arrow -->

@@ -16,17 +16,17 @@ Intro Section
                         <div class="carousel-content container">
                             <div class="row">
                                 <div class="col-md-6 col-xs-12">
-                                    <h2 class="wow wowlive bounceInDown" data-wow-delay="0.5s">
+                                    <h2 class=" bounceInDown" data-wow-delay="0.5s">
                                         We are professional
                                     </h2>
-                                    <p class="wow wowlive bounceInDown" data-wow-delay="0.8s">
+                                    <p class=" bounceInDown" data-wow-delay="0.8s">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                     </p>
-                                    <a class="btn-get-started scrollto wow wowlive bounceInDown" data-wow-delay="1s" href="#featured-services">
+                                    <a class="btn-get-started scrollto  bounceInDown" data-wow-delay="1s" href="#featured-services">
                                         Get Started
                                     </a>
                                 </div>
-                                <div class="col-md-6 col-xs-12 wow wowlive slideInRight fadeOut">
+                                <div class="col-md-6 col-xs-12  slideInRight fadeOut">
                                     <img class="img-fluid" src="<?= base_url(); ?>public/img/intro-carousel/1.png"  width="500px"/>
                                 </div>
                             </div>
@@ -40,17 +40,17 @@ Intro Section
                     <div class="carousel-container">
                         <div class="carousel-content container">
                             <div class="row">
-                                <div class="col-md-6 col-xs-12 wow wowlive slideInLeft fadeOut">
+                                <div class="col-md-6 col-xs-12 slideInLeft fadeOut">
                                     <img class="img-fluid" src="<?= base_url(); ?>public/img/intro-carousel/5.png"  width="500px"/>
                                 </div>
                                 <div class="col-md-6 col-xs-12">
-                                    <h2 class="wow wowlive bounceInDown" data-wow-delay="0.5s">
+                                    <h2 class=" bounceInDown" data-wow-delay="0.5s">
                                         We are professional
                                     </h2>
-                                    <p class="wow wowlive bounceInDown" data-wow-delay="0.8s">
+                                    <p class=" bounceInDown" data-wow-delay="0.8s">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                     </p>
-                                    <a class="btn-get-started scrollto wow wowlive bounceInDown" data-wow-delay="1s"href="#featured-services">
+                                    <a class="btn-get-started scrollto  bounceInDown" data-wow-delay="1s"href="#featured-services">
                                         Get Started
                                     </a>
                                 </div>
@@ -65,17 +65,17 @@ Intro Section
                     <div class="carousel-container">
                         <div class="carousel-content container">
                             <div class="row">
-                                <div class="col-md-6 col-xs-12 wow wowlive slideInLeft fadeOut">
+                                <div class="col-md-6 col-xs-12  slideInLeft fadeOut">
                                     <img class="img-fluid" src="<?= base_url(); ?>public/img/intro-carousel/5.png"  width="500px"/>
                                 </div>
                                 <div class="col-md-6 col-xs-12">
-                                    <h2 class="wow wowlive bounceInDown" data-wow-delay="0.5s">
+                                    <h2 class=" bounceInDown" data-wow-delay="0.5s">
                                         We are professional
                                     </h2>
-                                    <p class="wow wowlive bounceInDown" data-wow-delay="0.8s">
+                                    <p class=" bounceInDown" data-wow-delay="0.8s">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                                     </p>
-                                    <a class="btn-get-started scrollto wow wowlive bounceInDown" data-wow-delay="1s"href="#featured-services">
+                                    <a class="btn-get-started scrollto  bounceInDown" data-wow-delay="1s"href="#featured-services">
                                         Get Started
                                     </a>
                                 </div>

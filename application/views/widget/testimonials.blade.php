@@ -1,13 +1,13 @@
 <!--==========================
     Clients Section
     ============================-->
-<section class="section-bg wow fadeInUp" id="testimonials">
+<section class="wow fadeInUp" id="testimonials">
     <div class="container">
-        <header class="section-header">
+<!--        <header class="section-header">
             <h3>
                 Testimonials
             </h3>
-        </header>
+        </header>-->
         <div class="owl-carousel testimonials-carousel">
             <div class="testimonial-item">
                 <img alt="" class="testimonial-img" src="<?= base_url(); ?>public/img/testimonial-1.jpg">
