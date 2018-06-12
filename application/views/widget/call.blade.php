@@ -4,18 +4,12 @@
             <h3>
                 News & Topics
             </h3>
-            <div id="search-new" style="
-                 position:  absolute;
-                 right:  0px;
-                 top: 0px;
-                 ">
+            <div id="search-new" class="hidden-md-down">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm" style="
-                               /* display: none; */
-                               ">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm">
                         <div class="input-group-append bg-success border-primary">
-                            <span class="input-group-text bg-transparent"><i class="fa fa-search"></i></span>
+                            <span class="input-group-text bg-transparent text-white"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
                 </div>
