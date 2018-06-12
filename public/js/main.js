@@ -199,10 +199,16 @@ jQuery(document).ready(function ($) {
         autoplay: false,
         dots: false,
         loop: true,
-        responsive: {0: {items: 2}, 768: {items: 4}, 900: {items: 6}
-        }
+        responsive: {0: {items: 2}, 768: {items: 4}, 900: {items: 6}}
     });
 
+    $(".category-carousel").owlCarousel({
+        autoplay: false,
+        dots: false,
+        loop: false,
+        responsive: {0: {items: 2}, 768: {items: 3}, 900: {items: 4}}
+    });
+    
     // Testimonials carousel (uses the Owl Carousel library)
     $(".testimonials-carousel").owlCarousel({
         autoplay: true,

@@ -8,7 +8,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-    background: #fff;
+    background: #f7f7f74a;
     color: #666666;
     font-family: "Open Sans", sans-serif;
 }
@@ -61,14 +61,15 @@ h1, h2, h3, h4, h5, h6 {
         bottom: 15px;
     }
 }
-
+.row{
+    width: 100%;
+}
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
 #header {
     padding: 30px 0;
     height: 92px;
-    position: fixed;
     left: 0;
     top: 0;
     right: 0;
@@ -78,6 +79,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #header.header-scrolled {
     background: white;
+    position: fixed;
     padding: 10px 0;
     height: 62px;
     transition: all 0.5s;
@@ -130,15 +132,26 @@ h1, h2, h3, h4, h5, h6 {
 # Intro Section
 --------------------------------------------------------------*/
 #intro {
-    display: table;
-    width: 100%;
-    height: 100vh;
-    background: #000;
+    margin: 10px 0px 20px;
 }
-
+#intro .carousel{
+    border-radius: 30px;
+    padding: 10px;
+    background: #e5e6e2;
+}
+#intro .carousel-inner{
+    border-radius: 20px;
+}
+#intro .box-image{
+    height: 90px;
+    border-radius: 10px;
+    display: inline-block;
+    overflow: hidden;
+    margin: 10px 0px 0px;
+}
 #intro .carousel-item {
     width: 100%;
-    height: 100vh;
+    height: 300px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -694,8 +707,21 @@ body.mobile-nav-active #mobile-nav-toggle {
 NEWS 
 */
 #news{
-
     padding: 60px 0 40px 0;
+}
+#news .no-img{
+    margin: 10px 0px;
+}
+#news .news_tx a{
+    color:black;
+}
+#news header{
+    position: relative;
+}
+#news #search-new{
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }
 /* Services Section
 --------------------------------*/
@@ -861,7 +887,7 @@ NEWS
 /* Portfolio Section
 --------------------------------*/
 #portfolio {
-    padding: 60px 0;
+    /*padding: 60px 0;*/
 }
 
 #portfolio #portfolio-flters {

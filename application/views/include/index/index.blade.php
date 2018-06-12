@@ -1,5 +1,5 @@
 <?= $widget->silder() ?>
-
+<?= $widget->category() ?>
 <main id="main">
     <?= $widget->fact() ?>
     <?= $widget->about1() ?>

@@ -120,13 +120,13 @@ Footer
                                 <div class="validation">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <a href="#" data-target="#comment-modal" data-toggle="modal" style="color: gray;"><?= lang('text_gop_y') ?></a>
-                            </div>
                             <div class="">
                                 <button type="submit" class="btn btn-success btn-sm">
                                     <?= lang('Send_Message') ?>
                                 </button>
+                                <a class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal">
+                                    <?= lang('text_gop_y') ?>
+                                </a>
                             </div>
                         </form>
                     </div>

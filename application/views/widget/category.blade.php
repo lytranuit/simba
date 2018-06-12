@@ -1,25 +1,10 @@
 <!--==========================
      Portfolio Section
      ============================-->
-<section class="section-bg" id="portfolio">
+<section class="" id="portfolio">
     <div class="container">
-        <header class="section-header">
-            <h3 class="section-title">
-                Our Portfolio
-            </h3>
-        </header>
-        <!-- <div class="row">
-<div class="col-lg-12">
-  <ul id="portfolio-flters">
-    <li data-filter="*" class="filter-active">All</li>
-    <li data-filter=".filter-app">App</li>
-    <li data-filter=".filter-card">Card</li>
-    <li data-filter=".filter-web">Web</li>
-  </ul>
-</div>
-</div> -->
-        <div class="row portfolio-container">
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+        <div class="row portfolio-container owl-carousel category-carousel wow fadeInUp" data-wow-delay="0.5s">
+            <div class="portfolio-item filter-app">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/BANH KEO.jpg">
@@ -35,7 +20,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.1s">
+            <div class="portfolio-item filter-web">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/COCKTAIL&BIA.jpg">
@@ -51,7 +36,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.2s">
+            <div class="portfolio-item filter-app">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/KEM.jpg">
@@ -67,7 +52,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card wow fadeInUp">
+            <div class="portfolio-item filter-card">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/MỲ.jpg">
@@ -83,7 +68,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.1s">
+            <div class="portfolio-item filter-web">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU SAKE.jpg"/>
@@ -98,7 +83,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.2s">
+            <div class="portfolio-item filter-app">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU SHOCHU.jpg">
@@ -114,7 +99,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card wow fadeInUp">
+            <div class="portfolio-item filter-card">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU TRAI CAY.jpg"/>
@@ -129,7 +114,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card wow fadeInUp" data-wow-delay="0.1s">
+            <div class="portfolio-item filter-card">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/THUC PHAM CHO BE.jpg">
@@ -145,7 +130,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.2s">
+            <div class="portfolio-item filter-web">
                 <div class="portfolio-wrap">
                     <figure>
                         <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/thuy san.jpg"/>

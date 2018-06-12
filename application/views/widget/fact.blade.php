@@ -5,7 +5,7 @@
     <div class="container">
         <header class="section-header">
             <h3>
-                Sản phẩm
+                Tổng quan
             </h3>
             <p>
             </p>
