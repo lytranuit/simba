@@ -4,7 +4,7 @@
             <h3>
                 News & Topics
             </h3>
-            <div id="search-new" class="hidden-md-down">
+            <div id="search-new">
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Tìm kiếm">

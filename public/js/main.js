@@ -140,14 +140,6 @@ jQuery(document).ready(function ($) {
     var introCarousel = $(".carousel");
     var introCarouselIndicators = $(".carousel-indicators");
     introCarousel.on('slide.bs.carousel', function (e) {
-        if ($(".animated", this).length == 0) {
-//            $(".wowlive", this).removeClass("animated");
-            new WOW(
-                    {
-                        boxClass: 'wowlive', // default,
-                    }
-            ).init();
-        }
     });
     introCarousel.find(".carousel-inner").children(".carousel-item").each(function (index) {
         (index === 0) ?
@@ -167,7 +159,11 @@ jQuery(document).ready(function ($) {
         },
         allowPageScroll: "vertical"
     });
-
+//    $('.carousel').owlCarousel({
+//        items: 1,
+//        lazyLoad: true,
+//        loop: true
+//    });
     // Skills section
     $('#skills').waypoint(function () {
         $('.progress .progress-bar').each(function () {
@@ -206,9 +202,11 @@ jQuery(document).ready(function ($) {
         autoplay: false,
         dots: false,
         loop: false,
+        nav: true,
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
         responsive: {0: {items: 2}, 768: {items: 3}, 900: {items: 4}}
     });
-    
+
     // Testimonials carousel (uses the Owl Carousel library)
     $(".testimonials-carousel").owlCarousel({
         autoplay: true,

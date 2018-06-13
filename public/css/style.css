@@ -61,9 +61,7 @@ h1, h2, h3, h4, h5, h6 {
         bottom: 15px;
     }
 }
-.row{
-    width: 100%;
-}
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -168,6 +166,11 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
 }
 
+@media (max-width: 481px) {
+    #intro .carousel-inner .active{
+        height: 150px;
+    }
+}
 #intro .carousel-container {
     display: flex;
     justify-content: center;
@@ -723,6 +726,12 @@ NEWS
     right: 0px;
     top: 0px;
 }
+
+@media (max-width: 768px) {
+    #news #search-new{
+        position: relative;
+    }
+}
 /* Services Section
 --------------------------------*/
 #services {
@@ -931,7 +940,7 @@ NEWS
 }
 
 #portfolio .portfolio-item {
-    margin-bottom: 20px;
+    margin: 20px;
     position: relative;
     overflow: hidden;
 }
@@ -1958,3 +1967,42 @@ textarea.input100 {
     padding: 19px 20px 0 23px;
 }
 
+/* Owl */
+.owl-carousel .owl-nav .owl-prev,
+.owl-carousel .owl-nav .owl-next,
+.owl-carousel .owl-dot {
+    font-family: 'fontAwesome';
+    position: absolute;
+
+}
+
+.owl-carousel .owl-nav .owl-prev{
+    display: flex;
+    top: 0;
+    left: 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.owl-carousel .owl-nav .owl-next{
+    display: flex;
+    top: 0;
+    right: 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+.owl-carousel .owl-nav .fa{
+    font-size: 30px;
+}

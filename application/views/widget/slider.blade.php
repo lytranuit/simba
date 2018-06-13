@@ -6,10 +6,11 @@ Intro Section
     <div class="intro-container container">
         <div class="row">
             <div class="col-lg-8 wow slideInLeft">
-                <div class="carousel slide carousel-fade" id="introCarousel">
+                <div class="carousel slide" id="introCarousel">
                     <ol class="carousel-indicators">
                     </ol>
                     <div class="carousel-inner" role="listbox" >
+					
                         <div class="carousel-item active">
                             <div class="carousel-background">
                                 <img alt="" src="http://www.bvsc.com.vn/SlideImages/Mobile app_vi.jpg" width="100%"/>

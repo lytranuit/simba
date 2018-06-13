@@ -21,39 +21,44 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#team">
-                        Team
+                    <a href="#news">
+                        News
                     </a>
                 </li>
-                <li class="menu-has-children">
-                    <a href="">
-                        Drop Down
+                <!--                <li class="menu-has-children">
+                                    <a href="">
+                                        Drop Down
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                Drop Down 1
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Drop Down 3
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Drop Down 4
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Drop Down 5
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>-->
+                <li>
+                    <a href="#clients">
+                        Clients
                     </a>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Drop Down 1
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Drop Down 3
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Drop Down 4
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Drop Down 5
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li>
-                    <a href="#contact">
+                    <a href="#footer">
                         Contact
                     </a>
                 </li>
