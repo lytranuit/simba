@@ -12,17 +12,17 @@
             <ul class="nav-menu">
                 <li class="menu-active">
                     <a href="#intro">
-                        Home
+                        <?= lang("Home") ?>
                     </a>
                 </li>
                 <li>
                     <a href="#about">
-                        About Us
+                        <?= lang("SIMBA") ?>
                     </a>
                 </li>
                 <li>
                     <a href="#news">
-                        News
+                        <?= lang("news") ?>
                     </a>
                 </li>
                 <!--                <li class="menu-has-children">
@@ -54,23 +54,23 @@
                                 </li>-->
                 <li>
                     <a href="#clients">
-                        Clients
+                        <?= lang("clients") ?>
                     </a>
                 </li>
                 <li>
                     <a href="#footer">
-                        Contact
+                        <?= lang("contact") ?>
                     </a>
                 </li>
                 <li>
-                    <a class="" data-target="#login-modal" data-toggle="modal" href="#">
+                    <a class="#" data-target="#login-modal" data-toggle="modal" href="#">
                         <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
                             <?= lang('login_heading') ?>
                         </span>
                     </a>
                 </li>
                 <li class="menu-has-children">
-                    <a href="">
+                    <a href="#">
                         <?= $language_list[language_current()] ?>
                     </a>
                     <ul id="language">

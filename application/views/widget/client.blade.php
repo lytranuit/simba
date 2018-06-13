@@ -5,7 +5,7 @@
     <div class="container">
         <header class="section-header">
             <h3>
-                Our Clients
+                Đối tác
             </h3>
         </header>
         <div class="owl-carousel clients-carousel">

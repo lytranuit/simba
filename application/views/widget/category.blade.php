@@ -5,147 +5,89 @@
     <div class="container">
         <div class="row">
             <div class="col-12 portfolio-container owl-carousel category-carousel" data-wow-delay="0.5s">
-                <div class="portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/BANH KEO.jpg">
-                            <a class="link-preview" data-lightbox="portfolio" data-title="App 1" href="<?= base_url(); ?>public/img/portfolio/BANH KEO.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                            </img>
-                        </figure>
+                <figure class="portfolio-item filter-app">
+                    <a href="#">
+                        <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/BANH KEO.jpg">
+                        <figcaption class="figure-caption">Bánh kẹo</figcaption>
+                        <div class="figure-icon style1">
+                            <button>
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </a>
+                </figure>
+                <figure class="portfolio-item filter-web">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/COCKTAIL&BIA.jpg">
+                    <figcaption class="figure-caption">Cocktail & Bia</figcaption>
+                    <div class="figure-icon style2">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/COCKTAIL&BIA.jpg">
-                            <a class="link-preview" data-lightbox="portfolio" data-title="Web 3" href="<?= base_url(); ?>public/img/portfolio/COCKTAIL&BIA.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                            </img>
-                        </figure>
+                </figure>
+                <figure class="portfolio-item filter-app">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/KEM.jpg">
+                    <figcaption class="figure-caption">Kem</figcaption>
+                    <div class="figure-icon style3">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/KEM.jpg">
-                            <a class="link-preview" data-lightbox="portfolio" data-title="App 2" href="<?= base_url(); ?>public/img/portfolio/KEM.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                            </img>
-                        </figure>
+                </figure>
+                <figure class="portfolio-item filter-card">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/MỲ.jpg">
+                    <figcaption class="figure-caption">Mỳ nhật bản</figcaption>
+                    <div class="figure-icon style4">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/MỲ.jpg">
-                            <a class="link-preview" data-lightbox="portfolio" data-title="Card 2" href="<?= base_url(); ?>public/img/portfolio/MỲ.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                            </img>
-                        </figure>
+                </figure>
+                <figure class="portfolio-item filter-web">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU SAKE.jpg"/>
+                    <figcaption class="figure-caption">Rượu sake</figcaption>
+                    <div class="figure-icon style5">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU SAKE.jpg"/>
-                            <a class="link-preview" data-lightbox="portfolio" data-title="Web 2" href="<?= base_url(); ?>public/img/portfolio/RUOU SAKE.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                        </figure>
+                </figure>
+                <figure class="portfolio-item filter-app">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU SHOCHU.jpg">
+                    <figcaption class="figure-caption">Rượu shochu</figcaption>
+                    <div class="figure-icon style6">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-app">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU SHOCHU.jpg">
-                            <a class="link-preview" data-lightbox="portfolio" data-title="App 3" href="<?= base_url(); ?>public/img/portfolio/RUOU SHOCHU.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                            </img>
-                        </figure>
+                </figure>
+                <figure class="portfolio-item filter-card">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU TRAI CAY.jpg"/>
+                    <figcaption class="figure-caption">Rượu trái cây</figcaption>
+                    <div class="figure-icon style7">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/RUOU TRAI CAY.jpg"/>
-                            <a class="link-preview" data-lightbox="portfolio" data-title="Card 1" href="<?= base_url(); ?>public/img/portfolio/RUOU TRAI CAY.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                        </figure>
+                </figure>
+                <figure class="portfolio-item filter-card">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/THUC PHAM CHO BE.jpg">
+                    <figcaption class="figure-caption">Thực phẩm cho bé</figcaption>
+                    <div class="figure-icon style8">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-card">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/THUC PHAM CHO BE.jpg">
-                            <a class="link-preview" data-lightbox="portfolio" data-title="Card 3" href="<?= base_url(); ?>public/img/portfolio/THUC PHAM CHO BE.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                            </img>
-                        </figure>
+                </figure>
+                <figure class="portfolio-item filter-web">
+                    <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/thuy san.jpg"/>
+                    <figcaption class="figure-caption">Thủy sản</figcaption>
+                    <div class="figure-icon style9">
+                        <button>
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
-                </div>
-                <div class="portfolio-item filter-web">
-                    <div class="portfolio-wrap">
-                        <figure>
-                            <img alt="" class="img-fluid" src="<?= base_url(); ?>public/img/portfolio/thuy san.jpg"/>
-                            <a class="link-preview" data-lightbox="portfolio" data-title="Web 1" href="<?= base_url(); ?>public/img/portfolio/thuy san.jpg" title="Preview">
-                                <i class="ion ion-eye">
-                                </i>
-                            </a>
-                            <a class="link-details" href="#" title="More Details">
-                                <i class="ion ion-android-open">
-                                </i>
-                            </a>
-                        </figure>
-                    </div>
-                </div>
+                </figure>
             </div>
         </div>
     </div>

@@ -2,7 +2,8 @@
 $(window).scroll();
 jQuery(document).ready(function ($) {
     // Back to top button
-    $(document).off("click", "#language li a").on("click", "#language li a", function () {
+    $(document).off("click", "#language li a").on("click", "#language li a", function (e) {
+        e.preventDefault();
         var language = $(this).attr("data");
         $.ajax({
             url: 'ajax/setlanguage',
@@ -204,7 +205,7 @@ jQuery(document).ready(function ($) {
         loop: false,
         nav: true,
         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-        responsive: {0: {items: 2}, 768: {items: 3}, 900: {items: 4}}
+        responsive: {0: {items: 2}, 768: {items: 3}, 900: {items: 3}}
     });
 
     // Testimonials carousel (uses the Owl Carousel library)

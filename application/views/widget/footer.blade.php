@@ -15,35 +15,21 @@ Footer
                             <i class="ion-ios-arrow-right">
                             </i>
                             <a href="#">
-                                Home
+                                Trang chủ
                             </a>
                         </li>
                         <li>
                             <i class="ion-ios-arrow-right">
                             </i>
                             <a href="#">
-                                About us
+                                Điều khoản hợp tác
                             </a>
                         </li>
                         <li>
                             <i class="ion-ios-arrow-right">
                             </i>
                             <a href="#">
-                                Services
-                            </a>
-                        </li>
-                        <li>
-                            <i class="ion-ios-arrow-right">
-                            </i>
-                            <a href="#">
-                                Terms of service
-                            </a>
-                        </li>
-                        <li>
-                            <i class="ion-ios-arrow-right">
-                            </i>
-                            <a href="#">
-                                Privacy policy
+                                Chính sach công ty
                             </a>
                         </li>
                     </ul>
@@ -55,25 +41,24 @@ Footer
                     <p>
                         <i class="ion-ios-location-outline">
                         </i>
-                        A108 Adam Street 
-                        New York, NY 535022
-                        United States
+                        R1-08-03, Tòa nhà Everich, số 968 Ba Tháng Hai,
+                        Phường 15, Quận 11, Thành phố Hồ Chí Minh
                         <br>
                         <i class="ion-ios-telephone-outline">
                         </i>
-                        +1 5589 55488 55
+                        18009469
                         <br>
                         <i class="ion-ios-email-outline">
                         </i>
-                        info@example.com
+                        oishii@oishii.vn
                     </p>
                     <div class="social-links">
-                        <a class="twitter" href="#">
-                            <i class="fa fa-twitter">
-                            </i>
-                        </a>
                         <a class="facebook" href="#">
                             <i class="fa fa-facebook">
+                            </i>
+                        </a>
+                        <a class="twitter" href="#">
+                            <i class="fa fa-twitter">
                             </i>
                         </a>
                         <a class="instagram" href="#">

@@ -2,14 +2,16 @@
     <div class="container">
         <header class="section-header">
             <h3>
-                News & Topics
+                Công bố thông tin
             </h3>
-            <div id="search-new">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm">
-                        <div class="input-group-append bg-success border-primary">
-                            <span class="input-group-text bg-transparent text-white"><i class="fa fa-search"></i></span>
+            <div class='row justify-content-center'>
+                <div id="search-new" class="col-md-6 col-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm">
+                            <div class="input-group-append bg-success border-primary">
+                                <span class="input-group-text bg-transparent text-white"><i class="fa fa-search"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>

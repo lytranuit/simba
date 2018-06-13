@@ -10,7 +10,7 @@ Intro Section
                     <ol class="carousel-indicators">
                     </ol>
                     <div class="carousel-inner" role="listbox" >
-					
+
                         <div class="carousel-item active">
                             <div class="carousel-background">
                                 <img alt="" src="http://www.bvsc.com.vn/SlideImages/Mobile app_vi.jpg" width="100%"/>
@@ -38,14 +38,12 @@ Intro Section
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 p-0 hidden-md-down">
-                <div class="box-image col-lg-12 p-0">  
-                    <img alt="" src="http://www.bvsc.com.vn/ESImages/dang-ky-mo-tai-khoan.png" width="100%"/>
+            <div class="col-lg-4">
+                <div class="row">
+                    <a alt="" style="background-image:url(http://www.bvsc.com.vn/ESImages/dang-ky-mo-tai-khoan.png)" class="box-image"></a>
+                    <a alt="" style="background-image:url(http://www.bvsc.com.vn/ESImages/trade-online.png)" class="box-image"></a>
+                    <a alt="" style="background-image:url(http://www.bvsc.com.vn/ESImages/bang-gia.png);" class="box-image"></a>
                 </div>
-                <div class="box-image col-lg-12 p-0" data-wow-delay="0.2s">
-                    <img alt="" src="http://www.bvsc.com.vn/ESImages/trade-online.png" width="100%"/></div>
-                <div class="box-image col-lg-12 p-0" data-wow-delay="0.4s">
-                    <img alt="" src="http://www.bvsc.com.vn/ESImages/bang-gia.png" width="100%"/></div>
             </div>
         </div>
     </div>

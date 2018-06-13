@@ -141,11 +141,29 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 20px;
 }
 #intro .box-image{
-    height: 90px;
-    border-radius: 10px;
-    display: inline-block;
-    overflow: hidden;
+    height: auto;
+    padding: 23.75% 0 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     margin: 10px 0px 0px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    #intro .box-image{
+        padding: 6.75% 0 0;
+        margin: 10px 5px 0px;
+        width: 31.5%;
+    }
+}
+
+@media (max-width: 425px) {
+    #intro .box-image{
+        margin: 10px 3px 0px;
+        padding: 6.75% 0 0;
+        width: 30%;
+    }
 }
 #intro .carousel-item {
     width: 100%;
@@ -352,7 +370,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav Meu Styling */
 .nav-menu a {
-    padding: 10px 8px 0px 8px;
+    padding: 10px 0px 0px 8px;
     text-decoration: none;
     display: inline-block;
     color: black;
@@ -716,16 +734,9 @@ NEWS
     position: relative;
 }
 #news #search-new{
-    position: absolute;
-    right: 0px;
-    top: 0px;
+    position: relative;
 }
 
-@media (max-width: 768px) {
-    #news #search-new{
-        position: relative;
-    }
-}
 /* Services Section
 --------------------------------*/
 #services {
@@ -934,11 +945,117 @@ NEWS
 }
 
 #portfolio .portfolio-item {
-    margin: 20px;
+    display: block;
+    width: 90%;
+    height: auto;
     position: relative;
-    overflow: hidden;
+    padding: 58.37% 0 0 0;
 }
 
+#portfolio .portfolio-item img {
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#portfolio .portfolio-item .figure-icon {
+    position:  absolute;
+    color: #de1313;
+    right: -20px;
+    top: 0px;
+    height: 100%;
+    display:  flex;
+    align-items:  center;
+}
+#portfolio .portfolio-item .figure-icon button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0px 20px;
+    font-size: 2rem;
+    background: #6df742;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    #portfolio .portfolio-item .figure-icon{
+        right: -10px;
+    }
+
+    #portfolio .portfolio-item .figure-icon button {
+        padding: 0px 15px;
+        font-size: 1rem;
+    }
+}
+#portfolio .portfolio-item .figure-icon.style2 button{
+    background: #95b732;
+    color: white;
+}
+
+#portfolio .portfolio-item .figure-icon.style3 button{
+    background: #b73932;
+    color: white;
+}
+
+#portfolio .portfolio-item .figure-icon.style3 button{
+    background: #b73932;
+    color: white;
+}
+
+#portfolio .portfolio-item .figure-icon.style4 button{
+    background: #2ca999;
+    color: white;
+}
+
+#portfolio .portfolio-item .figure-icon.style5 button{
+    background: #a92c7c;
+    color: white;
+}
+
+#portfolio .portfolio-item .figure-icon.style6 button{
+    background: #3699e2;
+    color: white;
+}
+
+#portfolio .portfolio-item .figure-icon.style7 button{
+    background: #364ae2;
+    color: white;
+}
+
+#portfolio .portfolio-item .figure-icon.style8 button{
+    background: #a92c37;
+    color: white;
+}
+#portfolio .portfolio-item .figure-icon.style9 button{
+    background: #d3d814;
+    color: white;
+}
+#portfolio .portfolio-item .figure-caption {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #00000094;
+    color: white;
+}
 #portfolio .portfolio-item figure {
     background: #000;
     overflow: hidden;
