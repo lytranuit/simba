@@ -4,7 +4,7 @@
 <section class="" id="portfolio">
     <div class="container">
         <div class="row">
-            <div class="col-12 portfolio-container owl-carousel category-carousel wow fadeInUp" data-wow-delay="0.5s">
+            <div class="col-12 portfolio-container owl-carousel category-carousel" data-wow-delay="0.5s">
                 <div class="portfolio-item filter-app">
                     <div class="portfolio-wrap">
                         <figure>

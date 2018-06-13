@@ -7,7 +7,6 @@ class Index extends MY_Controller {
 ////////////////////////////////
 ////////////
         $this->data['is_login'] = $this->ion_auth->logged_in();
-        $this->lang->load('auth');
         $this->data['stylesheet_tag'] = array(
             'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700',
             'public/lib/bootstrap/css/bootstrap.min.css',

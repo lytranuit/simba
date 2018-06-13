@@ -10,6 +10,7 @@ class Widget {
     function __construct() {
         $this->CI = &get_instance();
         $this->CI->load->helper(array('url', 'language', 'my'));
+        $this->CI->lang->load(array('auth', 'home'));
         ////////////////////////////////
         $views = APPPATH . "views/";
         $cache = APPPATH . "cache/";
