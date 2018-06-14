@@ -104,11 +104,10 @@ jQuery(document).ready(function ($) {
                 if ($('#header').length) {
                     top_space = $('#header').outerHeight();
 
-                    if (!$('#header').hasClass('header-fixed')) {
-                        top_space = top_space - 20;
+                    if (!$('#header').hasClass('header-scrolled')) {
+                        top_space = top_space + 60;
                     }
                 }
-
                 $('html, body').animate({
                     scrollTop: target.offset().top - top_space
                 }, 1500, 'easeInOutExpo');
@@ -205,7 +204,7 @@ jQuery(document).ready(function ($) {
         loop: false,
         nav: true,
         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-        responsive: {0: {items: 2}, 768: {items: 3}, 900: {items: 3}}
+        responsive: {0: {items: 2, slideBy: 2}, 768: {items: 3, slideBy: 3}, 900: {items: 3, slideBy: 3}}
     });
 
     // Testimonials carousel (uses the Owl Carousel library)

@@ -7,10 +7,21 @@
             <h3>
                 <?= lang('SIMBA') ?>
             </h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
         </header>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="<?= base_url(); ?>public/img/intro-carousel/SAN PHAM 1.png"/>
+            </div>
+            <div class="col-md-6">
+                <h4 class="font-weight-bold">MongoDB Enterprise Advanced</h4>
+                <p>
+                    MongoDB Enterprise Advanced features MongoDB Enterprise Server and a finely-tuned package of advanced software, support, certifications, and other services. More than one-third of the Fortune 100 rely on MongoDB Enterprise Advanced to help run their mission critical applications.
+                </p>
+                <button class="btn btn-success">
+                    See more
+                </button>
+            </div>
+        </div>
         <div class="row about-cols">
             <div class="col-lg-12">
                 <ul class="timeline">

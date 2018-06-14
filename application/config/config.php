@@ -538,7 +538,7 @@ $config['proxy_ips'] = '';
 $config['modules_locations'] = array(APPPATH . 'modules/');
 
 
-$config['base_url'] = "http://localhost/simba/";
+$config['base_url'] = "http://localhost/simba1/";
 
 $config['hotline'] = "0938 727 846";
 

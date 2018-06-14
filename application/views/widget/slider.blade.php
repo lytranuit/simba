@@ -13,7 +13,7 @@ Intro Section
 
                         <div class="carousel-item active">
                             <div class="carousel-background">
-                                <img alt="" src="http://www.bvsc.com.vn/SlideImages/Mobile app_vi.jpg" width="100%"/>
+                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 1.png" width="100%"/>
                             </div>
                             <div class="carousel-container" >
 
@@ -21,7 +21,7 @@ Intro Section
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-background">
-                                <img alt="" src="http://www.bvsc.com.vn/SlideImages/summer_vi.jpg" width="100%"/>
+                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 2.png" width="100%"/>
                             </div>
                             <div class="carousel-container">
 
@@ -29,7 +29,7 @@ Intro Section
                         </div>  
                         <div class="carousel-item">
                             <div class="carousel-background">
-                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/slide2.jpg" width="100%"/>
+                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 1.png" width="100%"/>
                             </div>
                             <div class="carousel-container">
 
@@ -39,10 +39,11 @@ Intro Section
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="row">
-                    <a alt="" style="background-image:url(http://www.bvsc.com.vn/ESImages/dang-ky-mo-tai-khoan.png)" class="box-image"></a>
-                    <a alt="" style="background-image:url(http://www.bvsc.com.vn/ESImages/trade-online.png)" class="box-image"></a>
-                    <a alt="" style="background-image:url(http://www.bvsc.com.vn/ESImages/bang-gia.png);" class="box-image"></a>
+                <div class="row justify-content-center">
+                    <a alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/OISHII.png)" class="box-image"></a>
+                    <a alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/FRESH.png)" class="box-image"></a>
+                    <a alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/SAKE_ZONE.png);" class="box-image"></a>
+
                 </div>
             </div>
         </div>

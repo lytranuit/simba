@@ -161,8 +161,8 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 425px) {
     #intro .box-image{
         margin: 10px 3px 0px;
-        padding: 6.75% 0 0;
-        width: 30%;
+        padding: 14.75% 0 0;
+        width: 65%;
     }
 }
 #intro .carousel-item {

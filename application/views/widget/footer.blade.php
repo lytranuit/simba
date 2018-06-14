@@ -50,7 +50,7 @@ Footer
                         <br>
                         <i class="ion-ios-email-outline">
                         </i>
-                        oishii@oishii.vn
+                        info@simba.com.vn
                     </p>
                     <div class="social-links">
                         <a class="facebook" href="#">
@@ -122,10 +122,10 @@ Footer
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
-                <div class="copyright col-lg-9 col-sm-12">© Copyright 2016 Oishii.vn, All rights reserved.<br>
+                <div class="copyright col-lg-9 col-sm-12">© Copyright 2018 www.simba.com.vn, All rights reserved.<br>
                     + Tên công ty: Công ty TNHH Thương Mại Sim Ba<br>
                     + Địa chỉ: R1-08-03, Tòa nhà Everich, số 968 Ba Tháng Hai, Phường 15, Quận 11, Thành phố Hồ Chí Minh<br>
-                    + Email liên hệ: oishii@oishii.vn<br>
+                    + Email liên hệ: info@simba.com.vn<br>
                     + MST: 0303582244
                 </div>
                 <div class="col-lg-3 col-sm-12">
