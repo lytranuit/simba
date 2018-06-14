@@ -54,7 +54,7 @@ $config['url_suffix'] = '';
   | than english.
   |
  */
-$config['language'] = 'english';
+$config['language'] = 'vietnamese';
 
 $config['language_list'] = array(
     'english' => 'EN',
