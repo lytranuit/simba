@@ -984,10 +984,11 @@ NEWS
     -ms-user-select: none;
     user-select: none;
     border: 1px solid transparent;
-    padding: 0px 20px;
+    padding: 0px 30px;
     font-size: 2rem;
     background: #6df742;
     color: white;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
@@ -1055,6 +1056,7 @@ NEWS
     left: 0px;
     background: #00000094;
     color: white;
+    font-size: 1rem;
 }
 #portfolio .portfolio-item figure {
     background: #000;

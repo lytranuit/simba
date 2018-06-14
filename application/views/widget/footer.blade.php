@@ -29,7 +29,7 @@ Footer
                             <i class="ion-ios-arrow-right">
                             </i>
                             <a href="#">
-                                Chính sach công ty
+                                Chính sách công ty
                             </a>
                         </li>
                     </ul>
@@ -145,7 +145,7 @@ Footer
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="comment-modalLabel">
-                    Comment
+                    <?= lang('OUR_NEWSLETTER') ?>
                 </h5>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                     <span aria-hidden="true">
@@ -158,29 +158,29 @@ Footer
                     <!--<p>Sign up once and watch any of our free demos.</p>-->
                     <form class="" method="post" action="#">
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" id="name" type="text" name="name" placeholder="Name">
+                            <input class="input100" id="name" type="text" name="name" placeholder="Tên">
                             <label class="label-input100" for="name">
                                 <span class="fa fa-user"></span>
                             </label>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" id="name" type="text" name="name" placeholder="Customer">
+                            <input class="input100" id="name" type="text" name="name" placeholder="Khách hàng">
                             <label class="label-input100" for="name">
                                 <span class="fa fa-envelope"></span>
                             </label>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" id="name" type="text" name="name" placeholder="Product">
+                            <input class="input100" id="name" type="text" name="name" placeholder="Sản phẩm">
                             <label class="label-input100" for="name">
                                 <span class="fa fa-phone"></span>
                             </label>
                         </div>
                         <div class="wrap-input100 validate-input" data-validate="Message is required">
-                            <textarea class="input100" name="message" placeholder="Your message..."></textarea>
+                            <textarea class="input100" name="message" placeholder="Nội dung..."></textarea>
                         </div>
                         <div>
                             <button class="btn btn-success btn-sm">
-                                Send Message
+                                <?= lang('Send_Message') ?>
                             </button>
                         </div>
                     </form>
