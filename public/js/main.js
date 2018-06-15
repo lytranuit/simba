@@ -1,6 +1,13 @@
 
 $(window).scroll();
 jQuery(document).ready(function ($) {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        $("#simba-app").attr("href", 'https://itunes.apple.com/vn/app/simba-fresh/id1331294173');
+    } else {
+        $("#simba-app").attr("href", 'https://play.google.com/store/apps/details?id=com.simba.fresh');
+    }
     // Back to top button
     $(document).off("click", "#language li a").on("click", "#language li a", function (e) {
         e.preventDefault();
@@ -199,11 +206,9 @@ jQuery(document).ready(function ($) {
     });
 
     $(".category-carousel").owlCarousel({
-        autoplay: false,
+        autoplay: true,
         dots: false,
         loop: false,
-        nav: true,
-        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
         responsive: {0: {items: 2, slideBy: 2}, 768: {items: 3, slideBy: 3}, 900: {items: 3, slideBy: 3}}
     });
 

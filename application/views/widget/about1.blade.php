@@ -22,7 +22,7 @@
                 </button>
             </div>
         </div>
-        <div style="height: 20px;"></div>
+        <div style="height: 60px;"></div>
         <div class="row about-cols">
             <div class="col-lg-12">
                 <ul class="timeline">

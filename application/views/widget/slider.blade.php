@@ -13,7 +13,7 @@ Intro Section
 
                         <div class="carousel-item active">
                             <div class="carousel-background">
-                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 1.png" width="100%"/>
+                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 1.jpg" width="100%"/>
                             </div>
                             <div class="carousel-container" >
 
@@ -21,7 +21,7 @@ Intro Section
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-background">
-                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 2.png" width="100%"/>
+                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 2.jpg" width="100%"/>
                             </div>
                             <div class="carousel-container">
 
@@ -29,7 +29,7 @@ Intro Section
                         </div>  
                         <div class="carousel-item">
                             <div class="carousel-background">
-                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 1.png" width="100%"/>
+                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 3.jpg" width="100%"/>
                             </div>
                             <div class="carousel-container">
 
@@ -40,10 +40,9 @@ Intro Section
             </div>
             <div class="col-lg-4">
                 <div class="row justify-content-center">
-                    <a alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/OISHII.png)" class="box-image"></a>
-                    <a alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/FRESH.png)" class="box-image"></a>
-                    <a alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/SAKE_ZONE.png);" class="box-image"></a>
-
+                    <a target="_blank" href='http://www.oishii.vn/' alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/OISHII-1.jpg)" class="box-image" id="simba-web"></a>
+                    <a target="_blank" href='https://itunes.apple.com/vn/app/simba-fresh/id1331294173' alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/FRESH-1.jpg);" class="box-image" id="simba-app"></a>
+                    <a target="_blank" href='#'  alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/SAKE_ZONE-1.jpg)" class="box-image"></a>
                 </div>
             </div>
         </div>
