@@ -10,7 +10,7 @@
         </header>
         <div class="row">
             <div class="col-md-6">
-                <img class="img-fluid" src="<?= base_url(); ?>public/img/intro-carousel/SAN PHAM 1.png"/>
+                <img class="img-fluid" src="<?= base_url(); ?>public/img/intro-carousel/san-pham.png"/>
             </div>
             <div class="col-md-6">
                 <h4 class="font-weight-bold">MongoDB Enterprise Advanced</h4>
@@ -22,6 +22,7 @@
                 </button>
             </div>
         </div>
+        <div style="height: 20px;"></div>
         <div class="row about-cols">
             <div class="col-lg-12">
                 <ul class="timeline">
