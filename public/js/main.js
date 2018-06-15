@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
         $("#simba-app").attr("href", 'https://play.google.com/store/apps/details?id=com.simba.fresh');
     }
     // Back to top button
-    $(document).off("click", "#language li a").on("click", "#language li a", function (e) {
+    $(document).off("click", "#language a").on("click", "#language a", function (e) {
         e.preventDefault();
         var language = $(this).attr("data");
         $.ajax({
@@ -66,6 +66,9 @@ jQuery(document).ready(function ($) {
         var $mobile_nav = $('#nav-menu-container').clone().prop({
             id: 'mobile-nav'
         });
+        var $button_login = $(".button_login").clone().wrap("<li></li>").parent();
+        var $language = $("#language").clone().wrap("<li></li>").parent();
+        $("ul", $mobile_nav).append($button_login).append($language);
         $mobile_nav.find('> ul').attr({
             'class': '',
             'id': ''
