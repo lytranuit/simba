@@ -66,7 +66,11 @@ class Index extends MY_Controller {
     }
 
     public function index() {
+        $this->data['title'] = "Trang chủ";
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
 
+    function category() {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -160,23 +164,8 @@ class Index extends MY_Controller {
     }
 
     public function tintuc($param) {
-        $id = $param[0];
-        $this->load->model("tintuc_model");
-        $this->load->model("user_model");
-        $tin = $this->tintuc_model->where(array('id_tintuc' => $id))->as_array()->get_all();
-        $author = $this->user_model->where(array("id" => $tin[0]['id_user']))->fields(array("username"))->as_array()->get_all();
-        $arr_hinhanh = $this->tintuc_model->get_tintuc_hinhanh($tin[0]['id_tintuc']);
-
-        $tin[0]['author'] = $author[0]['username'];
-        $tin[0]['arr_hinhanh'] = $arr_hinhanh;
-        $this->data['tin'] = $tin[0];
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/flexslider.css");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.flexslider.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.jcarousel.min.js");
+//        $id = $param[0];
+//        echo 1;die();
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -194,7 +183,6 @@ class Index extends MY_Controller {
 ////        print_r($this->data['arr_tin']);
 ////        die();
 //        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
-        
 //        $this->data['template'] = 'right';
 //        echo "<pre>";
 //        print_r($this->data);

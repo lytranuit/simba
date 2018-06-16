@@ -105,7 +105,8 @@ jQuery(document).ready(function ($) {
     }
 
     // Smooth scroll for the menu and links with .scrollto classes
-    $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function () {
+    $(document).off("click", '.nav-menu a, #mobile-nav a, .scrollto').on('click', '.nav-menu a, #mobile-nav a, .scrollto', function () {
+        console.log(1);
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
             var target = $(this.hash);
             if (target.length) {
@@ -141,6 +142,12 @@ jQuery(document).ready(function ($) {
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
             $('#header').addClass('header-scrolled');
+            if ($('#nav-menu-container').is(":visible") && $('#header #menu-nav').length == 0) {
+                var $menu_nav = $('#nav-menu-container').clone().prop({
+                    id: 'menu-nav'
+                }).addClass("hidden-md-down");
+                $('#header .container').append($menu_nav);
+            }
         } else {
             $('#header').removeClass('header-scrolled');
         }

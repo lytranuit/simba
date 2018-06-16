@@ -8,7 +8,7 @@
                 <img alt="" src="<?= base_url(); ?>public/img/logo.png" title=""/>
             </a>
         </div>
-        <div class="pull-right hidden-sm-down" style="margin: 5px;">
+        <div class="pull-right hidden-md-down" style="margin: 5px;">
             <a class="button_login" data-target="#login-modal" data-toggle="modal" href="#">
                 <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
                     <?= lang('login_heading') ?>

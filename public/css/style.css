@@ -11,18 +11,9 @@ body {
     background: #f7f7f74a;
     color: #666666;
     font-family: "Open Sans", sans-serif;
+    font-size: 14px;
 }
 
-a {
-    color: #18d26e;
-    transition: 0.5s;
-}
-
-a:hover, a:active, a:focus {
-    color: #18d36e;
-    outline: none;
-    text-decoration: none;
-}
 
 
 h1, h2, h3, h4, h5, h6 {
@@ -77,6 +68,27 @@ h1, h2, h3, h4, h5, h6 {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fc7d33), color-stop(100%, #ff670f));
     background: -webkit-linear-gradient(top, #fc7d33 0%, #ff670f 100%);
     color:#fff;
+}
+.card-style1{
+    border-radius: 0px;
+    border: 0;
+    border-top: 1px solid gray;
+    margin-top: 60px;
+    font-size: 14px;
+}
+.card-style1 .card-header{
+    position: absolute;
+    top: -41px;
+    left: 0px;
+    z-index: 10000;
+    border: 1px solid gray;
+    border-bottom: 0px;
+    background: white;
+    font-size: 20px;
+    color: green;
+    padding: 5px 30px;
+    border-radius: 5px 5px 0px 0px;
+    font-weight: bold;
 }
 /*--------------------------------------------------------------
 # Header
@@ -383,7 +395,13 @@ h1, h2, h3, h4, h5, h6 {
         display: none;
     }
 }
-
+#menu-nav {
+    text-align: center;
+    display:none;
+}
+#header.header-scrolled #menu-nav{
+    display:block;
+}   
 /* Nav Meu Styling */
 .nav-menu a {
     padding: 15px;
@@ -402,7 +420,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu > li {
-   margin: 0px;
+    margin: 0px;
 }
 
 .nav-menu ul {

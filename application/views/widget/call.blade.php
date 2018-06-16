@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-lg-9">
                     <span class="news_tx">
-                        <a href="/en/news/eng_auto_20180510433546/main/0/link/2018051402en_201812Financialinfo_hosoku.pdf" target="_blank">
+                        <a href="<?= base_url() ?>index/tintuc" target="_blank">
                             Financial Results Supplementary Materials for the First Quarter of the Fiscal Year Ending December 2018
                         </a>
                     </span>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-lg-9">
                     <span class="news_tx">
-                        <a href="/en/news/eng_auto_20180510433521/main/0/link/2018051401en_Financial%20Results201812Q1.pdf" target="_blank">
+                        <a href="<?= base_url() ?>index/tintuc" target="_blank">
                             Consolidated Financial Results for the First Quarter of the Fiscal Year Ending December 31, 2018(Japanese GAAP)
                         </a>
                     </span>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-lg-9">
                     <span class="news_tx">
-                        <a href="/en/news/news-topics_2018042401.html">
+                        <a href="<?= base_url() ?>index/tintuc">
                             Public Interest Incorporated Foundation Susaki Welfare Foundation
                             Presentation Ceremony for Grant-In-Aid-Funds in the Second Half of 2017
                         </a>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-lg-9">
                     <span class="news_tx">
-                        <a href="/en/news/news-topics_ENG20180330/main/0/link/HP20180330ENG.pdf" target="_blank">
+                        <a href="<?= base_url() ?>index/tintuc" target="_blank">
                             Directors and Officers of Nishimoto Wismettac Group (Effective March 30, 2018)
                         </a>
                     </span>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-lg-9">
                     <span class="news_tx">
-                        <a href="/en/news/news-topics_2018032702.html">
+                        <a href="<?= base_url() ?>index/tintuc">
                             Nishimoto Co., Ltd. send "Newsletter to Shareholders" to all shareholders
                         </a>
                     </span>
