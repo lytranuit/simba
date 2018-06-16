@@ -9,29 +9,29 @@ class Index extends MY_Controller {
         $this->data['is_login'] = $this->ion_auth->logged_in();
         $this->data['stylesheet_tag'] = array(
             'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700',
-            'public/lib/bootstrap/css/bootstrap.min.css',
-            'public/lib/font-awesome/css/font-awesome.min.css',
-            'public/lib/animate/animate.min.css',
-            'public/lib/ionicons/css/ionicons.min.css',
-            'public/lib/owlcarousel/assets/owl.carousel.min.css',
-            'public/lib/lightbox/css/lightbox.min.css',
-            'public/css/style.css'
+            base_url() . 'public/lib/bootstrap/css/bootstrap.min.css',
+            base_url() . 'public/lib/font-awesome/css/font-awesome.min.css',
+            base_url() . 'public/lib/animate/animate.min.css',
+            base_url() . 'public/lib/ionicons/css/ionicons.min.css',
+            base_url() . 'public/lib/owlcarousel/assets/owl.carousel.min.css',
+            base_url() . 'public/lib/lightbox/css/lightbox.min.css',
+            base_url() . 'public/css/style.css'
         );
         $this->data['javascript_tag'] = array(
-            'public/lib/jquery/jquery.min.js',
-            'public/lib/jquery/jquery-migrate.min.js',
-            'public/lib/bootstrap/js/bootstrap.bundle.min.js',
-            'public/lib/easing/easing.min.js',
-            'public/lib/superfish/hoverIntent.js',
-            'public/lib/superfish/superfish.min.js',
-            'public/lib/wow/wow.min.js',
-            'public/lib/waypoints/waypoints.min.js',
-            'public/lib/counterup/counterup.min.js',
-            'public/lib/owlcarousel/owl.carousel.min.js',
-            'public/lib/isotope/isotope.pkgd.min.js',
-            'public/lib/lightbox/js/lightbox.min.js',
-            'public/lib/touchSwipe/jquery.touchSwipe.min.js',
-            'public/js/main.js'
+            base_url() . 'public/lib/jquery/jquery.min.js',
+            base_url() . 'public/lib/jquery/jquery-migrate.min.js',
+            base_url() . 'public/lib/bootstrap/js/bootstrap.bundle.min.js',
+            base_url() . 'public/lib/easing/easing.min.js',
+            base_url() . 'public/lib/superfish/hoverIntent.js',
+            base_url() . 'public/lib/superfish/superfish.min.js',
+            base_url() . 'public/lib/wow/wow.min.js',
+            base_url() . 'public/lib/waypoints/waypoints.min.js',
+            base_url() . 'public/lib/counterup/counterup.min.js',
+            base_url() . 'public/lib/owlcarousel/owl.carousel.min.js',
+            base_url() . 'public/lib/isotope/isotope.pkgd.min.js',
+            base_url() . 'public/lib/lightbox/js/lightbox.min.js',
+            base_url() . 'public/lib/touchSwipe/jquery.touchSwipe.min.js',
+            base_url() . 'public/js/main.js'
         );
     }
 
@@ -159,80 +159,6 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function tin($param) {
-        $id = $param[0];
-        $this->load->model("tin_model");
-        $this->load->model("user_model");
-        $this->load->model("huong_model");
-        $this->load->model("phaply_model");
-        $tin = $this->tin_model->where(array('id_tin' => $id))->as_array()->get_all();
-        $author = $this->user_model->where(array("id" => $tin[0]['id_user']))->fields(array("username"))->as_array()->get_all();
-        $huong = $this->huong_model->where(array("id_huong" => $tin[0]['id_huong']))->fields(array("ten_huong"))->as_array()->get_all();
-        $phaply = $this->phaply_model->where(array("id_phaply" => $tin[0]['id_phaply']))->fields(array("ten_phaply"))->as_array()->get_all();
-        $arr_hinhanh = $this->tin_model->get_tin_hinhanh($tin[0]['id_tin']);
-
-        $tin[0]['author'] = $author[0]['username'];
-        $tin[0]['phaply'] = isset($phaply[0]['ten_phaply']) ? $phaply[0]['ten_phaply'] : "";
-        $tin[0]['huong'] = isset($huong[0]['ten_huong']) ? $huong[0]['ten_huong'] : "";
-        $tin[0]['arr_hinhanh'] = $arr_hinhanh;
-        if ($tin[0]['gia'] != 0) {
-            if ($tin[0]['gia'] < 1000) {
-                $tin[0]['gia'] = $tin[0]['gia'] . " triệu";
-            } else {
-                if ($tin[0]['gia'] % 1000) {
-                    $tin[0]['gia'] = number_format($tin[0]['gia'] / 1000, 2, ',', ".") . " tỷ";
-                } else {
-                    $tin[0]['gia'] = number_format($tin[0]['gia'] / 1000) . " tỷ";
-                }
-            }
-        } else {
-            $tin[0]['gia'] = "Thương lượng";
-        }
-        $this->data['tin'] = $tin[0];
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/flexslider.css");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.flexslider.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.jcarousel.min.js");
-        echo $this->blade->view()->make('page/page', $this->data)->render();
-    }
-
-    function searchtin() {
-        $this->load->model("tin_model");
-        $this->load->model("user_model");
-        $this->load->model("khuvuc_model");
-        $this->data['arr_tin'] = $this->tin_model->where(array('deleted' => 0))->as_array()->get_all();
-        foreach ($this->data['arr_tin'] as $k => &$tin) {
-            $author = $this->user_model->where(array("id" => $tin['id_user']))->fields(array("username"))->as_array()->get_all();
-            $arr_hinhanh = $this->tin_model->get_tin_hinhanh($tin['id_tin']);
-            $quan = $this->khuvuc_model->where(array("id_khuvuc" => $tin['id_khuvuc']))->as_array()->get_all();
-            $tin['author'] = $author[0]['username'];
-            $tin['arr_hinhanh'] = $arr_hinhanh;
-            $tin['khuvuc'] = $quan[0]['ten_khuvuc'];
-            if ($tin['gia'] != 0) {
-                if ($tin['gia'] < 1000) {
-                    $tin['gia'] = $tin['gia'] . " triệu";
-                } else {
-                    if ($tin['gia'] % 1000) {
-                        $tin['gia'] = number_format($tin['gia'] / 1000, 2, ',', ".") . " tỉ";
-                    } else {
-                        $tin['gia'] = number_format($tin['gia'] / 1000) . " tỉ";
-                    }
-                }
-            } else {
-                $tin['gia'] = "Thương lượng";
-            }
-        }
-//        echo "<pre>";
-//        print_r($this->data['arr_tin']);
-//        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/owl.theme.css");
-        echo $this->blade->view()->make('page/page', $this->data)->render();
-    }
-
     public function tintuc($param) {
         $id = $param[0];
         $this->load->model("tintuc_model");
@@ -255,19 +181,24 @@ class Index extends MY_Controller {
     }
 
     function searchtintuc() {
-        $this->load->model("tintuc_model");
-        $this->load->model("user_model");
-        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0))->as_array()->get_all();
-        foreach ($this->data['arr_tin'] as $k => &$tin) {
-            $author = $this->user_model->where(array("id" => $tin['id_user']))->fields(array("username"))->as_array()->get_all();
-            $arr_hinhanh = $this->tintuc_model->get_tintuc_hinhanh($tin['id_tintuc']);
-            $tin['author'] = $author[0]['username'];
-            $tin['arr_hinhanh'] = $arr_hinhanh;
-        }
+//        $this->load->model("tintuc_model");
+//        $this->load->model("user_model");
+//        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0))->as_array()->get_all();
+//        foreach ($this->data['arr_tin'] as $k => &$tin) {
+//            $author = $this->user_model->where(array("id" => $tin['id_user']))->fields(array("username"))->as_array()->get_all();
+//            $arr_hinhanh = $this->tintuc_model->get_tintuc_hinhanh($tin['id_tintuc']);
+//            $tin['author'] = $author[0]['username'];
+//            $tin['arr_hinhanh'] = $arr_hinhanh;
+//        }
+////        echo "<pre>";
+////        print_r($this->data['arr_tin']);
+////        die();
+//        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
+        
+//        $this->data['template'] = 'right';
 //        echo "<pre>";
-//        print_r($this->data['arr_tin']);
+//        print_r($this->data);
 //        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -365,167 +296,6 @@ class Index extends MY_Controller {
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/typeaheadjs.js");
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/combobox.js");
         echo $this->blade->view()->make('page/page', $this->data)->render();
-    }
-
-    public function crondata() {
-        $this->load->model("cron_model");
-        $this->load->model("tin_model");
-        $this->load->model('hinhanh_model');
-        $this->load->model("hinhanh_tin_model");
-        include_once("public/dom/simple_html_dom.php");
-//        $html = file_get_contents("http://alonhadat.com.vn/dat-nen-phia-tay-tp-so-hong-rieng-bao-so-chi-3-7-tr-nen-giam-gia-den-7-5--1226562.html");
-//        echo $html;
-
-        $page = "http://alonhadat.com.vn/";
-        $html = file_get_html($page . 'nha-dat/can-ban/dat-tho-cu-dat-o/2/ho-chi-minh.html');
-        //$img = $html->find(".content-item .thumbnail a img");
-        $first = $html->find(".content-item");
-        foreach ($first as $link) {
-            $href = $link->find(".ct_title a", 0)->href;
-            $id = preg_replace('/(.*)-(.*).html*/', "$2", $href);
-
-
-            /*
-             *  check Is Cron
-             */
-            $checkcron = $this->cron_model->where(array('id_cron' => $id, "hosting" => $page))->get_all();
-            if (count($checkcron)) {
-                continue;
-            }
-            /// END 
-            /*
-             *  get info what you need
-             */
-            $img = $link->find(".thumbnail a img", 0)->src;
-            $date = date("Y-m-d");
-            $dir = FCPATH . "public/uploads/$date/";
-            if (!file_exists($dir)) {
-                mkdir($dir, 0777, true);
-            }
-            $img_output = "public/uploads/$date/$id.jpg";
-            if (strpos($img, "http://") !== FALSE || strpos($img, "https://") !== FALSE) {
-                
-            } else {
-                $img = $page . $img;
-            }
-            file_put_contents($img_output, file_get_contents($img));
-            $htmldata = file_get_html($page . $href);
-            $title = $htmldata->find(".content .title h1", 0)->plaintext;
-            $content = $htmldata->find(".content .detail", 0)->innertext;
-            $get_dientich = $htmldata->find(".content .square .value", 0)->plaintext;
-            $get_gia = $htmldata->find(".content .price .value", 0)->plaintext;
-            $arr_dientich = explode(" ", $get_dientich);
-            $dientich = strtofloat($arr_dientich[1]);
-            $arr_gia = explode(" ", $get_gia);
-            if ($arr_gia[count($arr_gia) - 2] != '') {////trên m2
-                switch (trim($arr_gia[2])) {
-                    case "tỷ":
-                        $temp = strtofloat($arr_gia[1]);
-                        $gia = $temp * $dientich * 1000;
-                        break;
-                    default;
-                        $temp = strtofloat($arr_gia[1]);
-                        $gia = $temp * $dientich;
-                        break;
-                }
-            } else { //// bình thường
-                switch ($arr_gia[2]) {
-                    case "tỷ":
-                        $temp = strtofloat($arr_gia[1]);
-                        $gia = $temp * 1000;
-                        break;
-                    default;
-                        $temp = strtofloat($arr_gia[1]);
-                        $gia = $temp;
-                        break;
-                }
-            }
-            $diachi = $htmldata->find(".content .contact .add .value", 0)->plaintext;
-            $data_up = array(
-                'title' => $title,
-                'alias' => sluggable($title),
-                'content' => $content,
-                'id_khuvuc' => 1,
-                'date' => date("Y-m-d H:i:s"),
-                'id_user' => 1,
-                'id_phaply' => 1,
-                'id_huong' => 1,
-                'diachi' => $diachi,
-                'chieudai' => 0,
-                'chieurong' => 0,
-                'gia' => $gia,
-                'dientich' => $dientich
-            );
-//            echo "<br>Giá:" . $gia . "<br>Diện tích:" . $dientich;
-//            echo "<br>";
-//            print_r($get_dientich);
-//            echo "<br>";
-//            print_r($get_gia);
-            $id_tin = $this->tin_model->insert($data_up);
-
-            ////// UPlad hinh anh
-            $data_up = array(
-                'ten_hinhanh' => $id,
-                'real_hinhanh' => $id,
-                'src' => $img_output,
-                'thumb_src' => $img_output,
-                'bg_src' => "public/uploads/2016-07-03/768x576_1467537290_0_logo.jpg",
-                'slider_src' => "public/uploads/2016-07-03/768x576_1467537290_0_logo.jpg",
-                'id_user' => 1,
-                'deleted' => 0,
-                'date' => date("Y-m-d H:i:s")
-            );
-            $id_image = $this->hinhanh_model->insert($data_up);
-            $this->hinhanh_tin_model->insert(array('id_tin' => $id_tin, 'id_hinhanh' => $id_image));
-
-            /*
-             *  Save id cron
-             */
-            $data = array(
-                'id_tin' => $id_tin,
-                'hosting' => $page,
-                'id_cron' => $id,
-                'date' => date("Y-m-d H:i:s")
-            );
-            $this->cron_model->insert($data);
-        }
-    }
-
-    public function gethinh() {
-        include_once("public/dom/simple_html_dom.php");
-//        $html = file_get_contents("http://alonhadat.com.vn/dat-nen-phia-tay-tp-so-hong-rieng-bao-so-chi-3-7-tr-nen-giam-gia-den-7-5--1226562.html");
-//        echo $html;
-
-        $page = "http://celadoncityreal.com/";
-        $html = file_get_html($page);
-
-        //$img = $html->find(".content-item .thumbnail a img");
-        $first = $html->find("img");
-
-        foreach ($first as $link) {
-            $src = $link->src;
-            if (strpos($src, $page) !== FALSE) {
-                /*
-                 * Lay link internal (Xóa ten page ra khoi src)
-                 */
-                $des = FCPATH . "downloads/" . str_replace($page, "", $src);
-                $filename = basename($des);
-                $path = str_replace($filename, "", $des);
-//                echo $des . "<br>";
-//                echo $filename . "<br>";
-//                echo $path . "<br>";
-//                die();
-                /*
-                 * LUU FILE
-                 */
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-                file_put_contents($des, file_get_contents($src));
-
-                print_r($link->src);
-            }
-        }
     }
 
 }

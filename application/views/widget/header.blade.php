@@ -4,7 +4,7 @@
 <header id="header">
     <div class="container">
         <div class="pull-left" id="logo">
-            <a href="#intro">
+            <a href="<?= base_url(); ?>">
                 <img alt="" src="<?= base_url(); ?>public/img/logo.png" title=""/>
             </a>
         </div>
