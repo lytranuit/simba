@@ -44,6 +44,11 @@
                             <?= lang("news") ?>
                         </a>
                     </li>
+                    <li>
+                        <a href="#news">
+                            Thông tin nội bộ
+                        </a>
+                    </li>
                     <!--                <li class="menu-has-children">
                                         <a href="">
                                             Drop Down

@@ -57,9 +57,9 @@ $config['url_suffix'] = '';
 $config['language'] = 'vietnamese';
 
 $config['language_list'] = array(
-    'english' => 'EN',
-    'vietnamese' => 'VI',
-    'japanese' => 'JP'
+    'vietnamese' => 'vi',
+    'english' => 'en',
+    'japanese' => 'jp'
 );
 
 /*
