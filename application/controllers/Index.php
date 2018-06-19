@@ -7,6 +7,7 @@ class Index extends MY_Controller {
 ////////////////////////////////
 ////////////
         $this->data['is_login'] = $this->user_model->logged_in();
+        $this->data['userdata'] = $this->session->userdata();
         $this->data['stylesheet_tag'] = array(
             'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700',
             base_url() . 'public/lib/bootstrap/css/bootstrap.min.css',
@@ -246,6 +247,10 @@ class Index extends MY_Controller {
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/typeaheadjs.js");
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/combobox.js");
         echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function success() {
+        echo json_encode(1);
     }
 
 }

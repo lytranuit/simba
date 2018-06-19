@@ -10,31 +10,16 @@ Intro Section
                     <ol class="carousel-indicators">
                     </ol>
                     <div class="carousel-inner" role="listbox" >
-
-                        <div class="carousel-item active">
+                        @foreach($list_silder as $key => $row)
+                        <div class="carousel-item <?= $key == 0 ? "active" : "" ?>">
                             <div class="carousel-background">
-                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 1.jpg" width="100%"/>
+                                <img alt="" src="<?= base_url() . $row['hinh']['slider_src']; ?>" width="100%"/>
                             </div>
                             <div class="carousel-container" >
                                 “Hoàn thiện giá trị cuộc sống thông qua dinh dưỡng an toàn và có trách nhiệm”
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <div class="carousel-background">
-                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 2.jpg" width="100%"/>
-                            </div>
-                            <div class="carousel-container">
-                                “Hoàn thiện giá trị cuộc sống thông qua dinh dưỡng an toàn và có trách nhiệm”
-                            </div>
-                        </div>  
-                        <div class="carousel-item">
-                            <div class="carousel-background">
-                                <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 3.jpg" width="100%"/>
-                            </div>
-                            <div class="carousel-container">
-                                “Hoàn thiện giá trị cuộc sống thông qua dinh dưỡng an toàn và có trách nhiệm”
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

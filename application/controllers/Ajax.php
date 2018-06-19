@@ -309,5 +309,16 @@ class Ajax extends MY_Controller {
         echo 1;
     }
 
+    function listslider() {
+        $this->load->model("slider_model");
+        $this->load->model("hinhanh_model");
+        $arr_slider = $this->slider_model->where(array('deleted' => 0))->as_array()->get_all();
+        foreach ($arr_slider as &$slider) {
+            $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
+            $slider['hinh'] = $hinh[0];
+        }
+        echo json_encode($arr_slider);
+    }
+
     ////////////
 }

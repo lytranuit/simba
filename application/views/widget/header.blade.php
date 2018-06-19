@@ -9,11 +9,19 @@
             </a>
         </div>
         <div class="pull-right hidden-md-down" style="margin: 5px;">
-            <a class="button_login" data-target="#login-modal" data-toggle="modal" href="#">
-                <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
-                    <?= lang('login_heading') ?>
-                </span>
-            </a>
+            <?php if ($is_login): ?> 
+                <a href="<?= base_url() ?>admin">
+                    <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
+                        <?= $userdata['identity'] ?>
+                    </span>
+                </a>
+            <?php else: ?>
+                <a class="button_login" data-target="#login-modal" data-toggle="modal" href="#">
+                    <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
+                        <?= lang('login_heading') ?>
+                    </span>
+                </a>
+            <?php endif; ?>
             <div id="language" class="d-inline-block">
                 <?php foreach ($language_list as $key => $lang): ?>
                     <a href="#" data='<?= $key ?>'>
@@ -113,11 +121,11 @@
                                             </a>
                                             <ul id="language">
                     <?php foreach ($language_list as $key => $lang): ?>
-                                                                                        <li>
-                                                                                            <a href="#" data='<?= $key ?>'>
+                                                                                                                <li>
+                                                                                                                    <a href="#" data='<?= $key ?>'>
                         <?= $lang ?>
-                                                                                            </a>
-                                                                                        </li>
+                                                                                                                    </a>
+                                                                                                                </li>
                     <?php endforeach; ?>
                     
                                             </ul>
@@ -163,10 +171,10 @@
                 <p class="text-center text-muted">
                     <a href="customer-register.html">
                         <strong>
-                            
+
                         </strong>
                     </a>
-                   Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Oishii.vn
+                    Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Oishii.vn
                 </p>
             </div>
         </div>

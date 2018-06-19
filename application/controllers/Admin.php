@@ -5,16 +5,18 @@ class Admin extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->data['is_login'] = $this->user_model->logged_in();
+        $this->data['userdata'] = $this->session->userdata();
         $this->data['template'] = "admin";
         $this->data['title'] = "Admin";
         $this->data['stylesheet_tag'] = array(
             "https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext",
             "https://fonts.googleapis.com/icon?family=Material+Icons",
-            base_url() . "public/admin/plugins/bootstrap/css/bootstrap.css",
-            base_url() . "public/admin/plugins/node-waves/waves.css",
-            base_url() . "public/admin/plugins/animate-css/animate.css",
-            base_url() . "public/admin/plugins/morrisjs/morris.css",
-            base_url() . "public/admin/css/style.css",
+            "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
+            base_url() . "public/admin/plugins/bootstrap/css/bootstrap.css ",
+            base_url() . "public/admin/plugins/node-waves/waves.css ",
+            base_url() . "public/admin/plugins/animate-css/animate.css ",
+            base_url() . "public/admin/plugins/morrisjs/morris.css ",
+            base_url() . "public/admin/css/style.css ",
             base_url() . "public/admin/css/themes/all-themes.css"
         );
         $this->data['javascript_tag'] = array(
@@ -33,8 +35,7 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/flot-charts/jquery.flot.categories.js",
             base_url() . "public/admin/plugins/flot-charts/jquery.flot.time.js",
             base_url() . "public/admin/plugins/jquery-sparkline/jquery.sparkline.js",
-            base_url() . "public/admin/js/admin.js",
-            base_url() . "public/admin/js/pages/index.js",
+            base_url() . "public/admin/js/admin.js"
         );
     }
 
@@ -71,7 +72,7 @@ class Admin extends MY_Controller {
             "editgioithieu",
             "slider",
         );
-        if (in_array($method, $fun_admin) && !$this->ion_auth->is_admin()) {
+        if (in_array($method, $fun_admin) && $this->data['userdata']['role'] != 1) {
             return false;
         }
         /* Tin đăng check */
@@ -82,7 +83,8 @@ class Admin extends MY_Controller {
             "remove_tin",
         );
         if (in_array($method, $fun_tin)) {
-            $id = $params[0];
+            $id = $params[
+                    0];
             $id_user = $this->session->userdata('user_id');
             $this->load->model("tin_model");
             $tin = $this->tin_model->where(array('deleted' => 0, 'id_user' => $id_user, 'id_tin' => $id))->as_array()->get_all();
@@ -96,9 +98,10 @@ class Admin extends MY_Controller {
     public function index() { /////// trang ca nhan
 //        $id_user = $this->session->userdata('user_id');
 //        $this->load->model("user_model");
-//        if (isset($_POST['edit_user'])) {
-//            $additional_data = array(
-//                'last_name' => $this->input->post('ten'),
+//        if (isset($_POST[   'edit_user'])) {
+//            
+//        $additional_data = array(
+//                'last_name' => $this-> input->post('ten'),
 //                'phone' => $this->input->post('dienthoai'),
 //                'gioitinh' => $this->input->post("gioitinh")
 //            );
@@ -107,7 +110,7 @@ class Admin extends MY_Controller {
 //            exit;
 //        } else {
 //            $user = $this->user_model->where(array('id' => $id_user))->as_array()->get_all();
-//            $this->data['user'] = $user[0];
+//            $this->data['user'] = $user[  0];
 //            //echo $this->data['content'];
 //            echo $this->blade->view()->make('page/page', $this->data)->render();
 //        }
@@ -115,73 +118,25 @@ class Admin extends MY_Controller {
     }
 
     public function slider() {
-        $id_user = $this->session->userdata('user_id');
-        if (isset($_POST['slider'])) {
-            $this->load->model("slider_model");
-            $this->load->model("hinhanh_model");
-            $arr_id = $this->input->post('id');
-            $arr_idhinhanh = $this->input->post('id_hinhanh');
-            $arr_text1 = $this->input->post('text1');
-            $arr_text2 = $this->input->post('text2');
-            $arr_text3 = $this->input->post('text3');
-            $arr_deleted = $this->input->post('id_deleted');
-            $arr_order = $this->input->post('order');
-            foreach ($arr_id as $key => $id) {
-                if (is_numeric($id)) { /////// update
-                    $additional_data = array(
-                        'id_hinhanh' => $arr_idhinhanh[$key],
-                        'animate_1' => $arr_text1[$key],
-                        'animate_2' => $arr_text2[$key],
-                        'animate_3' => $arr_text3[$key],
-                        'order' => $arr_order[$key]
-                    );
-                    $this->slider_model->update($additional_data, $id);
-                    $this->hinhanh_model->update(array('deleted' => 0), $arr_idhinhanh[$key]);
-                } else { ////// insert
-                    $additional_data = array(
-                        'id_hinhanh' => $arr_idhinhanh[$key],
-                        'animate_1' => $arr_text1[$key],
-                        'animate_2' => $arr_text2[$key],
-                        'animate_3' => $arr_text3[$key],
-                        'order' => $arr_order[$key]
-                    );
-                    $this->slider_model->insert($additional_data);
-                    $this->hinhanh_model->update(array('deleted' => 0), $arr_idhinhanh[$key]);
-                }
-            }
-            if (count($arr_deleted)) {
-                foreach ($arr_deleted as $id) {
-                    $this->slider_model->update(array("deleted" => 1), $id);
-                }
-            }
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit;
-        } else {
-            $this->load->model("slider_model");
-            $this->load->model("hinhanh_model");
-            $arr_slider = $this->slider_model->where(array('deleted' => 0))->order_by("order")->as_array()->get_all();
-            foreach ($arr_slider as &$slider) {
-                $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
-                $html = "\"<img src='" . base_url() . $hinh[0]['thumb_src'] . "' class='file-preview-image' alt='" . $hinh[0]['ten_hinhanh'] . "' title='" . $hinh[0]['ten_hinhanh'] . "'>\",";
-                $htmlcon = "{
-                        caption: '" . $hinh[0]['ten_hinhanh'] . "',
-                        width: '120px',
-                        url: '" . base_url() . "member/deleteImage/" . $hinh[0]['id_hinhanh'] . "',
-                        key: " . $hinh[0]['id_hinhanh'] . "
-                    },";
-                $slider['hinhhtml'] = $html;
-                $slider['hinhconf'] = $htmlcon;
-            }
-            $this->data['arr_slider'] = $arr_slider;
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/fileinput.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_editor.min.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/colors.css");
+//        $id_user = $this->session->userdata('user_id');
+        load_inputfile($this->data);
+        array_push($this->data['javascript_tag'], base_url() . "public/admin/js/include/slider.js");
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
 
-            array_push($this->data['javascript_tag'], base_url() . "public/js/froala_editor.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/colors.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/fileinput.js");
-            echo $this->blade->view()->make('page/page', $this->data)->render();
+    public function saveslider() {
+        if (isset($_POST['listhinh'])) {
+            $this->load->model("slider_model");
+            $arr_id = json_decode($this->input->post('listhinh'), true);
+            $this->slider_model->update(array("deleted" => 1));
+            foreach ($arr_id as $key => $id) {
+                $additional_data = array(
+                    'id_hinhanh' => $id,
+                    'order' => $key
+                );
+                $this->slider_model->insert($additional_data);
+            }
+            echo json_encode(array('success' => 1));
         }
     }
 
@@ -371,7 +326,7 @@ class Admin extends MY_Controller {
         }
     }
 
-    //remove a user
+//remove a user
     function remove_user($params) {
         $id = $params[0];
         $this->load->model("user_model");
@@ -380,7 +335,7 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    // activate the user
+// activate the user
     function activate($params) {
         $id = $params[0];
         $code = isset($params[1]) ? $params[1] : false;
@@ -393,7 +348,7 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    // deactivate the user
+// deactivate the user
     function deactivate($params) {
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             // redirect them to the home page because they must be an administrator to view this
@@ -1139,7 +1094,7 @@ class Admin extends MY_Controller {
         }
     }
 
-    // activate the tin
+// activate the tin
     function activate_tin($params) {
         $this->load->model("tin_model");
         $id = $params[0];
@@ -1148,7 +1103,7 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    // deactivate the tin
+// deactivate the tin
     function deactivate_tin($params) {
         $this->load->model("tin_model");
         $id = $params[0];
@@ -1157,7 +1112,7 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    //remove a tin
+//remove a tin
     function remove_tin($params) {
         $this->load->model("tin_model");
         $id = $params[0];
@@ -1454,7 +1409,7 @@ class Admin extends MY_Controller {
         }
     }
 
-    // activate the tin
+// activate the tin
     function activate_tintuc($params) {
         $this->load->model("tintuc_model");
         $id = $params[0];
@@ -1463,7 +1418,7 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    // deactivate the tin
+// deactivate the tin
     function deactivate_tintuc($params) {
         $this->load->model("tintuc_model");
         $id = $params[0];
@@ -1472,7 +1427,7 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    //remove a tin
+//remove a tin
     function remove_tintuc($params) {
         $this->load->model("tintuc_model");
         $id = $params[0];
@@ -1633,8 +1588,8 @@ class Admin extends MY_Controller {
             $config['create_thumb'] = FALSE;
             $config['maintain_ratio'] = FALSE;
             $config['quality'] = "100%";
-            $config['width'] = 1375;
-            $config['height'] = 670;
+            $config['width'] = 1200;
+            $config['height'] = 450;
             $config['new_image'] = $data['file_path'] . $config['width'] . "x" . $config['height'] . "_" . $data['file_name'];
             $slider_src = $upload_path_url . $config['width'] . "x" . $config['height'] . "_" . $data['file_name'];
             $dim = (intval($data["image_width"]) / intval($data["image_height"])) - ($config['width'] / $config['height']);
@@ -1771,8 +1726,8 @@ class Admin extends MY_Controller {
                 $config['create_thumb'] = FALSE;
                 $config['maintain_ratio'] = FALSE;
                 $config['quality'] = "100%";
-                $config['width'] = 1375;
-                $config['height'] = 670;
+                $config['width'] = 1200;
+                $config['height'] = 450;
                 $config['new_image'] = $data['file_path'] . $config['width'] . "x" . $config['height'] . "_" . $data['file_name'];
                 $slider_src = $upload_path_url . $config['width'] . "x" . $config['height'] . "_" . $data['file_name'];
                 $dim = (intval($data["image_width"]) / intval($data["image_height"])) - ($config['width'] / $config['height']);
@@ -1823,8 +1778,8 @@ class Admin extends MY_Controller {
                     $id_image = $this->hinhanh_model->insert($data_up);
                     if (IS_AJAX) {
                         echo json_encode(array(
-                            'initialPreview' => array("<img style = 'height:160px' src = '" . base_url() . "$info->url' class = 'file-preview-image'>"),
-                            'initialPreviewConfig' => array(array('caption' => $info->name, 'width' => '120px', 'height' => '160px', 'url' => base_url() . '/member/deleteImage/' . $id_image, 'key' => $id_image)),
+                            'initialPreview' => array(base_url() . $info->url),
+                            'initialPreviewConfig' => array(array('caption' => $info->name, 'width' => '120px', 'height' => '160px', 'url' => base_url() . '/index/success/' . $id_image, 'key' => $id_image)),
                             'append' => true,
                             'key' => $id_image
                         ));

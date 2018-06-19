@@ -58,60 +58,62 @@
                         <span>Thông tin nội bộ</span>
                     </a>
                 </li>
-                <li class="header">Quản trị</li>
-                <li>
-                    <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block toggled">
-                        <i class="material-icons">home</i>
-                        <span>Trang chủ</span>
-                    </a>
-                    <ul class="ml-menu" style="display: block;">
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>Slider</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>Sim ba</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>Đối tác</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons">list</i>
-                        <span>Menu</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons">list</i>
-                        <span>Page</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons">list</i>
-                        <span>Tin tức</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons">list</i>
-                        <span>Loại tin tức</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="material-icons">list</i>
-                        <span>Gớp ý</span>
-                    </a>
-                </li>
+                <?php if ($userdata['role'] == 1): ?>
+                    <li class="header">Quản trị</li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block toggled">
+                            <i class="material-icons">home</i>
+                            <span>Trang chủ</span>
+                        </a>
+                        <ul class="ml-menu" style="display: block;">
+                            <li>
+                                <a href="<?= base_url() ?>admin/slider">
+                                    <span>Banner</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <span>Sim ba</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <span>Đối tác</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons">list</i>
+                            <span>Menu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons">list</i>
+                            <span>Page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons">list</i>
+                            <span>Tin tức</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons">list</i>
+                            <span>Loại tin tức</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons">list</i>
+                            <span>Gớp ý</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         <!-- #Menu -->

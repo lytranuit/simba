@@ -9,8 +9,12 @@ class Widget {
 
     function __construct() {
         $this->CI = &get_instance();
+        $this->CI->load->library(array('session'));
         $this->CI->load->helper(array('url', 'language', 'my'));
         $this->CI->lang->load(array('auth', 'home'));
+        $this->CI->load->model("user_model");
+        $this->data['is_login'] = $this->CI->user_model->logged_in();
+        $this->data['userdata'] = $this->CI->session->userdata();
         ////////////////////////////////
         $views = APPPATH . "views/";
         $cache = APPPATH . "cache/";
@@ -36,6 +40,14 @@ class Widget {
     }
 
     function silder() {
+        $this->CI->load->model("slider_model");
+        $this->CI->load->model("hinhanh_model");
+        $arr_slider = $this->CI->slider_model->where(array('deleted' => 0))->as_array()->get_all();
+        foreach ($arr_slider as &$slider) {
+            $hinh = $this->CI->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
+            $slider['hinh'] = $hinh[0];
+        }
+        $this->data['list_silder'] = $arr_slider;
         echo $this->blade->view()->make('widget/slider', $this->data)->render();
     }
 
