@@ -22,6 +22,20 @@
                 <?php endforeach; ?>
             </div>
         </div>
+        <div>
+            <a style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
+                <span class="fa fa-shopping-cart text-danger"></span>
+                <span>
+                    APP
+                </span>
+            </a>
+            <a style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.oishii.vn/">
+                <span class="fa fa-shopping-cart text-danger"></span>
+                <span>
+                    Website
+                </span>
+            </a>
+        </div>
     </div>
 </header>
 <div id="menu" class="blue-grdt">
@@ -99,11 +113,11 @@
                                             </a>
                                             <ul id="language">
                     <?php foreach ($language_list as $key => $lang): ?>
-                                                        <li>
-                                                            <a href="#" data='<?= $key ?>'>
+                                                                                        <li>
+                                                                                            <a href="#" data='<?= $key ?>'>
                         <?= $lang ?>
-                                                            </a>
-                                                        </li>
+                                                                                            </a>
+                                                                                        </li>
                     <?php endforeach; ?>
                     
                                             </ul>
@@ -129,17 +143,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="customer-orders.html" method="get">
+                <form id="form-login">
                     <div class="form-group">
-                        <input class="form-control" id="email_modal" placeholder="email" type="text">
+                        <input class="form-control" id="email_modal" placeholder="username" type="text" name="identity">
                         </input>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" id="password_modal" placeholder="password" type="password">
+                        <input class="form-control" id="password_modal" placeholder="password" type="password" name="password">
                         </input>
                     </div>
                     <p class="text-center">
-                        <button class="btn btn-template-outlined">
+                        <button class="btn btn-template-outlined" id="button_login">
                             <i class="fa fa-sign-in">
                             </i>
                             Log in
@@ -147,15 +161,12 @@
                     </p>
                 </form>
                 <p class="text-center text-muted">
-                    Not registered yet?
-                </p>
-                <p class="text-center text-muted">
                     <a href="customer-register.html">
                         <strong>
-                            Register now
+                            
                         </strong>
                     </a>
-                    ! It is easy and done in 1 minute and gives you access to special discounts and much more!
+                   Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Oishii.vn
                 </p>
             </div>
         </div>

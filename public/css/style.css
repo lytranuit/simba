@@ -224,12 +224,27 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     align-items: center;
     position: absolute;
-    bottom: 0;
     top: 0;
-    left: 0;
-    right: 0;
+    color: white;
+    background: #04040485;
+    font-family: monospace;
+    font-size: 15px;
+    width: 100%;
+    padding: 5px;
+    border-radius: 0px 0px 20px 20px;
 }
 
+@media (max-width: 1024px) {
+    #intro .carousel-container {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 425px) {
+    #intro .carousel-container {
+        font-size: 9px;
+    }
+}
 #intro .carousel-content {
     text-align: center;
 }

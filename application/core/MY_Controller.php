@@ -8,12 +8,13 @@ class MY_Controller extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->library(array('ion_auth', 'form_validation', 'widget'));
+        $this->load->library(array('form_validation', 'widget'));
         $this->load->model("page_model");
+        $this->load->model("user_model");
 //        echo language_current();
         ////// set langue
         $this->config->set_item('language', language_current());
-        $this->lang->load(array('auth','home'));
+        $this->lang->load(array('auth', 'home'));
         ////
         $this->data['widget'] = $this->widget;
         $this->data['project_name'] = $this->config->item("project_name");

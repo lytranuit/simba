@@ -16,7 +16,7 @@ Intro Section
                                 <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 1.jpg" width="100%"/>
                             </div>
                             <div class="carousel-container" >
-
+                                “Hoàn thiện giá trị cuộc sống thông qua dinh dưỡng an toàn và có trách nhiệm”
                             </div>
                         </div>
                         <div class="carousel-item">
@@ -24,7 +24,7 @@ Intro Section
                                 <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 2.jpg" width="100%"/>
                             </div>
                             <div class="carousel-container">
-
+                                “Hoàn thiện giá trị cuộc sống thông qua dinh dưỡng an toàn và có trách nhiệm”
                             </div>
                         </div>  
                         <div class="carousel-item">
@@ -32,7 +32,7 @@ Intro Section
                                 <img alt="" src="<?= base_url(); ?>public/img/intro-carousel/BANNER 3.jpg" width="100%"/>
                             </div>
                             <div class="carousel-container">
-
+                                “Hoàn thiện giá trị cuộc sống thông qua dinh dưỡng an toàn và có trách nhiệm”
                             </div>
                         </div>
                     </div>

@@ -106,7 +106,6 @@ jQuery(document).ready(function ($) {
 
     // Smooth scroll for the menu and links with .scrollto classes
     $(document).off("click", '.nav-menu a, #mobile-nav a, .scrollto').on('click', '.nav-menu a, #mobile-nav a, .scrollto', function () {
-        console.log(1);
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
             var target = $(this.hash);
             if (target.length) {
@@ -229,5 +228,26 @@ jQuery(document).ready(function ($) {
         loop: true,
         items: 1
     });
-
+    $("#button_login").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            dataType: "JSON",
+            type: "POST",
+            url: path + "ajax/login",
+            data: $("#form-login").serialize(),
+            success: function (data) {
+                if (data.success == 0) {
+                    alert(data.msg);
+                } else {
+                    var role = data.role;
+                    if (role == "1") {
+                        location.href = path + "admin";
+                    } else {
+                        location.reload();
+                    }
+                }
+            }
+        });
+        return false;
+    })
 });

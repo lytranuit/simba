@@ -6,7 +6,7 @@ class Index extends MY_Controller {
         parent::__construct();
 ////////////////////////////////
 ////////////
-        $this->data['is_login'] = $this->ion_auth->logged_in();
+        $this->data['is_login'] = $this->user_model->logged_in();
         $this->data['stylesheet_tag'] = array(
             'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700',
             base_url() . 'public/lib/bootstrap/css/bootstrap.min.css',
@@ -80,42 +80,6 @@ class Index extends MY_Controller {
         $this->data['gioithieu'] = $gioithieu[0];
         array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
-    }
-
-    function login() {
-        if (!$this->ion_auth->logged_in()) {
-            $this->data['title'] = $this->lang->line('login_heading');
-
-            //validate form input
-            $this->form_validation->set_rules('identity', "", 'required');
-            $this->form_validation->set_rules('password', "", 'required');
-
-            if ($this->form_validation->run() == true) {
-                // check to see if the user is logging in
-                // check for "remember me"
-                $remember = (bool) $this->input->post('remember');
-
-                if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
-                    //if the login is successful
-                    //redirect them back to the home page
-                    $this->session->set_flashdata('message', "");
-                    header('Location: ' . $_SERVER['HTTP_REFERER']);
-                    exit;
-                } else {
-                    // if the login was un-successful
-                    // redirect them back to the login page
-                    $this->session->set_flashdata('message', "Tài khoản hoặc mật khẩu không đúng");
-                    redirect('index/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
-                }
-            } else {
-                // the user is not logging in so display the login page
-                // set the flash data error message if there is one
-                $this->data['message'] = $this->session->flashdata('message');
-                echo $this->blade->view()->make('page/page', $this->data)->render();
-            }
-        } else {
-            redirect('member', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
-        }
     }
 
     function signin() {
@@ -195,10 +159,8 @@ class Index extends MY_Controller {
         $this->data['title'] = "Logout";
 
         // log the user out
-        $logout = $this->ion_auth->logout();
+        $logout = $this->user_model->logout();
 
-        // redirect them to the login page
-        $this->session->set_flashdata('message', $this->ion_auth->messages());
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }
