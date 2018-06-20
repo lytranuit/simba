@@ -122,7 +122,7 @@
 </section>
 <script>
     $(document).ready(function () {
-        var menu_active = "<?= $menu_active ?>";
+        var menu_active = "{{$menu_active or 0}}";
         $("#leftsidebar li[data=" + menu_active + "]").addClass("active");
         $("#leftsidebar li[data=" + menu_active + "]").parents("li").addClass("active");
         $.AdminBSB.leftSideBar.activate();

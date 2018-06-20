@@ -399,51 +399,7 @@ class Admin extends MY_Controller {
             $id_tin = $this->pageweb_model->insert($data_up);
             redirect('member/quanlypage', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/fileinput.css");
-
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_editor.min.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
-            /////////// Plugin
-            array_push($this->data['stylesheet_tag'], "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/code_view.min.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/char_counter.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/code_view.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/colors.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/emoticons.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/file.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/fullscreen.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/image.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/image_manager.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/line_breaker.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/quick_insert.css");
-            array_push($this->data['stylesheet_tag'], base_url() . "public/css/plugins/table.css");
-
-            array_push($this->data['javascript_tag'], base_url() . "public/js/autoNumeric.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/fileinput.js");
-            ///////// Editor
-            array_push($this->data['javascript_tag'], base_url() . "public/js/froala_editor.min.js");
-            /////////// Plugin
-            array_push($this->data['javascript_tag'], "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js");
-            array_push($this->data['javascript_tag'], "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/code_view.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/align.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/char_counter.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/colors.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/emoticons.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/entities.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/font_size.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/fullscreen.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/image.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/image_manager.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/link.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/lists.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/paragraph_format.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/paragraph_style.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/quick_insert.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/save.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/url.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/plugins/video.min.js");
-            array_push($this->data['javascript_tag'], base_url() . "public/js/languages/en_gb.js");
+            array_push($this->data['javascript_tag'], "https://cdn.ckeditor.com/ckeditor5/10.0.1/classic/ckeditor.js");
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
     }

@@ -12,7 +12,7 @@
             <div class="body">
                 <div class="row">
                     <div class="col-md-12" style="margin:20px 0px;">
-                        <a class="btn btn-success" href="{{base_url()}}member/thempage">Thêm page</a>
+                        <a class="btn btn-success" href="{{base_url()}}admin/thempage">Thêm page</a>
                     </div>
                 </div>
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
