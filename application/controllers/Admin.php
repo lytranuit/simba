@@ -120,6 +120,7 @@ class Admin extends MY_Controller {
     public function slider() {
 //        $id_user = $this->session->userdata('user_id');
         load_inputfile($this->data);
+        $this->data['menu_active'] = "banner";
         array_push($this->data['javascript_tag'], base_url() . "public/admin/js/include/slider.js");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
@@ -379,10 +380,9 @@ class Admin extends MY_Controller {
 
     public function quanlypage() {
         $this->load->model("pageweb_model");
+        $this->data['menu_active'] = "page";
         $this->data['arr_tin'] = $this->pageweb_model->where(array('deleted' => 0))->as_object()->get_all();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/dataTables.bootstrap.min.css");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.dataTables.min.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/dataTables.bootstrap.min.js");
+        load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 

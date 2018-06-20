@@ -123,7 +123,7 @@ $.AdminBSB.leftSideBar = {
             });
 
             //Scroll active menu item when page load, if option set = true
-            if ($.AdminBSB.options.leftSideBar.scrollActiveItemWhenPageLoad) {
+            if ($.AdminBSB.options.leftSideBar.scrollActiveItemWhenPageLoad && $('.menu .list li.active').length) {
                 var activeItemOffsetTop = $('.menu .list li.active')[0].offsetTop
                 if (activeItemOffsetTop > 150) $el.slimscroll({ scrollTo: activeItemOffsetTop + 'px' });
             }
@@ -446,7 +446,6 @@ $.AdminBSB.browser = {
 
 $(function () {
     $.AdminBSB.browser.activate();
-    $.AdminBSB.leftSideBar.activate();
     $.AdminBSB.rightSideBar.activate();
     $.AdminBSB.navbar.activate();
     $.AdminBSB.dropdownMenu.activate();

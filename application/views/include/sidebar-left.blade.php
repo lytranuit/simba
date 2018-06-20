@@ -46,7 +46,7 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">User</li>
-                <li class="active">
+                <li>
                     <a href="index.html">
                         <i class="material-icons">account_box</i>
                         <span>Cá nhân</span>
@@ -66,7 +66,7 @@
                             <span>Trang chủ</span>
                         </a>
                         <ul class="ml-menu" style="display: block;">
-                            <li>
+                            <li data='banner'>
                                 <a href="<?= base_url() ?>admin/slider">
                                     <span>Banner</span>
                                 </a>
@@ -89,8 +89,8 @@
                             <span>Menu</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0);">
+                    <li data='page'>
+                        <a href="<?= base_url() ?>admin/quanlypage">
                             <i class="material-icons">list</i>
                             <span>Page</span>
                         </a>
@@ -120,3 +120,11 @@
     </aside>
     <!-- #END# Left Sidebar -->
 </section>
+<script>
+    $(document).ready(function () {
+        var menu_active = "<?= $menu_active ?>";
+        $("#leftsidebar li[data=" + menu_active + "]").addClass("active");
+        $("#leftsidebar li[data=" + menu_active + "]").parents("li").addClass("active");
+        $.AdminBSB.leftSideBar.activate();
+    })
+</script>

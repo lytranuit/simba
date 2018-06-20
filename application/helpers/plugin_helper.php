@@ -14,3 +14,15 @@ if (!function_exists('load_inputfile')) {
     }
 
 }
+
+
+if (!function_exists('load_datatable')) {
+
+    function load_datatable(&$data) {
+        array_push($data['stylesheet_tag'], base_url() . "public/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css");
+
+        array_push($data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/jquery.dataTables.js");
+        array_push($data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js");
+    }
+
+}

@@ -11,8 +11,5 @@
                 @yield("content")
             </div>
         </section>
-        @foreach($javascript_tag as $url)
-        <script src="{{$url}}"></script>
-        @endforeach
     </body>
 </html>

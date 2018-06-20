@@ -20,3 +20,6 @@
 <script>
     var path = '<?= base_url() ?>';
 </script>
+@foreach($javascript_tag as $url)
+<script src="{{$url}}"></script>
+@endforeach
