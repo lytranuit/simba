@@ -32,11 +32,11 @@
                             <td>{{$tin->alias}}</td>   
                             <td>
                                 <a target="blank" href="{{base_url() . $tin->alias}}"><i class="icon-eye-open"></i></a>
-                                <a href="{{base_url()}}member/editpage/{{$tin->id}}" class="text-info">
+                                <a href="{{base_url()}}admin/editpage/{{$tin->id}}" class="text-info">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}member/removepage/{{$tin->id}}" class="text-danger">
+                                <a href="{{base_url()}}admin/removepage/{{$tin->id}}" class="text-danger">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

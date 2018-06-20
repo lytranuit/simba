@@ -22,8 +22,8 @@
                             <div class="form-group">
                                 <b class="form-label">Nội dung (*):</b>
                                 <div class="form-line">
-                                    <textarea name="post_contents" id="editor" required="" class="form-control">
-    <p>Here goes the initial content of the editor.</p>
+                                    <textarea name="post_contents" id="edit" required="" class="form-control">
+                                        
                                     </textarea>
                                 </div>
                             </div>
@@ -42,6 +42,36 @@
 
 <script type='text/javascript'>
     $(document).ready(function () {
-        /* ENd dang tin */
+        $('#edit').froalaEditor({
+            heightMin: 200,
+            heightMax: 500, // Set the image upload URL.
+            imageUploadURL: '<?= base_url() ?>admin/uploadimage',
+            // Set request type.
+            imageUploadMethod: 'POST',
+            // Set max image size to 5MB.
+            imageMaxSize: 5 * 1024 * 1024,
+            // Allow to upload PNG and JPG.
+            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+            htmlRemoveTags: [],
+        });
+        $.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+        $("#form-dang-tin").validate({
+            highlight: function (input) {
+                $(input).parents('.form-line').addClass('error');
+            },
+            unhighlight: function (input) {
+                $(input).parents('.form-line').removeClass('error');
+            },
+            errorPlacement: function (error, element) {
+                $(element).parents('.form-group').append(error);
+            },
+            submitHandler: function (form) {
+                form.submit();
+                return false;
+            }
+        });
     });
 </script>

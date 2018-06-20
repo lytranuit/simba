@@ -46,14 +46,14 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">User</li>
-                <li>
-                    <a href="index.html">
+                <li data='info'>>
+                    <a href="<?= base_url() ?>admin">
                         <i class="material-icons">account_box</i>
                         <span>Cá nhân</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="index.html">
+                <li>
+                    <a href="<?= base_url() ?>admin">
                         <i class="material-icons">view_list</i>
                         <span>Thông tin nội bộ</span>
                     </a>
@@ -83,7 +83,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li data='menu'>
                         <a href="javascript:void(0);">
                             <i class="material-icons">list</i>
                             <span>Menu</span>
@@ -95,19 +95,19 @@
                             <span>Page</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0);">
+                    <li data='tintuc'>
+                        <a href="<?= base_url() ?>admin/quanlytintuc">
                             <i class="material-icons">list</i>
                             <span>Tin tức</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0);">
+                    <li data='type'>
+                        <a href="<?= base_url() ?>admin/quanlytype">
                             <i class="material-icons">list</i>
                             <span>Loại tin tức</span>
                         </a>
                     </li>
-                    <li>
+                    <li data='comment'>
                         <a href="javascript:void(0);">
                             <i class="material-icons">list</i>
                             <span>Gớp ý</span>
