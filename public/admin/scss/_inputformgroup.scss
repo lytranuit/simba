@@ -5,7 +5,7 @@
     .form-line {
         display: inline-block;
         width: 100%;
-        border-bottom: 1px solid #ddd;
+        border: 1px solid #ddd;
         position: relative;
 
         &:after {
@@ -166,7 +166,7 @@
     .form-line {
         width: 100%;
         position: relative;
-        border-bottom: 1px solid #ddd;
+        border: 1px solid #ddd;
 
         &:after {
             content: '';

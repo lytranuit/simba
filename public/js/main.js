@@ -1,6 +1,34 @@
 
 $(window).scroll();
 jQuery(document).ready(function ($) {
+    $("#contactForm").validate({
+        highlight: function (input) {
+            $(input).parents('.form-group').addClass('error');
+        },
+        unhighlight: function (input) {
+            $(input).parents('.form-group').removeClass('error');
+        },
+        errorPlacement: function (error, element) {
+            $(element).parents('.form-group').append(error);
+        },
+        submitHandler: function (form) {
+            $.ajax({
+                url: 'ajax/contactsubmit',
+                data: $("#contactForm").serialize(),
+                dataType: "JSON",
+                type: "POST",
+                success: function (data) {
+                    var code = data.code;
+                    var msg = data.msg;
+                    alert(msg);
+                    if (code == 400) {
+                        $("#contactForm").trigger('reset');
+                    }
+                }
+            });
+            return false;
+        }
+    });
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {

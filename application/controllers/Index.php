@@ -22,6 +22,7 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/jquery/jquery.min.js',
             base_url() . 'public/lib/jquery/jquery-migrate.min.js',
             base_url() . 'public/lib/bootstrap/js/bootstrap.bundle.min.js',
+            base_url() . "public/lib/jquery-validation/jquery.validate.js",
             base_url() . 'public/lib/easing/easing.min.js',
             base_url() . 'public/lib/superfish/hoverIntent.js',
             base_url() . 'public/lib/superfish/superfish.min.js',

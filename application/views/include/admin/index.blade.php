@@ -11,22 +11,24 @@
             </div>
             <div class="body">
                 <form id="form_advanced_validation" method="POST" novalidate="novalidate">
-                    <div class="form-group form-float">
+                    <div class="form-group">
+                        <b class="form-label">Username:</b>
                         <div class="form-line">
                             <input type="text" class="form-control" name="username" maxlength="10" minlength="3" required="" aria-required="true">
-                            <label class="form-label">Username</label>
                         </div>
                         <div class="help-info"></div>
                     </div>
-                    <div class="form-group form-float">
+                    <div class="form-group">
+                        <b class="form-label">Name</b>
                         <div class="form-line">
                             <input type="text" class="form-control" name="fullname" maxlength="10" minlength="3" required="" aria-required="true">
-                            <label class="form-label">Name</label>
                         </div>
-                        <div class="help-info"></div>
                     </div>
-                    <div class="mb-5">
-                        <a href="#">Thay đổi mật khẩu</a>
+                    <div style="margin-bottom: 20px;">
+                        <a href="#"> 
+                            <i class="material-icons" style='font-size: 20px;vertical-align: middle;'>lock</i>
+                            <span>Thay đổi mật khẩu</span> 
+                        </a>
                     </div>
                     <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
                 </form>

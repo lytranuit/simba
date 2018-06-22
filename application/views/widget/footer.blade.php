@@ -82,31 +82,33 @@ Footer
                     <div class="form">
                         <div id="errormessage">
                         </div>
-                        <form action="" class="contactForm" method="post" role="form">
+                        <form id="contactForm">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <input class="form-control" id="name" name="name" placeholder="<?= lang('Your_Name') ?>" type="text"/>
+                                    <input class="form-control" id="name" name="name" required="" placeholder="<?= lang('Your_Name') ?>" type="text"/>
                                     <div class="validation">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <input class="form-control" id="sdt" name="sdt" placeholder="<?= lang('Your_Phone') ?>" type="tel"/>
+                                    <input class="form-control" id="sdt" name="phone" required="" placeholder="<?= lang('Your_Phone') ?>" type="tel"/>
                                     <div class="validation">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <input class="form-control" id="email" name="email" placeholder="<?= lang('Your_Email') ?>" type="email"/>
+                                    <input class="form-control" id="email" name="email" required="" placeholder="<?= lang('Your_Email') ?>" type="email"/>
                                     <div class="validation">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control"  name="message" placeholder="<?= lang('Message') ?>" rows="5"></textarea>
+                                <textarea class="form-control"  name="content" required=""  placeholder="<?= lang('Message') ?>" rows="5"></textarea>
                                 <div class="validation">
                                 </div>
                             </div>
+
+                            <!--<div class="g-recaptcha" data-sitekey="6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_"></div>-->
                             <div class="">
-                                <button type="submit" class="btn btn-success btn-sm">
+                                <button id="send_message"class="btn btn-success btn-sm" name="submit" type="submit">
                                     <?= lang('Send_Message') ?>
                                 </button>
                                 <a class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal">
@@ -158,19 +160,19 @@ Footer
                     <!--<p>Sign up once and watch any of our free demos.</p>-->
                     <form class="" method="post" action="#">
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" id="name" type="text" name="name" placeholder="Tên">
+                            <input class="input100" id="name1" type="text" name="name" placeholder="Tên">
                             <label class="label-input100" for="name">
                                 <span class="fa fa-user"></span>
                             </label>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" id="name" type="text" name="name" placeholder="Khách hàng">
+                            <input class="input100" id="customer" type="text" name="customer" placeholder="Khách hàng">
                             <label class="label-input100" for="name">
                                 <span class="fa fa-envelope"></span>
                             </label>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" id="name" type="text" name="name" placeholder="Sản phẩm">
+                            <input class="input100" id="product" type="text" name="product" placeholder="Sản phẩm">
                             <label class="label-input100" for="name">
                                 <span class="fa fa-phone"></span>
                             </label>

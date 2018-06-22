@@ -43,9 +43,9 @@ $.AdminBSB.options = {
 }
 
 /* Left Sidebar - Function =================================================================================================
-*  You can manage the left sidebar menu options
-*  
-*/
+ *  You can manage the left sidebar menu options
+ *  
+ */
 $.AdminBSB.leftSideBar = {
     activate: function () {
         var _this = this;
@@ -55,10 +55,13 @@ $.AdminBSB.leftSideBar = {
         //Close sidebar
         $(window).click(function (e) {
             var $target = $(e.target);
-            if (e.target.nodeName.toLowerCase() === 'i') { $target = $(e.target).parent(); }
+            if (e.target.nodeName.toLowerCase() === 'i') {
+                $target = $(e.target).parent();
+            }
 
             if (!$target.hasClass('bars') && _this.isOpen() && $target.parents('#leftsidebar').length === 0) {
-                if (!$target.hasClass('js-right-sidebar')) $overlay.fadeOut();
+                if (!$target.hasClass('js-right-sidebar'))
+                    $overlay.fadeOut();
                 $body.removeClass('overlay-open');
             }
         });
@@ -125,7 +128,8 @@ $.AdminBSB.leftSideBar = {
             //Scroll active menu item when page load, if option set = true
             if ($.AdminBSB.options.leftSideBar.scrollActiveItemWhenPageLoad && $('.menu .list li.active').length) {
                 var activeItemOffsetTop = $('.menu .list li.active')[0].offsetTop
-                if (activeItemOffsetTop > 150) $el.slimscroll({ scrollTo: activeItemOffsetTop + 'px' });
+                if (activeItemOffsetTop > 150)
+                    $el.slimscroll({scrollTo: activeItemOffsetTop + 'px'});
             }
         }
     },
@@ -143,8 +147,7 @@ $.AdminBSB.leftSideBar = {
         if (width < $.AdminBSB.options.leftSideBar.breakpointWidth) {
             $body.addClass('ls-closed');
             $openCloseBar.fadeIn();
-        }
-        else {
+        } else {
             $body.removeClass('ls-closed');
             $openCloseBar.fadeOut();
         }
@@ -156,9 +159,9 @@ $.AdminBSB.leftSideBar = {
 //==========================================================================================================================
 
 /* Right Sidebar - Function ================================================================================================
-*  You can manage the right sidebar menu options
-*  
-*/
+ *  You can manage the right sidebar menu options
+ *  
+ */
 $.AdminBSB.rightSideBar = {
     activate: function () {
         var _this = this;
@@ -168,17 +171,24 @@ $.AdminBSB.rightSideBar = {
         //Close sidebar
         $(window).click(function (e) {
             var $target = $(e.target);
-            if (e.target.nodeName.toLowerCase() === 'i') { $target = $(e.target).parent(); }
+            if (e.target.nodeName.toLowerCase() === 'i') {
+                $target = $(e.target).parent();
+            }
 
             if (!$target.hasClass('js-right-sidebar') && _this.isOpen() && $target.parents('#rightsidebar').length === 0) {
-                if (!$target.hasClass('bars')) $overlay.fadeOut();
+                if (!$target.hasClass('bars'))
+                    $overlay.fadeOut();
                 $sidebar.removeClass('open');
             }
         });
 
         $('.js-right-sidebar').on('click', function () {
             $sidebar.toggleClass('open');
-            if (_this.isOpen()) { $overlay.fadeIn(); } else { $overlay.fadeOut(); }
+            if (_this.isOpen()) {
+                $overlay.fadeIn();
+            } else {
+                $overlay.fadeOut();
+            }
         });
     },
     isOpen: function () {
@@ -188,9 +198,9 @@ $.AdminBSB.rightSideBar = {
 //==========================================================================================================================
 
 /* Searchbar - Function ================================================================================================
-*  You can manage the search bar
-*  
-*/
+ *  You can manage the search bar
+ *  
+ */
 var $searchBar = $('.search-bar');
 $.AdminBSB.search = {
     activate: function () {
@@ -225,9 +235,9 @@ $.AdminBSB.search = {
 //==========================================================================================================================
 
 /* Navbar - Function =======================================================================================================
-*  You can manage the navbar
-*  
-*/
+ *  You can manage the navbar
+ *  
+ */
 $.AdminBSB.navbar = {
     activate: function () {
         var $body = $('body');
@@ -236,7 +246,11 @@ $.AdminBSB.navbar = {
         //Open left sidebar panel
         $('.bars').on('click', function () {
             $body.toggleClass('overlay-open');
-            if ($body.hasClass('overlay-open')) { $overlay.fadeIn(); } else { $overlay.fadeOut(); }
+            if ($body.hasClass('overlay-open')) {
+                $overlay.fadeIn();
+            } else {
+                $overlay.fadeOut();
+            }
         });
 
         //Close collapse bar on click event
@@ -255,9 +269,9 @@ $.AdminBSB.navbar = {
 //==========================================================================================================================
 
 /* Input - Function ========================================================================================================
-*  You can manage the inputs(also textareas) with name of class 'form-control'
-*  
-*/
+ *  You can manage the inputs(also textareas) with name of class 'form-control'
+ *  
+ */
 $.AdminBSB.input = {
     activate: function () {
         //On focus event
@@ -269,9 +283,10 @@ $.AdminBSB.input = {
         $('.form-control').focusout(function () {
             var $this = $(this);
             if ($this.parents('.form-group').hasClass('form-float')) {
-                if ($this.val() == '') { $this.parents('.form-line').removeClass('focused'); }
-            }
-            else {
+                if ($this.val() == '') {
+                    $this.parents('.form-line').removeClass('focused');
+                }
+            } else {
                 $this.parents('.form-line').removeClass('focused');
             }
         });
@@ -292,20 +307,22 @@ $.AdminBSB.input = {
 //==========================================================================================================================
 
 /* Form - Select - Function ================================================================================================
-*  You can manage the 'select' of form elements
-*  
-*/
+ *  You can manage the 'select' of form elements
+ *  
+ */
 $.AdminBSB.select = {
     activate: function () {
-        if ($.fn.selectpicker) { $('select:not(.ms)').selectpicker(); }
+        if ($.fn.selectpicker) {
+            $('select:not(.ms)').selectpicker();
+        }
     }
 }
 //==========================================================================================================================
 
 /* DropdownMenu - Function =================================================================================================
-*  You can manage the dropdown menu
-*  
-*/
+ *  You can manage the dropdown menu
+ *  
+ */
 
 $.AdminBSB.dropdownMenu = {
     activate: function () {
@@ -345,8 +362,12 @@ $.AdminBSB.dropdownMenu = {
         if (dropdown.length > 0) {
             var udEffectIn = dropdown.data('effect-in');
             var udEffectOut = dropdown.data('effect-out');
-            if (udEffectIn !== undefined) { effectIn = udEffectIn; }
-            if (udEffectOut !== undefined) { effectOut = udEffectOut; }
+            if (udEffectIn !== undefined) {
+                effectIn = udEffectIn;
+            }
+            if (udEffectOut !== undefined) {
+                effectOut = udEffectOut;
+            }
         }
 
         return {
@@ -381,9 +402,9 @@ $.AdminBSB.dropdownMenu = {
 //==========================================================================================================================
 
 /* Browser - Function ======================================================================================================
-*  You can manage browser
-*  
-*/
+ *  You can manage browser
+ *  
+ */
 var edge = 'Microsoft Edge';
 var ie10 = 'Internet Explorer 10';
 var ie11 = 'Internet Explorer 11';
@@ -397,7 +418,8 @@ $.AdminBSB.browser = {
         var _this = this;
         var className = _this.getClassName();
 
-        if (className !== '') $('html').addClass(_this.getClassName());
+        if (className !== '')
+            $('html').addClass(_this.getClassName());
     },
     getBrowser: function () {
         var userAgent = navigator.userAgent.toLowerCase();
@@ -443,7 +465,38 @@ $.AdminBSB.browser = {
     }
 }
 //==========================================================================================================================
-
+$.AdminBSB.function = {
+    fillForm: function (form, data) {
+        $('input, select, textarea', form).each(function () {
+            var type = $(this).attr('type');
+            var value = "";
+            if ($.type(data[$(this).attr('name')]) !== "undefined") {
+                value = data[$(this).attr('name')];
+            } else {
+                return;
+            }
+            switch (type) {
+                case 'checkbox':
+                    $(this).prop('checked', false);
+                    if (value == true || value == 'true' || value == 1) {
+                        $(this).prop('checked', true);
+                    }
+                    break;
+                case 'radio':
+                    $(this).removeAttr('checked', 'checked');
+                    var rdvalue = $(this).val();
+                    if (rdvalue == value) {
+                        $(this).prop('checked', true);
+                    }
+                    break;
+                default:
+                    $(this).val(value);
+                    break;
+            }
+            $('select', form).selectpicker('render');
+        });
+    }
+}
 $(function () {
     $.AdminBSB.browser.activate();
     $.AdminBSB.rightSideBar.activate();
@@ -452,6 +505,7 @@ $(function () {
     $.AdminBSB.input.activate();
     $.AdminBSB.select.activate();
     $.AdminBSB.search.activate();
-
-    setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
+    setTimeout(function () {
+        $('.page-loader-wrapper').fadeOut();
+    }, 50);
 });

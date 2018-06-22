@@ -245,50 +245,52 @@ class Ajax extends MY_Controller {
     function contactsubmit() {
 
         if (isset($_SESSION['timer_contact']) && $_SESSION['timer_contact'] > date("Y-m-d H:i:s")) {
-            echo json_encode(array('error' => "Yêu cầu đã được gữi! Xin chờ trong ít phút", 'timer' => $_SESSION['timer_contact']));
+            echo json_encode(array('msg' => "Xin chờ trong ít phút", 'timer' => $_SESSION['timer_contact'], 'code' => 401));
             die();
         }
-        $this->load->model("contact_model");
-        if (isset($_POST['submit'])) {
+        $this->load->model("comment_model");
+        if (isset($_POST['content'])) {
             $name = $_POST['name'];
             $email = $_POST['email'];
-            $sodt = $_POST['mobile'];
-            $message = $_POST['message'];
+            $phone = $_POST['phone'];
+            $content = $_POST['content'];
             $array = array(
-                'ten' => $name,
+                'name' => $name,
                 'email' => $email,
-                'sodt' => $sodt,
-                'message' => $message
+                'phone' => $phone,
+                'content' => $content
             );
-            $this->contact_model->insert($array);
+            $this->comment_model->insert($array);
             /*
              * SET LIMIT 
              */
             $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-            echo json_encode(array('success' => 1));
+            echo json_encode(array('code' => 400, 'msg' => "Cảm ơn bạn đã góp ý cho chúng tôi!"));
             /*
              * Mail setting
              */
-            $this->load->config('ion_auth', TRUE);
-            $this->load->library(array('email'));
-            $email_config = $this->config->item('email_config', 'ion_auth');
-
-            if ($this->config->item('use_ci_email', 'ion_auth') && isset($email_config) && is_array($email_config)) {
-                $this->email->initialize($email_config);
-            }
-            /*
-             * Send mail
-             */
-            $this->email->clear();
-            $this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
-            $this->email->to(config_item("email_dk"));
-            $this->email->subject($this->config->item('site_title', 'ion_auth') . ' - Tin nhắn');
-            $html = "<p><strong>Tên:</strong>$name</p>"
-                    . "<p><strong>Email:</strong>$email</p>"
-                    . "<p><strong>Số điện thoại:</strong>$sodt</p>"
-                    . "<p><strong>Tin nhắn:</strong>$message</p>";
-            $this->email->message($html);
-            $this->email->send();
+//            $this->load->config('ion_auth', TRUE);
+//            $this->load->library(array('email'));
+//            $email_config = $this->config->item('email_config', 'ion_auth');
+//
+//            if ($this->config->item('use_ci_email', 'ion_auth') && isset($email_config) && is_array($email_config)) {
+//                $this->email->initialize($email_config);
+//            }
+//            /*
+//             * Send mail
+//             */
+//            $this->email->clear();
+//            $this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
+//            $this->email->to(config_item("email_dk"));
+//            $this->email->subject($this->config->item('site_title', 'ion_auth') . ' - Tin nhắn');
+//            $html = "<p><strong>Tên:</strong>$name</p>"
+//                    . "<p><strong>Email:</strong>$email</p>"
+//                    . "<p><strong>Số điện thoại:</strong>$sodt</p>"
+//                    . "<p><strong>Tin nhắn:</strong>$message</p>";
+//            $this->email->message($html);
+//            $this->email->send();
+        } else {
+            echo json_encode(array('code' => 402, 'msg' => "Vui lòng nhập đầy đủ thông tin."));
         }
     }
 

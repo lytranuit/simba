@@ -11,7 +11,7 @@
             <div class="body">
                 <div class="row">
                     <form method="POST" action="" id="form-dang-tin">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group form-float">
                                 <b class="form-label">Tên Tiếng Việt (*):</b>
                                 <div class="form-line">
@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group form-float">
                                 <b class="form-label">Tên Tiếng Anh:</b>
                                 <div class="form-line">
@@ -29,14 +29,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-
+                        <div class="col-md-3">
                             <div class="form-group form-float">
                                 <b class="form-label">Tên Tiếng Nhật:</b>
                                 <div class="form-line">
-                                    <input type="text" name='name_j[' class="form-control" aria-required="true" value="{{$tin['name_jp']}}">
+                                    <input type="text" name='name_jp' class="form-control" aria-required="true" value="{{$tin['name_jp']}}">
                                     <label class="form-label"></label>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"> 
+                            <b class="form-label">Màu:</b>
+                            <div class="input-group colorpicker">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="color" value="{{$tin['color']}}">
+                                </div>
+                                <span class="input-group-addon">
+                                    <i></i>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -53,6 +63,7 @@
 
 <script type='text/javascript'>
     $(document).ready(function () {
+        $('.colorpicker').colorpicker();
         $.validator.setDefaults({
             debug: true,
             success: "valid"

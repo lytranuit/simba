@@ -4713,7 +4713,7 @@ section.content {
   .input-group .form-line {
     display: inline-block;
     width: 100%;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
     position: relative; }
     .input-group .form-line:after {
       content: '';
@@ -4824,7 +4824,7 @@ section.content {
   .form-group .form-line {
     width: 100%;
     position: relative;
-    border-bottom: 1px solid #ddd; }
+    border: 1px solid #ddd; }
     .form-group .form-line:after {
       content: '';
       position: absolute;

@@ -46,7 +46,7 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">User</li>
-                <li data='info'>>
+                <li data='info'>
                     <a href="<?= base_url() ?>admin">
                         <i class="material-icons">account_box</i>
                         <span>Cá nhân</span>

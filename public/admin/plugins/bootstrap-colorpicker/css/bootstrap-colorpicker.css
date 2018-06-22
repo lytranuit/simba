@@ -70,7 +70,6 @@
   background-size: contain;
 }
 .colorpicker {
-  padding: 4px;
   min-width: 130px;
   margin-top: 1px;
   -webkit-border-radius: 4px;
@@ -219,4 +218,3 @@
   border-right: 0;
   border-left: 0;
 }
-/*# sourceMappingURL=bootstrap-colorpicker.css.map */

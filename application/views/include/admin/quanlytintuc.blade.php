@@ -1,7 +1,7 @@
 
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
-    <li class="active"><a href="javascript:void(0);">Quant lý tin tức</a></li>
+    <li class="active"><a href="javascript:void(0);">Quản lý tin tức</a></li>
 </ol>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -29,8 +29,9 @@
                         @foreach($arr_tin as $key=>$tin)
                         <tr>
                             <td>{{$key+1}}</td>
+                            <td><img src='{{base_url()}}{{$tin->obj_hinh->thumb_src or 'public/img/product/1.jpg'}}' width="50"/></td>
                             <td>{{$tin->title}}</td>
-                            <td>{{$tin->obj_type->name_vi}}</td>   
+                            <td><span style="background: {{$tin->obj_type->color or '#000000'}};padding: 5px 20px;color: white;">{{$tin->obj_type->name_vi or ''}}</span></td>   
                             <td>
                                 <a href="{{base_url()}}admin/edittintuc/{{$tin->id}}" class="text-info">
                                     <i class="ace-icon fa fa-pencil bigger-120">

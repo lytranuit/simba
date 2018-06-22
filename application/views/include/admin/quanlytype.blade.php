@@ -22,6 +22,7 @@
                             <th>Tên tiếng Viêt</th>
                             <th>Tên tiếng Anh</th>
                             <th>Tên tiếng Nhật</th>
+                            <th>Màu</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -32,6 +33,7 @@
                             <td>{{$tin->name_vi}}</td>
                             <td>{{$tin->name_en}}</td>   
                             <td>{{$tin->name_jp}}</td>   
+                            <td><span style="background: {{$tin->color}};width: 30px;height: 30px;display: inline-block;"></span></td>   
                             <td>
                                 <a href="{{base_url()}}admin/edittype/{{$tin->id}}" class="text-info">
                                     <i class="ace-icon fa fa-pencil bigger-120">
