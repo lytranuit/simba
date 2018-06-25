@@ -230,15 +230,13 @@ class Admin extends MY_Controller {
     }
 
     /*
-     * Message
+     * Gioithieu
      */
 
-    public function quanlymessage() {
-        $this->load->model("contact_model");
-        $this->data['arr_tin'] = $this->contact_model->where(array('deleted' => 0))->as_object()->get_all();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/dataTables.bootstrap.min.css");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.dataTables.min.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/dataTables.bootstrap.min.js");
+    public function gioithieu() {
+//        $this->load->model("contact_model");
+//        $this->data['arr_tin'] = $this->contact_model->where(array('deleted' => 0))->as_object()->get_all();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/timeline.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
