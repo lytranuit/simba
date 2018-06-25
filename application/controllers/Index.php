@@ -19,6 +19,7 @@ class Index extends MY_Controller {
             base_url() . 'public/css/style.css'
         );
         $this->data['javascript_tag'] = array(
+            "https://www.google.com/recaptcha/api.js",
             base_url() . 'public/lib/jquery/jquery.min.js',
             base_url() . 'public/lib/jquery/jquery-migrate.min.js',
             base_url() . 'public/lib/bootstrap/js/bootstrap.bundle.min.js',
@@ -130,8 +131,15 @@ class Index extends MY_Controller {
     }
 
     public function tintuc($param) {
-//        $id = $param[0];
-//        echo 1;die();
+        $id = $param[0];
+        $this->load->model("tintuc_model");
+        $this->load->model("user_model");
+        $tin = $this->tintuc_model->where(array('id' => $id))->with_author()->with_hinhanh()->with_files()->as_object()->get();
+        $this->data['tin'] = $tin;
+//        echo "<pre>";
+//        print_r($tin);
+//        die();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -238,12 +246,12 @@ class Index extends MY_Controller {
         $this->data['page_ava'] = $page_ava;
         $this->data['link'] = $dataselect;
 
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/dataTables.bootstrap.min.css");
+        array_push($this->data['stylesheet_tag'], base_url() . "public/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css");
 //        array_push($this->data['stylesheet_tag'], base_url() . "public/css/bootstrap-editable.css");
 //        array_push($this->data['stylesheet_tag'], base_url() . "public/css/typeahead.js-bootstrap.css");
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/bootstrap-editable.min.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.dataTables.min.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/dataTables.bootstrap.min.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/jquery.dataTables.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js");
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/typeahead.js");
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/typeaheadjs.js");
 //        array_push($this->data['javascript_tag'], base_url() . "public/js/combobox.js");

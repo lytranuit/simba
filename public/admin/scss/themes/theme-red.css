@@ -11,25 +11,25 @@
 .theme-red .nav > li > a {
   color: #fff; }
   .theme-red .nav > li > a:hover {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
   .theme-red .nav > li > a:focus {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
 .theme-red .nav .open > a {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .theme-red .nav .open > a:hover {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
   .theme-red .nav .open > a:focus {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
 .theme-red .bars {
   color: #fff; }
 .theme-red .sidebar .menu .list li.active {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .theme-red .sidebar .menu .list li.active > :first-child i, .theme-red .sidebar .menu .list li.active > :first-child span {
     color: #F44336; }
 .theme-red .sidebar .menu .list .toggled {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 .theme-red .sidebar .menu .list .ml-menu {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 .theme-red .sidebar .legal {
   background-color: #fff; }
   .theme-red .sidebar .legal .copyright a {

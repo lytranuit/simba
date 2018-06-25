@@ -32,58 +32,25 @@ Intro Section
                         </div>-->
             <div class="col-lg-4">
                 <!-- Single Blog Post -->
+                @foreach($list_tintuc as $key => $row)
                 <div class="single-blog-post post-style-2 d-flex align-items-center">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                        <img src="<?= base_url(); ?>public/img/about-mission.jpg" alt="">
+                        <img src="{{base_url()}}{{$row['hinhanh']['thumb_src'] or 'public/img/preview.png'}}" alt="">
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                        <a href="#" class="headline">
-                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
+                        <a href="<?= get_url_seo("index/tintuc", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" class="headline">
+                            <h5><?= mb_strlen($row[pick_language($row, 'title_')]) < 50 ? $row[pick_language($row, 'title_')] : mb_substr($row[pick_language($row, 'title_')], 0, 50) . "..."; ?></h5>
                         </a>
                         <!-- Post Meta -->
                         <div class="post-meta">
-                            <p>Katy Liu on Sep 29, 2017 at 9:48 am</p>
+                            <p>admin on Sep 29, 2017 at 9:48 am</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Single Blog Post -->
-                <div class="single-blog-post post-style-2 d-flex align-items-center">
-                    <!-- Post Thumbnail -->
-                    <div class="post-thumbnail">
-                        <img src="<?= base_url(); ?>public/img/about-plan.jpg" alt="">
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-                        <a href="#" class="headline">
-                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                        </a>
-                        <!-- Post Meta -->
-                        <div class="post-meta">
-                            <p>Katy Liu on Sep 29, 2017 at 9:48 am</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Blog Post -->
-                <div class="single-blog-post post-style-2 d-flex align-items-center">
-                    <!-- Post Thumbnail -->
-                    <div class="post-thumbnail">
-                        <img src="<?= base_url(); ?>public/img/about-vision.jpg" alt="">
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-                        <a href="#" class="headline">
-                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most</h5>
-                        </a>
-                        <!-- Post Meta -->
-                        <div class="post-meta">
-                            <p>Katy Liu on Sep 29, 2017 at 9:48 am</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

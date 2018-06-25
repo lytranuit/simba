@@ -118,7 +118,7 @@
     <div class="container mt-5">
         <header class="section-header">
             <h3>
-                Thông tin nội bộ
+                Công bố chất lượng sản phẩm
             </h3>
             <div class='row justify-content-center'>
                 <div id="search-new" class="col-md-6 col-12">

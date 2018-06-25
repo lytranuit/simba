@@ -258,7 +258,8 @@ class Ajax extends MY_Controller {
                 'name' => $name,
                 'email' => $email,
                 'phone' => $phone,
-                'content' => $content
+                'content' => $content,
+                'date' => time()
             );
             $this->comment_model->insert($array);
             /*

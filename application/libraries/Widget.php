@@ -27,7 +27,7 @@ class Widget {
         $this->CI->load->model("menu_model");
         $all_menu = $this->CI->menu_model->where("deleted", 0)->order_by(array('id_parent' => "ASC", 'order' => "ASC"))->as_array()->get_all();
 //        array_unshift($all_menu, array('id' => 0, 'id_page' => 0, 'text' => "Trang chủ", 'id_parent' => 0));
-        $this->data['menu'] = recursive_menu_html($all_menu, 0);
+        $this->data['menu'] = $all_menu;
         $this->data['language_list'] = $this->CI->config->item('language_list');
 //        echo "<pre>";
 //        print_r($this->data['menu']);
@@ -41,13 +41,22 @@ class Widget {
 
     function silder() {
         $this->CI->load->model("slider_model");
+        $this->CI->load->model("tintuc_model");
         $this->CI->load->model("hinhanh_model");
+
         $arr_slider = $this->CI->slider_model->where(array('deleted' => 0))->as_array()->get_all();
         foreach ($arr_slider as &$slider) {
             $hinh = $this->CI->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
             $slider['hinh'] = $hinh[0];
         }
+
+        $arr_tintuc = $this->CI->tintuc_model->order_by("id", "DESC")->limit(3)->where(array('deleted' => 0, 'type' => 2))->with_hinhanh()->as_array()->get_all();
         $this->data['list_silder'] = $arr_slider;
+        $this->data['list_tintuc'] = $arr_tintuc;
+//        echo "<pre>";
+//        print_r($arr_tintuc);die();
+        $language_list = $this->CI->config->item('language_list');
+        $this->data['lang'] = $language_list[language_current()];
         echo $this->blade->view()->make('widget/slider', $this->data)->render();
     }
 

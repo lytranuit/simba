@@ -100,26 +100,21 @@ class Admin extends MY_Controller {
     }
 
     public function index() { /////// trang ca nhan
-//        $id_user = $this->session->userdata('user_id');
-//        $this->load->model("user_model");
-//        if (isset($_POST[   'edit_user'])) {
-//            
-//        $additional_data = array(
-//                'last_name' => $this-> input->post('ten'),
-//                'phone' => $this->input->post('dienthoai'),
-//                'gioitinh' => $this->input->post("gioitinh")
-//            );
-//            $this->user_model->update($additional_data, $id_user);
-//            header('Location: ' . $_SERVER['HTTP_REFERER']);
-//            exit;
-//        } else {
-//            $user = $this->user_model->where(array('id' => $id_user))->as_array()->get_all();
-//            $this->data['user'] = $user[  0];
-//            //echo $this->data['content'];
-//            echo $this->blade->view()->make('page/page', $this->data)->render();
-//        }
-        $this->data['menu_active'] = "info";
-        echo $this->blade->view()->make('page/page', $this->data)->render();
+        $id_user = $this->session->userdata('user_id');
+        $this->load->model("user_model");
+        if (isset($_POST['edit_user'])) {
+            $additional_data = array(
+                'fullname' => $this->input->post('fullname'),
+            );
+            $this->user_model->update($additional_data, $id_user);
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        } else {
+            $user = $this->user_model->where(array('id' => $id_user))->as_object()->get();
+            $this->data['user'] = $user;
+            $this->data['menu_active'] = "info";
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
     }
 
     public function slider() {
@@ -183,16 +178,22 @@ class Admin extends MY_Controller {
 
     function changepass() {
         $id_user = $this->session->userdata('user_id');
-        if (isset($_POST['change_pass'])) {
-            $this->ion_auth->change_password($this->session->userdata('identity'), $this->input->post('passwordold'), $this->input->post('password'));
-            $this->session->set_flashdata('success', "Thay đổi mật khẩu thành công!");
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit;
-        } else {
-            $this->data['id_user'] = $id_user;
-            $this->data['success'] = $this->session->flashdata('success');
-            echo $this->blade->view()->make('page/page', $this->data)->render();
+        $this->load->model("user_model");
+        $user = $this->user_model->where(array("id" => $id_user))->get();
+        if (!isset($_POST['password']) || (isset($_POST['password']) && $user->password != md5($_POST['password']))) {
+            echo json_encode(array('code' => 402, "msg" => "Mật khẩu cũ không đúng."));
+            die();
         }
+        if (!isset($_POST['confirmpassword']) || !isset($_POST['newpassword']) || (isset($_POST['newpassword']) && isset($_POST['confirmpassword']) && $_POST['newpassword'] != $_POST['confirmpassword'])) {
+            echo json_encode(array('code' => 403, "msg" => "Xác nhận mật khẩu mới không đúng."));
+            die();
+        }
+        $additional_data = array(
+            'password' => md5($this->input->post('newpassword')),
+        );
+        $this->user_model->update($additional_data, $id_user);
+        echo json_encode(array('code' => 400, "msg" => "Thay đổi mật khẩu thành công."));
+        die();
     }
 
 //remove a user
@@ -378,6 +379,69 @@ class Admin extends MY_Controller {
     }
 
     /*
+     * Product
+     */
+
+    public function quanlyproduct() {
+        $this->data['menu_active'] = "product";
+        $this->load->model("product_model");
+        $this->data['arr_tin'] = $this->product_model->where(array('deleted' => 0))->with_hinhanh()->order_by('id', "DESC")->as_object()->get_all();
+//        print_r($this->data['arr_tin']);
+//        die();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themproduct() { ////////// Trang dang tin
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("product_model");
+            $data_up = $this->product_model->create_object($data);
+            $this->product_model->insert($data_up);
+            redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "product";
+            $this->load->model("category_model");
+            $this->data['arr_category'] = $this->category_model->as_object()->get_all();
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function editproduct($param) {
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("product_model");
+            $data_up = $this->product_model->create_object($data);
+            $this->product_model->update($data_up, $id);
+            redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "product";
+            $this->load->model("category_model");
+            $this->load->model("product_model");
+
+            $this->data['arr_category'] = $this->category_model->as_object()->get_all();
+
+            $tin = $this->product_model->with_hinhanh()->where(array('id' => $id))->as_object()->get();
+            $this->data['tin'] = $tin;
+
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removeproduct($params) {
+        $this->load->model("tintuc_model");
+        $id = $params[0];
+        $this->tintuc_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    /*
      * Tin Tuc
      */
 
@@ -388,7 +452,7 @@ class Admin extends MY_Controller {
         $this->load->model("typetintuc_model");
         $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0))->order_by('id', "DESC")->as_object()->get_all();
         foreach ($this->data['arr_tin'] as $k => &$tin) {
-            $tin->title = mb_strlen($tin->title) < 50 ? $tin->title : mb_substr($tin->title, 0, 50) . "...";
+            $tin->title_vi = mb_strlen($tin->title_vi) < 50 ? $tin->title_vi : mb_substr($tin->title_vi, 0, 50) . "...";
             $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $tin->id_hinhanh))->as_object()->get_all();
             $type = $this->typetintuc_model->where(array('id' => $tin->type))->as_object()->get_all();
             $tin->obj_hinh = isset($hinh[0]) ? $hinh[0] : array();
@@ -402,13 +466,13 @@ class Admin extends MY_Controller {
 
     public function themtintuc() { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
-            $data = $_POST;
-            $data['id_user'] = $this->session->userdata('user_id');
-            $data['active'] = 1;
-            $data_up = object_tintuc($data);
             $this->load->model("tintuc_model");
             $this->load->model("tintucfile_model");
             $this->load->model("hinhanh_model");
+            $data = $_POST;
+            $data['id_user'] = $this->session->userdata('user_id');
+            $data['active'] = 1;
+            $data_up = $this->tintuc_model->create_object($data);
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
 //            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
@@ -431,13 +495,13 @@ class Admin extends MY_Controller {
     function edittintuc($param) {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
-            $data = $_POST;
-            $data['id_user'] = $this->session->userdata('user_id');
-            $data['active'] = 1;
-            $data_up = object_tintuc($data);
             $this->load->model("tintuc_model");
             $this->load->model("tintucfile_model");
             $this->load->model("hinhanh_model");
+            $data = $_POST;
+            $data['id_user'] = $this->session->userdata('user_id');
+            $data['active'] = 1;
+            $data_up = $this->tintuc_model->create_object($data);
             $this->tintuc_model->update($data_up, $id);
             $files = $this->input->post('id_files');
             $this->tintucfile_model->where('id_tintuc', $id)->delete();
@@ -506,15 +570,75 @@ class Admin extends MY_Controller {
     public function quanlymenu() {
         $this->load->model("pageweb_model");
         $this->load->model("menu_model");
-        $all_menu = $this->menu_model->where("deleted", 0)->as_array()->get_all();
-        $data = recursive_menu_data($all_menu, 0);
-        array_unshift($data, array('id' => 0, 'id_page' => 0, 'text' => "Trang chủ", 'expanded' => false, 'enabled' => false));
-        $this->data['data'] = $data;
-        $this->data['page'] = $this->pageweb_model->where("deleted", 0)->as_array()->get_all();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/kendo.default.min.css");
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/kendo.common.min.css");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/kendo.all.min.js");
+        $this->data['menu_active'] = "menu";
+        $all_menu = $this->menu_model->where("deleted", 0)->order_by("order")->as_object()->get_all();
+//        $data = recursive_menu_data($all_menu, 0);
+//        array_unshift($data, array('id' => 0, 'id_page' => 0, 'text' => "Trang chủ", 'expanded' => false, 'enabled' => false));
+        $this->data['data'] = $all_menu;
+//        $this->data['page'] = $this->pageweb_model->where("deleted", 0)->as_array()->get_all();
         echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    function editmenu($param) {
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $text_vi = $_POST['text_vi'];
+            $text_en = isset($_POST['text_en']) ? $_POST['text_en'] : "";
+            $text_jp = isset($_POST['text_jp']) ? $_POST['text_jp'] : "";
+            $data_up = array(
+                'text_vi' => $text_vi,
+                'text_en' => $text_en,
+                'text_jp' => $text_jp,
+            );
+            $this->load->model("menu_model");
+            $this->menu_model->update($data_up, $id);
+            redirect('admin/quanlymenu', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "menu";
+            $this->load->model("menu_model");
+            $tin = $this->menu_model->where(array('id' => $id))->as_array()->get_all();
+            $this->data['tin'] = $tin[0];
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    /*
+     * GOP Y
+     */
+
+    public function quanlycomment() {
+        $this->load->model("comment_model");
+        $this->data['menu_active'] = "comment";
+        $all_menu = $this->comment_model->where("deleted", 0)->order_by("date", "DESC")->as_object()->get_all();
+        $this->data['data'] = $all_menu;
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    /*
+     * TABLE
+     */
+
+    function table() {
+//        {
+//  "draw": 2,
+//  "recordsTotal": 57,
+//  "recordsFiltered": 57,
+//  "data": []
+//        }
+
+        $post = $this->input->post();
+        echo "<pre>";
+        print_r($post);
+        die();
+        $table = $_POST['table'];
+        $data_return = array(
+            'draw' => intval($post['draw']),
+            'recordsTotal' => 100,
+            'recordsFiltered' => 100,
+            'data' => array()
+        );
+        echo json_encode($data_return);
     }
 
     /*

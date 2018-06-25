@@ -84,17 +84,17 @@ Footer
                         </div>
                         <form id="contactForm">
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <input class="form-control" id="name" name="name" required="" placeholder="<?= lang('Your_Name') ?>" type="text"/>
                                     <div class="validation">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <input class="form-control" id="sdt" name="phone" required="" placeholder="<?= lang('Your_Phone') ?>" type="tel"/>
                                     <div class="validation">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <input class="form-control" id="email" name="email" required="" placeholder="<?= lang('Your_Email') ?>" type="email"/>
                                     <div class="validation">
                                     </div>
@@ -105,15 +105,18 @@ Footer
                                 <div class="validation">
                                 </div>
                             </div>
-
-                            <!--<div class="g-recaptcha" data-sitekey="6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_"></div>-->
-                            <div class="">
-                                <button id="send_message"class="btn btn-success btn-sm" name="submit" type="submit">
-                                    <?= lang('Send_Message') ?>
-                                </button>
-                                <a class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal">
-                                    <?= lang('text_gop_y') ?>
-                                </a>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <button id="send_message"class="btn btn-success btn-sm" name="submit" type="submit">
+                                        <?= lang('Send_Message') ?>
+                                    </button>
+                                    <a class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal">
+                                        <?= lang('text_gop_y') ?>
+                                    </a>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="g-recaptcha" data-sitekey="6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_" data-size='20'></div>
+                                </div>
                             </div>
                         </form>
                     </div>

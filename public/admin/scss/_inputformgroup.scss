@@ -143,9 +143,7 @@
         width: 100%;
         border: none;
         box-shadow: none;
-        // border-bottom: 1px solid #ddd;
         @include border-radius(0);
-        padding-left: 0;
     }
 
     .help-info {
