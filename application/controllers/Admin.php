@@ -237,7 +237,10 @@ class Admin extends MY_Controller {
     public function gioithieu() {
 //        $this->load->model("contact_model");
 //        $this->data['arr_tin'] = $this->contact_model->where(array('deleted' => 0))->as_object()->get_all();
+        $this->data['menu_active'] = "about";
         array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/timeline.css");
+        load_editor($this->data);
+        load_inputfile($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 

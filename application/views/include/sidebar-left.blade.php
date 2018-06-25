@@ -77,7 +77,7 @@
                                 </a>
                             </li>
                             <li data='about'>
-                                <a href="<?= base_url() ?>admin/about">
+                                <a href="<?= base_url() ?>admin/gioithieu">
                                     <span>Sim Ba</span>
                                 </a>
                             </li>

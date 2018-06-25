@@ -38,7 +38,6 @@ if (!function_exists('load_editor')) {
         array_push($data['stylesheet_tag'], base_url() . "public/admin/css/plugins/char_counter.css");
         array_push($data['stylesheet_tag'], base_url() . "public/admin/css/plugins/code_view.css");
         array_push($data['stylesheet_tag'], base_url() . "public/admin/css/plugins/colors.css");
-        array_push($data['stylesheet_tag'], base_url() . "public/admin/css/plugins/emoticons.css");
         array_push($data['stylesheet_tag'], base_url() . "public/admin/css/plugins/file.css");
         array_push($data['stylesheet_tag'], base_url() . "public/admin/css/plugins/fullscreen.css");
         array_push($data['stylesheet_tag'], base_url() . "public/admin/css/plugins/image.css");
@@ -52,7 +51,7 @@ if (!function_exists('load_editor')) {
         array_push($data['javascript_tag'], base_url() . "public/admin/js/plugins/align.min.js");
         array_push($data['javascript_tag'], base_url() . "public/admin/js/plugins/char_counter.min.js");
         array_push($data['javascript_tag'], base_url() . "public/admin/js/plugins/colors.min.js");
-        array_push($data['javascript_tag'], base_url() . "public/admin/js/plugins/emoticons.min.js");
+        array_push($data['stylesheet_tag'], base_url() . "public/admin/js/plugins/file.min.js");
         array_push($data['javascript_tag'], base_url() . "public/admin/js/plugins/entities.min.js");
         array_push($data['javascript_tag'], base_url() . "public/admin/js/plugins/font_size.min.js");
         array_push($data['javascript_tag'], base_url() . "public/admin/js/plugins/fullscreen.min.js");

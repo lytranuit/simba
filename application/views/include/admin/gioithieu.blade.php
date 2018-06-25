@@ -16,16 +16,13 @@
                 <section id="about">
                     <div class="row">
                         <div class="col-md-6">
-                            <img class="img-fluid" src="<?= base_url(); ?>public/img/intro-carousel/san-pham.png"/>
+                            <img style="width: 100%;height: 100%;cursor: pointer;" src="<?= base_url(); ?>public/img/intro-carousel/san-pham.png"/>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 froala-editor">
                             <h4 class="font-weight-bold">MongoDB Enterprise Advanced</h4>
                             <p>
                                 MongoDB Enterprise Advanced features MongoDB Enterprise Server and a finely-tuned package of advanced software, support, certifications, and other services. More than one-third of the Fortune 100 rely on MongoDB Enterprise Advanced to help run their mission critical applications.
                             </p>
-                            <button class="btn btn-success">
-                                See more
-                            </button>
                         </div>
                     </div>
                     <div style="height: 60px;"></div>
@@ -36,7 +33,7 @@
                                     <div class="timeline-image">
                                         <img style="width: 100%;height: 100%" src="<?= base_url(); ?>public/img/1.jpg" alt="">
                                     </div>
-                                    <div class="timeline-panel">
+                                    <div class="timeline-panel froala-editor">
                                         <div class="timeline-heading">
                                             <h4>2009-2011</h4>
                                             <h4 class="subheading">Our Humble Beginnings</h4>
@@ -50,7 +47,7 @@
                                     <div class="timeline-image">
                                         <img style="width: 100%;height: 100%" src="<?= base_url(); ?>public/img/1.jpg" alt="">
                                     </div>
-                                    <div class="timeline-panel">
+                                    <div class="timeline-panel froala-editor">
                                         <div class="timeline-heading">
                                             <h4>March 2011</h4>
                                             <h4 class="subheading">An Agency is Born</h4>
@@ -64,7 +61,7 @@
                                     <div class="timeline-image">
                                         <img style="width: 100%;height: 100%" src="<?= base_url(); ?>public/img/1.jpg" alt="">
                                     </div>
-                                    <div class="timeline-panel">
+                                    <div class="timeline-panel froala-editor">
                                         <div class="timeline-heading">
                                             <h4>December 2012</h4>
                                             <h4 class="subheading">Transition to Full Service</h4>
@@ -78,7 +75,7 @@
                                     <div class="timeline-image">
                                         <img style="width: 100%;height: 100%" src="<?= base_url(); ?>public/img/1.jpg" alt="">
                                     </div>
-                                    <div class="timeline-panel">
+                                    <div class="timeline-panel froala-editor">
                                         <div class="timeline-heading">
                                             <h4>July 2014</h4>
                                             <h4 class="subheading">Phase Two Expansion</h4>
@@ -101,3 +98,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.froala-editor').froalaEditor({
+            toolbarInline: true,
+            charCounterCount: false,
+//            toolbarVisibleWithoutSelection: true,
+            imageUploadURL: '<?= base_url() ?>admin/uploadimage',
+            // Set request type.
+            imageUploadMethod: 'POST',
+            // Set max image size to 5MB.
+            imageMaxSize: 5 * 1024 * 1024,
+            // Allow to upload PNG and JPG.
+            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+            htmlRemoveTags: [],
+            toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
+        })
+    });
+</script>
