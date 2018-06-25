@@ -11,25 +11,25 @@
 .theme-grey .nav > li > a {
   color: #fff; }
   .theme-grey .nav > li > a:hover {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
   .theme-grey .nav > li > a:focus {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
 .theme-grey .nav .open > a {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .theme-grey .nav .open > a:hover {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
   .theme-grey .nav .open > a:focus {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
 .theme-grey .bars {
   color: #fff; }
 .theme-grey .sidebar .menu .list li.active {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .theme-grey .sidebar .menu .list li.active > :first-child i, .theme-grey .sidebar .menu .list li.active > :first-child span {
     color: #9E9E9E; }
 .theme-grey .sidebar .menu .list .toggled {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 .theme-grey .sidebar .menu .list .ml-menu {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 .theme-grey .sidebar .legal {
   background-color: #fff; }
   .theme-grey .sidebar .legal .copyright a {

@@ -11,25 +11,25 @@
 .theme-amber .nav > li > a {
   color: #fff; }
   .theme-amber .nav > li > a:hover {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
   .theme-amber .nav > li > a:focus {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
 .theme-amber .nav .open > a {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .theme-amber .nav .open > a:hover {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
   .theme-amber .nav .open > a:focus {
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
 .theme-amber .bars {
   color: #fff; }
 .theme-amber .sidebar .menu .list li.active {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .theme-amber .sidebar .menu .list li.active > :first-child i, .theme-amber .sidebar .menu .list li.active > :first-child span {
     color: #FFC107; }
 .theme-amber .sidebar .menu .list .toggled {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 .theme-amber .sidebar .menu .list .ml-menu {
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
 .theme-amber .sidebar .legal {
   background-color: #fff; }
   .theme-amber .sidebar .legal .copyright a {

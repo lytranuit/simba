@@ -34,13 +34,13 @@
             <a style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
                 <span class="fa fa-shopping-cart text-danger"></span>
                 <span>
-                    APP
+                    App SimBa Fresh
                 </span>
             </a>
             <a style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.oishii.vn/">
                 <span class="fa fa-shopping-cart text-danger"></span>
                 <span>
-                    Website
+                    SimBa Shop Oishii
                 </span>
             </a>
         </div>
@@ -51,85 +51,14 @@
         <div clas="col-12">
             <nav id='nav-menu-container'>
                 <ul class="nav-menu">
-                    <li class="menu-active">
-                        <a href="#intro">
-                            <?= lang("Home") ?>
-                        </a>
-                    </li>
+                    @foreach($menu as $row)
                     <li>
-                        <a href="#about">
-                            <?= lang("SIMBA") ?>
+                        <a href="<?= base_url() . $row['link'] ?>">
+                            <?= $row[pick_language($row, 'text_')] ?>
                         </a>
                     </li>
-                    <li>
-                        <a href="#news">
-                            <?= lang("news") ?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#news">
-                            Thông tin nội bộ
-                        </a>
-                    </li>
-                    <!--                <li class="menu-has-children">
-                                        <a href="">
-                                            Drop Down
-                                        </a>
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    Drop Down 1
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Drop Down 3
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Drop Down 4
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Drop Down 5
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>-->
-                    <li>
-                        <a href="#clients">
-                            <?= lang("clients") ?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#footer">
-                            <?= lang("contact") ?>
-                        </a>
-                    </li>
-                    <!--                <li>
-                                        <a class="#" data-target="#login-modal" data-toggle="modal" href="#">
-                                            <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
-                    <?= lang('login_heading') ?>
-                                            </span>
-                                        </a>
-                                    </li>-->
-                    <!--                    <li class="menu-has-children">
-                                            <a href="#">
-                    <?= $language_list[language_current()] ?>
-                                            </a>
-                                            <ul id="language">
-                    <?php foreach ($language_list as $key => $lang): ?>
-                                                                                                                <li>
-                                                                                                                    <a href="#" data='<?= $key ?>'>
-                        <?= $lang ?>
-                                                                                                                    </a>
-                                                                                                                </li>
-                    <?php endforeach; ?>
-                    
-                                            </ul>
-                                        </li>-->
+                    @endforeach
+
                 </ul>
             </nav>
             <!-- #nav-menu-container -->

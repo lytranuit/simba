@@ -71,20 +71,25 @@
                                     <span>Banner</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Sim ba</span>
+                            <li data='product'>
+                                <a href="<?= base_url() ?>admin/quanlyproduct">
+                                    <span>Thông tin nhóm hàng</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);">
+                            <li data='about'>
+                                <a href="<?= base_url() ?>admin/about">
+                                    <span>Sim Ba</span>
+                                </a>
+                            </li>
+                            <li data='client'>
+                                <a href="<?= base_url() ?>admin/quanlydoitac">
                                     <span>Đối tác</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li data='menu'>
-                        <a href="javascript:void(0);">
+                        <a href="<?= base_url() ?>admin/quanlymenu">
                             <i class="material-icons">list</i>
                             <span>Menu</span>
                         </a>
@@ -92,13 +97,19 @@
                     <li data='page'>
                         <a href="<?= base_url() ?>admin/quanlypage">
                             <i class="material-icons">list</i>
-                            <span>Page</span>
+                            <span>Liên kết</span>
                         </a>
                     </li>
                     <li data='tintuc'>
                         <a href="<?= base_url() ?>admin/quanlytintuc">
                             <i class="material-icons">list</i>
-                            <span>Tin tức</span>
+                            <span>Công bố thông tin</span>
+                        </a>
+                    </li>
+                    <li data='type'>
+                        <a href="<?= base_url() ?>admin/quanlytype">
+                            <i class="material-icons">list</i>
+                            <span>Công bố chất lượng sản phẩm</span>
                         </a>
                     </li>
                     <li data='type'>
@@ -108,9 +119,9 @@
                         </a>
                     </li>
                     <li data='comment'>
-                        <a href="javascript:void(0);">
+                        <a href="<?= base_url() ?>admin/quanlycomment">
                             <i class="material-icons">list</i>
-                            <span>Gớp ý</span>
+                            <span>Góp ý</span>
                         </a>
                     </li>
                 <?php endif; ?>

@@ -41,14 +41,14 @@
                                     <div class="form-group form-float">
                                         <b class="form-label">Tiêu đề (*):</b>
                                         <div class="form-line">
-                                            <input type="text" name='title' class="form-control" required="" aria-required="true">
+                                            <input type="text" name='title_vi' class="form-control" required="" aria-required="true">
                                             <label class="form-label"></label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <b class="form-label">Nội dung (*):</b>
                                         <div class="form-line">
-                                            <textarea name="content" required="" class="form-control edit">
+                                            <textarea name="content_vi" required="" class="form-control edit">
                                         
                                             </textarea>
                                         </div>
