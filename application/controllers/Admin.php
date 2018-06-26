@@ -437,9 +437,63 @@ class Admin extends MY_Controller {
     }
 
     function removeproduct($params) {
-        $this->load->model("tintuc_model");
+        $this->load->model("product_model");
         $id = $params[0];
-        $this->tintuc_model->update(array("deleted" => 1), $id);
+        $this->product_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    /*
+     * Client
+     */
+
+    public function quanlyclient() {
+        $this->data['menu_active'] = "client";
+        $this->load->model("client_model");
+        $this->data['arr_tin'] = $this->client_model->where(array('deleted' => 0))->with_hinhanh()->order_by('id', "DESC")->as_object()->get_all();
+//        print_r($this->data['arr_tin']);
+//        die();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themclient() { ////////// Trang dang tin
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("client_model");
+            $data_up = $this->client_model->create_object($data);
+            $this->client_model->insert($data_up);
+            redirect('admin/quanlyclient', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "client";
+            load_inputfile($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function editclient($param) {
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("client_model");
+            $data_up = $this->client_model->create_object($data);
+            $this->client_model->update($data_up, $id);
+            redirect('admin/quanlyclient', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "client";
+            $this->load->model("client_model");
+            $tin = $this->client_model->where(array('id' => $id))->with_hinhanh()->as_object()->get();
+            $this->data['tin'] = $tin;
+            load_inputfile($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removeclient($params) {
+        $this->load->model("client_model");
+        $id = $params[0];
+        $this->client_model->update(array("deleted" => 1), $id);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }

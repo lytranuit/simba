@@ -82,7 +82,7 @@
                                 </a>
                             </li>
                             <li data='client'>
-                                <a href="<?= base_url() ?>admin/quanlydoitac">
+                                <a href="<?= base_url() ?>admin/quanlyclient">
                                     <span>Đối tác</span>
                                 </a>
                             </li>
