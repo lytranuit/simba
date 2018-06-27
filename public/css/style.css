@@ -18,8 +18,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    margin: 0 0 20px 0;
+    font-weight: bold;
     padding: 0;
 }
 
@@ -1996,14 +1995,11 @@ NEWS
 .timeline>li .timeline-panel:after{right:auto;left:-14px;border-right-width:14px;border-left-width:0}
 .timeline>li .timeline-image{position:absolute;z-index:100;left:0;width:80px;height:80px;margin-left:0;text-align:center;color:#fff;border:7px solid #e9ecef;border-radius:100%;overflow: auto}
 .timeline>li:last-child .timeline-image{background-color:#fed136}
-.timeline>li .timeline-panel h4{font-weight: bold;margin: 0px 0px 12px;}
 .timeline>li .timeline-image h4{font-size:10px;line-height:14px;margin-top:12px}
 .timeline>li.timeline-inverted>.timeline-panel{float:right;padding:0 20px 0 100px;text-align:left}
 .timeline>li.timeline-inverted>.timeline-panel:before{right:auto;left:-15px;border-right-width:15px;border-left-width:0}
 .timeline>li.timeline-inverted>.timeline-panel:after{right:auto;left:-14px;border-right-width:14px;border-left-width:0}
 .timeline>li:last-child{margin-bottom:0}
-.timeline .timeline-heading h4{margin-top:0;color:inherit}
-.timeline .timeline-heading h4.subheading{text-transform:none}
 .timeline .timeline-body>p,.timeline .timeline-body>ul{margin-bottom:0}
 @media (min-width:768px){
     .timeline:before{left:50%}

@@ -16,8 +16,10 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/ionicons/css/ionicons.min.css',
             base_url() . 'public/lib/owlcarousel/assets/owl.carousel.min.css',
             base_url() . 'public/lib/lightbox/css/lightbox.min.css',
+            base_url() . "public/lib/froala_editor/css/froala_style.min.css",
             base_url() . 'public/css/style.css'
         );
+        
         $this->data['javascript_tag'] = array(
             "https://www.google.com/recaptcha/api.js",
             base_url() . 'public/lib/jquery/jquery.min.js',

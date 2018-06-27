@@ -84,13 +84,26 @@ if (!function_exists('language_current')) {
 
 }
 
+if (!function_exists('short_language_current')) {
+
+    function short_language_current() {
+        $CI = &get_instance();
+        $language_current = $CI->config->item('language');
+        $arr_lang = $CI->config->item('language_list');
+        if (isset($_SESSION['language_current'])) {
+            $language_current = $_SESSION['language_current'];
+        }
+
+        return $arr_lang[$language_current];
+    }
+
+}
+
 if (!function_exists('pick_language')) {
 
     function pick_language($data, $struct = 'name_') {
         $CI = &get_instance();
-        $language_current = language_current();
-        $arr_lang = $CI->config->item('language_list');
-        $short_lang = $arr_lang[$language_current];
+        $short_lang = short_language_current();
         if (isset($data[$struct . $short_lang]) && $data[$struct . $short_lang] != "") {
             return $struct . $short_lang;
         } else {

@@ -10,6 +10,7 @@ class Tintuc_model extends MY_Model {
         $this->primary_key = 'id';
         $this->has_one['author'] = array('foreign_model' => 'User_model', 'foreign_table' => 'user', 'foreign_key' => 'id', 'local_key' => 'id_user');
         $this->has_one['hinhanh'] = array('foreign_model' => 'Hinhanh_model', 'foreign_table' => 'tbl_hinhanh', 'foreign_key' => 'id_hinhanh', 'local_key' => 'id_hinhanh');
+        $this->has_one['typeobj'] = array('foreign_model' => 'Typetintuc_model', 'foreign_table' => 'tbl_tintuc_type', 'foreign_key' => 'id', 'local_key' => 'type');
         $this->has_many_pivot['files'] = array(
             'foreign_model' => 'Hinhanh_model',
             'pivot_table' => 'tbl_tintuc_file',

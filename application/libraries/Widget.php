@@ -61,6 +61,9 @@ class Widget {
     }
 
     function about1() {
+        $short_language = short_language_current();
+        $this->CI->load->model("about_model");
+        $this->data['arr_about'] = $this->CI->about_model->where(array('deleted' => 0, 'language' => $short_language))->with_hinhanh()->as_object()->get_all();
         echo $this->blade->view()->make('widget/about1', $this->data)->render();
     }
 
@@ -85,6 +88,11 @@ class Widget {
     }
 
     function category() {
+        $this->CI->load->model("category_model");
+        $this->data['data'] = $this->CI->category_model->where(array('deleted' => 0))->with_hinhanh()->as_array()->get_all();
+//        echo "<pre>";
+//        print_r($this->data['data']);
+//        die();
         echo $this->blade->view()->make('widget/category', $this->data)->render();
     }
 
@@ -93,6 +101,8 @@ class Widget {
     }
 
     function client() {
+        $this->CI->load->model("client_model");
+        $this->data['data'] = $this->CI->client_model->where(array('deleted' => 0))->with_hinhanh()->as_array()->get_all();
         echo $this->blade->view()->make('widget/client', $this->data)->render();
     }
 

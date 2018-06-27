@@ -39,6 +39,49 @@ class Ajax extends MY_Controller {
         echo $this->blade->view()->make('ajax/ajaxlydo', $this->data)->render();
     }
 
+    function news() {
+        $this->load->model("tintuc_model");
+        $search = $this->input->get("search");
+        $page = $this->input->get("page");
+        $limit = $this->input->get("limit");
+        $page = $page != "" ? $page : 1;
+        $limit = $limit != "" ? $limit : 10;
+        /*
+         * TINH COUNT
+         */
+        if ($search != "") {
+            $short_language = short_language_current();
+            $where = $this->tintuc_model->where("deleted = 0 AND title_" . $short_language . " like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE);
+        } else
+            $where = $this->tintuc_model->where(array('deleted' => 0));
+
+        $count = $where->count_rows();
+        /*
+         * LAY DATA
+         */
+        if ($search != "") {
+            $short_language = short_language_current();
+            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND title_" . $short_language . " like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->as_array();
+        } else
+            $where = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0))->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
+        $data = $where->paginate($limit, NULL, $page);
+
+        $max_page = ceil($count / $limit);
+//        echo "<pre>";
+//        print_r($data);
+//        die();
+        $this->data['count'] = $count;
+        $this->data['data'] = $data;
+        $this->data['current_page'] = $page;
+        $this->data['max_page'] = $max_page;
+
+        echo $this->blade->view()->make('ajax/news', $this->data)->render();
+    }
+
+    function product() {
+        echo $this->blade->view()->make('ajax/product', $this->data)->render();
+    }
+
     function editpage() {
         $id = $this->input->get('id');
         $link = $this->input->get('link');

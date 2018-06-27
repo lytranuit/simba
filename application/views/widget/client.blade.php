@@ -9,14 +9,11 @@
             </h3>
         </header>
         <div class="owl-carousel clients-carousel">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-1.png">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-2.png">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-3.png">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-4.png">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-5.png">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-6.png">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-7.png">
-            <img alt="" src="<?= base_url(); ?>public/img/clients/client-8.png">
+            @foreach($data as $row)
+            <a href="{{$row['link']}}">
+                <img alt="" src="{{base_url()}}{{$row['hinhanh']['src'] or 'public/img/preview.png'}}">
+            </a>
+            @endforeach
         </div>
     </div>
 </section>
