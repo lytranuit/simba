@@ -1,15 +1,14 @@
 @if($data)
 @foreach($data as $row)
-<?php $typeobj = (array) $row['typeobj']; ?>
 <div class="no-img deactivated normal col-12 row">
     <div class="col-lg-3">
         <span class="date mr-5">{{date("Y/m/d",$row['date'])}}</span>
-        <span class="c_icon" style="background:{{$typeobj['color']}};"><?= $typeobj[pick_language($typeobj, 'name_')] ?></span>
+        <span class="c_icon"></span>
     </div>
     <div class="col-lg-9">
         <span class="news_tx">
             <a href="<?= base_url() ?>index/tintuc" target="_blank">
-                {{$row[pick_language($row,'title_')]}}
+                {{$row[pick_language($row,'name_')]}}
             </a>
         </span>
         @if(isset($row['files']) && count((array) $row['files']))

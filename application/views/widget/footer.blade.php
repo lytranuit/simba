@@ -106,7 +106,7 @@ Footer
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <button id="send_message"class="btn btn-success btn-sm" name="submit" type="submit">
                                         <?= lang('Send_Message') ?>
                                     </button>
@@ -114,8 +114,8 @@ Footer
                                         <?= lang('text_gop_y') ?>
                                     </a>
                                 </div>
-                                <div class="col-md-7">
-                                    <div class="g-recaptcha" data-sitekey="6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_" data-size='20'></div>
+                                <div class="col-md-6">
+                                    <div class="g-recaptcha" data-sitekey="6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
                                 </div>
                             </div>
                         </form>

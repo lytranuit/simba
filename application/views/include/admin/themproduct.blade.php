@@ -24,6 +24,11 @@
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="col-md-6">
+                            <b class="form-label">File:</b>
+                            <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
+                        </div>
                         <div class="col-md-12">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs tab-nav-right" role="tablist">
@@ -123,6 +128,24 @@
             $("#kv-explorer").click();
         });
 
+        $("#kv-file").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': path + 'admin/uploadfile',
+            maxFileCount: 3,
+            showPreview: false,
+            showRemove: false,
+            showUpload: false,
+            showCancel: false,
+            browseLabel: "",
+            initialPreviewConfig: []
+        }).on("filebatchselected", function (event, files) {
+            $("#form-dang-tin .id_files").remove();
+            $(this).fileinput("upload");
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var id = data.response.key;
+            var append = "<input type='hidden' name='id_files[]' value='" + id + "' class='id_files'/>";
+            $("#form-dang-tin").append(append);
+        });
         $('.edit').froalaEditor({
             heightMin: 200,
             heightMax: 500, // Set the image upload URL.

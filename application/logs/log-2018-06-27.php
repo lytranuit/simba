@@ -98,3 +98,77 @@ ERROR - 2018-06-27 12:00:24 --> Severity: Notice --> Trying to get property of n
 ERROR - 2018-06-27 12:04:04 --> Severity: Parsing Error --> syntax error, unexpected ')', expecting ',' or ';' C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 18
 ERROR - 2018-06-27 12:04:17 --> Severity: Parsing Error --> syntax error, unexpected ')', expecting ',' or ';' C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 18
 ERROR - 2018-06-27 12:04:55 --> Severity: Parsing Error --> syntax error, unexpected ')', expecting ',' or ';' C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 18
+ERROR - 2018-06-27 14:09:27 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\simba\application\cache\a1d627b4830f21a4b18b861969176816a4e06c6f.php 16
+ERROR - 2018-06-27 14:09:27 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\a1d627b4830f21a4b18b861969176816a4e06c6f.php 16
+ERROR - 2018-06-27 14:09:27 --> Severity: Notice --> Undefined index: role C:\xampp\htdocs\simba\application\cache\9ab2a552c32e1bb022e917044983484442c25d9c.php 61
+ERROR - 2018-06-27 14:09:28 --> Severity: Notice --> Undefined property: stdClass::$size C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 18
+ERROR - 2018-06-27 14:10:10 --> Severity: Notice --> Undefined index: role C:\xampp\htdocs\simba\application\cache\9ab2a552c32e1bb022e917044983484442c25d9c.php 61
+ERROR - 2018-06-27 14:11:51 --> Severity: Notice --> Undefined property: stdClass::$title C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 16
+ERROR - 2018-06-27 14:11:51 --> Severity: Notice --> Undefined property: stdClass::$content C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 19
+ERROR - 2018-06-27 14:22:27 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\simba\application\controllers\Index.php 136
+ERROR - 2018-06-27 14:22:27 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 16
+ERROR - 2018-06-27 14:22:27 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 19
+ERROR - 2018-06-27 14:22:27 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 21
+ERROR - 2018-06-27 14:48:19 --> Severity: Error --> Cannot use object of type stdClass as array C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 6
+ERROR - 2018-06-27 14:48:55 --> Severity: Parsing Error --> syntax error, unexpected '}', expecting ',' or ';' C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 6
+ERROR - 2018-06-27 14:49:04 --> Severity: Error --> Cannot use object of type stdClass as array C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 6
+ERROR - 2018-06-27 14:49:45 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\simba\application\controllers\Index.php 136
+ERROR - 2018-06-27 14:49:45 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 16
+ERROR - 2018-06-27 14:49:45 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 19
+ERROR - 2018-06-27 14:49:45 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 21
+ERROR - 2018-06-27 14:49:46 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\simba\application\controllers\Index.php 136
+ERROR - 2018-06-27 14:49:46 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 16
+ERROR - 2018-06-27 14:49:46 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 19
+ERROR - 2018-06-27 14:49:46 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 21
+ERROR - 2018-06-27 14:49:46 --> Severity: Error --> Cannot use object of type stdClass as array C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 6
+ERROR - 2018-06-27 14:49:47 --> Severity: Error --> Cannot use object of type stdClass as array C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 6
+ERROR - 2018-06-27 14:49:49 --> Severity: Error --> Cannot use object of type stdClass as array C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 6
+ERROR - 2018-06-27 14:50:05 --> Severity: Error --> Cannot use object of type stdClass as array C:\xampp\htdocs\simba\application\helpers\my_helper.php 107
+ERROR - 2018-06-27 14:59:00 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 3
+ERROR - 2018-06-27 14:59:00 --> Severity: Notice --> Undefined index: color C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 14:59:00 --> Severity: Notice --> Undefined index: name_vi C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 3
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: color C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: name_vi C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 3
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: color C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: name_vi C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 3
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: color C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:08 --> Severity: Notice --> Undefined index: name_vi C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:11 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 3
+ERROR - 2018-06-27 15:00:11 --> Severity: Notice --> Undefined index: color C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:11 --> Severity: Notice --> Undefined index: name_vi C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:11 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 3
+ERROR - 2018-06-27 15:00:11 --> Severity: Notice --> Undefined index: color C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:00:11 --> Severity: Notice --> Undefined index: name_vi C:\xampp\htdocs\simba\application\cache\12e43987044972e8f07c6d646c4d5ab1667bc651.php 7
+ERROR - 2018-06-27 15:01:40 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\simba\application\controllers\Index.php 136
+ERROR - 2018-06-27 15:01:40 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 16
+ERROR - 2018-06-27 15:01:40 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 19
+ERROR - 2018-06-27 15:01:40 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 21
+ERROR - 2018-06-27 15:10:24 --> Severity: Notice --> Undefined property: stdClass::$files C:\xampp\htdocs\simba\application\cache\e9ef3869b348b5749e7723e8672315246357ec52.php 18
+ERROR - 2018-06-27 15:10:24 --> Severity: Notice --> Undefined property: stdClass::$files C:\xampp\htdocs\simba\application\cache\e9ef3869b348b5749e7723e8672315246357ec52.php 38
+ERROR - 2018-06-27 16:02:17 --> Severity: Notice --> Undefined property: stdClass::$files C:\xampp\htdocs\simba\application\cache\e9ef3869b348b5749e7723e8672315246357ec52.php 18
+ERROR - 2018-06-27 16:02:17 --> Severity: Notice --> Undefined property: stdClass::$files C:\xampp\htdocs\simba\application\cache\e9ef3869b348b5749e7723e8672315246357ec52.php 38
+ERROR - 2018-06-27 16:56:38 --> Severity: Notice --> Undefined property: stdClass::$files C:\xampp\htdocs\simba\application\cache\f10ccd010a973f49c85b75fb530a9c3b932e7b25.php 18
+ERROR - 2018-06-27 17:05:43 --> Severity: Notice --> Undefined property: Admin::$hinhanh_model C:\xampp\htdocs\simba\application\controllers\Admin.php 519
+ERROR - 2018-06-27 17:05:43 --> Severity: Error --> Call to a member function update() on null C:\xampp\htdocs\simba\application\controllers\Admin.php 519
+ERROR - 2018-06-27 17:37:29 --> 404 Page Not Found: 
+ERROR - 2018-06-27 17:45:21 --> Query error: Unknown column 'date' in 'order clause' - Invalid query: SELECT *, `id_hinhanh`
+FROM `tbl_client`
+WHERE `deleted` =0
+ORDER BY `date` DESC
+ERROR - 2018-06-27 17:54:26 --> Severity: Warning --> array_push() expects parameter 1 to be array, null given C:\xampp\htdocs\simba\application\controllers\Admin.php 748
+ERROR - 2018-06-27 18:56:11 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 3
+ERROR - 2018-06-27 18:56:11 --> Severity: Notice --> Undefined index: title_vi C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 11
+ERROR - 2018-06-27 18:56:11 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 3
+ERROR - 2018-06-27 18:56:12 --> Severity: Notice --> Undefined index: title_vi C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 11
+ERROR - 2018-06-27 18:56:12 --> Severity: Notice --> Undefined index: typeobj C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 3
+ERROR - 2018-06-27 18:56:12 --> Severity: Notice --> Undefined index: title_vi C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 11
+ERROR - 2018-06-27 18:56:20 --> Severity: Notice --> Undefined index: title_vi C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 10
+ERROR - 2018-06-27 18:56:20 --> Severity: Notice --> Undefined index: title_vi C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 10
+ERROR - 2018-06-27 18:56:20 --> Severity: Notice --> Undefined index: title_vi C:\xampp\htdocs\simba\application\cache\6f6c7f4eb411351bbba9c85d28e93c0ed54061e8.php 10
+ERROR - 2018-06-27 19:15:54 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\simba\application\controllers\Index.php 136
+ERROR - 2018-06-27 19:15:54 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 16
+ERROR - 2018-06-27 19:15:54 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 19
+ERROR - 2018-06-27 19:15:54 --> Severity: Notice --> Trying to get property of non-object C:\xampp\htdocs\simba\application\cache\7bc07f2242524add403d44fbe779b6d1ba02f0e8.php 21

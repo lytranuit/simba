@@ -94,9 +94,12 @@ jQuery(document).ready(function ($) {
         var $mobile_nav = $('#nav-menu-container').clone().prop({
             id: 'mobile-nav'
         });
+        var $hr = $("<li class='dropdown-divider'></li>");
+        var $web_oishii = $("#oishii-web").clone().removeClass().wrap("<li></li>").parent();
+        var $app_simba = $("#simba-app").clone().removeClass().wrap("<li></li>").parent();
         var $button_login = $(".button_login").clone().wrap("<li></li>").parent();
         var $language = $("#language").clone().wrap("<li></li>").parent();
-        $("ul", $mobile_nav).append($button_login).append($language);
+        $("ul", $mobile_nav).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($language);
         $mobile_nav.find('> ul').attr({
             'class': '',
             'id': ''
@@ -294,8 +297,23 @@ jQuery(document).ready(function ($) {
             load_page_news();
         }
     });
+    $("#product").on("click", "a.page-link", function (e) {
+        e.preventDefault();
+        var page = $(this).text();
+        load_page_product(page);
+    });
+    $("#product .button_search").click(function () {
+        load_page_product();
+    });
+    $("#product .input_search").keyup(function (e) {
+        if (e.keyCode == 13) {
+            load_page_product();
+        }
+    });
     load_page_news();
+    load_page_product();
 });
+
 function load_page_news(page = 1) {
     var search = $("#tintuc .input_search").val();
     var data = {page: page, search: search};
@@ -305,6 +323,19 @@ function load_page_news(page = 1) {
         data: data,
         success: function (data) {
             $("#tintuc .data").html(data);
+        }
+    });
+}
+
+function load_page_product(page = 1) {
+    var search = $("#product .input_search").val();
+    var data = {page: page, search: search};
+    $.ajax({
+        dataType: "HTML",
+        url: path + "ajax/product",
+        data: data,
+        success: function (data) {
+            $("#product .data").html(data);
         }
     });
 }

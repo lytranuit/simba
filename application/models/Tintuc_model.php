@@ -35,37 +35,24 @@ class Tintuc_model extends MY_Model {
     }
 
     function create_object($data) {
-        $title_vi = isset($data['title_vi']) ? $data['title_vi'] : '';
-        $content_vi = isset($data['content_vi']) ? $data['content_vi'] : '';
-        $title_en = isset($data['title_en']) ? $data['title_en'] : '';
-        $content_en = isset($data['content_en']) ? $data['content_en'] : '';
-        $title_jp = isset($data['title_jp']) ? $data['title_jp'] : '';
-        $content_jp = isset($data['content_jp']) ? $data['content_jp'] : '';
-        $date = isset($data['date']) ? $data['date'] : time();
-        $type = isset($data['type']) ? $data['type'] : null;
-        $id_hinhanh = isset($data['id_hinhanh']) ? $data['id_hinhanh'] : null;
-        $id_user = isset($data['id_user']) ? $data['id_user'] : null;
-        $active = isset($data['active']) ? $data['active'] : 0;
-        if ($type == 4) {
-            $is_private = 1;
-        } else {
-            $is_private = 0;
+        $array = array(
+            'title_vi', 'content_vi', 'title_en', 'content_en', 'title_jp', 'content_jp', 'type', 'id_hinhanh', 'id_user', 'active'
+        );
+        $obj = array();
+        foreach ($array as $key) {
+            if (isset($data[$key])) {
+                $obj[$key] = $data[$key];
+            } else
+                continue;
+            if ($key == 'type') {
+                if ($data[$key] == 4) {
+                    $obj['is_private'] = 1;
+                } else {
+                    $obj['is_private'] = 0;
+                }
+            }
         }
 
-        $obj = array(
-            'title_vi' => $title_vi,
-            'content_vi' => $content_vi,
-            'title_en' => $title_en,
-            'content_en' => $content_en,
-            'title_jp' => $title_jp,
-            'content_jp' => $content_jp,
-            'date' => $date,
-            'type' => $type,
-            'id_hinhanh' => $id_hinhanh,
-            'id_user' => $id_user,
-            'active' => $active,
-            'is_private' => $is_private
-        );
         return $obj;
     }
 

@@ -9,28 +9,33 @@ class Product_model extends MY_Model {
         $this->table = 'tbl_product';
         $this->primary_key = 'id';
         $this->has_one['hinhanh'] = array('foreign_model' => 'Hinhanh_model', 'foreign_table' => 'tbl_hinhanh', 'foreign_key' => 'id_hinhanh', 'local_key' => 'id_hinhanh');
+        $this->has_many_pivot['files'] = array(
+            'foreign_model' => 'Hinhanh_model',
+            'pivot_table' => 'tbl_product_file',
+            'local_key' => 'id',
+            'pivot_local_key' => 'id_product', /* this is the related key in the pivot table to the local key
+              this is an optional key, but if your column name inside the pivot table
+              doesn't respect the format of "singularlocaltable_primarykey", then you must set it. In the next title
+              you will see how a pivot table should be set, if you want to  skip these keys */
+            'pivot_foreign_key' => 'id_file', /* this is also optional, the same as above, but for foreign table's keys */
+            'foreign_key' => 'id_hinhanh',
+            'get_relate' => TRUE /* another optional setting, which is explained below */
+        );
         parent::__construct();
     }
 
-    public function create_object($data) {
-        $name_vi = isset($data['name_vi']) ? $data['name_vi'] : '';
-        $content_vi = isset($data['content_vi']) ? $data['content_vi'] : '';
-        $name_en = isset($data['name_en']) ? $data['name_en'] : '';
-        $content_en = isset($data['content_en']) ? $data['content_en'] : '';
-        $name_jp = isset($data['name_jp']) ? $data['name_jp'] : '';
-        $content_jp = isset($data['content_jp']) ? $data['content_jp'] : '';
-        $id_product = isset($data['id_product']) ? $data['id_product'] : null;
-        $id_hinhanh = isset($data['id_hinhanh']) ? $data['id_hinhanh'] : null;
-        $obj = array(
-            'name_vi' => $name_vi,
-            'content_vi' => $content_vi,
-            'name_en' => $name_en,
-            'content_en' => $content_en,
-            'name_jp' => $name_jp,
-            'content_jp' => $content_jp,
-            'id_product' => $id_product,
-            'id_hinhanh' => $id_hinhanh,
+    function create_object($data) {
+        $array = array(
+            'name_vi', 'content_vi', 'name_en', 'content_en', 'name_jp', 'content_jp', 'id_hinhanh', 'id_product'
         );
+        $obj = array();
+        foreach ($array as $key) {
+            if (isset($data[$key])) {
+                $obj[$key] = $data[$key];
+            } else
+                continue;
+        }
+
         return $obj;
     }
 

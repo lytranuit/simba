@@ -14,7 +14,12 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
             </div>
             <div class="body">
                 <div class="row">
-                    <form method="POST" action="" id="form-dang-tin" class="col-md-12">
+                    <form method="POST" action="" id="form-dang-tin" class="col-md-12"> 
+                        @if(count($tin->files))
+                        @foreach($tin->files as $key =>$row)
+                        <input type='hidden' name='id_files[]' value='{{$key}}' class='id_files'/>
+                        @endforeach
+                        @endif
                         <input type="hidden" name='id_hinhanh' value='{{$tin->id_hinhanh}}' class='id_hinhanh'/>
                         <div class="col-md-2">
                             <b class="form-label">Hình ảnh đại diện:</b>
@@ -28,6 +33,10 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                                 <option value="{{$row->id}}">{{$row->name_vi}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-md-6">
+                            <b class="form-label">File: </b><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files" : "" ?>
+                            <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
                         </div>
                         <div class="col-md-12">
                             <!-- Nav tabs -->
@@ -132,6 +141,24 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
 
         $("#hinh_preview").click(function () {
             $("#kv-explorer").click();
+        });
+        $("#kv-file").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': path + 'admin/uploadfile',
+            maxFileCount: 3,
+            showPreview: false,
+            showRemove: false,
+            showUpload: false,
+            showCancel: false,
+            browseLabel: "",
+            initialPreviewConfig: []
+        }).on("filebatchselected", function (event, files) {
+            $("#form-dang-tin .id_files").remove();
+            $(this).fileinput("upload");
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var id = data.response.key;
+            var append = "<input type='hidden' name='id_files[]' value='" + id + "' class='id_files'/>";
+            $("#form-dang-tin").append(append);
         });
         $('.edit').froalaEditor({
             heightMin: 200,

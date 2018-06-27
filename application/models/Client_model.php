@@ -12,15 +12,18 @@ class Client_model extends MY_Model {
         parent::__construct();
     }
 
-    public function create_object($data) {
-        $name_client = isset($data['name_client']) ? $data['name_client'] : '';
-        $link = isset($data['link']) ? $data['link'] : '';
-        $id_hinhanh = isset($data['id_hinhanh']) ? $data['id_hinhanh'] : null;
-        $obj = array(
-            'name_client' => $name_client,
-            'link' => $link,
-            'id_hinhanh' => $id_hinhanh,
+    function create_object($data) {
+        $array = array(
+            'name_client', 'link', 'id_hinhanh'
         );
+        $obj = array();
+        foreach ($array as $key) {
+            if (isset($data[$key])) {
+                $obj[$key] = $data[$key];
+            } else
+                continue;
+        }
+
         return $obj;
     }
 

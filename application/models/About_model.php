@@ -12,17 +12,20 @@ class About_model extends MY_Model {
         parent::__construct();
     }
 
-    public function create_object($data) {
-        $content = isset($data['content']) ? $data['content'] : '';
-        $language = isset($data['language']) ? $data['language'] : 'vi';
-        $order = isset($data['order']) ? $data['order'] : '0';
-        $id_hinhanh = isset($data['id_hinhanh']) ? $data['id_hinhanh'] : null;
-        $obj = array(
-            'content' => $content,
-            'language' => $language,
-            'order' => $order,
-            'id_hinhanh' => $id_hinhanh,
+    function create_object($data) {
+        $array = array(
+            'content', 'language', 'order', 'id_hinhanh'
         );
+        $obj = array();
+        foreach ($array as $key) {
+            if (isset($data[$key])) {
+                $obj[$key] = $data[$key];
+            } elseif ($key == 'order') {
+                $obj[$key] = 0;
+            } else
+                continue;
+        }
+
         return $obj;
     }
 

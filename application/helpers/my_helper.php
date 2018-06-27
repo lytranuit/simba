@@ -104,6 +104,7 @@ if (!function_exists('pick_language')) {
     function pick_language($data, $struct = 'name_') {
         $CI = &get_instance();
         $short_lang = short_language_current();
+        $data = (array) $data;
         if (isset($data[$struct . $short_lang]) && $data[$struct . $short_lang] != "") {
             return $struct . $short_lang;
         } else {

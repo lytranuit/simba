@@ -10,7 +10,7 @@
         </div>
         <div class="pull-right hidden-md-down" style="margin: 5px;">
             <?php if ($is_login): ?> 
-                <a href="<?= base_url() ?>admin">
+                <a class="button_login" href="<?= base_url() ?>admin">
                     <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
                         <?= $userdata['identity'] ?>
                     </span>
@@ -30,14 +30,14 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        <div>
+        <div class="hidden-sm-down">
             <a style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
                 <span class="fa fa-shopping-cart text-danger"></span>
                 <span>
                     App SimBa Fresh
                 </span>
             </a>
-            <a style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.oishii.vn/">
+            <a style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.oishii.vn/" id="oishii-web">
                 <span class="fa fa-shopping-cart text-danger"></span>
                 <span>
                     SimBa Shop Oishii

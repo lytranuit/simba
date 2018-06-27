@@ -408,7 +408,7 @@ class Admin extends MY_Controller {
     public function quanlycategory() {
         $this->data['menu_active'] = "category";
         $this->load->model("category_model");
-        $this->data['arr_tin'] = $this->category_model->where(array('deleted' => 0))->with_hinhanh()->order_by('id', "DESC")->as_object()->get_all();
+        $this->data['arr_tin'] = $this->category_model->where(array('deleted' => 0))->with_hinhanh()->order_by('date', "DESC")->as_object()->get_all();
 //        print_r($this->data['arr_tin']);
 //        die();
         load_datatable($this->data);
@@ -419,6 +419,7 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("category_model");
+            $data['date'] = time();
             $data_up = $this->category_model->create_object($data);
             $this->category_model->insert($data_up);
             redirect('admin/quanlycategory', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
@@ -456,6 +457,14 @@ class Admin extends MY_Controller {
         }
     }
 
+    function updatecategory($params) {
+        $this->load->model("category_model");
+        $id = $params[0];
+        $this->category_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
     function removecategory($params) {
         $this->load->model("category_model");
         $id = $params[0];
@@ -471,7 +480,7 @@ class Admin extends MY_Controller {
     public function quanlyproduct() {
         $this->data['menu_active'] = "product";
         $this->load->model("product_model");
-        $this->data['arr_tin'] = $this->product_model->where(array('deleted' => 0))->with_hinhanh()->order_by('id', "DESC")->as_object()->get_all();
+        $this->data['arr_tin'] = $this->product_model->where(array('deleted' => 0))->with_hinhanh()->order_by('date', "DESC")->as_object()->get_all();
 //        print_r($this->data['arr_tin']);
 //        die();
         load_datatable($this->data);
@@ -482,8 +491,18 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("product_model");
+            $this->load->model("productfile_model");
+            $this->load->model("hinhanh_model");
+            $data['date'] = time();
             $data_up = $this->product_model->create_object($data);
-            $this->product_model->insert($data_up);
+            $id = $this->product_model->insert($data_up);
+            $files = $this->input->post('id_files');
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->productfile_model->insert(array('id_product' => $id, 'id_file' => $file));
+                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                }
+            }
             redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->data['menu_active'] = "product";
@@ -500,8 +519,18 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("product_model");
+            $this->load->model("productfile_model");
+            $this->load->model("hinhanh_model");
             $data_up = $this->product_model->create_object($data);
             $this->product_model->update($data_up, $id);
+            $files = $this->input->post('id_files');
+            $this->productfile_model->where('id_product', $id)->delete();
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->productfile_model->insert(array('id_product' => $id, 'id_file' => $file));
+                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                }
+            }
             redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->data['menu_active'] = "product";
@@ -510,13 +539,21 @@ class Admin extends MY_Controller {
 
             $this->data['arr_category'] = $this->productsimba_model->as_object()->get_all();
 
-            $tin = $this->product_model->with_hinhanh()->where(array('id' => $id))->as_object()->get();
+            $tin = $this->product_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
             $this->data['tin'] = $tin;
 
             load_inputfile($this->data);
             load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
+    }
+
+    function updateproduct($params) {
+        $this->load->model("product_model");
+        $id = $params[0];
+        $this->product_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
     }
 
     function removeproduct($params) {
@@ -534,7 +571,7 @@ class Admin extends MY_Controller {
     public function quanlyclient() {
         $this->data['menu_active'] = "client";
         $this->load->model("client_model");
-        $this->data['arr_tin'] = $this->client_model->where(array('deleted' => 0))->with_hinhanh()->order_by('id', "DESC")->as_object()->get_all();
+        $this->data['arr_tin'] = $this->client_model->where(array('deleted' => 0))->with_hinhanh()->order_by('order', "DESC")->as_object()->get_all();
 //        print_r($this->data['arr_tin']);
 //        die();
         load_datatable($this->data);
@@ -545,6 +582,7 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("client_model");
+            $data['date'] = time();
             $data_up = $this->client_model->create_object($data);
             $this->client_model->insert($data_up);
             redirect('admin/quanlyclient', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
@@ -573,6 +611,14 @@ class Admin extends MY_Controller {
         }
     }
 
+    function updateclient($params) {
+        $this->load->model("client_model");
+        $id = $params[0];
+        $this->client_model->update(array("order" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
     function removeclient($params) {
         $this->load->model("client_model");
         $id = $params[0];
@@ -590,7 +636,7 @@ class Admin extends MY_Controller {
         $this->load->model("tintuc_model");
         $this->load->model("hinhanh_model");
         $this->load->model("typetintuc_model");
-        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0))->order_by('id', "DESC")->as_object()->get_all();
+        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0))->order_by('date', "DESC")->as_object()->get_all();
         foreach ($this->data['arr_tin'] as $k => &$tin) {
             $tin->title_vi = mb_strlen($tin->title_vi) < 50 ? $tin->title_vi : mb_substr($tin->title_vi, 0, 50) . "...";
             $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $tin->id_hinhanh))->as_object()->get_all();
@@ -612,6 +658,7 @@ class Admin extends MY_Controller {
             $data = $_POST;
             $data['id_user'] = $this->session->userdata('user_id');
             $data['active'] = 1;
+            $data['date'] = time();
             $data_up = $this->tintuc_model->create_object($data);
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
@@ -668,6 +715,14 @@ class Admin extends MY_Controller {
         }
     }
 
+    function updatetintuc($params) {
+        $this->load->model("tintuc_model");
+        $id = $params[0];
+        $this->tintuc_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
     function removetintuc($params) {
         $this->load->model("tintuc_model");
         $id = $params[0];
@@ -683,7 +738,7 @@ class Admin extends MY_Controller {
     public function quanlynoibo() {
         $this->data['menu_active'] = "noibo";
         $this->load->model("tintuc_model");
-        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 1))->order_by('id', "DESC")->with_hinhanh()->as_object()->get_all();
+        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 1))->order_by('date', "DESC")->with_hinhanh()->as_object()->get_all();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
@@ -693,6 +748,8 @@ class Admin extends MY_Controller {
         $this->load->model("tintuc_model");
         $tin = $this->tintuc_model->where(array('id' => $id))->with_hinhanh()->with_files()->as_array()->get();
         $this->data['tin'] = $tin;
+
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/froala_editor/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 

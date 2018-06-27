@@ -33,11 +33,15 @@
                             <td>{{$tin->title_vi}}</td>
                             <td><span style="background: {{$tin->obj_type->color or '#000000'}};padding: 5px 20px;color: white;">{{$tin->obj_type->name_vi or ''}}</span></td>   
                             <td>
-                                <a href="{{base_url()}}admin/edittintuc/{{$tin->id}}" class="text-info">
+                                <a href="{{base_url()}}admin/updatetintuc/{{$tin->id}}" class="text-warning" title="update">
+                                    <i class="fa fa-star">
+                                    </i>
+                                </a>
+                                <a href="{{base_url()}}admin/edittintuc/{{$tin->id}}" class="text-info" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/removetintuc/{{$tin->id}}" class="text-danger" data-type='confirm'>
+                                <a href="{{base_url()}}admin/removetintuc/{{$tin->id}}" class="text-danger" data-type='confirm' title="remove">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

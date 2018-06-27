@@ -755,7 +755,8 @@ NEWS
     color:black;
 }
 #news header{
-    position: relative;
+    position: relative;  
+    margin: 0px 0px 30px;
 }
 #news #search-new{
     position: relative;
@@ -2293,4 +2294,10 @@ textarea.input100 {
         font-size: 10px;
         color: gray;
     }
+}
+
+.c_icon{
+    padding: 2px 5px;
+    color: white;
+    font-size: 11px;
 }
