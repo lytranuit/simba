@@ -289,6 +289,31 @@
 
 <script>
     $(document).ready(function () {
+        $(".kv-explorer").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': path + 'admin/uploadhinhanh',
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+            maxFileCount: 1,
+            showPreview: false,
+            showRemove: false,
+            showUpload: false,
+            showCancel: false,
+            browseLabel: "",
+        }).on("filebatchselected", function (event, files) {
+            $(this).fileinput("upload");
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var id = data.response.key;
+            var src = data.response.initialPreview[0];
+            $("#hinh_preview").attr("src", src);
+            var append = "<input type='hidden' name='id_hinhanh' value='" + id + "' class='id_hinhanh'/>";
+            $("#form-dang-tin").append(append);
+        });
+        $(".kv-explorer").parents(".file-input").hide();
+
+        $("#hinh_preview").click(function () {
+            $("#kv-explorer").click();
+        });
+
         $('.froala-editor').froalaEditor({
             toolbarInline: true,
             charCounterCount: false,
@@ -302,6 +327,6 @@
             imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
             htmlRemoveTags: [],
             toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
-        })
+        });
     });
 </script>

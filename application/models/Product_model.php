@@ -19,7 +19,7 @@ class Product_model extends MY_Model {
         $content_en = isset($data['content_en']) ? $data['content_en'] : '';
         $name_jp = isset($data['name_jp']) ? $data['name_jp'] : '';
         $content_jp = isset($data['content_jp']) ? $data['content_jp'] : '';
-        $id_category = isset($data['id_category']) ? $data['id_category'] : null;
+        $id_product = isset($data['id_product']) ? $data['id_product'] : null;
         $id_hinhanh = isset($data['id_hinhanh']) ? $data['id_hinhanh'] : null;
         $obj = array(
             'name_vi' => $name_vi,
@@ -28,7 +28,7 @@ class Product_model extends MY_Model {
             'content_en' => $content_en,
             'name_jp' => $name_jp,
             'content_jp' => $content_jp,
-            'id_category' => $id_category,
+            'id_product' => $id_product,
             'id_hinhanh' => $id_hinhanh,
         );
         return $obj;

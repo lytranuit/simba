@@ -52,8 +52,8 @@
                         <span>Cá nhân</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<?= base_url() ?>admin">
+                <li data="noibo">
+                    <a href="<?= base_url() ?>admin/quanlynoibo">
                         <i class="material-icons">view_list</i>
                         <span>Thông tin nội bộ</span>
                     </a>
@@ -71,8 +71,8 @@
                                     <span>Banner</span>
                                 </a>
                             </li>
-                            <li data='product'>
-                                <a href="<?= base_url() ?>admin/quanlyproduct">
+                            <li data='category'>
+                                <a href="<?= base_url() ?>admin/quanlycategory">
                                     <span>Thông tin nhóm hàng</span>
                                 </a>
                             </li>
@@ -106,8 +106,8 @@
                             <span>Công bố thông tin</span>
                         </a>
                     </li>
-                    <li data='type'>
-                        <a href="<?= base_url() ?>admin/quanlytype">
+                    <li data='product'>
+                        <a href="<?= base_url() ?>admin/quanlyproduct">
                             <i class="material-icons">list</i>
                             <span>Công bố chất lượng sản phẩm</span>
                         </a>

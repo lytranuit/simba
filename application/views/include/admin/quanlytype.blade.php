@@ -39,7 +39,7 @@
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/removetype/{{$tin->id}}" class="text-danger">
+                                <a href="{{base_url()}}admin/removetype/{{$tin->id}}" class="text-danger" data-type='confirm'>
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

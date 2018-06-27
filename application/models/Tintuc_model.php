@@ -45,6 +45,12 @@ class Tintuc_model extends MY_Model {
         $id_hinhanh = isset($data['id_hinhanh']) ? $data['id_hinhanh'] : null;
         $id_user = isset($data['id_user']) ? $data['id_user'] : null;
         $active = isset($data['active']) ? $data['active'] : 0;
+        if ($type == 4) {
+            $is_private = 1;
+        } else {
+            $is_private = 0;
+        }
+
         $obj = array(
             'title_vi' => $title_vi,
             'content_vi' => $content_vi,
@@ -56,7 +62,8 @@ class Tintuc_model extends MY_Model {
             'type' => $type,
             'id_hinhanh' => $id_hinhanh,
             'id_user' => $id_user,
-            'active' => $active
+            'active' => $active,
+            'is_private' => $is_private
         );
         return $obj;
     }

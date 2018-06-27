@@ -18,6 +18,7 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/node-waves/waves.css ",
             base_url() . "public/admin/plugins/animate-css/animate.css ",
             base_url() . "public/admin/plugins/morrisjs/morris.css ",
+            base_url() . "public/admin/plugins/sweetalert/sweetalert.css",
             base_url() . "public/admin/css/style.css ",
             base_url() . "public/admin/css/themes/all-themes.css"
         );
@@ -39,6 +40,7 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/flot-charts/jquery.flot.time.js",
             base_url() . "public/admin/plugins/jquery-sparkline/jquery.sparkline.js",
             base_url() . "public/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+            base_url() . "public/admin/plugins/sweetalert/sweetalert.min.js",
             base_url() . "public/admin/js/admin.js"
         );
     }
@@ -382,6 +384,69 @@ class Admin extends MY_Controller {
     }
 
     /*
+     * Category
+     */
+
+    public function quanlycategory() {
+        $this->data['menu_active'] = "category";
+        $this->load->model("category_model");
+        $this->data['arr_tin'] = $this->category_model->where(array('deleted' => 0))->with_hinhanh()->order_by('id', "DESC")->as_object()->get_all();
+//        print_r($this->data['arr_tin']);
+//        die();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themcategory() { ////////// Trang dang tin
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("category_model");
+            $data_up = $this->category_model->create_object($data);
+            $this->category_model->insert($data_up);
+            redirect('admin/quanlycategory', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "category";
+            $this->load->model("categorysimba_model");
+            $this->data['arr_category'] = $this->categorysimba_model->as_object()->get_all();
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function editcategory($param) {
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("category_model");
+            $data_up = $this->category_model->create_object($data);
+            $this->category_model->update($data_up, $id);
+            redirect('admin/quanlycategory', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "category";
+            $this->load->model("categorysimba_model");
+            $this->load->model("category_model");
+
+            $this->data['arr_category'] = $this->categorysimba_model->as_object()->get_all();
+
+            $tin = $this->category_model->with_hinhanh()->where(array('id' => $id))->as_object()->get();
+            $this->data['tin'] = $tin;
+
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removecategory($params) {
+        $this->load->model("category_model");
+        $id = $params[0];
+        $this->category_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    /*
      * Product
      */
 
@@ -404,8 +469,8 @@ class Admin extends MY_Controller {
             redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->data['menu_active'] = "product";
-            $this->load->model("category_model");
-            $this->data['arr_category'] = $this->category_model->as_object()->get_all();
+            $this->load->model("productsimba_model");
+            $this->data['arr_category'] = $this->productsimba_model->as_object()->get_all();
             load_inputfile($this->data);
             load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();
@@ -422,10 +487,10 @@ class Admin extends MY_Controller {
             redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->data['menu_active'] = "product";
-            $this->load->model("category_model");
+            $this->load->model("productsimba_model");
             $this->load->model("product_model");
 
-            $this->data['arr_category'] = $this->category_model->as_object()->get_all();
+            $this->data['arr_category'] = $this->productsimba_model->as_object()->get_all();
 
             $tin = $this->product_model->with_hinhanh()->where(array('id' => $id))->as_object()->get();
             $this->data['tin'] = $tin;
@@ -593,13 +658,24 @@ class Admin extends MY_Controller {
         exit;
     }
 
-// activate the tin
-    function activate_tintuc($params) {
+    /*
+     * Tin Tuc noi bo
+     */
+
+    public function quanlynoibo() {
+        $this->data['menu_active'] = "noibo";
         $this->load->model("tintuc_model");
-        $id = $params[0];
-        $this->tintuc_model->update(array("active" => 1), $id);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 1))->order_by('id', "DESC")->with_hinhanh()->as_object()->get_all();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    function viewtin($param) {
+        $id = $param[0];
+        $this->load->model("tintuc_model");
+        $tin = $this->tintuc_model->where(array('id' => $id))->with_hinhanh()->with_files()->as_array()->get();
+        $this->data['tin'] = $tin;
+        echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
 // deactivate the tin

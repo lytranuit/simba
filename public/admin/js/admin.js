@@ -312,9 +312,9 @@ $.AdminBSB.input = {
  */
 $.AdminBSB.select = {
     activate: function () {
-        if ($.fn.selectpicker) {
-            $('select:not(.ms)').selectpicker();
-        }
+//        if ($.fn.selectpicker) {
+//            $('select:not(.ms)').selectpicker();
+//        }
     }
 }
 //==========================================================================================================================
@@ -336,7 +336,8 @@ $.AdminBSB.dropdownMenu = {
             "shown.bs.dropdown": function () {
                 var dropdown = _this.dropdownEffect(this);
                 if (dropdown.effectIn && dropdown.effectOut) {
-                    _this.dropdownEffectEnd(dropdown, function () { });
+                    _this.dropdownEffectEnd(dropdown, function () {
+                    });
                 }
             },
             "hide.bs.dropdown": function (e) {
@@ -396,6 +397,24 @@ $.AdminBSB.dropdownMenu = {
             if (typeof callback == 'function') {
                 callback();
             }
+        });
+    }
+}
+$.AdminBSB.Custom = {
+    activate: function () {
+        $("a[data-type=confirm]").click(function (e) {
+            e.preventDefault();
+            var href = $(this).attr("href");
+            swal({
+                title: "Are you sure?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }, function () {
+                location.href = href;
+            });
         });
     }
 }
@@ -493,7 +512,7 @@ $.AdminBSB.function = {
                     $(this).val(value);
                     break;
             }
-            $('select', form).selectpicker('render');
+//            $('select', form).selectpicker('render');
         });
     }
 }
@@ -505,6 +524,7 @@ $(function () {
     $.AdminBSB.input.activate();
     $.AdminBSB.select.activate();
     $.AdminBSB.search.activate();
+    $.AdminBSB.Custom.activate();
     setTimeout(function () {
         $('.page-loader-wrapper').fadeOut();
     }, 50);
