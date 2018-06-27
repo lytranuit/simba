@@ -237,13 +237,31 @@ class Admin extends MY_Controller {
      */
 
     public function gioithieu() {
-//        $this->load->model("contact_model");
-//        $this->data['arr_tin'] = $this->contact_model->where(array('deleted' => 0))->as_object()->get_all();
+        $this->load->model("about_model");
+        $this->data['arr_vi'] = $this->about_model->where(array('deleted' => 0, 'language' => 'vi'))->order_by("order", "ASC")->with_hinhanh()->as_object()->get_all();
+        $this->data['arr_en'] = $this->about_model->where(array('deleted' => 0, 'language' => 'en'))->order_by("order", "ASC")->with_hinhanh()->as_object()->get_all();
+        $this->data['arr_jp'] = $this->about_model->where(array('deleted' => 0, 'language' => 'jp'))->order_by("order", "ASC")->with_hinhanh()->as_object()->get_all();
+//        echo "<pre>";
+//        print_r($this->data['arr_en']);
+//        die();
         $this->data['menu_active'] = "about";
         array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/timeline.css");
         load_editor($this->data);
         load_inputfile($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function savegioithieu() {
+        $this->load->model("about_model");
+        $this->about_model->update(array('deleted' => 1));
+        $array = json_decode($this->input->post('data'), true);
+//        var_dump($array);
+//        die();
+        foreach ($array as $row) {
+            $data = $this->about_model->create_object($row);
+            $this->about_model->insert($data);
+        }
+        echo json_encode(array('success' => 1));
     }
 
     /*

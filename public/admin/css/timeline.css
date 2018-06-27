@@ -12,6 +12,17 @@
 .timeline>li .timeline-panel{position:relative;float:right;width:100%;padding:0 20px 0 100px;text-align:left}
 .timeline>li .timeline-panel:before{right:auto;left:-15px;border-right-width:15px;border-left-width:0}
 .timeline>li .timeline-panel:after{right:auto;left:-14px;border-right-width:14px;border-left-width:0}
+.timeline>li .timeline-close{    
+    font-size: 20px;
+    position: absolute;
+    top: -40px;
+    width: 30px;
+    left: 50%;
+    height: 30px;
+    margin-left: -16px;
+    cursor: pointer;
+    text-align: center;
+}
 .timeline>li .timeline-image{cursor: pointer;position:absolute;left:0;width:80px;height:80px;margin-left:0;text-align:center;color:#fff;border:7px solid #e9ecef;border-radius:100%;overflow: auto}
 .timeline>li:last-child .timeline-image{background-color:#fed136}
 .timeline>li .timeline-panel h4{font-weight: bold;margin: 0px 0px 12px;}
