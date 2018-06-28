@@ -10,11 +10,16 @@
         </div>
         <div class="pull-right hidden-md-down" style="margin: 5px;">
             <?php if ($is_login): ?> 
-                <a class="button_login" href="<?= base_url() ?>admin">
+                <a class="button_login logged" href="<?= base_url() ?>admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
                         <?= $userdata['identity'] ?>
                     </span>
                 </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="font-size: 0.9rem;">
+                    <a class="dropdown-item" href="<?= base_url() ?>admin">{{lang("info")}}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item logout" href="<?= base_url() ?>index/logout">{{lang("logout")}}</a>
+                </div>
             <?php else: ?>
                 <a class="button_login" data-target="#login-modal" data-toggle="modal" href="#">
                     <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">

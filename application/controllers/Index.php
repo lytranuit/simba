@@ -19,7 +19,7 @@ class Index extends MY_Controller {
             base_url() . "public/lib/froala_editor/css/froala_style.min.css",
             base_url() . 'public/css/style.css'
         );
-        
+
         $this->data['javascript_tag'] = array(
             "https://www.google.com/recaptcha/api.js",
             base_url() . 'public/lib/jquery/jquery.min.js',
@@ -72,10 +72,6 @@ class Index extends MY_Controller {
 
     public function index() {
         $this->data['title'] = "Trang chủ";
-        echo $this->blade->view()->make('page/page', $this->data)->render();
-    }
-
-    function category() {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -132,12 +128,32 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function tintuc($param) {
+    public function news($param) {
         $id = $param[0];
         $this->load->model("tintuc_model");
-        $this->load->model("user_model");
         $tin = $this->tintuc_model->where(array('id' => $id))->with_author()->with_hinhanh()->with_files()->as_object()->get();
         $this->data['tin'] = $tin;
+//        echo "<pre>";
+//        print_r($tin);
+//        die();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    function category($param) {
+        $id = $param[0];
+        $this->load->model("category_model");
+        $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->as_object()->get();
+        $this->data['tin'] = $tin;
+        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    function product($param) {
+        $id = $param[0];
+        $this->load->model("product_model");
+        $tin = $this->product_model->where(array('id' => $id))->with_hinhanh()->with_product()->with_files()->as_object()->get();
+        $this->data['tin'] = json_decode(json_encode($tin), true);
 //        echo "<pre>";
 //        print_r($tin);
 //        die();

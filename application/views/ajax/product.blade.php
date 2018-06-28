@@ -7,13 +7,13 @@
     </div>
     <div class="col-lg-9">
         <span class="news_tx">
-            <a href="<?= base_url() ?>index/tintuc" target="_blank">
+            <a href="<?= get_url_seo('index/product', array($row['id'], sluggable($row[pick_language($row, 'name_')]))) ?>">
                 {{$row[pick_language($row,'name_')]}}
             </a>
         </span>
         @if(isset($row['files']) && count((array) $row['files']))
         @foreach($row['files'] as $std)
-        <span class="d_icon"><img src="http://file.swcms.net/file/wismettac/dam/jcr:eed0655e-2d22-4ba4-a8b9-bcfb99d43e89/pdf.png" alt="pdf"></span>
+        <span class="d_icon"><i class="file-icon" data-type="<?= pathinfo($std->real_hinhanh, PATHINFO_EXTENSION); ?>"></i></span>
         <span class="filesize">({{ceil($std->size / 1024)}}KB)</span>
         @endforeach
         @endif

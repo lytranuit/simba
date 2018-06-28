@@ -1,4 +1,8 @@
 <?php
+
+$lang['info'] = 'Cá nhân';
+$lang['logout'] = 'Đăng xuất';
+
 $lang['OUR_NEWSLETTER'] = 'Góp ý';
 $lang['CONTACT_US'] = 'Liên hệ';
 $lang['USEFUL_LINKS'] = 'Liên kết';

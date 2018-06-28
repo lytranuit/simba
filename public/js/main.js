@@ -97,9 +97,14 @@ jQuery(document).ready(function ($) {
         var $hr = $("<li class='dropdown-divider'></li>");
         var $web_oishii = $("#oishii-web").clone().removeClass().wrap("<li></li>").parent();
         var $app_simba = $("#simba-app").clone().removeClass().wrap("<li></li>").parent();
-        var $button_login = $(".button_login").clone().wrap("<li></li>").parent();
+        var $button_login = $(".button_login").clone().removeAttr("data-toggle").wrap("<li></li>").parent();
+        var $logout = "";
+        if ($(".logged").length) {
+            console.log("logout")
+            $logout = $(".logout").clone().wrap("<li></li>").parent();
+        }
         var $language = $("#language").clone().wrap("<li></li>").parent();
-        $("ul", $mobile_nav).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($language);
+        $("ul", $mobile_nav).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($logout).append($language);
         $mobile_nav.find('> ul').attr({
             'class': '',
             'id': ''

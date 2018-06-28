@@ -21,6 +21,8 @@ class Product_model extends MY_Model {
             'foreign_key' => 'id_hinhanh',
             'get_relate' => TRUE /* another optional setting, which is explained below */
         );
+        $this->has_one['product'] = array('foreign_model' => 'Productsimba_model', 'foreign_table' => 'product', 'foreign_key' => 'id', 'local_key' => 'id_product');
+
         parent::__construct();
     }
 
