@@ -7,12 +7,8 @@ class Ajax extends MY_Controller {
     }
 
     function login() {
-        $this->load->model("user_model");
-        //validate form input
-        $this->form_validation->set_rules('identity', "", 'required');
-        $this->form_validation->set_rules('password', "", 'required');
-
-        if ($this->form_validation->run() == true) {
+        if (isset($_POST['identity']) && isset($_POST['password'])) {
+            $this->load->model("user_model");
             // check to see if the user is logging in
             if ($this->user_model->login($this->input->post('identity'), $this->input->post('password'))) {
                 echo json_encode(array('success' => 1, "role" => $this->session->userdata('role')));

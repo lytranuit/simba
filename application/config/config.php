@@ -197,7 +197,7 @@ $config['directory_trigger'] = 'd';
   | your log files will fill up very fast.
   |
  */
-$config['log_threshold'] = 1;
+$config['log_threshold'] = 0;
 
 /*
   |--------------------------------------------------------------------------
@@ -351,11 +351,11 @@ $config['encryption_key'] = '';
   | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
   |
  */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database'; // Change files to database
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
-$config['sess_match_ip'] = FALSE;
+$config['sess_save_path'] = 'ci_sessions'; // This will be your database table for sessions
+$config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 
@@ -545,3 +545,7 @@ $config['hotline'] = "0938 727 846";
 $config['project_name'] = "Simba";
 
 $config['email_dk'] = "tqviet209@gmail.com";
+
+$config['key_captcha'] = '6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_';
+
+$config['secret_captcha'] = '6LcfOmAUAAAAAMSJllJrxOU6YbQZrmb-lXEedS0A';

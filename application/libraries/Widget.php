@@ -36,6 +36,7 @@ class Widget {
     }
 
     function footer() {
+        $this->data['key'] = $this->CI->config->item('key_captcha');
         echo $this->blade->view()->make('widget/footer', $this->data)->render();
     }
 

@@ -115,7 +115,7 @@ Footer
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="g-recaptcha" data-sitekey="6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+                                    <div class="g-recaptcha" data-sitekey="{{$key}}" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
                                 </div>
                             </div>
                         </form>
