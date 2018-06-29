@@ -103,9 +103,10 @@ jQuery(document).ready(function ($) {
         var $hr = $("<li class='dropdown-divider'></li>");
         var $web_oishii = $("#oishii-web").clone().removeClass().wrap("<li></li>").parent();
         var $app_simba = $("#simba-app").clone().removeClass().wrap("<li></li>").parent();
-        var $button_login = $(".button_login").clone().removeAttr("data-toggle").wrap("<li></li>").parent();
+        var $button_login = $(".button_login").clone().wrap("<li></li>").parent();
         var $logout = "";
         if ($(".logged").length) {
+            $(".button_login",$button_login).removeAttr("data-toggle");
             $logout = $(".logout").clone().wrap("<li></li>").parent();
         }
         var $language = $("#language").clone().wrap("<li></li>").parent();

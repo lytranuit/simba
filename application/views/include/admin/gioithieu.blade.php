@@ -232,7 +232,6 @@
                 ele = $($("template").html());
                 froala_html = $(".froala-editor", ele).html();
             }
-            console.log(froala_html);
             var id = $(".timeline li", parents).length;
             $(".kv-explorer", ele).attr("id", 'kv-' + id);
             $(".froala-editor", ele).attr("id", 'fr-' + id);
