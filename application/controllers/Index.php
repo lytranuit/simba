@@ -70,7 +70,6 @@ class Index extends MY_Controller {
     }
 
     public function index() {
-        $this->data['title'] = "Trang chủ";
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 

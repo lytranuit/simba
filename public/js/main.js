@@ -37,6 +37,11 @@ jQuery(document).ready(function ($) {
     } else {
         $("#simba-app").attr("href", 'https://play.google.com/store/apps/details?id=com.simba.fresh');
     }
+    $(document).keyup(function (e) {
+        if (e.which == 13 && $("#login-modal").is(":visible")) {
+            $("#button_login").trigger("click");
+        }
+    })
     // Back to top button
     $(document).off("click", "#language a").on("click", "#language a", function (e) {
         e.preventDefault();

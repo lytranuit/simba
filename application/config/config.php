@@ -542,7 +542,7 @@ $config['base_url'] = "http://localhost/simba/";
 
 $config['hotline'] = "0938 727 846";
 
-$config['project_name'] = "Simba";
+$config['project_name'] = "Sim Ba Trading Co., LTD";
 
 $config['email_dk'] = "tqviet209@gmail.com";
 
