@@ -21,7 +21,6 @@ class Index extends MY_Controller {
         );
 
         $this->data['javascript_tag'] = array(
-            "https://www.google.com/recaptcha/api.js",
             base_url() . 'public/lib/jquery/jquery.min.js',
             base_url() . 'public/lib/jquery/jquery-migrate.min.js',
             base_url() . 'public/lib/bootstrap/js/bootstrap.bundle.min.js',
@@ -121,9 +120,9 @@ class Index extends MY_Controller {
     public function page($param) {
         $id = $param[0];
         $this->load->model("pageweb_model");
-        $tin = $this->pageweb_model->where(array('id' => $id))->as_array()->get_all();
-        $this->data['tin'] = $tin[0];
-        $this->data['title'] = $tin[0]['title'];
+        $tin = $this->pageweb_model->where(array('id' => $id))->as_array()->get();
+        $this->data['tin'] = $tin;
+        $this->data['title'] = $tin[pick_language($tin, 'title_')];
         array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
@@ -132,7 +131,9 @@ class Index extends MY_Controller {
         $id = $param[0];
         $this->load->model("tintuc_model");
         $tin = $this->tintuc_model->where(array('id' => $id))->with_author()->with_hinhanh()->with_files()->as_object()->get();
+        $tin = json_decode(json_encode($tin), true);
         $this->data['tin'] = $tin;
+        $this->data['title'] = $tin[pick_language($tin, 'title_')];
 //        echo "<pre>";
 //        print_r($tin);
 //        die();
@@ -144,7 +145,9 @@ class Index extends MY_Controller {
         $id = $param[0];
         $this->load->model("category_model");
         $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->as_object()->get();
+        $tin = json_decode(json_encode($tin), true);
         $this->data['tin'] = $tin;
+        $this->data['title'] = $tin[pick_language($tin, 'name_')];
         array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
@@ -153,7 +156,9 @@ class Index extends MY_Controller {
         $id = $param[0];
         $this->load->model("product_model");
         $tin = $this->product_model->where(array('id' => $id))->with_hinhanh()->with_product()->with_files()->as_object()->get();
-        $this->data['tin'] = json_decode(json_encode($tin), true);
+        $tin = json_decode(json_encode($tin), true);
+        $this->data['tin'] = $tin;
+        $this->data['title'] = $tin[pick_language($tin, 'name_')];
 //        echo "<pre>";
 //        print_r($tin);
 //        die();

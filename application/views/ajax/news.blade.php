@@ -8,7 +8,7 @@
     </div>
     <div class="col-lg-9">
         <span class="news_tx">
-            <a href="<?= base_url() ?>index/tintuc" target="_blank">
+            <a href="<?= get_url_seo('index/news', array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>">
                 {{$row[pick_language($row,'title_')]}}
             </a>
         </span>

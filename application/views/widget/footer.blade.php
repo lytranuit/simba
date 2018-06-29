@@ -14,24 +14,20 @@ Footer
                         <li>
                             <i class="ion-ios-arrow-right">
                             </i>
-                            <a href="#">
+                            <a href="{{base_url()}}">
                                 Trang chủ
                             </a>
                         </li>
+                        @foreach($lienket as $row)
                         <li>
                             <i class="ion-ios-arrow-right">
                             </i>
-                            <a href="#">
-                                Điều khoản hợp tác
+                            <a href="<?= get_url_seo("index/page", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>">
+                                {{$row[pick_language($row, 'title_')]}}
                             </a>
                         </li>
-                        <li>
-                            <i class="ion-ios-arrow-right">
-                            </i>
-                            <a href="#">
-                                Chính sách công ty
-                            </a>
-                        </li>
+                        @endforeach
+
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 footer-contact">
@@ -115,7 +111,8 @@ Footer
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="g-recaptcha" data-sitekey="{{$key}}" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+                                    <?= $scriptCap ?>
+                                    <?= $captcha ?>
                                 </div>
                             </div>
                         </form>

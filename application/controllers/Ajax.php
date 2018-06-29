@@ -318,32 +318,36 @@ class Ajax extends MY_Controller {
 
     function contactsubmit() {
 
-        if (isset($_SESSION['timer_contact']) && $_SESSION['timer_contact'] > date("Y-m-d H:i:s")) {
-            echo json_encode(array('msg' => "Xin chờ trong ít phút", 'timer' => $_SESSION['timer_contact'], 'code' => 401));
-            die();
-        }
-        $this->load->model("comment_model");
-        if (isset($_POST['content'])) {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $content = $_POST['content'];
-            $array = array(
-                'name' => $name,
-                'email' => $email,
-                'phone' => $phone,
-                'content' => $content,
-                'date' => time()
-            );
-            $this->comment_model->insert($array);
-            /*
-             * SET LIMIT 
-             */
-            $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-            echo json_encode(array('code' => 400, 'msg' => "Cảm ơn bạn đã góp ý cho chúng tôi!"));
-            /*
-             * Mail setting
-             */
+//        if (isset($_SESSION['timer_contact']) && $_SESSION['timer_contact'] > date("Y-m-d H:i:s")) {
+//            echo json_encode(array('msg' => "Xin chờ trong ít phút", 'timer' => $_SESSION['timer_contact'], 'code' => 401));
+//            die();
+//        }
+
+        $recaptcha = $this->input->post('g-recaptcha-response');
+        $response = $this->recaptcha->verifyResponse($recaptcha);
+        if (isset($response['success']) and $response['success'] === true) {
+            $this->load->model("comment_model");
+            if (isset($_POST['content'])) {
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $content = $_POST['content'];
+                $array = array(
+                    'name' => $name,
+                    'email' => $email,
+                    'phone' => $phone,
+                    'content' => $content,
+                    'date' => time()
+                );
+                $this->comment_model->insert($array);
+                /*
+                 * SET LIMIT 
+                 */
+                $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
+                echo json_encode(array('code' => 400, 'msg' => "Cảm ơn bạn đã góp ý cho chúng tôi!"));
+                /*
+                 * Mail setting
+                 */
 //            $this->load->config('ion_auth', TRUE);
 //            $this->load->library(array('email'));
 //            $email_config = $this->config->item('email_config', 'ion_auth');
@@ -364,8 +368,11 @@ class Ajax extends MY_Controller {
 //                    . "<p><strong>Tin nhắn:</strong>$message</p>";
 //            $this->email->message($html);
 //            $this->email->send();
+            } else {
+                echo json_encode(array('code' => 402, 'msg' => "Vui lòng nhập đầy đủ thông tin."));
+            }
         } else {
-            echo json_encode(array('code' => 402, 'msg' => "Vui lòng nhập đầy đủ thông tin."));
+            echo json_encode(array('code' => 403, 'msg' => "Vui lòng nhấn nút Captcha."));
         }
     }
 

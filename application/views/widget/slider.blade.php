@@ -40,12 +40,12 @@ Intro Section
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                        <a href="<?= get_url_seo("index/tintuc", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" class="headline">
+                        <a href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" class="headline">
                             <h5><?= mb_strlen($row[pick_language($row, 'title_')]) < 50 ? $row[pick_language($row, 'title_')] : mb_substr($row[pick_language($row, 'title_')], 0, 50) . "..."; ?></h5>
                         </a>
                         <!-- Post Meta -->
                         <div class="post-meta">
-                            <p>admin on Sep 29, 2017 at 9:48 am</p>
+                            <p>admin on {{date("F j, Y, g:i a",$row['date'])}}</p>
                         </div>
                     </div>
                 </div>

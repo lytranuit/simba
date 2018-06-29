@@ -8,7 +8,7 @@
                     </div>
                     <div class="body">
                         <div class="row">
-                            <div class="col-lg-6 row justify-content-center">
+                            <div class="col-lg-6 row justify-content-center align-items-center">
                                 <div class="col-6">
                                     <img class="img-fluid"src="{{base_url()}}{{$tin['hinhanh']['src'] or 'public/img/product/1.jpg'}}" />
                                 </div>

@@ -71,8 +71,3 @@ $result = $query->result_array();
 foreach ($result as $row) {
     $route[$row['seo_url']] = $row['link'] . "/" . $row['param'];
 }
-$query = $db->get('tbl_page_web');
-$result = $query->result_array();
-foreach ($result as $row) {
-    $route[$row['alias']] = "index/page/" . $row['id'];
-}

@@ -9,8 +9,6 @@ class Widget {
 
     function __construct() {
         $this->CI = &get_instance();
-        $this->CI->load->library(array('session'));
-        $this->CI->load->helper(array('url', 'language', 'my'));
         $this->CI->lang->load(array('auth', 'home'));
         $this->CI->load->model("user_model");
         $this->data['is_login'] = $this->CI->user_model->logged_in();
@@ -36,7 +34,11 @@ class Widget {
     }
 
     function footer() {
-        $this->data['key'] = $this->CI->config->item('key_captcha');
+        $this->CI->load->model("pageweb_model");
+        $lienket = $this->CI->pageweb_model->where(array('deleted' => 0, 'active' => 1))->order_by(array('id' => "ASC"))->limit(5)->as_array()->get_all();
+        $this->data['lienket'] = $lienket;
+        $this->data['captcha'] = $this->CI->recaptcha->getWidget(array('style' => 'transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;'));
+        $this->data['scriptCap'] = $this->CI->recaptcha->getScriptTag(array('hl' => short_language_current()));
         echo $this->blade->view()->make('widget/footer', $this->data)->render();
     }
 

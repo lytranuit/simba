@@ -23,6 +23,7 @@ jQuery(document).ready(function ($) {
                     alert(msg);
                     if (code == 400) {
                         $("#contactForm").trigger('reset');
+                        grecaptcha.reset();
                     }
                 }
             });
@@ -100,7 +101,6 @@ jQuery(document).ready(function ($) {
         var $button_login = $(".button_login").clone().removeAttr("data-toggle").wrap("<li></li>").parent();
         var $logout = "";
         if ($(".logged").length) {
-            console.log("logout")
             $logout = $(".logout").clone().wrap("<li></li>").parent();
         }
         var $language = $("#language").clone().wrap("<li></li>").parent();
@@ -244,7 +244,6 @@ jQuery(document).ready(function ($) {
 
     // Clients carousel (uses the Owl Carousel library)
     var start = Math.ceil($(".clients-carousel a").length / 2) - 1;
-    console.log(start);
     $(".clients-carousel").owlCarousel({
         autoplay: false,
         dots: false,

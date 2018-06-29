@@ -546,6 +546,3 @@ $config['project_name'] = "Simba";
 
 $config['email_dk'] = "tqviet209@gmail.com";
 
-$config['key_captcha'] = '6LcfOmAUAAAAAMBuNXVYI8fhQrCmZc8DLr5X-Eq_';
-
-$config['secret_captcha'] = '6LcfOmAUAAAAAMSJllJrxOU6YbQZrmb-lXEedS0A';

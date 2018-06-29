@@ -19,8 +19,9 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Tiêu đề</th>
-                            <th>SEO URL</th>
+                            <th>Tiêu đề Tiếng Việt</th>
+                            <th>Tiêu đề Tiếng Anh</th>
+                            <th>Tiêu đề Tiếng Nhật</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -28,10 +29,11 @@
                         @foreach($arr_tin as $key=>$tin)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$tin->title}}</td>
-                            <td>{{$tin->alias}}</td>   
+                            <td>{{$tin->title_vi}}</td>
+                            <td>{{$tin->title_en}}</td>   
+                            <td>{{$tin->title_jp}}</td>   
                             <td>
-                                <a target="blank" href="{{base_url() . $tin->alias}}"><i class="icon-eye-open"></i></a>
+                                <!--<a target="blank" href="{{base_url() . $tin->alias}}"><i class="icon-eye-open"></i></a>-->
                                 <a href="{{base_url()}}admin/editpage/{{$tin->id}}" class="text-info">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>

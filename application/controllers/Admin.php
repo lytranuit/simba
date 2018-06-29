@@ -270,14 +270,12 @@ class Admin extends MY_Controller {
 
     public function thempage() { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
-            $post_title = $_POST['post_titles'];
-            $post_content = $_POST['post_contents'];
-            $data_up = array(
-                'title' => $post_title,
-                'alias' => sluggable($post_title),
-                'content' => $post_content
-            );
             $this->load->model("pageweb_model");
+            $data = $_POST;
+            $data['date'] = time();
+            $data['active'] = 1;
+            $data['id_'] = $this->session->userdata('user_id');
+            $data_up = $this->pageweb_model->create_object($data);
             $id_tin = $this->pageweb_model->insert($data_up);
             redirect('admin/quanlypage', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
@@ -290,29 +288,16 @@ class Admin extends MY_Controller {
     function editpage($param) {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
-            $this->load->model("page_model");
             $this->load->model("pageweb_model");
-            $post_title = $_POST['post_titles'];
-            $post_content = $_POST['post_contents'];
-            $post_alias = sluggable($post_title);
-            $check = $this->pageweb_model->where(array('alias' => $post_alias))->as_array()->get_all();
-            $check2 = $this->page_model->where(array('seo_url' => $post_alias))->as_array()->get_all();
-            while (count($check) && $check[0]['id'] != $id && count($check2)) {
-                $post_alias = $_POST['post_alias'] . "-" . rand();
-                $check = $this->pageweb_model->where(array('alias' => $post_alias))->as_array()->get_all();
-            }
-            $data_up = array(
-                'title' => $post_title,
-                'alias' => $post_alias,
-                'content' => $post_content
-            );
+            $data = $_POST;
+            $data_up = $this->pageweb_model->create_object($data);
             $this->pageweb_model->update($data_up, $id);
             redirect('admin/quanlypage', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->data['menu_active'] = "page";
             $this->load->model("pageweb_model");
-            $tin = $this->pageweb_model->where(array('id' => $id))->as_array()->get_all();
-            $this->data['tin'] = $tin[0];
+            $tin = $this->pageweb_model->where(array('id' => $id))->as_array()->get();
+            $this->data['tin'] = $tin;
             load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
