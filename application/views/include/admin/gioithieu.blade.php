@@ -224,11 +224,15 @@
         })
         $(".add").click(function () {
             var parents = $(this).parents(".tab-pane");
+            var froala_html = $(".froala-editor", $(this).prev()).froalaEditor('html.get', true);
             var ele = $(this).prev().clone();
-            if (ele.length && ele.is("li"))
+            if (ele.length && ele.is("li")) {
                 ele.toggleClass("timeline-inverted");
-            else
+            } else {
                 ele = $($("template").html());
+                froala_html = $(".froala-editor", ele).html();
+            }
+            console.log(froala_html);
             var id = $(".timeline li", parents).length;
             $(".kv-explorer", ele).attr("id", 'kv-' + id);
             $(".froala-editor", ele).attr("id", 'fr-' + id);
@@ -269,6 +273,7 @@
                 htmlRemoveTags: [],
                 toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
             });
+            $('#fr-' + id, parents).froalaEditor("html.set", froala_html);
         });
         $("#save").click(function () {
             var array = [];
