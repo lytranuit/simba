@@ -16,7 +16,7 @@
                             <div class="col-lg-6">
                                 <ul>
                                     <li>
-                                        <span style="font-size: 1.5rem">Chi Tiết</span>
+                                        <span style="font-size: 1.5rem">Thông tin tóm tắt</span>
                                     </li>
                                     <li>
                                         <label class="col-md-4">Mã hàng:</label>
@@ -24,7 +24,6 @@
                                     </li>
                                     <li>
                                         <label class="col-md-4">Xuất Xứ:</label>
-                                        <span>Nhật bản</span>
                                     </li>
                                     <li>
                                         <label class="col-md-4">Dung tích/Trọng lượng:</label>
@@ -33,18 +32,19 @@
                                     <li>
                                         <label class="col-md-4">Bảo quản:</label>
                                         <span>Bảo quản nhiệt độ phòng </span>
+                                        <span>Nhật bản</span>
                                     </li>
                                     <li>
                                         <label class="col-md-4">Mô tả:</label>
                                         <span>{{$tin['product'][pick_language($tin['product'],'description_')]}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">File đính kèm:</label>
+                                        <label class="col-md-4">File CBCL Sản phẩm:</label>
                                         <div>
                                             @foreach($tin['files'] as $row)
                                             <a href="#" class="need_login d-block">
                                                 <i class="file-icon" data-type="<?= pathinfo($row['real_hinhanh'], PATHINFO_EXTENSION); ?>"></i>
-                                                {{$row['ten_hinhanh']}}
+                                                {{$row['real_hinhanh']}}
                                             </a>
                                             @endforeach
                                         </div>
