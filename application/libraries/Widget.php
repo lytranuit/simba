@@ -110,6 +110,8 @@ class Widget {
     }
 
     function testimonials() {
+        $this->CI->load->model("happy_model");
+        $this->data['data'] = $this->CI->happy_model->where(array('deleted' => 0))->order_by(array("order" => "ASC", "date" => "DESC"))->with_hinhanh()->as_array()->get_all();
         echo $this->blade->view()->make('widget/testimonials', $this->data)->render();
     }
 

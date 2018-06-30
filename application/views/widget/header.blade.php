@@ -15,18 +15,18 @@
                         <?= $userdata['identity'] ?>
                     </span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="font-size: 0.9rem;">
-                    <a class="dropdown-item" href="<?= base_url() ?>admin">{{lang("info")}}</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item logout" href="<?= base_url() ?>index/logout">{{lang("logout")}}</a>
-                </div>
             <?php else: ?>
-                <a class="button_login" data-target="#login-modal" data-toggle="modal" href="#">
+                <a class="button_login" data-target="#login-modal" data-toggle="modal" id="navbarDropdownMenuLink" href="#" aria-haspopup="true" aria-expanded="false">
                     <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
                         <?= lang('login_heading') ?>
                     </span>
                 </a>
             <?php endif; ?>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="font-size: 0.9rem;">
+                <a class="dropdown-item" href="<?= base_url() ?>admin">{{lang("info")}}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item logout" href="<?= base_url() ?>index/logout">{{lang("logout")}}</a>
+            </div>
             <div id="language" class="d-inline-block">
                 <?php foreach ($language_list as $key => $lang): ?>
                     <a href="#" data='<?= $key ?>'>

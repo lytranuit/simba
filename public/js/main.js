@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
             $(input).parents('.form-group').removeClass('error');
         },
         errorPlacement: function (error, element) {
-            $(element).parents('.form-group').append(error);
+//            $(element).parents('.form-group').append(error);
         },
         submitHandler: function (form) {
             $.ajax({
@@ -106,7 +106,7 @@ jQuery(document).ready(function ($) {
         var $button_login = $(".button_login").clone().wrap("<li></li>").parent();
         var $logout = "";
         if ($(".logged").length) {
-            $(".button_login",$button_login).removeAttr("data-toggle");
+            $(".button_login", $button_login).removeAttr("data-toggle");
             $logout = $(".logout").clone().wrap("<li></li>").parent();
         }
         var $language = $("#language").clone().wrap("<li></li>").parent();
@@ -274,6 +274,7 @@ jQuery(document).ready(function ($) {
     });
     $("#button_login").click(function (e) {
         e.preventDefault();
+        var callback = $(this).data('callback');
         $.ajax({
             dataType: "JSON",
             type: "POST",
@@ -283,11 +284,18 @@ jQuery(document).ready(function ($) {
                 if (data.success == 0) {
                     alert(data.msg);
                 } else {
-                    var role = data.role;
-                    if (role == "1") {
-                        location.href = path + "admin";
+                    var username = data.username;
+                    var $button_login = $(".button_login");
+                    $button_login.addClass("logged").removeAttr("data-target").attr("data-toggle", "dropdown").attr("id", "navbarDropdownMenuLink");
+                    $("span", $button_login).text(username);
+                    $('.modal').modal('hide');
+                    if (typeof callback === "function") {
+                        callback();
                     } else {
-                        location.reload();
+                        var role = data.role;
+                        if (role == "1") {
+                            location.href = path + "admin";
+                        }
                     }
                 }
             }

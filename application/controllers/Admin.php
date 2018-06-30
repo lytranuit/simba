@@ -20,6 +20,7 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/morrisjs/morris.css ",
             base_url() . "public/admin/plugins/sweetalert/sweetalert.css",
             base_url() . "public/admin/css/style.css ",
+            base_url() . "public/admin/plugins/chosen/chosen.min.css",
             base_url() . "public/admin/css/themes/all-themes.css"
         );
         $this->data['javascript_tag'] = array(
@@ -33,6 +34,7 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/morrisjs/morris.js",
             base_url() . "public/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
             base_url() . "public/admin/plugins/sweetalert/sweetalert.min.js",
+            base_url() . "public/admin/plugins/chosen/chosen.jquery.min.js",
             base_url() . "public/admin/js/admin.js"
         );
     }
@@ -74,22 +76,21 @@ class Admin extends MY_Controller {
             return false;
         }
         /* Tin đăng check */
-        $fun_tin = array(
-            "edittin",
-            "activate_tin",
-            "deactivate_tin",
-            "remove_tin",
-        );
-        if (in_array($method, $fun_tin)) {
-            $id = $params[
-                    0];
-            $id_user = $this->session->userdata('user_id');
-            $this->load->model("tin_model");
-            $tin = $this->tin_model->where(array('deleted' => 0, 'id_user' => $id_user, 'id_tin' => $id))->as_array()->get_all();
-            if (!count($tin)) {
-                return false;
-            }
-        }
+//        $fun_tin = array(
+//            "edittin",
+//            "activate_tin",
+//            "deactivate_tin",
+//            "remove_tin",
+//        );
+//        if (in_array($method, $fun_tin)) {
+//            $id = $params[0];
+//            $id_user = $this->session->userdata('user_id');
+//            $this->load->model("tin_model");
+//            $tin = $this->tin_model->where(array('deleted' => 0, 'id_user' => $id_user, 'id_tin' => $id))->as_array()->get_all();
+//            if (!count($tin)) {
+//                return false;
+//            }
+//        }
         return true;
     }
 
@@ -600,6 +601,69 @@ class Admin extends MY_Controller {
         $this->load->model("client_model");
         $id = $params[0];
         $this->client_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    /*
+     * Happy Client
+     */
+
+    public function quanlyhappy() {
+        $this->data['menu_active'] = "happy";
+        $this->load->model("happy_model");
+        $this->data['arr_tin'] = $this->happy_model->where(array('deleted' => 0))->with_hinhanh()->order_by(array('order' => "ASC", 'date' => "DESC"))->as_object()->get_all();
+//        print_r($this->data['arr_tin']);
+//        die();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themhappy() { ////////// Trang dang tin
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("happy_model");
+            $data['date'] = time();
+            $data_up = $this->happy_model->create_object($data);
+            $this->happy_model->insert($data_up);
+            redirect('admin/quanlyhappy', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "happy";
+            load_inputfile($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function edithappy($param) {
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $data = $_POST;
+            $this->load->model("happy_model");
+            $data_up = $this->happy_model->create_object($data);
+            $this->happy_model->update($data_up, $id);
+            redirect('admin/quanlyhappy', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->data['menu_active'] = "happy";
+            $this->load->model("happy_model");
+            $tin = $this->happy_model->where(array('id' => $id))->with_hinhanh()->as_object()->get();
+            $this->data['tin'] = $tin;
+            load_inputfile($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function updatehappy($params) {
+        $this->load->model("happy_model");
+        $id = $params[0];
+        $this->happy_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    function removehappy($params) {
+        $this->load->model("happy_model");
+        $id = $params[0];
+        $this->happy_model->update(array("deleted" => 1), $id);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }

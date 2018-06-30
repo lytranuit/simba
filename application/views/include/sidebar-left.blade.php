@@ -86,6 +86,11 @@
                                     <span>Đối tác</span>
                                 </a>
                             </li>
+                            <li data='happy'>
+                                <a href="<?= base_url() ?>admin/quanlyhappy">
+                                    <span>Đánh giá của KH</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li data='menu'>
@@ -109,7 +114,7 @@
                     <li data='product'>
                         <a href="<?= base_url() ?>admin/quanlyproduct">
                             <i class="material-icons">list</i>
-                            <span>Công bố chất lượng sản phẩm</span>
+                            <span>CBCL Sản phẩm</span>
                         </a>
                     </li>
                     <li data='type'>

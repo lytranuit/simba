@@ -11,7 +11,7 @@ class Ajax extends MY_Controller {
             $this->load->model("user_model");
             // check to see if the user is logging in
             if ($this->user_model->login($this->input->post('identity'), $this->input->post('password'))) {
-                echo json_encode(array('success' => 1, "role" => $this->session->userdata('role')));
+                echo json_encode(array('success' => 1, 'username' => $this->session->userdata('identity'), "role" => $this->session->userdata('role')));
             } else {
                 echo json_encode(array('success' => 0, 'msg' => "Tài khoản hoặc mật khẩu không đúng"));
             }

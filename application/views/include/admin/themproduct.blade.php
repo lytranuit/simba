@@ -18,9 +18,9 @@
                         </div>
                         <div class="col-md-4">
                             <b class="form-label">Product (*):</b>
-                            <select class="form-control" name="id_product">
+                            <select class="form-control" name="id_product" id="id_product">
                                 @foreach($arr_category as $row)
-                                <option value="{{$row->id}}">{{$row->name_vi}}</option>
+                                <option value="{{$row->id}}">{{$row->code . ' - ' .$row->name_vi}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -103,6 +103,8 @@
 
 <script type='text/javascript'>
     $(document).ready(function () {
+
+        $("#id_product").chosen();
         $("#kv-explorer").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'admin/uploadhinhanh',

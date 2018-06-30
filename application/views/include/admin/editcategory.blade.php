@@ -23,7 +23,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                         </div>
                         <div class="col-md-4">
                             <b class="form-label">Category (*):</b>
-                            <select class="form-control" name="id_category">
+                            <select class="form-control" name="id_category" id="id_category">
                                 @foreach($arr_category as $row)
                                 <option value="{{$row->id}}">{{$row->name_vi}}</option>
                                 @endforeach
@@ -105,6 +105,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
     $(document).ready(function () {
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
+        $("#id_category").chosen();
         $("#kv-explorer").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'admin/uploadhinhanh',
