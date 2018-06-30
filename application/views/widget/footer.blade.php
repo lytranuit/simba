@@ -8,14 +8,14 @@ Footer
             <div class="row">
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>
-                        <?= lang('USEFUL_LINKS') ?>
+                        <?= lang('Links') ?>
                     </h4>
                     <ul>
                         <li>
                             <i class="ion-ios-arrow-right">
                             </i>
                             <a href="{{base_url()}}">
-                                Trang chủ
+                                <?= lang('Home') ?>
                             </a>
                         </li>
                         @foreach($lienket as $row)
@@ -32,7 +32,7 @@ Footer
                 </div>
                 <div class="col-lg-3 col-md-6 footer-contact">
                     <h4>
-                        <?= lang('CONTACT_US') ?>
+                        <?= lang('Contact') ?>
                     </h4>
                     <p>
                         <i class="ion-ios-location-outline">
@@ -73,7 +73,7 @@ Footer
                 </div>
                 <div class="col-lg-6 col-md-12 footer-newsletter" id="contact">
                     <h4>
-                        <?= lang('OUR_NEWSLETTER') ?>
+                        <?= lang('Comment') ?>
                     </h4>
                     <div class="form">
                         <div id="errormessage">

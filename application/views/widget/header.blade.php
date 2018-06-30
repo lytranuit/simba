@@ -18,7 +18,7 @@
             <?php else: ?>
                 <a class="button_login" data-target="#login-modal" data-toggle="modal" id="navbarDropdownMenuLink" href="<?= base_url() ?>admin" aria-haspopup="true" aria-expanded="false">
                     <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
-                        <?= lang('login_heading') ?>
+                        <?= lang('login') ?>
                     </span>
                 </a>
             <?php endif; ?>
@@ -76,7 +76,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="login-modalLabel">
-                    Login
+                    {{lang('login')}}
                 </h5>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                     <span aria-hidden="true">
@@ -87,18 +87,18 @@
             <div class="modal-body">
                 <form id="form-login">
                     <div class="form-group">
-                        <input class="form-control" id="email_modal" placeholder="username" type="text" name="identity">
+                        <input class="form-control" id="email_modal" placeholder="{{lang("login_identity_label")}}" type="text" name="identity">
                         </input>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" id="password_modal" placeholder="password" type="password" name="password">
+                        <input class="form-control" id="password_modal" placeholder="{{lang("login_password_label")}}" type="password" name="password">
                         </input>
                     </div>
                     <p class="text-center">
                         <button class="btn btn-template-outlined" id="button_login">
                             <i class="fa fa-sign-in">
                             </i>
-                            Log in
+                            {{lang('login')}}
                         </button>
                     </p>
                 </form>
@@ -108,7 +108,7 @@
 
                         </strong>
                     </a>
-                    Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Oishii.vn
+                    {{lang('help_login')}}
                 </p>
             </div>
         </div>

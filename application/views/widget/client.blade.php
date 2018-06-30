@@ -5,7 +5,7 @@
     <div class="container">
         <header class="section-header">
             <h3>
-                Đối tác
+                {{lang("Clients")}}
             </h3>
         </header>
         <div class="owl-carousel clients-carousel">

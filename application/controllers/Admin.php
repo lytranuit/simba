@@ -136,41 +136,6 @@ class Admin extends MY_Controller {
         }
     }
 
-    /*
-     * QUản lý User
-     */
-
-    public function quanlyuser() {
-        $this->load->model("user_model");
-        $this->load->model("group_model");
-        $this->data['arr_groups'] = $this->group_model->where(array('deleted' => 0))->fields(array("id as value", "name as text"))->as_array()->get_all();
-        $this->data['arr_users'] = $this->user_model->where(array('deleted' => 0))->as_object()->get_all();
-        foreach ($this->data['arr_users'] as $k => &$user) {
-            $group = $this->ion_auth->get_users_groups($user->id)->result();
-            $arr = array();
-            foreach ($group as $row) {
-                array_push($arr, $row->id);
-            }
-            $user->groups = implode(",", $arr);
-        }
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/dataTables.bootstrap.min.css");
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/bootstrap-editable.css");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/bootstrap-editable.min.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/jquery.dataTables.min.js");
-        array_push($this->data['javascript_tag'], base_url() . "public/js/dataTables.bootstrap.min.js");
-        echo $this->blade->view()->make('page/page', $this->data)->render();
-    }
-
-    function change_group($params) {
-        $id_user = $params[0];
-        $arr_group = $this->input->post("value");
-        ////remove group cu
-        $this->ion_auth->remove_from_group('', $id_user);
-        foreach ($arr_group as $grp) {
-            $this->ion_auth->add_to_group($grp, $id_user);
-        }
-    }
-
     function changepass() {
         $id_user = $this->session->userdata('user_id');
         $this->load->model("user_model");
@@ -189,40 +154,6 @@ class Admin extends MY_Controller {
         $this->user_model->update($additional_data, $id_user);
         echo json_encode(array('code' => 400, "msg" => "Thay đổi mật khẩu thành công."));
         die();
-    }
-
-//remove a user
-    function remove_user($params) {
-        $id = $params[0];
-        $this->load->model("user_model");
-        $this->user_model->update(array("deleted" => 1), $id);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
-    }
-
-// activate the user
-    function activate($params) {
-        $id = $params[0];
-        $code = isset($params[1]) ? $params[1] : false;
-        if ($code !== false) {
-            $activation = $this->ion_auth->activate($id, $code);
-        } else if ($this->ion_auth->is_admin()) {
-            $activation = $this->ion_auth->activate($id);
-        }
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
-    }
-
-// deactivate the user
-    function deactivate($params) {
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            // redirect them to the home page because they must be an administrator to view this
-            return show_error('You must be an administrator to view this page.');
-        }
-        $id = (int) $params[0];
-        $this->ion_auth->deactivate($id);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
     }
 
     /*

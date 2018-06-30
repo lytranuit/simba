@@ -2,7 +2,7 @@
     <div class="container" id="tintuc">
         <header class="section-header">
             <h3>
-                Công bố thông tin
+                {{lang('News')}}
             </h3>
         </header>
         <div class='row justify-content-center'>
@@ -25,7 +25,7 @@
     <div class="container mt-5" id="product">
         <header class="section-header">
             <h3>
-                Công bố chất lượng sản phẩm
+                {{lang('News_product')}}
             </h3>
         </header>
         <div class='row justify-content-center'>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="row data">
-           
+
         </div>
     </div>
 </section>

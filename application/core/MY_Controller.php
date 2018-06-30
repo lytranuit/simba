@@ -14,7 +14,7 @@ class MY_Controller extends CI_Controller {
 //        echo language_current();
         ////// set langue
         $this->config->set_item('language', language_current());
-        $this->lang->load(array('auth', 'home'));
+        $this->lang->load(array('home'));
         ////
         $this->data['widget'] = $this->widget;
         $this->data['project_name'] = $this->config->item("project_name");

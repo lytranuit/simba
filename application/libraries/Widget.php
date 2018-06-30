@@ -9,7 +9,7 @@ class Widget {
 
     function __construct() {
         $this->CI = &get_instance();
-        $this->CI->lang->load(array('auth', 'home'));
+        $this->CI->lang->load(array('home'));
         $this->CI->load->model("user_model");
         $this->data['is_login'] = $this->CI->user_model->logged_in();
         $this->data['userdata'] = $this->CI->session->userdata();
@@ -70,24 +70,8 @@ class Widget {
         echo $this->blade->view()->make('widget/about1', $this->data)->render();
     }
 
-    function about2() {
-        echo $this->blade->view()->make('widget/about2', $this->data)->render();
-    }
-
-    function service() {
-        echo $this->blade->view()->make('widget/service', $this->data)->render();
-    }
-
-    function service1() {
-        echo $this->blade->view()->make('widget/service1', $this->data)->render();
-    }
-
-    function call() {
-        echo $this->blade->view()->make('widget/call', $this->data)->render();
-    }
-
-    function fact() {
-        echo $this->blade->view()->make('widget/fact', $this->data)->render();
+    function news() {
+        echo $this->blade->view()->make('widget/news', $this->data)->render();
     }
 
     function category() {
@@ -97,10 +81,6 @@ class Widget {
 //        print_r($this->data['data']);
 //        die();
         echo $this->blade->view()->make('widget/category', $this->data)->render();
-    }
-
-    function category1() {
-        echo $this->blade->view()->make('widget/category1', $this->data)->render();
     }
 
     function client() {
@@ -113,10 +93,6 @@ class Widget {
         $this->CI->load->model("happy_model");
         $this->data['data'] = $this->CI->happy_model->where(array('deleted' => 0))->order_by(array("order" => "ASC", "date" => "DESC"))->with_hinhanh()->as_array()->get_all();
         echo $this->blade->view()->make('widget/testimonials', $this->data)->render();
-    }
-
-    function team() {
-        echo $this->blade->view()->make('widget/team', $this->data)->render();
     }
 
 }
