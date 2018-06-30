@@ -1,3 +1,4 @@
+@if(count($data))
 <!--==========================
     Clients Section
     ============================-->
@@ -29,3 +30,4 @@
     </div>
 </section>
 <!-- #testimonials -->
+@endif

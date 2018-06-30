@@ -9,11 +9,24 @@
                 <h2>{{$tin['title_vi']}}</h2>
             </div>
             <div class="body">
-                <div class="row">
-                    <div class="fr-view">
-                        <?= $tin['content_vi'] ?>
-                    </div>
+                <div class="fr-view">
+                    <?= $tin['content_vi'] ?>
                 </div>
+                @if(count($tin['files']))
+                <p>
+                    <b>File đính kèm:</b>
+                <p>
+                <div>
+                    @foreach($tin['files'] as $row)
+                    <a href="{{base_url(). 'ajax/downloadfile?id='.$row->id_hinhanh}}" class="files d-block mt-1">
+                        <i class="file-icon" data-type="<?= pathinfo($row->real_hinhanh, PATHINFO_EXTENSION); ?>"></i>
+                        {{$row->real_hinhanh}}
+                    </a>
+                    <br>
+                    <br>
+                    @endforeach
+                </div>
+                @endif
             </div>
         </div>
     </div>

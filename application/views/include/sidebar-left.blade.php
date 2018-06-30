@@ -52,12 +52,14 @@
                         <span>Cá nhân</span>
                     </a>
                 </li>
+                @if($userdata['role'] < 3)
                 <li data="noibo">
                     <a href="<?= base_url() ?>admin/quanlynoibo">
                         <i class="material-icons">view_list</i>
                         <span>Thông tin nội bộ</span>
                     </a>
                 </li>
+                @endif
                 <?php if ($userdata['role'] == 1): ?>
                     <li class="header">Quản trị</li>
                     <li>

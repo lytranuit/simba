@@ -720,7 +720,10 @@ class Admin extends MY_Controller {
         $this->load->model("tintuc_model");
         $tin = $this->tintuc_model->where(array('id' => $id))->with_hinhanh()->with_files()->as_array()->get();
         $this->data['tin'] = $tin;
-
+//        echo "<pre>";
+//        print_r($tin);
+//        die();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/fileicon.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/froala_editor/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
