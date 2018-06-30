@@ -4,13 +4,13 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
 
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
-    <li class="active"><a href="javascript:void(0);">Sửa Tin Tức</a></li>
+    <li class="active"><a href="javascript:void(0);">Sửa tin tức</a></li>
 </ol>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Sửa Tin Tức</h2>
+                <h2>Sửa tin tức</h2>
             </div>
             <div class="body">
                 <div class="row">

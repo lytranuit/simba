@@ -236,7 +236,6 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     top: 0;
     right: 0;
-    transition: all 0.5s;
     z-index: 997;
 }
 
@@ -245,7 +244,6 @@ h1, h2, h3, h4, h5, h6 {
     position: fixed;
     padding: 10px 0;
     height: 62px;
-    transition: all 0.5s;
     box-shadow: 0 4px 5px 0 rgba(180,187,193,0.25);
 }
 #header.header-scrolled .nav-menu a{
@@ -456,6 +454,13 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
+#menu.header-scrolled{
+    position: fixed;
+    top: 60px;
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+}
 /* Nav Menu Essentials */
 .nav-menu, .nav-menu * {
     margin: 0;

@@ -34,11 +34,11 @@
                             <td>{{$tin->title_jp}}</td>   
                             <td>
                                 <!--<a target="blank" href="{{base_url() . $tin->alias}}"><i class="icon-eye-open"></i></a>-->
-                                <a href="{{base_url()}}admin/editpage/{{$tin->id}}" class="text-info">
+                                <a href="{{base_url()}}admin/editpage/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/removepage/{{$tin->id}}" class="text-danger" data-type='confirm'>
+                                <a href="{{base_url()}}admin/removepage/{{$tin->id}}" class="btn btn-default" title="remove" data-type='confirm'>
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

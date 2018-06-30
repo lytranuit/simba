@@ -36,7 +36,7 @@ class Tintuc_model extends MY_Model {
 
     function create_object($data) {
         $array = array(
-            'title_vi', 'content_vi', 'title_en', 'content_en', 'title_jp', 'content_jp', 'type', 'id_hinhanh', 'id_user', 'active'
+            'title_vi', 'content_vi', 'title_en', 'content_en', 'title_jp', 'content_jp', 'type', 'id_hinhanh', 'id_user', 'date', 'active'
         );
         $obj = array();
         foreach ($array as $key) {

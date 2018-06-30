@@ -35,12 +35,12 @@
                             <td>{{$tin->name_jp}}</td>   
                             <td><span style="background: {{$tin->color}};width: 30px;height: 30px;display: inline-block;"></span></td>   
                             <td>
-                                <a href="{{base_url()}}admin/edittype/{{$tin->id}}" class="text-info">
+                                <a href="{{base_url()}}admin/edittype/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
                                 @if($tin->id != 4)
-                                <a href="{{base_url()}}admin/removetype/{{$tin->id}}" class="text-danger" data-type='confirm'>
+                                <a href="{{base_url()}}admin/removetype/{{$tin->id}}" class="btn btn-default" title="delete" data-type='confirm'>
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

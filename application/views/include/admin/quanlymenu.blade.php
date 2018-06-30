@@ -33,7 +33,7 @@
                             <td>{{$tin->text_en}}</td>
                             <td>{{$tin->text_jp}}</td>
                             <td>
-                                <a href="{{base_url()}}admin/editmenu/{{$tin->id}}" class="text-info">
+                                <a href="{{base_url()}}admin/editmenu/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>

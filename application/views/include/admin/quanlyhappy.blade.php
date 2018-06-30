@@ -1,13 +1,13 @@
 
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
-    <li class="active"><a href="javascript:void(0);">Đánh giá của KH</a></li>
+    <li class="active"><a href="javascript:void(0);">Thông tin Đối tác</a></li>
 </ol>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Đánh giá của KH</h2>
+                <h2>Thông tin Đối tác</h2>
             </div>
             <div class="body">
                 <div class="row">
@@ -33,15 +33,15 @@
                             <td>{{$tin->name}}</td>
                             <td>{{$tin->comment}}</td>
                             <td>
-                                <a href="{{base_url()}}admin/updatehappy/{{$tin->id}}" class="text-warning" title="update">
+                                <a href="{{base_url()}}admin/updatehappy/{{$tin->id}}" class="btn btn-default" title="update">
                                     <i class="fa fa-star">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/edithappy/{{$tin->id}}" class="text-info" title="edit">
+                                <a href="{{base_url()}}admin/edithappy/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/removehappy/{{$tin->id}}" class="text-danger" data-type='confirm' title="remove">
+                                <a href="{{base_url()}}admin/removehappy/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

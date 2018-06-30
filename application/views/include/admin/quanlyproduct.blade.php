@@ -1,18 +1,18 @@
 
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
-    <li class="active"><a href="javascript:void(0);">Công bố chất lượng</a></li>
+    <li class="active"><a href="javascript:void(0);">CBCL Sản phẩm</a></li>
 </ol>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Công bố chất lượng</h2>
+                <h2>CBCL Sản phẩm</h2>
             </div>
             <div class="body">
                 <div class="row">
                     <div class="col-md-12" style="margin:20px 0px;">
-                        <a class="btn btn-success" href="{{base_url()}}admin/themproduct">Thêm sản phẩm</a>
+                        <a class="btn btn-success" href="{{base_url()}}admin/themproduct">Thêm CBCL Sản phẩm</a>
                     </div>
                 </div>
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
@@ -31,15 +31,15 @@
                             <td><img src='{{base_url()}}{{$tin->hinhanh->thumb_src or 'public/img/preview.png'}}' width="50"/></td>
                             <td>{{$tin->name_vi}}</td>
                             <td>
-                                <a href="{{base_url()}}admin/updateproduct/{{$tin->id}}" class="text-warning" title="update">
+                                <a href="{{base_url()}}admin/updateproduct/{{$tin->id}}" class="btn btn-default" title="update">
                                     <i class="fa fa-star">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/editproduct/{{$tin->id}}" class="text-info" title="edit">
+                                <a href="{{base_url()}}admin/editproduct/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/removeproduct/{{$tin->id}}" class="text-danger" data-type='confirm' title="remove">
+                                <a href="{{base_url()}}admin/removeproduct/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

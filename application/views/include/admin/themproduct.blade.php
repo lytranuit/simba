@@ -1,12 +1,12 @@
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
-    <li class="active"><a href="javascript:void(0);">Thêm sản phẩm</a></li>
+    <li class="active"><a href="javascript:void(0);">Thêm CBCL Sản phẩm</a></li>
 </ol>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Thêm chất lượng sản phẩm</h2>
+                <h2>Thêm CBCL Sản phẩm</h2>
             </div>
             <div class="body">
                 <div class="row">

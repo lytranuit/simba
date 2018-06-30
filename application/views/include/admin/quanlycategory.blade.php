@@ -31,15 +31,15 @@
                             <td><img src='{{base_url()}}{{$tin->hinhanh->thumb_src or 'public/img/preview.png'}}' width="50"/></td>
                             <td>{{$tin->name_vi}}</td>
                             <td>
-                                <a href="{{base_url()}}admin/updatecategory/{{$tin->id}}" class="text-warning" title="update">
+                                <a href="{{base_url()}}admin/updatecategory/{{$tin->id}}" class="btn btn-default" title="update">
                                     <i class="fa fa-star">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/editcategory/{{$tin->id}}" class="text-info" title="edit">
+                                <a href="{{base_url()}}admin/editcategory/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                <a href="{{base_url()}}admin/removecategory/{{$tin->id}}" class="text-danger" data-type='confirm' title="remove">
+                                <a href="{{base_url()}}admin/removecategory/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>
