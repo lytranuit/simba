@@ -193,7 +193,7 @@
         $(".kv-explorer").parents(".file-input").hide();
 
         $('.froala-editor').froalaEditor({
-            toolbarInline: true,
+            initOnClick: true,
             charCounterCount: false,
 //            toolbarVisibleWithoutSelection: true,
             imageUploadURL: '<?= base_url() ?>admin/uploadimage',
@@ -204,7 +204,7 @@
             // Allow to upload PNG and JPG.
             imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
             htmlRemoveTags: [],
-            toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
+//            toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
         });
         /*
          * EVENT
@@ -259,7 +259,7 @@
             });
             $("#kv-" + id, parents).parents(".file-input").hide();
             $('#fr-' + id, parents).froalaEditor({
-                toolbarInline: true,
+                initOnClick: true,
                 charCounterCount: false,
 //            toolbarVisibleWithoutSelection: true,
                 imageUploadURL: '<?= base_url() ?>admin/uploadimage',
