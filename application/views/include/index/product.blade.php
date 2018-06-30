@@ -38,17 +38,19 @@
                                         <label class="col-md-4">Mô tả:</label>
                                         <span>{{$tin['product'][pick_language($tin['product'],'description_')]}}</span>
                                     </li>
+                                    @if(count($tin['files']))
                                     <li>
                                         <label class="col-md-4">File CBCL Sản phẩm:</label>
                                         <div>
                                             @foreach($tin['files'] as $row)
-                                            <a href="#" class="need_login d-block">
+                                            <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}'>
                                                 <i class="file-icon" data-type="<?= pathinfo($row['real_hinhanh'], PATHINFO_EXTENSION); ?>"></i>
                                                 {{$row['real_hinhanh']}}
                                             </a>
                                             @endforeach
                                         </div>
                                     </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

@@ -103,11 +103,11 @@ jQuery(document).ready(function ($) {
         var $hr = $("<li class='dropdown-divider'></li>");
         var $web_oishii = $("#oishii-web").clone().removeClass().wrap("<li></li>").parent();
         var $app_simba = $("#simba-app").clone().removeClass().wrap("<li></li>").parent();
-        var $button_login = $(".button_login").clone().wrap("<li></li>").parent();
+        var $button_login = $(".button_login").first().clone().wrap("<li></li>").parent();
         var $logout = "";
         if ($(".logged").length) {
             $(".button_login", $button_login).removeAttr("data-toggle");
-            $logout = $(".logout").clone().wrap("<li></li>").parent();
+            $logout = $(".logout").first().clone().wrap("<li></li>").parent();
         }
         var $language = $("#language").clone().wrap("<li></li>").parent();
         $("ul", $mobile_nav).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($logout).append($language);
@@ -274,7 +274,8 @@ jQuery(document).ready(function ($) {
     });
     $("#button_login").click(function (e) {
         e.preventDefault();
-        var callback = $(this).data('callback');
+        var callback = $(document).data('callback');
+        var param = $(document).data("param");
         $.ajax({
             dataType: "JSON",
             type: "POST",
@@ -287,10 +288,13 @@ jQuery(document).ready(function ($) {
                     var username = data.username;
                     var $button_login = $(".button_login");
                     $button_login.addClass("logged").removeAttr("data-target").attr("data-toggle", "dropdown").attr("id", "navbarDropdownMenuLink");
+                    $("#mobile-nav .button_login").removeAttr("data-toggle");
+                    $logout = $(".logout").first().clone().wrap("<li></li>").parent();
+                    $("#mobile-nav .button_login").parent().after($logout);
                     $("span", $button_login).text(username);
                     $('.modal').modal('hide');
                     if (typeof callback === "function") {
-                        callback();
+                        callback(param);
                     } else {
                         var role = data.role;
                         if (role == "1") {
@@ -302,6 +306,28 @@ jQuery(document).ready(function ($) {
         });
         return false;
     });
+    $("#advanced_comment").click(function (e) {
+        e.preventDefault();
+        if ($(".logged").length) {
+
+        } else {
+            $(document).data("callback", click_gopy);
+            $(".button_login").trigger("click");
+            return false;
+        }
+    });
+    $(".files").click(function (e) {
+        e.preventDefault();
+        var id = $(this).attr("data");
+        if ($(".logged").length) {
+            download_file(id);
+        } else {
+            $(document).data("param", id);
+            $(document).data("callback", download_file);
+            $(".button_login").trigger("click");
+            return false;
+        }
+    })
     $("#tintuc").on("click", "a.page-link", function (e) {
         e.preventDefault();
         var page = $(this).text();
@@ -356,4 +382,11 @@ function load_page_product(page = 1) {
             $("#product .data").html(data);
         }
     });
+}
+function click_gopy(...param) {
+    $("#advanced_comment").trigger("click");
+}
+function download_file(...param) {
+    var id = param[0];
+    location.href = path + "ajax/downloadfile?id=" + id
 }

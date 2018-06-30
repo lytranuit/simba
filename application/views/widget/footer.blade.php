@@ -102,11 +102,11 @@ Footer
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-2">
                                     <button id="send_message"class="btn btn-success btn-sm" name="submit" type="submit">
                                         <?= lang('Send_Message') ?>
                                     </button>
-                                    <a class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal">
+                                    <a id="advanced_comment" class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal">
                                         <?= lang('text_gop_y') ?>
                                     </a>
                                 </div>

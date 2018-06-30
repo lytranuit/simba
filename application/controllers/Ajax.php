@@ -20,21 +20,6 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function loadslider() {
-        $this->data['id'] = "new" . rand();
-        echo $this->blade->view()->make('ajax/ajaxslider', $this->data)->render();
-    }
-
-    function loadtienich() {
-        $this->data['id'] = "new" . rand();
-        echo $this->blade->view()->make('ajax/ajaxtienich', $this->data)->render();
-    }
-
-    function loadlydo() {
-        $this->data['id'] = "new" . rand();
-        echo $this->blade->view()->make('ajax/ajaxlydo', $this->data)->render();
-    }
-
     function news() {
         $this->load->model("tintuc_model");
         $search = $this->input->get("search");
@@ -187,135 +172,6 @@ class Ajax extends MY_Controller {
         echo $this->blade->view()->make('ajax/ajaxpage', $this->data)->render();
     }
 
-    function get_quan_huyen() {
-        if (isset($_GET['parent']))
-            $parent = $_GET['parent'];
-        else
-            $parent = 0;
-        $this->load->model("khuvuc_model");
-        $quan = $this->khuvuc_model->where(array('parent' => $parent, 'deleted' => 0))->order_by("order")->as_array()->get_all();
-        echo '<option value="' . $parent . '">--- Chọn Quận/Huyện ---</option>';
-        foreach ($quan as $cate) {
-            echo '<option value="' . $cate['id_khuvuc'] . '">' . $cate['ten_khuvuc'] . '</option>';
-        }
-    }
-
-    function get_tin() {
-        $page = $this->input->get('page');
-        $this->load->model("tin_model");
-        $this->load->model("user_model");
-        $this->load->model("khuvuc_model");
-        $this->load->model("hinhanh_model");
-        $per_page = 10;
-        $total_posts = $this->tin_model->where(array('deleted' => 0, 'active' => 1))->count_rows();
-        $this->data['count_page'] = round($total_posts / $per_page);
-        $this->data['arr_tin'] = $this->tin_model->where(array('deleted' => 0, 'active' => 1))->order_by("id_tin", "DESC")->as_array()->paginate($per_page, $total_posts, $page);
-        foreach ($this->data['arr_tin'] as &$row) {
-            $arr_hinhanh = $this->tin_model->get_tin_hinhanh($row['id_tin']);
-            if (count($arr_hinhanh)) {
-                $hinhanh = $arr_hinhanh;
-            } else {
-                $hinhanh = $this->hinhanh_model->where(array("default" => 1, 'deleted' => 0))->as_array()->get_all();
-            }
-            $author = $this->user_model->where(array('id' => $row['id_user']))->as_array()->get_all();
-            $khuvuc = $this->khuvuc_model->where(array('id_khuvuc' => $row['id_khuvuc']))->as_array()->get_all();
-            $row['hinhanh'] = $hinhanh[0]['thumb_src'];
-            $row['arr_hinhanh'] = $hinhanh;
-            $row['author'] = $author[0]['username'];
-            $row['khuvuc'] = $khuvuc[0]['ten_khuvuc'];
-            if ($row['gia'] != 0) {
-                if ($row['gia'] < 1000) {
-                    $row['gia'] = $row['gia'] . " triệu";
-                } else {
-                    if ($row['gia'] % 1000) {
-                        $row['gia'] = number_format($row['gia'] / 1000, 2, ',', ".") . " tỷ";
-                    } else {
-                        $row['gia'] = number_format($row['gia'] / 1000) . " tỷ";
-                    }
-                }
-            } else {
-                $row['gia'] = "Thương lượng";
-            }
-        }
-        echo $this->blade->view()->make('ajax/ajaxtin', $this->data)->render();
-    }
-
-    function insertchat() {
-        $text = $this->input->post('text');
-        $id_room = $this->input->post('room');
-        $id_customer = $this->input->post('id_customer');
-        $this->load->model("chat_model");
-        $this->load->model("room_model");
-        $array = array(
-            'room' => $id_room,
-            'id_customer' => $id_customer,
-            'note_content' => htmlentities($text),
-        );
-        $this->chat_model->insert($array);
-        /*
-         * Log file
-         */
-        $dir = FCPATH . "public/log/";
-        $filename = $dir . 0 . ".txt";
-        file_put_contents($filename, "Create log \r\n");
-    }
-
-    function realtime() {
-        if (isset($_GET['time'])) {
-            $this->load->model("chat_model");
-            $this->load->model("room_model");
-            set_time_limit(0);
-            session_write_close(); ///////////// bo qua session
-            $dir = FCPATH . "public/log/";
-            $ip_address = $this->input->ip_address();
-            $room = $this->room_model->where(array('ip_address' => $ip_address))->as_array()->get();
-            if ($room) {
-                $id_room = $room['id'];
-            } else {
-                $array = array(
-                    'ip_address' => $ip_address,
-                );
-                $id_room = $this->room_model->insert($array);
-            }
-            $filename = $dir . $id_room . ".txt";
-            if (file_exists($filename)) {
-                
-            } else {
-                file_put_contents($filename, "Create log \r\n");
-            }
-            $filename_admin = $dir . 0 . ".txt";
-            if (file_exists($filename_admin)) {
-                
-            } else {
-                file_put_contents($filename_admin, "Create log \r\n");
-            }
-            $currentfile = filemtime($filename);
-            $currentfile_admin = filemtime($filename_admin);
-            $lastmofi = $_GET['time'];
-            $micro_seconds = 10000;
-//            echo $currentfile;
-//            echo "<br>";
-//            echo $lastmofi;
-//            echo "<br>";
-//            echo $currentfile_admin;
-//            echo "<br>";
-//            die();
-            while ($currentfile <= $lastmofi && $currentfile_admin <= $lastmofi) {
-                usleep($micro_seconds);
-                clearstatcache();
-                $currentfile = filemtime($filename);
-                $currentfile_admin = filemtime($filename_admin);
-            }
-            /*
-             * Lay data return
-             */
-            $time = $currentfile > $currentfile_admin ? $currentfile : $currentfile_admin;
-            $date = date("Y-m-d H:i:s", $time - 2);
-            $data = $this->chat_model->newchat($id_room, $date);
-            echo json_encode(array('time' => $time, 'data' => $data));
-        }
-    }
-
     function contactsubmit() {
 
 //        if (isset($_SESSION['timer_contact']) && $_SESSION['timer_contact'] > date("Y-m-d H:i:s")) {
@@ -393,15 +249,33 @@ class Ajax extends MY_Controller {
         echo 1;
     }
 
-    function listslider() {
-        $this->load->model("slider_model");
+    function downloadfile() {
+        $this->load->model("user_model");
         $this->load->model("hinhanh_model");
-        $arr_slider = $this->slider_model->where(array('deleted' => 0))->as_array()->get_all();
-        foreach ($arr_slider as &$slider) {
-            $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
-            $slider['hinh'] = $hinh[0];
+        $is_logged_in = $this->user_model->logged_in();
+        if (!$is_logged_in) {
+            echo json_encode(array("code" => 403, "msg" => "Yêu cầu đăng nhập."));
+            die();
         }
-        echo json_encode($arr_slider);
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $file = $this->hinhanh_model->where(array("id_hinhanh" => $id))->as_array()->get();
+            if ($file) {
+                $real_name = $file['real_hinhanh'];
+                $src = FCPATH . $file['src'];
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename=" . $real_name);
+                header("Content-Transfer-Encoding: binary");
+                readfile($src);
+            } else {
+                echo json_encode(array("code" => 405, "msg" => "File không tồn tại!"));
+                die();
+            }
+        } else {
+            echo json_encode(array("code" => 404, "msg" => "Thiếu thông số."));
+            die();
+        }
     }
 
     ////////////

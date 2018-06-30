@@ -16,7 +16,7 @@
                     </span>
                 </a>
             <?php else: ?>
-                <a class="button_login" data-target="#login-modal" data-toggle="modal" id="navbarDropdownMenuLink" href="#" aria-haspopup="true" aria-expanded="false">
+                <a class="button_login" data-target="#login-modal" data-toggle="modal" id="navbarDropdownMenuLink" href="<?= base_url() ?>admin" aria-haspopup="true" aria-expanded="false">
                     <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
                         <?= lang('login_heading') ?>
                     </span>
