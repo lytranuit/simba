@@ -108,8 +108,11 @@ class Index extends MY_Controller {
     function category($param) {
         $id = $param[0];
         $this->load->model("category_model");
-        $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->as_object()->get();
+        $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->with_products()->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
+//        echo "<pre>";
+//        print_r($tin);
+//        die();
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
         array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
@@ -120,6 +123,20 @@ class Index extends MY_Controller {
         $id = $param[0];
         $this->load->model("product_model");
         $tin = $this->product_model->where(array('id' => $id))->with_hinhanh()->with_product()->with_files()->as_object()->get();
+        $tin = json_decode(json_encode($tin), true);
+        $this->data['tin'] = $tin;
+        $this->data['title'] = $tin[pick_language($tin, 'name_')];
+//        echo "<pre>";
+//        print_r($tin);
+//        die();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    function productsimba($param) {
+        $id = $param[0];
+        $this->load->model("productsimba_model");
+        $tin = $this->productsimba_model->where(array('id' => $id))->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];

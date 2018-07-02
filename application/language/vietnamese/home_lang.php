@@ -43,4 +43,8 @@ $lang['product_dungtich'] = "Dung tích/Trọng lượng";
 $lang['product_baoquan'] = "Bảo quản";
 $lang['product_mota'] = "Mô tả";
 $lang['product_file'] = "File CBCL Sản phẩm";
+/*
+ * CATEGORY
+ */
+$lang['heading_product'] = "Sản phẩm";
 ?>

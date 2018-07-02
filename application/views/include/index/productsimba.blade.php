@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-lg-6 row justify-content-center align-items-center">
                                 <div class="col-6">
-                                    <img class="img-fluid"src="{{base_url()}}{{$tin['hinhanh']['src'] or 'public/img/product/1.jpg'}}" />
+                                    <img class="img-fluid"src="http://www.oishii.vn{{$tin['image_url']}}" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -20,7 +20,7 @@
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_code')}}:</label>
-                                        <span>{{$tin['product']['code']}}</span>
+                                        <span>{{$tin['code']}}</span>
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_xuatxu')}}:</label>
@@ -28,35 +28,22 @@
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_dungtich')}}:</label>
-                                        <span>{{$tin['product']['volume']}}</span>
+                                        <span>{{$tin['volume']}}</span>
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_baoquan')}}:</label>
-                                        <span>Bảo quản nhiệt độ phòng </span>
+                                        <span>Bảo quản nhiệt độ phòng</span>
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_mota')}}:</label>
-                                        <span>{{$tin['product'][pick_language($tin['product'],'description_')]}}</span>
+                                        <span>{{$tin[pick_language($tin,'description_')]}}</span>
                                     </li>
-                                    @if(count($tin['files']))
-                                    <li>
-                                        <label class="col-md-4">{{lang('product_file')}}:</label>
-                                        <div>
-                                            @foreach($tin['files'] as $row)
-                                            <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}'>
-                                                <i class="file-icon" data-type="<?= pathinfo($row['real_hinhanh'], PATHINFO_EXTENSION); ?>"></i>
-                                                {{$row['real_hinhanh']}}
-                                            </a>
-                                            @endforeach
-                                        </div>
-                                    </li>
-                                    @endif
                                 </ul>
                             </div>
                         </div>
                         <hr>
                         <div class="fr-view">
-                            <?= $tin[pick_language($tin, 'content_')] ?>
+                            <?= $tin[pick_language($tin, 'guide_')] ?>
                         </div>
                     </div>
                 </div>
