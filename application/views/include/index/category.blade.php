@@ -13,9 +13,11 @@
                         <hr>
                     </div>
                 </div>
+
                 <div class="card card-style1 mb-3">
                     <div class="card-header">{{lang('heading_product')}}</div>
                     <div class="card-body row">
+                        @if(count($tin['products']))
                         @foreach($tin['products'] as $row)
                         <a class="col-md-3 text-center hover_product" href="<?= get_url_seo('index/productsimba', array($row['id'], sluggable($row[pick_language($row, 'name_')]))) ?>" style="color: black;">
                             <img class="img-fluid" src="http://www.oishii.vn{{$row['image_url']}}" alt="Card image cap" style="max-height: 180px;"> 
@@ -25,6 +27,7 @@
                             </div>
                         </a>
                         @endforeach
+                        @endif
                         <div class="col-12 d-none">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center" style="font-size:14px;">
