@@ -13,8 +13,6 @@ body {
     font-size: 14px;
 }
 
-
-
 h1, h2, h3, h4, h5, h6 {
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
@@ -93,6 +91,64 @@ h1, h2, h3, h4, h5, h6 {
     padding: 5px 30px;
     border-radius: 5px 5px 0px 0px;
     font-weight: bold;
+}
+/* pagination  */
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination li {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    border-radius: 0;
+}
+.pagination > li {
+    display: inline;
+}
+.pagination > li:first-child > a, .pagination > li:last-child > a {
+    width: auto;
+    height: 32px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    border-radius: 0;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    background-color: transparent;
+}
+.pagination > li > a {
+    border: none;
+    font-weight: bold;
+    color: #555;
+}
+.pagination li.active a {
+    background-color: #2196F3;
+    color: white;
+}
+.pagination li a:focus, .pagination li a:active {
+    background-color: transparent;
+    color: #555;
+}
+.pagination > .disabled > span:hover{
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+}
+.pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus {
+    z-index: 2;
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
 }
 /* FILE ICON */
 .file-icon {

@@ -329,10 +329,20 @@ jQuery(document).ready(function ($) {
             return false;
         }
     })
-    $("#tintuc").on("click", "a.page-link", function (e) {
+    $("#tintuc").on("click", ".pagination a.page_link", function (e) {
         e.preventDefault();
         var page = $(this).text();
         load_page_news(page);
+    });
+    $("#tintuc").on("click", ".pagination a.page_next", function (e) {
+        e.preventDefault();
+        var page = parseInt($("#tintuc .pagination li.active a").text());
+        load_page_news(page + 1);
+    });
+    $("#tintuc").on("click", ".pagination a.page_prev", function (e) {
+        e.preventDefault();
+        var page = parseInt($("#tintuc .pagination li.active a").text());
+        load_page_news(page - 1);
     });
     $("#tintuc .button_search").click(function () {
         load_page_news();
@@ -342,10 +352,20 @@ jQuery(document).ready(function ($) {
             load_page_news();
         }
     });
-    $("#product").on("click", "a.page-link", function (e) {
+    $("#product").on("click", ".pagination a.page_link", function (e) {
         e.preventDefault();
         var page = $(this).text();
         load_page_product(page);
+    });
+    $("#product").on("click", ".pagination a.page_next", function (e) {
+        e.preventDefault();
+        var page = parseInt($("#product .pagination li.active a").text());
+        load_page_product(page + 1);
+    });
+    $("#product").on("click", ".pagination a.page_prev", function (e) {
+        e.preventDefault();
+        var page = parseInt($("#product .pagination li.active a").text());
+        load_page_product(page - 1);
     });
     $("#product .button_search").click(function () {
         load_page_product();
