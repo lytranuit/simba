@@ -608,7 +608,7 @@ class Admin extends MY_Controller {
         $this->load->model("tintuc_model");
         $this->load->model("hinhanh_model");
         $this->load->model("typetintuc_model");
-        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0))->order_by('date', "DESC")->as_object()->get_all();
+        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0))->order_by('date', "DESC")->as_object()->get_all();
         foreach ($this->data['arr_tin'] as $k => &$tin) {
             $tin->title_vi = mb_strlen($tin->title_vi) < 50 ? $tin->title_vi : mb_substr($tin->title_vi, 0, 50) . "...";
             $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $tin->id_hinhanh))->as_object()->get_all();
@@ -707,12 +707,74 @@ class Admin extends MY_Controller {
      * Tin Tuc noi bo
      */
 
-    public function quanlynoibo() {
-        $this->data['menu_active'] = "noibo";
+    public function quanlynoibat() {
+        $this->data['menu_active'] = "noibat";
         $this->load->model("tintuc_model");
         $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 1))->order_by('date', "DESC")->with_hinhanh()->as_object()->get_all();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themnoibat() { ////////// Trang dang tin
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("tintuc_model");
+            $this->load->model("tintucfile_model");
+            $this->load->model("hinhanh_model");
+            $data = $_POST;
+            $data['id_user'] = $this->session->userdata('user_id');
+            $data['active'] = 1;
+            $data['is_private'] = 1;
+            $data['date'] = time();
+            $data_up = $this->tintuc_model->create_object($data);
+            $id_tintuc = $this->tintuc_model->insert($data_up);
+            $files = $this->input->post('id_files');
+//            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
+                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                }
+            }
+            redirect('admin/quanlynoibo', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    public function editnoibat($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("tintuc_model");
+            $this->load->model("tintucfile_model");
+            $this->load->model("hinhanh_model");
+            $data = $_POST;
+            $data['id_user'] = $this->session->userdata('user_id');
+            $data['active'] = 1;
+            $data['is_private'] = 1;
+            $data_up = $this->tintuc_model->create_object($data);
+            $this->tintuc_model->update($data_up, $id);
+            $files = $this->input->post('id_files');
+            $this->tintucfile_model->where('id_tintuc', $id)->delete();
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->tintucfile_model->insert(array('id_tintuc' => $id, 'id_file' => $file));
+                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                }
+            }
+            redirect('admin/quanlynoibo', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("tintuc_model");
+            $tin = $this->tintuc_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
+//            echo "<pre>";
+//            print_r($tin);
+//            die();
+            $this->data['tin'] = $tin;
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
     }
 
     function viewtin($param) {
@@ -726,6 +788,80 @@ class Admin extends MY_Controller {
         array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/fileicon.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/froala_editor/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    /*
+     * Tin Tuc noi bo
+     */
+
+    public function quanlynoibo() {
+        $this->data['menu_active'] = "noibo";
+        $this->load->model("tintuc_model");
+        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 1))->order_by('date', "DESC")->with_hinhanh()->as_object()->get_all();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themnoibo() { ////////// Trang dang tin
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("tintuc_model");
+            $this->load->model("tintucfile_model");
+            $this->load->model("hinhanh_model");
+            $data = $_POST;
+            $data['id_user'] = $this->session->userdata('user_id');
+            $data['active'] = 1;
+            $data['is_private'] = 1;
+            $data['date'] = time();
+            $data_up = $this->tintuc_model->create_object($data);
+            $id_tintuc = $this->tintuc_model->insert($data_up);
+            $files = $this->input->post('id_files');
+//            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
+                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                }
+            }
+            redirect('admin/quanlynoibo', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    public function editnoibo($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("tintuc_model");
+            $this->load->model("tintucfile_model");
+            $this->load->model("hinhanh_model");
+            $data = $_POST;
+            $data['id_user'] = $this->session->userdata('user_id');
+            $data['active'] = 1;
+            $data['is_private'] = 1;
+            $data_up = $this->tintuc_model->create_object($data);
+            $this->tintuc_model->update($data_up, $id);
+            $files = $this->input->post('id_files');
+            $this->tintucfile_model->where('id_tintuc', $id)->delete();
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->tintucfile_model->insert(array('id_tintuc' => $id, 'id_file' => $file));
+                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                }
+            }
+            redirect('admin/quanlynoibo', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("tintuc_model");
+            $tin = $this->tintuc_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
+//            echo "<pre>";
+//            print_r($tin);
+//            die();
+            $this->data['tin'] = $tin;
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
     }
 
 // deactivate the tin

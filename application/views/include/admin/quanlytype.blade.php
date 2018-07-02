@@ -39,12 +39,10 @@
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
-                                @if($tin->id != 4)
                                 <a href="{{base_url()}}admin/removetype/{{$tin->id}}" class="btn btn-default" title="delete" data-type='confirm'>
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>
-                                @endif
                             </td>
                         </tr>
                         @endforeach

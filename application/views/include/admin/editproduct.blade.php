@@ -35,7 +35,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <b class="form-label">File: </b><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files" : "" ?>
+                            <b class="form-label">File: </b><span><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files <i class='fa fa-close remove_file' style='cursor: pointer;'></i>" : "" ?></span>
                             <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
                         </div>
                         <div class="col-md-12">
@@ -115,6 +115,10 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
         $("#id_product").chosen();
+        $(".remove_file").click(function () {
+            $(this).parent().remove();
+            $("#form-dang-tin .id_files").remove();
+        })
         $("#kv-explorer").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'admin/uploadhinhanh',
@@ -125,9 +129,6 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
             showUpload: false,
             showCancel: false,
             browseLabel: "",
-            initialPreviewConfig: [
-                {caption: "Business 1.jpg", size: 762980, url: "$urlD", key: 11},
-            ]
         }).on("filebatchselected", function (event, files) {
             $("#form-dang-tin .id_hinhanh").remove();
             $(this).fileinput("upload");
@@ -154,7 +155,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
             browseLabel: "",
             initialPreviewConfig: []
         }).on("filebatchselected", function (event, files) {
-            $("#form-dang-tin .id_files").remove();
+            $(".remove_file").trigger("click");
             $(this).fileinput("upload");
         }).on('fileuploaded', function (event, data, previewId, index) {
             var id = data.response.key;

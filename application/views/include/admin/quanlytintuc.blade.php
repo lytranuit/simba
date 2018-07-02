@@ -19,7 +19,6 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Hình ảnh</th>
                             <th>Tiêu đề</th>
                             <th>Type</th>
                             <th>Hành động</th>
@@ -29,7 +28,6 @@
                         @foreach($arr_tin as $key=>$tin)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td><img src='{{base_url()}}{{$tin->obj_hinh->thumb_src or 'public/img/preview.png'}}' width="50"/></td>
                             <td>{{$tin->title_vi}}</td>
                             <td><span style="background: {{$tin->obj_type->color or '#000000'}};padding: 5px 20px;color: white;">{{$tin->obj_type->name_vi or ''}}</span></td>   
                             <td>

@@ -61,12 +61,6 @@
                 </li>
                 @endif
                 <?php if ($userdata['role'] == 1): ?>
-                    <li data="quanlynoibo">
-                        <a href="<?= base_url() ?>admin/quanlythongtinnoibo">
-                            <i class="material-icons">view_list</i>
-                            <span>Quản lý thông tin nội bộ</span>
-                        </a>
-                    </li>
                     <li class="header">Quản trị</li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block toggled">

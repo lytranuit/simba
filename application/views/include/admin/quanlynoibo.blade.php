@@ -10,20 +10,38 @@
                 <h2>Thông tin nội bộ</h2>
             </div>
             <div class="body">
+                <div class="row">
+                    <div class="col-md-12" style="margin:20px 0px;">
+                        <a class="btn btn-success" href="{{base_url()}}admin/themnoibo">Thêm</a>
+                    </div>
+                </div>
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Hình ảnh</th>
                             <th>Tiêu đề</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($arr_tin as $key=>$tin)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td><img src='{{base_url()}}{{$tin->hinhanh->thumb_src or 'public/img/preview.png'}}' width="50"/></td>
                             <td><a href="{{base_url()}}admin/viewtin/{{$tin->id}}">{{$tin->title_vi}}</a></td>
+                            <td>
+                                <a href="{{base_url()}}admin/updatetintuc/{{$tin->id}}" class="btn btn-default" title="update">
+                                    <i class="fa fa-star">
+                                    </i>
+                                </a>
+                                <a href="{{base_url()}}admin/editnoibo/{{$tin->id}}" class="btn btn-default" title="edit">
+                                    <i class="ace-icon fa fa-pencil bigger-120">
+                                    </i>
+                                </a>
+                                <a href="{{base_url()}}admin/removetintuc/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
+                                    <i class="ace-icon fa fa-trash-o bigger-120">
+                                    </i>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -38,8 +56,7 @@
         $('#quanlytin').DataTable({
             "columns": [
                 {"width": "20px"},
-                {"width": "50px"},
-                null,
+                null, null
             ]
         });
     });

@@ -36,7 +36,7 @@ class Tintuc_model extends MY_Model {
 
     function create_object($data) {
         $array = array(
-            'title_vi', 'content_vi', 'title_en', 'content_en', 'title_jp', 'content_jp', 'type', 'id_hinhanh', 'id_user', 'date', 'active'
+            'title_vi', 'content_vi', 'title_en', 'content_en', 'title_jp', 'content_jp', 'type', 'id_hinhanh', 'id_user', 'date', 'active', 'is_private', 'is_highlight'
         );
         $obj = array();
         foreach ($array as $key) {
@@ -44,13 +44,6 @@ class Tintuc_model extends MY_Model {
                 $obj[$key] = $data[$key];
             } else
                 continue;
-            if ($key == 'type') {
-                if ($data[$key] == 4) {
-                    $obj['is_private'] = 1;
-                } else {
-                    $obj['is_private'] = 0;
-                }
-            }
         }
 
         return $obj;

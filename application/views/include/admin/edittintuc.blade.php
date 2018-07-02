@@ -20,12 +20,6 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                         <input type='hidden' name='id_files[]' value='{{$key}}' class='id_files'/>
                         @endforeach
                         @endif
-                        <input type="hidden" name='id_hinhanh' value='{{$tin->id_hinhanh}}' class='id_hinhanh'/>
-                        <div class="col-md-2">
-                            <b class="form-label">Hình ảnh đại diện:</b>
-                            <img src="<?= base_url() . $hinh_preview ?>" id='hinh_preview' style="display:block;cursor: pointer;width: 125px;"/>
-                            <input id="kv-explorer" type="file" name="hinhanh[]" accept="image/*" class='upload_hinhanh'>
-                        </div>
                         <div class="col-md-4">
                             <b class="form-label">Type (*):</b>
                             <select class="form-control" name="type">
@@ -35,7 +29,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <b class="form-label">File: </b><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files" : "" ?>
+                            <b class="form-label">File: </b><span><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files <i class='fa fa-close remove_file' style='cursor: pointer;'></i>" : "" ?></span>
                             <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
                         </div>
                         <div class="col-md-12">
@@ -101,7 +95,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                             </div>
                         </div>
                         <div class="col-md-12" style="padding-left:0;">
-                            <button type="submit" name="dangtin" class="btn btn-primary">Thêm Tin tức</button>
+                            <button type="submit" name="dangtin" class="btn btn-primary">Sửa Tin tức</button>
                         </div>
                     </form>
                 </div>
@@ -114,30 +108,10 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
     $(document).ready(function () {
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
-        $("#kv-explorer").fileinput({
-            'theme': 'explorer-fa',
-            'uploadUrl': path + 'admin/uploadhinhanh',
-            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-            maxFileCount: 1,
-            showPreview: false,
-            showRemove: false,
-            showUpload: false,
-            showCancel: false,
-            browseLabel: "",
-            initialPreviewConfig: [
-                {caption: "Business 1.jpg", size: 762980, url: "$urlD", key: 11},
-            ]
-        }).on("filebatchselected", function (event, files) {
-            $("#form-dang-tin .id_hinhanh").remove();
-            $(this).fileinput("upload");
-        }).on('fileuploaded', function (event, data, previewId, index) {
-            var id = data.response.key;
-            var src = data.response.initialPreview[0];
-            $("#hinh_preview").attr("src", src);
-            var append = "<input type='hidden' name='id_hinhanh' value='" + id + "' class='id_hinhanh'/>";
-            $("#form-dang-tin").append(append);
-        });
-        $("#kv-explorer").parents(".file-input").hide();
+        $(".remove_file").click(function () {
+            $(this).parent().remove();
+            $("#form-dang-tin .id_files").remove();
+        })
         $("#kv-file").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'admin/uploadfile',
@@ -149,15 +123,12 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
             browseLabel: "",
             initialPreviewConfig: []
         }).on("filebatchselected", function (event, files) {
-            $("#form-dang-tin .id_files").remove();
+            $(".remove_file").trigger("click");
             $(this).fileinput("upload");
         }).on('fileuploaded', function (event, data, previewId, index) {
             var id = data.response.key;
             var append = "<input type='hidden' name='id_files[]' value='" + id + "' class='id_files'/>";
             $("#form-dang-tin").append(append);
-        });
-        $("#hinh_preview").click(function () {
-            $("#kv-explorer").click();
         });
         $('.edit').froalaEditor({
             heightMin: 200,
