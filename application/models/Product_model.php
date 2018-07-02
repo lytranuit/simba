@@ -28,7 +28,7 @@ class Product_model extends MY_Model {
 
     function create_object($data) {
         $array = array(
-            'name_vi', 'content_vi', 'name_en', 'content_en', 'name_jp', 'content_jp', 'id_hinhanh', 'id_product'
+            'name_vi', 'content_vi', 'name_en', 'content_en', 'name_jp', 'content_jp', 'id_hinhanh', 'id_product', 'date'
         );
         $obj = array();
         foreach ($array as $key) {
