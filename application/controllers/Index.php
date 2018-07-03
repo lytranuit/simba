@@ -15,7 +15,7 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/animate/animate.min.css',
             base_url() . 'public/lib/ionicons/css/ionicons.min.css',
             base_url() . 'public/lib/owlcarousel/assets/owl.carousel.min.css',
-            base_url() . 'public/lib/lightbox/css/lightbox.min.css',
+            base_url() . 'public/lib/fancybox/jquery.fancybox.min.css',
             base_url() . "public/lib/froala_editor/css/froala_style.min.css",
             base_url() . 'public/css/style.css'
         );
@@ -33,7 +33,7 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/counterup/counterup.min.js',
             base_url() . 'public/lib/owlcarousel/owl.carousel.min.js',
             base_url() . 'public/lib/isotope/isotope.pkgd.min.js',
-            base_url() . 'public/lib/lightbox/js/lightbox.min.js',
+            base_url() . 'public/lib/fancybox/jquery.fancybox.min.js',
             base_url() . 'public/lib/touchSwipe/jquery.touchSwipe.min.js',
             base_url() . 'public/js/main.js'
         );

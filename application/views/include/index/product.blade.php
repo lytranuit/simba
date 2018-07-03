@@ -10,7 +10,8 @@
                         <div class="row">
                             <div class="col-lg-6 row justify-content-center align-items-center">
                                 <div class="col-6">
-                                    <img class="img-fluid"src="{{base_url()}}{{$tin['hinhanh']['src'] or 'public/img/product/1.jpg'}}" />
+                                    <a class="fancybox" href="{{base_url()}}{{$tin['hinhanh']['src'] or 'public/img/intro-carousel/san pham.png'}}"><img class="img-fluid"src="{{base_url()}}{{$tin['hinhanh']['src'] or 'public/img/intro-carousel/san pham.png'}}" /></a>
+                                    <p class="text-center">View full size</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">

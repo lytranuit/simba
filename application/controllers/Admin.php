@@ -608,7 +608,7 @@ class Admin extends MY_Controller {
         $this->load->model("tintuc_model");
         $this->load->model("hinhanh_model");
         $this->load->model("typetintuc_model");
-        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0))->order_by('date', "DESC")->as_object()->get_all();
+        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0, 'is_highlight' => 0))->order_by('date', "DESC")->as_object()->get_all();
         foreach ($this->data['arr_tin'] as $k => &$tin) {
             $tin->title_vi = mb_strlen($tin->title_vi) < 50 ? $tin->title_vi : mb_substr($tin->title_vi, 0, 50) . "...";
             $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $tin->id_hinhanh))->as_object()->get_all();
@@ -704,13 +704,13 @@ class Admin extends MY_Controller {
     }
 
     /*
-     * Tin Tuc noi bo
+     * Tin Tuc noi bat
      */
 
     public function quanlynoibat() {
         $this->data['menu_active'] = "noibat";
         $this->load->model("tintuc_model");
-        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 1))->order_by('date', "DESC")->with_hinhanh()->as_object()->get_all();
+        $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_highlight' => 1))->order_by('date', "DESC")->with_hinhanh()->as_object()->get_all();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
@@ -723,7 +723,7 @@ class Admin extends MY_Controller {
             $data = $_POST;
             $data['id_user'] = $this->session->userdata('user_id');
             $data['active'] = 1;
-            $data['is_private'] = 1;
+            $data['is_highlight'] = 1;
             $data['date'] = time();
             $data_up = $this->tintuc_model->create_object($data);
             $id_tintuc = $this->tintuc_model->insert($data_up);
@@ -735,7 +735,7 @@ class Admin extends MY_Controller {
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
                 }
             }
-            redirect('admin/quanlynoibo', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+            redirect('admin/quanlynoibat', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             load_inputfile($this->data);
             load_editor($this->data);
@@ -752,7 +752,7 @@ class Admin extends MY_Controller {
             $data = $_POST;
             $data['id_user'] = $this->session->userdata('user_id');
             $data['active'] = 1;
-            $data['is_private'] = 1;
+            $data['is_highlight'] = 1;
             $data_up = $this->tintuc_model->create_object($data);
             $this->tintuc_model->update($data_up, $id);
             $files = $this->input->post('id_files');
@@ -763,7 +763,7 @@ class Admin extends MY_Controller {
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
                 }
             }
-            redirect('admin/quanlynoibo', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+            redirect('admin/quanlynoibat', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->load->model("tintuc_model");
             $tin = $this->tintuc_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
@@ -979,7 +979,8 @@ class Admin extends MY_Controller {
         $config['max_size'] = '10000';
         $this->load->library('upload', $config);
         $files = $_FILES;
-        $_FILES['file']['name'] = time() . "_" . $files['file']['name'];
+        $ext = pathinfo($files['file']['name'], PATHINFO_EXTENSION);
+        $_FILES['file']['name'] = time() . "." . $ext;
         $real_name = $files['file']['name'];
         if (!$this->upload->do_upload('file')) {
             $errors = $this->upload->display_errors();
@@ -1115,7 +1116,8 @@ class Admin extends MY_Controller {
 
         $file_count = count($_FILES['hinhanh']['name']);
         for ($i = 0; $i < $file_count; $i++) {
-            $_FILES['hinhanh']['name'] = time() . "_" . $i . "_" . $files['hinhanh']['name'][$i];
+            $ext = pathinfo($_FILES['hinhanh']['name'][$i], PATHINFO_EXTENSION);
+            $_FILES['hinhanh']['name'] = time() . "_" . $i . "." . $ext;
             $_FILES['hinhanh']['type'] = $files['hinhanh']['type'][$i];
             $_FILES['hinhanh']['tmp_name'] = $files['hinhanh']['tmp_name'][$i];
             $_FILES['hinhanh']['error'] = $files['hinhanh']['error'][$i];
@@ -1269,7 +1271,9 @@ class Admin extends MY_Controller {
 //        print_r($_FILES['file_up']);
 //        die();
         for ($i = 0; $i < $file_count; $i++) {
-            $_FILES['file_up']['name'] = time() . "_" . $i . "_" . $files['file_up']['name'][$i];
+
+            $ext = pathinfo($_FILES['file_up']['name'][$i], PATHINFO_EXTENSION);
+            $_FILES['file_up']['name'] = time() . "_" . $i . "." . $ext;
             $_FILES['file_up']['type'] = $files['file_up']['type'][$i];
             $_FILES['file_up']['tmp_name'] = $files['file_up']['tmp_name'][$i];
             $_FILES['file_up']['error'] = $files['file_up']['error'][$i];

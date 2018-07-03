@@ -1,6 +1,7 @@
 
 $(window).scroll();
 jQuery(document).ready(function ($) {
+    $(".fancybox").fancybox();
     $("#contactForm").validate({
         highlight: function (input) {
             $(input).parents('.form-group').addClass('error');
