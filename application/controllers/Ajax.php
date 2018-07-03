@@ -43,9 +43,9 @@ class Ajax extends MY_Controller {
          */
         if ($search != "") {
             $short_language = short_language_current();
-            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND title_" . $short_language . " like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE);
+            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND is_highlight = 0 AND title_" . $short_language . " like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE);
         } else
-            $where = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0));
+            $where = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0, 'is_highlight' => 0));
 
         $count = $where->count_rows();
         /*
@@ -53,9 +53,9 @@ class Ajax extends MY_Controller {
          */
         if ($search != "") {
             $short_language = short_language_current();
-            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND title_" . $short_language . " like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
+            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND is_highlight = 0 AND title_" . $short_language . " like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
         } else
-            $where = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0))->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
+            $where = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0, 'is_highlight' => 0))->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
         $data = $where->paginate($limit, NULL, $page);
 
         $max_page = ceil($count / $limit);

@@ -53,7 +53,7 @@ class Widget {
             $slider['hinh'] = $hinh[0];
         }
 
-        $arr_tintuc = $this->CI->tintuc_model->where(array('deleted' => 0, 'is_private' => 0))->order_by("date", "DESC")->limit(3)->with_hinhanh()->as_array()->get_all();
+        $arr_tintuc = $this->CI->tintuc_model->where(array('deleted' => 0, 'is_private' => 0, 'is_highlight' => 1))->order_by("date", "DESC")->limit(3)->with_hinhanh()->as_array()->get_all();
         $this->data['list_silder'] = $arr_slider;
         $this->data['list_tintuc'] = $arr_tintuc;
 //        echo "<pre>";
