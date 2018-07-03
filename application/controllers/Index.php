@@ -16,7 +16,7 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/ionicons/css/ionicons.min.css',
             base_url() . 'public/lib/owlcarousel/assets/owl.carousel.min.css',
             base_url() . 'public/lib/fancybox/jquery.fancybox.min.css',
-            base_url() . "public/lib/froala_editor/css/froala_style.min.css",
+            base_url() . "public/lib/froala_editor/froala_style.min.css",
             base_url() . 'public/css/style.css'
         );
 
@@ -77,7 +77,6 @@ class Index extends MY_Controller {
         $this->load->model("option_model");
         $gioithieu = $this->option_model->where(array("name" => 'gioi-thieu'))->as_array()->get_all();
         $this->data['gioithieu'] = $gioithieu[0];
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -87,7 +86,6 @@ class Index extends MY_Controller {
         $tin = $this->pageweb_model->where(array('id' => $id))->as_array()->get();
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'title_')];
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -101,7 +99,6 @@ class Index extends MY_Controller {
 //        echo "<pre>";
 //        print_r($tin);
 //        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -115,7 +112,6 @@ class Index extends MY_Controller {
 //        die();
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -129,7 +125,6 @@ class Index extends MY_Controller {
 //        echo "<pre>";
 //        print_r($tin);
 //        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -143,7 +138,6 @@ class Index extends MY_Controller {
 //        echo "<pre>";
 //        print_r($tin);
 //        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
