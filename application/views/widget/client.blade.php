@@ -10,7 +10,7 @@
         </header>
         <div class="owl-carousel clients-carousel">
             @foreach($data as $row)
-            <a href="{{$row['link']}}">
+            <a href="{{$row['link']}}" target="_blank">
                 <img alt="" src="{{base_url()}}{{$row['hinhanh']['src'] or 'public/img/preview.png'}}">
             </a>
             @endforeach

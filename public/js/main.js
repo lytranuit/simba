@@ -387,6 +387,20 @@ function load_page_news(page = 1) {
         dataType: "HTML",
         url: path + "ajax/news",
         data: data,
+        beforeSend: function () {
+            $("#tintuc .data").html('<div class="loader">'
+                    + '<div class="preloader">'
+                    + '    <div class="spinner-layer pl-red">'
+                    + '        <div class="circle-clipper left">'
+                    + '            <div class="circle"></div>'
+                    + '        </div>'
+                    + '        <div class="circle-clipper right">'
+                    + '            <div class="circle"></div>'
+                    + '        </div>'
+                    + '    </div>'
+                    + '</div>'
+                    + '</div>');
+        },
         success: function (data) {
             $("#tintuc .data").html(data);
         }
@@ -400,6 +414,20 @@ function load_page_product(page = 1) {
         dataType: "HTML",
         url: path + "ajax/product",
         data: data,
+        beforeSend: function () {
+            $("#product .data").html('<div class="loader">'
+                    + '<div class="preloader">'
+                    + '    <div class="spinner-layer pl-red">'
+                    + '        <div class="circle-clipper left">'
+                    + '            <div class="circle"></div>'
+                    + '        </div>'
+                    + '        <div class="circle-clipper right">'
+                    + '            <div class="circle"></div>'
+                    + '        </div>'
+                    + '    </div>'
+                    + '</div>'
+                    + '</div>');
+        },
         success: function (data) {
             $("#product .data").html(data);
         }

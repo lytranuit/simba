@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="row data">
+        <div class="row data justify-content-center">
 
         </div>
     </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="row data">
+        <div class="row data justify-content-center">
 
         </div>
     </div>
