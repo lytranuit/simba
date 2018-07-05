@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control input_search" placeholder="Tìm kiếm">
-                        <div class="input-group-append bg-success border-primary" style="cursor: pointer;">
+                        <div class="input-group-append bg-success border-primary button_search" style="cursor: pointer;">
                             <span class="input-group-text bg-transparent text-white"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
