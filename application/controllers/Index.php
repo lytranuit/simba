@@ -8,6 +8,7 @@ class Index extends MY_Controller {
 ////////////
         $this->data['is_login'] = $this->user_model->logged_in();
         $this->data['userdata'] = $this->session->userdata();
+        $version = $this->config->item("version");
         $this->data['stylesheet_tag'] = array(
             'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700',
             base_url() . 'public/lib/bootstrap/css/bootstrap.min.css',
@@ -16,8 +17,8 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/ionicons/css/ionicons.min.css',
             base_url() . 'public/lib/owlcarousel/assets/owl.carousel.min.css',
             base_url() . 'public/lib/fancybox/jquery.fancybox.min.css',
-            base_url() . "public/lib/froala_editor/froala_style.min.css",
-            base_url() . 'public/css/style.css'
+            base_url() . 'public/lib/froala_editor/froala_style.min.css',
+            base_url() . 'public/css/style.css?v=' . $version,
         );
 
         $this->data['javascript_tag'] = array(
@@ -35,7 +36,7 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/isotope/isotope.pkgd.min.js',
             base_url() . 'public/lib/fancybox/jquery.fancybox.min.js',
             base_url() . 'public/lib/touchSwipe/jquery.touchSwipe.min.js',
-            base_url() . 'public/js/main.js'
+            base_url() . 'public/js/main.js?v=' . $version,
         );
     }
 

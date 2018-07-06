@@ -388,7 +388,8 @@ function load_page_news(page = 1) {
         url: path + "ajax/news",
         data: data,
         beforeSend: function () {
-            $("#tintuc .data").html('<div class="loader">'
+            var height = $("#tintuc .data").outerHeight(true);
+            $("#tintuc .data").html('<div class="loader" style="height:' + height + 'px;">'
                     + '<div class="preloader">'
                     + '    <div class="spinner-layer pl-red">'
                     + '        <div class="circle-clipper left">'
@@ -415,7 +416,9 @@ function load_page_product(page = 1) {
         url: path + "ajax/product",
         data: data,
         beforeSend: function () {
-            $("#product .data").html('<div class="loader">'
+            var height = $("#product .data").outerHeight(true);
+
+            $("#product .data").html('<div class="loader" style="height:' + height + 'px;">'
                     + '<div class="preloader">'
                     + '    <div class="spinner-layer pl-red">'
                     + '        <div class="circle-clipper left">'

@@ -8,6 +8,7 @@ class Admin extends MY_Controller {
         $this->data['userdata'] = $this->session->userdata();
         $this->data['template'] = "admin";
         $this->data['title'] = "Admin";
+        $version = $this->config->item("version");
         $this->data['stylesheet_tag'] = array(
             "https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext",
             "https://fonts.googleapis.com/icon?family=Material+Icons",
@@ -19,9 +20,9 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/animate-css/animate.css ",
             base_url() . "public/admin/plugins/morrisjs/morris.css ",
             base_url() . "public/admin/plugins/sweetalert/sweetalert.css",
-            base_url() . "public/admin/css/style.css ",
             base_url() . "public/admin/plugins/chosen/chosen.min.css",
-            base_url() . "public/admin/css/themes/all-themes.css"
+            base_url() . "public/admin/css/themes/all-themes.css",
+            base_url() . "public/admin/css/style.css?v=" . $version
         );
         $this->data['javascript_tag'] = array(
             base_url() . "public/admin/plugins/jquery/jquery.min.js",
@@ -35,7 +36,7 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
             base_url() . "public/admin/plugins/sweetalert/sweetalert.min.js",
             base_url() . "public/admin/plugins/chosen/chosen.jquery.min.js",
-            base_url() . "public/admin/js/admin.js"
+            base_url() . "public/admin/js/admin.js?v=" . $version
         );
     }
 
