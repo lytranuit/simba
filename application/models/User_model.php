@@ -8,7 +8,24 @@ class User_model extends MY_Model {
     public function __construct() {
         $this->table = 'user';
         $this->primary_key = 'id';
+        $this->has_one['role_user'] = array('foreign_model' => 'Role_model', 'foreign_table' => 'role', 'foreign_key' => 'id', 'local_key' => 'role');
+
         parent::__construct();
+    }
+
+    function create_object($data) {
+        $array = array(
+            'username', 'role', 'fullname', 'active', 'customer_id', 'password'
+        );
+        $obj = array();
+        foreach ($array as $key) {
+            if (isset($data[$key])) {
+                $obj[$key] = $data[$key];
+            } else
+                continue;
+        }
+
+        return $obj;
     }
 
     /**

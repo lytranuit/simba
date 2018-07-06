@@ -157,6 +157,21 @@ class Admin extends MY_Controller {
         die();
     }
 
+    function changepasswithout() {
+        $id_user = $this->session->userdata('user_id');
+        $this->load->model("user_model");
+        if (!isset($_POST['confirmpassword']) || !isset($_POST['newpassword']) || (isset($_POST['newpassword']) && isset($_POST['confirmpassword']) && $_POST['newpassword'] != $_POST['confirmpassword'])) {
+            echo json_encode(array('code' => 403, "msg" => "Xác nhận mật khẩu mới không đúng."));
+            die();
+        }
+        $additional_data = array(
+            'password' => md5($this->input->post('newpassword')),
+        );
+        $this->user_model->update($additional_data, $id_user);
+        echo json_encode(array('code' => 400, "msg" => "Thay đổi mật khẩu thành công."));
+        die();
+    }
+
     /*
      * Gioithieu
      */
@@ -936,6 +951,114 @@ class Admin extends MY_Controller {
     }
 
     /*
+     * Role
+     */
+
+    public function quanlyrole() {
+        $this->data['menu_active'] = "role";
+        $this->load->model("role_model");
+        $this->data['arr_tin'] = $this->role_model->where(array('deleted' => 0))->as_object()->get_all();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themrole() { ////////// Trang dang tin
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("role_model");
+            $data_up = array('name' => $_POST['name']);
+            $id_tintuc = $this->role_model->insert($data_up);
+            redirect('admin/quanlyrole', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    public function editrole($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("role_model");
+            $data_up = array('name' => $_POST['name']);
+            $id_tintuc = $this->role_model->update($data_up, $id);
+            redirect('admin/quanlyrole', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("role_model");
+            $tin = $this->role_model->where(array('id' => $id))->as_object()->get();
+//            echo "<pre>";
+//            print_r($tin);
+//            die();
+            $this->data['tin'] = $tin;
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removerole($params) {
+        $this->load->model("role_model");
+        $id = $params[0];
+        $this->role_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    /*
+     * USER
+     */
+
+    public function quanlyuser() {
+        $this->data['menu_active'] = "user";
+        $this->load->model("user_model");
+        $this->data['arr_tin'] = $this->user_model->limit(10)->with_role_user()->as_object()->get_all();
+//        echo "<pre>";
+//        print_r($this->data['arr_tin']);
+//        die();
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themuser() {
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("user_model");
+            $data = $_POST;
+            $data['password'] = md5(123456);
+            $data_up = $this->user_model->create_object($data);
+            $id_tintuc = $this->user_model->insert($data_up);
+            redirect('admin/quanlyuser', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("role_model");
+            $this->data['role'] = $this->role_model->as_array()->get_all();
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    public function edituser($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("user_model");
+            $data = $_POST;
+            $data_up = $this->user_model->create_object($data);
+            $id_tintuc = $this->user_model->update($data_up, $id);
+            redirect('admin/quanlyuser', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("user_model");
+            $tin = $this->user_model->where(array('id' => $id))->as_object()->get();
+//            echo "<pre>";
+//            print_r($tin);
+//            die();
+            $this->load->model("role_model");
+            $this->data['role'] = $this->role_model->as_array()->get_all();
+            $this->data['tin'] = $tin;
+            load_inputfile($this->data);
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    /*
      * TABLE
      */
 
@@ -1348,6 +1471,17 @@ class Admin extends MY_Controller {
                     $file_data['upload_data'] = $this->upload->data();
                 }
             }
+        }
+    }
+
+    public function checkusername() {
+        $username = $this->input->get('username');
+        $this->load->model("user_model");
+        $check = $this->user_model->where(array("username" => $username))->as_array()->get_all();
+        if (!$check) {
+            echo json_encode(array('success' => 1));
+        } else {
+            echo json_encode(array('success' => 0, 'msg' => "Tài khoản đã tồn tại!"));
         }
     }
 

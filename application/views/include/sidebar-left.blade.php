@@ -138,6 +138,21 @@
                         </a>
                     </li>
                 <?php endif; ?>
+                <?php if ($userdata['role'] == 1): ?>
+                    <li class="header">User</li>
+                    <li data='user'>
+                        <a href="<?= base_url() ?>admin/quanlyuser">
+                            <i class="material-icons">list</i>
+                            <span>User</span>
+                        </a>
+                    </li>
+                    <li data='role'>
+                        <a href="<?= base_url() ?>admin/quanlyrole">
+                            <i class="material-icons">list</i>
+                            <span>Role</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         <!-- #Menu -->

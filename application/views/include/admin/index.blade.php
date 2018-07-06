@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <b class="form-label">Tên</b>
                         <div class="form-line">
-                            <input type="text" class="form-control" value="{{$user->fullname}}" name="fullname" maxlength="10" minlength="3" required="" aria-required="true">
+                            <input type="text" class="form-control" value="{{$user->fullname}}" name="fullname" minlength="3" required="" aria-required="true">
                         </div>
                     </div>
                     <div style="margin-bottom: 20px;">
