@@ -20,28 +20,28 @@
                                         <span style="font-size: 1.5rem">{{lang('product_tomtat')}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_code')}}:</label>
+                                        <label class="col-md-4 col-6">{{lang('product_code')}}:</label>
                                         <span>{{$tin['product']['code']}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_xuatxu')}}:</label>
-                                        <span>Nhật bản</span>
+                                        <label class="col-md-4 col-6">{{lang('product_xuatxu')}}:</label>
+                                        <span>{{$tin['product']['country'][pick_language($tin['product']['country'],'name_')]}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_dungtich')}}:</label>
+                                        <label class="col-md-4 col-6">{{lang('product_dungtich')}}:</label>
                                         <span>{{$tin['product']['volume']}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_baoquan')}}:</label>
-                                        <span>Bảo quản nhiệt độ phòng </span>
+                                        <label class="col-md-4 col-6">{{lang('product_baoquan')}}:</label>
+                                        <span>{{$tin['product']['preservation'][pick_language($tin['product']['preservation'],'name_')]}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_mota')}}:</label>
+                                        <label class="col-md-4 col-6">{{lang('product_mota')}}:</label>
                                         <span>{{$tin['product'][pick_language($tin['product'],'description_')]}}</span>
                                     </li>
                                     @if(count($tin['files']))
                                     <li>
-                                        <label class="col-md-4">{{lang('product_file')}}:</label>
+                                        <label class="col-md-4 col-6">{{lang('product_file')}}:</label>
                                         <div>
                                             @foreach($tin['files'] as $row)
                                             <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}'>

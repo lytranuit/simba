@@ -19,25 +19,24 @@
                                         <span style="font-size: 1.5rem">{{lang('product_tomtat')}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_code')}}:</label>
+                                        <label class="col-md-4 col-6">{{lang('product_code')}}:</label>
                                         <span>{{$tin['code']}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_xuatxu')}}:</label>
-                                        <span>Nhật bản</span>
+                                        <label class="col-md-4 col-6">{{lang('product_xuatxu')}}:</label>
+                                        <span>{{$tin['country'][pick_language($tin['country'],'name_')]}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_dungtich')}}:</label>
+                                        <label class="col-md-4 col-6">{{lang('product_dungtich')}}:</label>
                                         <span>{{$tin['volume']}}</span>
                                     </li>
                                     <li>
-                                        <label class="col-md-4">{{lang('product_baoquan')}}:</label>
-                                        <span>Bảo quản nhiệt độ phòng</span>
+                                        <label class="col-md-4 col-6">{{lang('product_baoquan')}}:</label>
+                                        <span>{{$tin['preservation'][pick_language($tin['preservation'],'name_')]}}</span>
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_mota')}}:</label>
                                         <span>{{$tin[pick_language($tin,'description_')]}} <p><a href="http://www.oishii.vn/product/view/{{$tin['id']}}/{{sluggable($tin[pick_language($tin,'name_')])}}" target="_blank">Hãy chọn mua Sản phẩm tại www.oishii.com.vn</a></p></span>
-
                                     </li>
                                 </ul>
                             </div>

@@ -118,8 +118,11 @@ class Index extends MY_Controller {
     function product($param) {
         $id = $param[0];
         $this->load->model("product_model");
+        $this->load->model("productsimba_model");
         $tin = $this->product_model->where(array('id' => $id))->with_hinhanh()->with_product()->with_files()->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
+        $tin['product']['country'] = $this->productsimba_model->xuatxu($tin['product']['origin_country_id']);
+        $tin['product']['preservation'] = $this->productsimba_model->preservation($tin['product']['preservation_id']);
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
 //        echo "<pre>";
@@ -133,6 +136,8 @@ class Index extends MY_Controller {
         $this->load->model("productsimba_model");
         $tin = $this->productsimba_model->where(array('id' => $id))->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
+        $tin['country'] = $this->productsimba_model->xuatxu($tin['origin_country_id']);
+        $tin['preservation'] = $this->productsimba_model->preservation($tin['preservation_id']);
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
 //        echo "<pre>";
