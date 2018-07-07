@@ -149,11 +149,11 @@ class Index extends MY_Controller {
 
     // log the user out
     function logout() {
+
         $this->data['title'] = "Logout";
 
         // log the user out
         $logout = $this->user_model->logout();
-
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }

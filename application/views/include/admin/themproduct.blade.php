@@ -25,9 +25,21 @@
                             </select>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <b class="form-label">File:</b>
                             <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
+                        </div>
+                        <div class="col-md-3">
+                            <b class="form-label">Role Download:</b>
+                            <select class="form-control" name="role_download[]" id="role_download" multiple="">
+                                @foreach($role as $row)
+                                @if(in_array($row['id'],array(1,2)))
+                                <option value="{{$row['id']}}" selected="">{{$row['name']}}</option>
+                                @else 
+                                <option value="{{$row['id']}}">{{$row['name']}}</option>
+                                @endif
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <!-- Nav tabs -->
@@ -105,6 +117,7 @@
     $(document).ready(function () {
 
         $("#id_product").chosen();
+        $("#role_download").chosen();
         $("#kv-explorer").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'admin/uploadhinhanh',

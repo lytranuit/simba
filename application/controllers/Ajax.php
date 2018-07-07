@@ -268,17 +268,24 @@ class Ajax extends MY_Controller {
             echo json_encode(array("code" => 403, "msg" => "Yêu cầu đăng nhập."));
             die();
         }
+        $role_user = $this->session->userdata('role');
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $file = $this->hinhanh_model->where(array("id_hinhanh" => $id))->as_array()->get();
             if ($file) {
-                $real_name = $file['real_hinhanh'];
-                $src = FCPATH . $file['src'];
-                header("Cache-Control: public");
-                header("Content-Description: File Transfer");
-                header("Content-Disposition: attachment; filename=" . $real_name);
-                header("Content-Transfer-Encoding: binary");
-                readfile($src);
+                $role_download = $file['role_download'];
+                if ($role_download == 0 || in_array($role_user, explode(",", $role_download))) {
+                    $real_name = $file['real_hinhanh'];
+                    $src = FCPATH . $file['src'];
+                    header("Cache-Control: public");
+                    header("Content-Description: File Transfer");
+                    header("Content-Disposition: attachment; filename=" . $real_name);
+                    header("Content-Transfer-Encoding: binary");
+                    readfile($src);
+                } else {
+                    echo json_encode(array("code" => 406, "msg" => "Bạn không có quyền download file!"));
+                    die();
+                }
             } else {
                 echo json_encode(array("code" => 405, "msg" => "File không tồn tại!"));
                 die();

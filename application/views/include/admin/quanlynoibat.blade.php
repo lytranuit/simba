@@ -47,7 +47,7 @@
                                 @endif
 
                                 @if(is_permission("removenoibat"))
-                                <a href="{{base_url()}}admin/removetintuc/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
+                                <a href="{{base_url()}}admin/removenoibat/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>

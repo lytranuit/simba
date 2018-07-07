@@ -55,6 +55,13 @@ class Admin extends MY_Controller {
     }
 
     private function has_right($method, $params = array()) {
+
+        /*
+         * SET PERMISSION
+         */
+        $role_user = $this->session->userdata('role');
+        $this->user_model->set_permission($role_user);
+
         /* Change method */
         switch ($method) {
             case 'updatetintuc':
@@ -449,16 +456,20 @@ class Admin extends MY_Controller {
             $data_up = $this->product_model->create_object($data);
             $id = $this->product_model->insert($data_up);
             $files = $this->input->post('id_files');
+            $role_download = implode(",", $this->input->post('role_download'));
+//            $this->productfile_model->where('id_product', $id)->delete();
             if (count($files) > 0) {
                 foreach ($files as $file) {
                     $this->productfile_model->insert(array('id_product' => $id, 'id_file' => $file));
-                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                    $this->hinhanh_model->update(array('deleted' => 0, 'role_download' => $role_download), $file);
                 }
             }
             redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->data['menu_active'] = "product";
             $this->load->model("productsimba_model");
+            $this->load->model("role_model");
+            $this->data['role'] = $this->role_model->as_array()->get_all();
             $this->data['arr_category'] = $this->productsimba_model->as_object()->get_all();
             load_inputfile($this->data);
             load_editor($this->data);
@@ -476,11 +487,12 @@ class Admin extends MY_Controller {
             $data_up = $this->product_model->create_object($data);
             $this->product_model->update($data_up, $id);
             $files = $this->input->post('id_files');
+            $role_download = implode(",", $this->input->post('role_download'));
             $this->productfile_model->where('id_product', $id)->delete();
             if (count($files) > 0) {
                 foreach ($files as $file) {
                     $this->productfile_model->insert(array('id_product' => $id, 'id_file' => $file));
-                    $this->hinhanh_model->update(array('deleted' => 0), $file);
+                    $this->hinhanh_model->update(array('deleted' => 0, 'role_download' => $role_download), $file);
                 }
             }
             redirect('admin/quanlyproduct', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
@@ -488,7 +500,8 @@ class Admin extends MY_Controller {
             $this->data['menu_active'] = "product";
             $this->load->model("productsimba_model");
             $this->load->model("product_model");
-
+            $this->load->model("role_model");
+            $this->data['role'] = $this->role_model->as_array()->get_all();
             $this->data['arr_category'] = $this->productsimba_model->as_object()->get_all();
 
             $tin = $this->product_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
@@ -831,7 +844,7 @@ class Admin extends MY_Controller {
     function removenoibat($params) {
         $this->load->model("tintuc_model");
         $id = $params[0];
-        $this->tintuc_model->update(array("deleted" => 1), $id);
+        $this->tintuc_model->where(array('is_highlight' => 1, 'id' => $id))->update(array("deleted" => 1));
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -921,7 +934,7 @@ class Admin extends MY_Controller {
     function removenoibo($params) {
         $this->load->model("tintuc_model");
         $id = $params[0];
-        $this->tintuc_model->update(array("deleted" => 1), $id);
+        $this->tintuc_model->where(array('is_private' => 1, 'id' => $id))->update(array("deleted" => 1));
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }

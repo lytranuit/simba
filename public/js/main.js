@@ -441,5 +441,8 @@ function click_gopy(...param) {
 }
 function download_file(...param) {
     var id = param[0];
-    location.href = path + "ajax/downloadfile?id=" + id
+    window.open(
+            path + "ajax/downloadfile?id=" + id,
+            '_blank' // <- This is what makes it open in a new window.
+            );
 }

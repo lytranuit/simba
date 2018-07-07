@@ -1,5 +1,11 @@
 <?php
 $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "public/img/preview.png";
+$role_download = array();
+if (count((array) $tin->files)) {
+    foreach ($tin->files as $key => $row):
+        $role_download = explode(",", $row->role_download);
+    endforeach;
+}
 ?>
 
 <ol class="breadcrumb breadcrumb-bg-grey">
@@ -15,7 +21,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
             <div class="body">
                 <div class="row">
                     <form method="POST" action="" id="form-dang-tin" class="col-md-12"> 
-                        @if(count($tin->files))
+                        @if(count((array)$tin->files))
                         @foreach($tin->files as $key =>$row)
                         <input type='hidden' name='id_files[]' value='{{$key}}' class='id_files'/>
                         @endforeach
@@ -26,6 +32,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                             <img src="<?= base_url() . $hinh_preview ?>" id='hinh_preview' style="display:block;cursor: pointer;width: 125px;"/>
                             <input id="kv-explorer" type="file" name="hinhanh[]" accept="image/*" class='upload_hinhanh'>
                         </div>
+
                         <div class="col-md-4">
                             <b class="form-label">Product (*):</b>
                             <select class="form-control" name="id_product" id="id_product">
@@ -34,9 +41,21 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <b class="form-label">File: </b><span><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files <i class='fa fa-close remove_file' style='cursor: pointer;'></i>" : "" ?></span>
                             <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
+                        </div>
+                        <div class="col-md-3">
+                            <b class="form-label">Role Download:</b>
+                            <select class="form-control" name="role_download[]" id="role_download" multiple="">
+                                @foreach($role as $row)
+                                @if(in_array($row['id'],$role_download))
+                                <option value="{{$row['id']}}" selected="">{{$row['name']}}</option>
+                                @else 
+                                <option value="{{$row['id']}}">{{$row['name']}}</option>
+                                @endif
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <!-- Nav tabs -->
@@ -115,6 +134,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
         $("#id_product").chosen();
+        $("#role_download").chosen();
         $(".remove_file").click(function () {
             $(this).parent().remove();
             $("#form-dang-tin .id_files").remove();
