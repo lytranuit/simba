@@ -10,11 +10,13 @@
                 <h2>Thông tin nội bộ</h2>
             </div>
             <div class="body">
+                @if(is_permission("themnoibo"))
                 <div class="row">
                     <div class="col-md-12" style="margin:20px 0px;">
                         <a class="btn btn-success" href="{{base_url()}}admin/themnoibo">Thêm</a>
                     </div>
                 </div>
+                @endif
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -29,7 +31,8 @@
                             <td>{{$key+1}}</td>
                             <td><a href="{{base_url()}}admin/viewtin/{{$tin->id}}">{{$tin->title_vi}}</a></td>
                             <td>
-                                <a href="{{base_url()}}admin/updatetintuc/{{$tin->id}}" class="btn btn-default" title="update">
+                                @if(is_permission("editnoibo"))
+                                <a href="{{base_url()}}admin/updatenoibo/{{$tin->id}}" class="btn btn-default" title="update">
                                     <i class="fa fa-star">
                                     </i>
                                 </a>
@@ -37,10 +40,13 @@
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
+                                @endif
+                                @if(is_permission("removenoibo"))
                                 <a href="{{base_url()}}admin/removetintuc/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -73,14 +73,24 @@ class User_model extends MY_Model {
      * @author jrmadsen67
      * */
     public function set_session($user) {
+
+        $query = $this->db->from("role_permission")
+                        ->join("permission", "role_permission.id_permission = permission.id")
+                        ->where('id_role', $user->role)->get();
+        $permission = $query->result_array();
+        $permission = array_map(function($item) {
+            return $item['function'];
+        }, $permission);
         $session_data = array(
             'identity' => $user->username,
             'username' => $user->username,
             'role' => $user->role,
+            'permission' => $permission,
             'customer_id' => $user->customer_id,
             'user_id' => $user->id, //everyone likes to overwrite id so we'll use user_id
         );
-
+//        print_r($permission);
+//        die();
         $this->session->set_userdata($session_data);
         return TRUE;
     }

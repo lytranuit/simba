@@ -55,25 +55,49 @@ class Admin extends MY_Controller {
     }
 
     private function has_right($method, $params = array()) {
-        /* check admin */
-        $fun_admin = array(
-            "quanlyuser",
-            "change_group",
-            "remove_user",
-            "activate",
-            "deactivate",
-            "quanlytintuc",
-            "quanlymenu",
-            "dangtintuc",
-            "edittintuc",
-            "editbanner",
-            "activate_tintuc",
-            "deactivate_tintuc",
-            "remove_tintuc",
-            "editgioithieu",
-            "slider",
-        );
-        if (in_array($method, $fun_admin) && $this->data['userdata']['role'] != 1) {
+        /* Change method */
+        switch ($method) {
+            case 'updatetintuc':
+                $method = 'edittintuc';
+                break;
+            case 'editmenu':
+                $method = 'quanlymenu';
+                break;
+            case 'updatenoibat':
+                $method = 'editnoibat';
+                break;
+            case 'updatenoibo':
+                $method = 'editnoibo';
+                break;
+            case 'updateproduct':
+                $method = 'editproduct';
+                break;
+            case 'viewtin':
+                $method = 'quanlynoibo';
+                break;
+            case 'slider':
+            case 'saveslider':
+            case 'gioithieu':
+            case 'savegioithieu':
+            case 'quanlycategory':
+            case 'themcategory':
+            case 'editcategory':
+            case 'updatecategory':
+            case 'removecategory':
+            case 'quanlyclient':
+            case 'themclient':
+            case 'editclient':
+            case 'updateclient':
+            case 'removeclient':
+            case 'quanlyhappy':
+            case 'themhappy':
+            case 'edithappy':
+            case 'updatehappy':
+            case 'removehappy':
+                $method = 'trangchu';
+                break;
+        }
+        if (has_permission($method) && !is_permission($method)) {
             return false;
         }
         /* Tin đăng check */
@@ -158,7 +182,7 @@ class Admin extends MY_Controller {
     }
 
     function changepasswithout() {
-        $id_user = $this->session->userdata('user_id');
+        $id_user = $this->input->post('id_user');
         $this->load->model("user_model");
         if (!isset($_POST['confirmpassword']) || !isset($_POST['newpassword']) || (isset($_POST['newpassword']) && isset($_POST['confirmpassword']) && $_POST['newpassword'] != $_POST['confirmpassword'])) {
             echo json_encode(array('code' => 403, "msg" => "Xác nhận mật khẩu mới không đúng."));
@@ -167,6 +191,9 @@ class Admin extends MY_Controller {
         $additional_data = array(
             'password' => md5($this->input->post('newpassword')),
         );
+//        print_r($additional_data);
+//        echo $id_user;
+//        die();
         $this->user_model->update($additional_data, $id_user);
         echo json_encode(array('code' => 400, "msg" => "Thay đổi mật khẩu thành công."));
         die();
@@ -404,8 +431,8 @@ class Admin extends MY_Controller {
 
     public function quanlyproduct() {
         $this->data['menu_active'] = "product";
-        $this->load->model("product_model");
-        $this->data['arr_tin'] = $this->product_model->where(array('deleted' => 0))->with_hinhanh()->order_by('date', "DESC")->as_object()->get_all();
+//        $this->load->model("product_model");
+        $this->data['arr_tin'] = array();
 //        print_r($this->data['arr_tin']);
 //        die();
         load_datatable($this->data);
@@ -793,17 +820,20 @@ class Admin extends MY_Controller {
         }
     }
 
-    function viewtin($param) {
-        $id = $param[0];
+    function updatenoibat($params) {
         $this->load->model("tintuc_model");
-        $tin = $this->tintuc_model->where(array('id' => $id))->with_hinhanh()->with_files()->as_array()->get();
-        $this->data['tin'] = $tin;
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
-        array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/fileicon.css");
-        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/froala_editor/css/froala_style.min.css");
-        echo $this->blade->view()->make('page/page', $this->data)->render();
+        $id = $params[0];
+        $this->tintuc_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    function removenoibat($params) {
+        $this->load->model("tintuc_model");
+        $id = $params[0];
+        $this->tintuc_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
     }
 
     /*
@@ -880,20 +910,40 @@ class Admin extends MY_Controller {
         }
     }
 
+    function updatenoibo($params) {
+        $this->load->model("tintuc_model");
+        $id = $params[0];
+        $this->tintuc_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    function removenoibo($params) {
+        $this->load->model("tintuc_model");
+        $id = $params[0];
+        $this->tintuc_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    function viewtin($param) {
+        $id = $param[0];
+        $this->load->model("tintuc_model");
+        $tin = $this->tintuc_model->where(array('id' => $id))->with_hinhanh()->with_files()->as_array()->get();
+        $this->data['tin'] = $tin;
+//        echo "<pre>";
+//        print_r($tin);
+//        die();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/fileicon.css");
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/froala_editor/css/froala_style.min.css");
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
 // deactivate the tin
     function deactivate_tintuc($params) {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->update(array("active" => 0), $id);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
-    }
-
-//remove a tin
-    function remove_tintuc($params) {
-        $this->load->model("tintuc_model");
-        $id = $params[0];
-        $this->tintuc_model->update(array("deleted" => 1), $id);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }
@@ -965,12 +1015,26 @@ class Admin extends MY_Controller {
     public function themrole() { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $this->load->model("role_model");
+            $this->load->model("rolepermission_model");
             $data_up = array('name' => $_POST['name']);
-            $id_tintuc = $this->role_model->insert($data_up);
+            $id = $this->role_model->insert($data_up);
+            if (isset($_POST['permission'])) {
+                $permission = $_POST['permission'];
+//            $this->rolepermission_model->where('id_role', $id)->delete();
+                foreach ($permission as $row) {
+                    $this->rolepermission_model->insert(array('id_role' => $id, 'id_permission' => $row));
+                }
+            }
             redirect('admin/quanlyrole', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
-            load_inputfile($this->data);
-            load_editor($this->data);
+//            load_inputfile($this->data);
+//            load_editor($this->data);
+            $this->load->model("permission_model");
+            $permission = $this->permission_model->where(array('deleted' => 0))->group_by("module")->as_array()->get_all();
+            foreach ($permission as &$row) {
+                $row['child'] = $this->permission_model->where(array('module' => $row['module'], 'deleted' => 0))->as_array()->get_all();
+            }
+            $this->data['permission'] = $permission;
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
     }
@@ -979,18 +1043,35 @@ class Admin extends MY_Controller {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("role_model");
+            $this->load->model("rolepermission_model");
             $data_up = array('name' => $_POST['name']);
-            $id_tintuc = $this->role_model->update($data_up, $id);
+            $this->role_model->update($data_up, $id);
+            if (isset($_POST['permission'])) {
+                $permission = $_POST['permission'];
+                $this->rolepermission_model->where('id_role', $id)->delete();
+                foreach ($permission as $row) {
+                    $this->rolepermission_model->insert(array('id_role' => $id, 'id_permission' => $row));
+                }
+            }
             redirect('admin/quanlyrole', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->load->model("role_model");
-            $tin = $this->role_model->where(array('id' => $id))->as_object()->get();
+            $this->load->model("permission_model");
+            $tin = $this->role_model->where(array('id' => $id))->with_permission()->as_array()->get();
 //            echo "<pre>";
 //            print_r($tin);
 //            die();
             $this->data['tin'] = $tin;
-            load_inputfile($this->data);
-            load_editor($this->data);
+            $permission = $this->permission_model->where(array('deleted' => 0))->group_by("module")->as_array()->get_all();
+            foreach ($permission as &$row) {
+                $row['child'] = $this->permission_model->where(array('module' => $row['module'], 'deleted' => 0))->as_array()->get_all();
+            }
+            $this->data['permission'] = $permission;
+//            echo "<pre>";
+//            print_r($permission);
+//            die();
+//            load_inputfile($this->data);
+//            load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
     }
@@ -1009,8 +1090,8 @@ class Admin extends MY_Controller {
 
     public function quanlyuser() {
         $this->data['menu_active'] = "user";
-        $this->load->model("user_model");
-        $this->data['arr_tin'] = $this->user_model->limit(10)->with_role_user()->as_object()->get_all();
+//        $this->load->model("user_model");
+//        $this->data['arr_tin'] = $this->user_model->limit(10)->with_role_user()->as_object()->get_all();
 //        echo "<pre>";
 //        print_r($this->data['arr_tin']);
 //        die();
@@ -1059,29 +1140,130 @@ class Admin extends MY_Controller {
     }
 
     /*
-     * TABLE
+     * TABLE USER
      */
 
-    function table() {
-//        {
-//  "draw": 2,
-//  "recordsTotal": 57,
-//  "recordsFiltered": 57,
-//  "data": []
-//        }
+    function tableuser() {
+        $this->load->model("user_model");
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $page = ($start / $limit) + 1;
+        $where = $this->user_model;
 
-        $post = $this->input->post();
-        echo "<pre>";
-        print_r($post);
-        die();
-        $table = $_POST['table'];
-        $data_return = array(
-            'draw' => intval($post['draw']),
-            'recordsTotal' => 100,
-            'recordsFiltered' => 100,
-            'data' => array()
+        $totalData = $where->count_rows();
+        $totalFiltered = $totalData;
+
+        if (empty($this->input->post('search')['value'])) {
+//            $max_page = ceil($totalFiltered / $limit);
+
+            $where = $this->user_model;
+        } else {
+            $search = $this->input->post('search')['value'];
+            $where = $this->user_model->where("username like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE);
+            $totalFiltered = $where->count_rows();
+            $where = $this->user_model->where("username like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE);
+        }
+
+        $posts = $where->order_by("id", "DESC")->with_role_user()->paginate($limit, NULL, $page);
+//        echo "<pre>";
+//        print_r($posts);
+//        die();
+        $data = array();
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+
+                $nestedData['username'] = $post->username;
+                $nestedData['role_name'] = $post->role_user->name;
+                $nestedData['active'] = $post->active ? "Có" : "Không";
+                $nestedData['action'] = '<a href="' . base_url() . 'admin/edituser/' . $post->id . '" class="btn btn-default" title="edit">'
+                        . '<i class="ace-icon fa fa-pencil bigger-120">'
+                        . '</i>'
+                        . '</a>'
+                        . '<a href="' . base_url() . 'admin/removeuser/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                        . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                        . '</i>'
+                        . '</a>';
+
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
         );
-        echo json_encode($data_return);
+
+        echo json_encode($json_data);
+    }
+
+    /*
+     * TABLE Product
+     */
+
+    function tableproduct() {
+        $this->load->model("product_model");
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $page = ($start / $limit) + 1;
+        $where = $this->product_model->where("deleted", 0);
+
+        $totalData = $where->count_rows();
+        $totalFiltered = $totalData;
+
+        if (empty($this->input->post('search')['value'])) {
+//            $max_page = ceil($totalFiltered / $limit);
+
+            $where = $this->product_model->where("deleted", 0);
+        } else {
+            $search = $this->input->post('search')['value'];
+            $where = $this->product_model->where("deleted = 0 AND name_vi like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE);
+            $totalFiltered = $where->count_rows();
+            $where = $this->product_model->where("deleted = 0 and name_vi like '%" . $search . "%'", NULL, NULL, FALSE, FALSE, TRUE);
+        }
+
+        $posts = $where->order_by("date", "DESC")->with_hinhanh()->paginate($limit, NULL, $page);
+//        echo "<pre>";
+//        print_r($posts);
+//        die();
+        $data = array();
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+
+                $nestedData['id'] = $post->id;
+                $nestedData['hinhanh'] = "<img src='" . base_url() . (isset($post->hinhanh->thumb_src) ? $post->hinhanh->thumb_src : 'public/img/preview.png') . "' width='50'/>";
+                $nestedData['name'] = $post->name_vi;
+                $action = "";
+                if (is_permission("editproduct")) {
+                    $action .= '<a href="' . base_url() . 'admin/updateproduct/' . $post->id . '" class="btn btn-default" title="update">
+                                    <i class="fa fa-star">
+                                    </i>
+                                </a>
+                                <a href="' . base_url() . 'admin/editproduct/' . $post->id . '" class="btn btn-default" title="edit">'
+                            . '<i class="ace-icon fa fa-pencil bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                if (is_permission("removeproduct")) {
+                    $action .= '<a href="' . base_url() . 'admin/removeproduct/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                $nestedData['action'] = $action;
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+
+        echo json_encode($json_data);
     }
 
     /*

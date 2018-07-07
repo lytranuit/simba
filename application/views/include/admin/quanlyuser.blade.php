@@ -18,7 +18,6 @@
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>STT</th>
                             <th>Username</th>
                             <th>Role</th>
                             <th>Active</th>
@@ -26,32 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($arr_tin as $key=>$tin)
-                        <tr>
-                            <td>{{$key+1}}</td>
-                            <td>{{$tin->username}}</td>
-                            <td>{{$tin->role_user->name}}</td>
-                            <td>
-                                @if($tin->active == 1)
-                                Có
-                                @else
-                                Không   
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{base_url()}}admin/edituser/{{$tin->id}}" class="btn btn-default" title="edit">
-                                    <i class="ace-icon fa fa-pencil bigger-120">
-                                    </i>
-                                </a>
-                                @if($tin->role != 1)
-                                <a href="{{base_url()}}admin/removeuser/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
-                                    <i class="ace-icon fa fa-trash-o bigger-120">
-                                    </i>
-                                </a>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -61,6 +35,21 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#quanlytin').DataTable();
+        $('#quanlytin').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": path + "admin/tableuser",
+                "dataType": "json",
+                "type": "POST",
+            },
+            "columns": [
+                {"data": "username"},
+                {"data": "role_name"},
+                {"data": "active"},
+                {"data": "action"},
+            ]
+
+        });
     });
 </script>

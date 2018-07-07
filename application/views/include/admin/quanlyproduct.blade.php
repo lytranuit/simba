@@ -10,11 +10,13 @@
                 <h2>CBCL Sản phẩm</h2>
             </div>
             <div class="body">
+                @if(is_permission("themproduct"))
                 <div class="row">
                     <div class="col-md-12" style="margin:20px 0px;">
                         <a class="btn btn-success" href="{{base_url()}}admin/themproduct">Thêm CBCL Sản phẩm</a>
                     </div>
                 </div>
+                @endif
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -31,6 +33,7 @@
                             <td><img src='{{base_url()}}{{$tin->hinhanh->thumb_src or 'public/img/preview.png'}}' width="50"/></td>
                             <td>{{$tin->name_vi}}</td>
                             <td>
+                                @if(is_permission("editproduct"))
                                 <a href="{{base_url()}}admin/updateproduct/{{$tin->id}}" class="btn btn-default" title="update">
                                     <i class="fa fa-star">
                                     </i>
@@ -39,10 +42,13 @@
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
+                                @endif
+                                @if(is_permission("removeproduct"))
                                 <a href="{{base_url()}}admin/removeproduct/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -55,6 +61,21 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#quanlytin').DataTable();
+        $('#quanlytin').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": path + "admin/tableproduct",
+                "dataType": "json",
+                "type": "POST",
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "hinhanh"},
+                {"data": "name"},
+                {"data": "action"},
+            ]
+
+        });
     });
 </script>

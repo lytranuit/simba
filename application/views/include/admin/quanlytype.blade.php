@@ -10,11 +10,14 @@
                 <h2>Quản lý loại tin tức</h2>
             </div>
             <div class="body">
+
+                @if(is_permission("themtype"))
                 <div class="row">
                     <div class="col-md-12" style="margin:20px 0px;">
                         <a class="btn btn-success" href="{{base_url()}}admin/themtype">Thêm loại</a>
                     </div>
                 </div>
+                @endif
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -35,14 +38,20 @@
                             <td>{{$tin->name_jp}}</td>   
                             <td><span style="background: {{$tin->color}};width: 30px;height: 30px;display: inline-block;"></span></td>   
                             <td>
+
+                                @if(is_permission("edittype"))
                                 <a href="{{base_url()}}admin/edittype/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>
                                 </a>
+                                @endif
+
+                                @if(is_permission("removetype"))
                                 <a href="{{base_url()}}admin/removetype/{{$tin->id}}" class="btn btn-default" title="delete" data-type='confirm'>
                                     <i class="ace-icon fa fa-trash-o bigger-120">
                                     </i>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -351,13 +351,20 @@ $config['encryption_key'] = '';
   | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
   |
  */
-$config['sess_driver'] = 'database'; // Change files to database
+$config['sess_driver'] = 'database';  // select database driver
+$config['sess_save_path'] = 'ci_sessions';  // name of the mysql table
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = 'ci_sessions'; // This will be your database table for sessions
-$config['sess_match_ip'] = TRUE;
+$config['sess_expire_on_close'] = FALSE;
+$config['sess_encrypt_cookie'] = FALSE;
+$config['sess_use_database'] = TRUE;
+$config['sess_table_name'] = 'ci_sessions';
+$config['sess_match_ip'] = FALSE;
+$config['sess_match_useragent'] = FALSE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE;
+
+
+
 
 /*
   |--------------------------------------------------------------------------

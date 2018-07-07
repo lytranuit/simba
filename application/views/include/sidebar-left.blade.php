@@ -52,7 +52,7 @@
                         <span>Cá nhân</span>
                     </a>
                 </li>
-                @if($userdata['role'] < 3)
+                @if(is_permission("quanlynoibo"))
                 <li data="noibo">
                     <a href="<?= base_url() ?>admin/quanlynoibo">
                         <i class="material-icons">view_list</i>
@@ -60,84 +60,98 @@
                     </a>
                 </li>
                 @endif
-                <?php if ($userdata['role'] == 1): ?>
-                    <li class="header">Quản trị</li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block toggled">
-                            <i class="material-icons">home</i>
-                            <span>Trang chủ</span>
-                        </a>
-                        <ul class="ml-menu" style="display: block;">
-                            <li data='banner'>
-                                <a href="<?= base_url() ?>admin/slider">
-                                    <span>Banner</span>
-                                </a>
-                            </li>
-                            <li data='category'>
-                                <a href="<?= base_url() ?>admin/quanlycategory">
-                                    <span>Thông tin nhóm hàng</span>
-                                </a>
-                            </li>
-                            <li data='about'>
-                                <a href="<?= base_url() ?>admin/gioithieu">
-                                    <span>Sim Ba</span>
-                                </a>
-                            </li>
-                            <li data='client'>
-                                <a href="<?= base_url() ?>admin/quanlyclient">
-                                    <span>Đối tác</span>
-                                </a>
-                            </li>
-                            <li data='happy'>
-                                <a href="<?= base_url() ?>admin/quanlyhappy">
-                                    <span>Thông tin Đối tác</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li data='menu'>
-                        <a href="<?= base_url() ?>admin/quanlymenu">
-                            <i class="material-icons">list</i>
-                            <span>Menu</span>
-                        </a>
-                    </li>
-                    <li data='page'>
-                        <a href="<?= base_url() ?>admin/quanlypage">
-                            <i class="material-icons">list</i>
-                            <span>Liên kết</span>
-                        </a>
-                    </li>
-                    <li data='noibat'>
-                        <a href="<?= base_url() ?>admin/quanlynoibat">
-                            <i class="material-icons">list</i>
-                            <span>Thông tin nổi bật</span>
-                        </a>
-                    </li>
-                    <li data='tintuc'>
-                        <a href="<?= base_url() ?>admin/quanlytintuc">
-                            <i class="material-icons">list</i>
-                            <span>Công bố thông tin</span>
-                        </a>
-                    </li>
-                    <li data='product'>
-                        <a href="<?= base_url() ?>admin/quanlyproduct">
-                            <i class="material-icons">list</i>
-                            <span>CBCL Sản phẩm</span>
-                        </a>
-                    </li>
-                    <li data='type'>
-                        <a href="<?= base_url() ?>admin/quanlytype">
-                            <i class="material-icons">list</i>
-                            <span>Loại tin tức</span>
-                        </a>
-                    </li>
-                    <li data='comment'>
-                        <a href="<?= base_url() ?>admin/quanlycomment">
-                            <i class="material-icons">list</i>
-                            <span>Góp ý</span>
-                        </a>
-                    </li>
-                <?php endif; ?>
+                <li class="header">Quản trị</li>
+                @if(is_permission("trangchu"))
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block toggled">
+                        <i class="material-icons">home</i>
+                        <span>Trang chủ</span>
+                    </a>
+                    <ul class="ml-menu" style="display: block;">
+                        <li data='banner'>
+                            <a href="<?= base_url() ?>admin/slider">
+                                <span>Banner</span>
+                            </a>
+                        </li>
+                        <li data='category'>
+                            <a href="<?= base_url() ?>admin/quanlycategory">
+                                <span>Thông tin nhóm hàng</span>
+                            </a>
+                        </li>
+                        <li data='about'>
+                            <a href="<?= base_url() ?>admin/gioithieu">
+                                <span>Sim Ba</span>
+                            </a>
+                        </li>
+                        <li data='client'>
+                            <a href="<?= base_url() ?>admin/quanlyclient">
+                                <span>Đối tác</span>
+                            </a>
+                        </li>
+                        <li data='happy'>
+                            <a href="<?= base_url() ?>admin/quanlyhappy">
+                                <span>Thông tin Đối tác</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+                @if(is_permission("quanlymenu"))
+                <li data='menu'>
+                    <a href="<?= base_url() ?>admin/quanlymenu">
+                        <i class="material-icons">list</i>
+                        <span>Menu</span>
+                    </a>
+                </li>
+                @endif
+                @if(is_permission("quanlypage"))
+                <li data='page'>
+                    <a href="<?= base_url() ?>admin/quanlypage">
+                        <i class="material-icons">list</i>
+                        <span>Liên kết</span>
+                    </a>
+                </li>
+                @endif
+                @if(is_permission("quanlynoibat"))
+                <li data='noibat'>
+                    <a href="<?= base_url() ?>admin/quanlynoibat">
+                        <i class="material-icons">list</i>
+                        <span>Thông tin nổi bật</span>
+                    </a>
+                </li>
+                @endif
+                @if(is_permission("quanlytintuc"))
+                <li data='tintuc'>
+                    <a href="<?= base_url() ?>admin/quanlytintuc">
+                        <i class="material-icons">list</i>
+                        <span>Công bố thông tin</span>
+                    </a>
+                </li>
+                @endif
+                @if(is_permission("quanlyproduct"))
+                <li data='product'>
+                    <a href="<?= base_url() ?>admin/quanlyproduct">
+                        <i class="material-icons">list</i>
+                        <span>CBCL Sản phẩm</span>
+                    </a>
+                </li>
+                @endif
+                @if(is_permission("quanlytype"))
+                <li data='type'>
+                    <a href="<?= base_url() ?>admin/quanlytype">
+                        <i class="material-icons">list</i>
+                        <span>Loại tin tức</span>
+                    </a>
+                </li>
+                @endif
+                @if(is_permission("quanlycomment"))
+                <li data='comment'>
+                    <a href="<?= base_url() ?>admin/quanlycomment">
+                        <i class="material-icons">list</i>
+                        <span>Góp ý</span>
+                    </a>
+                </li>
+                @endif
                 <?php if ($userdata['role'] == 1): ?>
                     <li class="header">User</li>
                     <li data='user'>

@@ -71,6 +71,7 @@
                 <div class="main">
                     <!--<p>Sign up once and watch any of our free demos.</p>-->
                     <form id="form-password">
+                        <input type="hidden" name="id_user" value="{{$tin->id}}"/>
                         <div class="form-group">
                             <b class="form-label">Mât khẩu mới</b>
                             <div class="form-line">

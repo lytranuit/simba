@@ -14,7 +14,7 @@ jQuery(document).ready(function ($) {
         },
         submitHandler: function (form) {
             $.ajax({
-                url: 'ajax/contactsubmit',
+                url: path + 'ajax/contactsubmit',
                 data: $("#contactForm").serialize(),
                 dataType: "JSON",
                 type: "POST",
@@ -48,7 +48,7 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         var language = $(this).attr("data");
         $.ajax({
-            url: 'ajax/setlanguage',
+            url: path + 'ajax/setlanguage',
             data: {language: language},
             type: "POST",
             success: function () {

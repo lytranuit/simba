@@ -127,3 +127,32 @@ if (!function_exists('strtofloat')) {
     }
 
 }
+
+if (!function_exists('is_permission')) {
+
+    function is_permission($func) {
+        $array_permission = $_SESSION['permission'];
+        $role = $_SESSION['role'];
+        if ($role == 1 || in_array($func, $array_permission)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}
+
+if (!function_exists('has_permission')) {
+
+    function has_permission($func) {
+        $CI = &get_instance();
+        $CI->load->model('permission_model');
+        $permission = $CI->permission_model->where(array("function" => $func, 'deleted' => 0))->as_array()->get_all();
+        if (count($permission)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}

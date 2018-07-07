@@ -1,5 +1,5 @@
 <?php
-$hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "public/img/preview.png";
+$arr_permission = count($tin['permission']) ? array_keys($tin['permission']) : array();
 ?>
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
@@ -14,7 +14,6 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
             <div class="body">
                 <div class="row">
                     <form method="POST" action="" id="form-dang-tin" class="col-md-12">
-                        <input type="hidden" name='id_hinhanh' value='{{$tin->id_hinhanh}}' class='id_hinhanh'/>
                         <div class="col-md-12">
                             <div class="form-group form-float">
                                 <b class="form-label">Tên</b>
@@ -24,6 +23,21 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                                 </div>
                             </div>
                         </div>
+                        @if($tin['id'] != 1)
+                        @foreach($permission as $key=>$row)
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                {{$row['module_alias']}}
+                            </div>
+                            @foreach($row['child'] as $key1=>$row1)
+                            <div class="col-md-2">
+                                <input type="checkbox" id="md_checkbox_{{$key}}_{{$key1}}" class="filled-in chk-col-blue" name="permission[]" value="{{$row1['id']}}" <?= in_array($row1['id'], $arr_permission) ? "checked" : "" ?>>
+                                <label for="md_checkbox_{{$key}}_{{$key1}}">{{$row1['function_alias']}}</label>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endforeach
+                        @endif
                         <div class="col-md-12" style="padding-left:0;">
                             <button type="submit" name="dangtin" class="btn btn-primary">Sửa</button>
                         </div>

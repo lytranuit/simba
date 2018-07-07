@@ -20,6 +20,20 @@
                                 </div>
                             </div>
                         </div>
+
+                        @foreach($permission as $key=>$row)
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                {{$row['module_alias']}}
+                            </div>
+                            @foreach($row['child'] as $key1=>$row1)
+                            <div class="col-md-2">
+                                <input type="checkbox" id="md_checkbox_{{$key}}_{{$key1}}" class="filled-in chk-col-blue" name="permission[]" value="{{$row1['id']}}">
+                                <label for="md_checkbox_{{$key}}_{{$key1}}">{{$row1['function_alias']}}</label>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endforeach
                         <div class="col-md-12" style="padding-left:0;">
                             <button type="submit" name="dangtin" class="btn btn-primary">Thêm</button>
                         </div>
