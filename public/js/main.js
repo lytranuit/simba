@@ -1,8 +1,6 @@
 
 $(window).scroll();
 jQuery(document).ready(function ($) {
-    $("#select_product").chosen({width: "100%"});
-    $("#select_customer").chosen({width: "100%"});
     $(".fancybox").fancybox();
     $("#contactForm").validate({
         highlight: function (input) {
@@ -33,40 +31,6 @@ jQuery(document).ready(function ($) {
                     if (code == 400) {
                         $("#contactForm").trigger('reset');
                         grecaptcha.reset();
-                    }
-                }
-            });
-            return false;
-        }
-    });
-    $("#gop_y_khac").validate({
-        highlight: function (input) {
-            $(input).parents('.wrap-input100').addClass('error');
-        },
-        unhighlight: function (input) {
-            $(input).parents('.wrap-input100').removeClass('error');
-        },
-        errorPlacement: function (error, element) {
-//            $(element).parents('.form-group').append(error);
-        },
-        submitHandler: function (form) {
-            if ($("#gop_y_khac").data("requestRunning"))
-                return false;
-            $.ajax({
-                url: path + 'ajax/feedback',
-                data: $("#gop_y_khac").serialize(),
-                dataType: "JSON",
-                type: "POST",
-                beforeSend: function () {
-                    $("#gop_y_khac").data("requestRunning", true);
-                },
-                success: function (data) {
-                    $("#gop_y_khac").data("requestRunning", false);
-                    var code = data.code;
-                    var msg = data.msg;
-                    alert(msg);
-                    if (code == 400) {
-                        location.reload();
                     }
                 }
             });
@@ -353,7 +317,47 @@ jQuery(document).ready(function ($) {
     $("#advanced_comment").click(function (e) {
         e.preventDefault();
         if ($(".logged").length) {
-
+            console.log($('#comment-modal .modal-body').is(":empty"));
+            if ($('#comment-modal .modal-body').is(":empty"))
+                $('#comment-modal .modal-body').load(path + "ajax/modalfeedback", function (result) {
+                    $("#select_product").chosen({width: "100%"});
+                    $("#select_customer").chosen({width: "100%"});
+                    $('#myModal').modal({show: true});
+                    $("#gop_y_khac").validate({
+                        highlight: function (input) {
+                            $(input).parents('.wrap-input100').addClass('error');
+                        },
+                        unhighlight: function (input) {
+                            $(input).parents('.wrap-input100').removeClass('error');
+                        },
+                        errorPlacement: function (error, element) {
+//            $(element).parents('.form-group').append(error);
+                        },
+                        submitHandler: function (form) {
+                            if ($("#gop_y_khac").data("requestRunning"))
+                                return false;
+                            $.ajax({
+                                url: path + 'ajax/feedback',
+                                data: $("#gop_y_khac").serialize(),
+                                dataType: "JSON",
+                                type: "POST",
+                                beforeSend: function () {
+                                    $("#gop_y_khac").data("requestRunning", true);
+                                },
+                                success: function (data) {
+                                    $("#gop_y_khac").data("requestRunning", false);
+                                    var code = data.code;
+                                    var msg = data.msg;
+                                    alert(msg);
+                                    if (code == 400) {
+                                        location.reload();
+                                    }
+                                }
+                            });
+                            return false;
+                        }
+                    });
+                });
         } else {
             $(document).data("callback", click_gopy);
             $(".button_login").trigger("click");

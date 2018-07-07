@@ -243,6 +243,14 @@ class Ajax extends MY_Controller {
         }
     }
 
+    function modalfeedback() {
+        $this->load->model("customersimba_model");
+        $this->load->model("productsimba_model");
+        $this->data['customers'] = $this->customersimba_model->where(array('deleted' => 0))->as_array()->get_all();
+        $this->data['products'] = $this->productsimba_model->as_array()->get_all();
+        echo $this->blade->view()->make('ajax/modalfeedback', $this->data)->render();
+    }
+
     function feedback() {
         $this->load->model("feedback_model");
         if (isset($_POST['content'])) {
