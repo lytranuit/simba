@@ -13,10 +13,10 @@ class Ajax extends MY_Controller {
             if ($this->user_model->login($this->input->post('identity'), $this->input->post('password'))) {
                 echo json_encode(array('success' => 1, 'username' => $this->session->userdata('identity'), "role" => $this->session->userdata('role')));
             } else {
-                echo json_encode(array('success' => 0, 'msg' => "Tài khoản hoặc mật khẩu không đúng"));
+                echo json_encode(array('success' => 0, 'code' => 501, 'msg' => "Tài khoản hoặc mật khẩu không đúng"));
             }
         } else {
-            echo json_encode(array('success' => 0, 'msg' => "Tài khoản hoặc mật khẩu không đúng"));
+            echo json_encode(array('success' => 0, 'code' => 501, 'msg' => "Tài khoản hoặc mật khẩu không đúng"));
         }
     }
 
@@ -240,6 +240,23 @@ class Ajax extends MY_Controller {
             }
         } else {
             echo json_encode(array('code' => 403, 'msg' => "Vui lòng nhấn nút Captcha."));
+        }
+    }
+
+    function feedback() {
+        $this->load->model("feedback_model");
+        if (isset($_POST['content'])) {
+            $data = $_POST;
+            $data['date'] = time();
+            $data_up = $this->feedback_model->create_object($data);
+            $this->feedback_model->insert($data_up);
+            /*
+             * SET LIMIT 
+             */
+            $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
+            echo json_encode(array('code' => 400, 'msg' => "Cảm ơn bạn đã góp ý cho chúng tôi!"));
+        } else {
+            echo json_encode(array('code' => 402, 'msg' => "Vui lòng nhập đầy đủ thông tin."));
         }
     }
 

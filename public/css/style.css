@@ -1645,8 +1645,8 @@ NEWS
     box-shadow: none;
     font-size: 15px;
 }
-#contact #contactForm .error input, #contact #contactForm .error textarea{
-    border: 1px solid red;
+.error input,  .error textarea{
+    border: 1px solid red !important;
 }
 
 /*--------------------------------------------------------------

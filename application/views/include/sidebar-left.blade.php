@@ -152,6 +152,14 @@
                     </a>
                 </li>
                 @endif
+                @if(is_permission("quanlyfeedback"))
+                <li data='feedback'>
+                    <a href="<?= base_url() ?>admin/quanlyfeedback">
+                        <i class="material-icons">list</i>
+                        <span>Góp ý khác</span>
+                    </a>
+                </li>
+                @endif
                 <?php if ($userdata['role'] == 1): ?>
                     <li class="header">User</li>
                     <li data='user'>

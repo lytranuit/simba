@@ -1014,6 +1014,22 @@ class Admin extends MY_Controller {
     }
 
     /*
+     * GOP ý khác
+     */
+
+    public function quanlyfeedback() {
+        $this->load->model("feedback_model");
+        $this->data['menu_active'] = "feedback";
+        $all_menu = $this->feedback_model->where("deleted", 0)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get_all();
+//        echo "<pre>";
+//        print_r($all_menu);
+//        die();
+        $this->data['data'] = $all_menu;
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    /*
      * Role
      */
 

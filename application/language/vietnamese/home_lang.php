@@ -47,4 +47,15 @@ $lang['product_file'] = "File CBCL Sản phẩm";
  * CATEGORY
  */
 $lang['heading_product'] = "Sản phẩm";
+/*
+ * Ajax
+ */
+$lang['alert_406'] = "Bạn không có quyền download file!";
+$lang['alert_405'] = "File không tồn tại!";
+$lang['alert_404'] = "Thiếu thông số.";
+$lang['alert_403'] = "Yêu cầu đăng nhập.";
+$lang['alert_402'] = "Vui lòng nhập đầy đủ thông tin.";
+$lang['alert_401'] = "Vui lòng nhấn nút Captcha.";
+$lang['alert_400'] = "Cảm ơn bạn đã góp ý cho chúng tôi!";
+$lang['alert_501'] = "Tài khoản hoặc mật khẩu không đúng!";
 ?>

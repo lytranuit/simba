@@ -9,7 +9,7 @@
                     <div class="body">
                         <div class="row">
                             <div class="col-lg-6 row justify-content-center align-items-center">
-                                <div class="col-6">
+                                <div class="col-sm-6 col-8">
                                     <a class="fancybox" href="http://www.oishii.vn{{$tin['image_url']}}"><img class="img-fluid"src="http://www.oishii.vn{{$tin['image_url']}}" /></a>
                                 </div>
                             </div>
