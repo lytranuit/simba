@@ -10,22 +10,20 @@
         <div class="wrap-input100 validate-input">
             <b>Khách hàng</b>
             <div  class="col-12">
-                <select id="select_customer" name="customer_id">
-                    <option value="0">Chọn khách hàng </option>
-                    @foreach($customers as $row)
+                <select id="select_customer" name="customer_id" required="">
+<!--                    @foreach($customers as $row)
                     <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name']}}</option>
-                    @endforeach
+                    @endforeach-->
                 </select>
             </div>
         </div>
         <div class="wrap-input100 validate-input">
             <b>Sản phẩm</b>
             <div  class="col-12">
-                <select id="select_product" name="product_id">
-                    <option value="0">Chọn Sản phẩm</option>
-                    @foreach($products as $row)
+                <select id="select_product" name="product_id" required="">
+<!--                    @foreach($products as $row)
                     <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name_vi']}}</option>
-                    @endforeach
+                    @endforeach-->
                 </select>
             </div>
         </div>

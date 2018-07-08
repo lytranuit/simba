@@ -1645,7 +1645,7 @@ NEWS
     box-shadow: none;
     font-size: 15px;
 }
-.error input,  .error textarea{
+.error input,  .error textarea,.error .chosen-single{
     border: 1px solid red !important;
 }
 

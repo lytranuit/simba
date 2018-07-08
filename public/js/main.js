@@ -294,6 +294,8 @@ jQuery(document).ready(function ($) {
                     alert(data.msg);
                 } else {
                     var username = data.username;
+                    var role = data.role;
+                    var role_feedback = data.role_feedback;
                     var $button_login = $(".button_login");
                     $button_login.addClass("logged").removeAttr("data-target").attr("data-toggle", "dropdown").attr("id", "navbarDropdownMenuLink");
                     $("#mobile-nav .button_login").removeAttr("data-toggle");
@@ -301,13 +303,11 @@ jQuery(document).ready(function ($) {
                     $("#mobile-nav .button_login").parent().after($logout);
                     $("span", $button_login).text(username);
                     $('.modal').modal('hide');
+                    $button_login.attr("role", role).attr("data-name", username);
+                    $("#advanced_comment").attr("role_feedback", role_feedback);
                     if (typeof callback === "function") {
                         callback(param);
                     } else {
-                        var role = data.role;
-                        var role_feedback = data.role_feedback;
-                        $button_login.attr("role", role);
-                        $("#advanced_comment").attr("role_feedback", role_feedback);
                         if (role == "1") {
                             location.href = path + "admin";
                         }
@@ -325,9 +325,46 @@ jQuery(document).ready(function ($) {
         if ($is_logged && ($role_user == "1" || $.inArray($role_user, $role_feedback) != -1)) {
             if ($('#comment-modal .modal-body').is(":empty"))
                 $('#comment-modal .modal-body').load(path + "ajax/modalfeedback", function (result) {
-                    $("#select_product").chosen({width: "100%"});
-                    $("#select_customer").chosen({width: "100%"});
+//                    $("#select_product").chosen({width: "100%"});
+//                    $("#select_customer").chosen({width: "100%"});
+                    var name = $(".logged").first().attr("data-name");
+                    $("#name1").val(name);
+//                    $('#select_customer_chosen input').autocomplete({
+//                        source: function (request, response) {
+//                            $.ajax({
+//                                url: path + "ajax/customer",
+//                                data: {search: +request.term},
+//                                dataType: "json",
+//                                beforeSend: function () {
+////                                    $('ul.chzn-results').empty();
+//                                },
+//                                success: function (data) {
+//                                    response($.map(data, function (item) {
+//                                        $('#select_customer').append('<option value="blah">' + item.name + '</option>');
+//                                    }));
+//
+//                                    $("#select_customer").trigger("chosen:updated");
+//                                }
+//                            });
+//                        }
+//                    });
                     $('#myModal').modal({show: true});
+
+                    $("#select_customer").ajaxChosen({
+                        dataType: 'json',
+                        type: 'POST',
+                        url: path + "ajax/feedbackcustomer",
+                    }, {
+                        loadingImg: path + 'public/img/loading.gif'
+                    }, {width: "100%", allow_single_deselect: true});
+
+                    $("#select_product").ajaxChosen({
+                        dataType: 'json',
+                        type: 'POST',
+                        url: path + "ajax/feedbackproduct",
+                    }, {
+                        loadingImg: path + 'public/img/loading.gif'
+                    }, {width: "100%", allow_single_deselect: true});
                     $("#gop_y_khac").validate({
                         highlight: function (input) {
                             $(input).parents('.wrap-input100').addClass('error');
@@ -372,6 +409,7 @@ jQuery(document).ready(function ($) {
             return false;
         }
     });
+
     $(".files").click(function (e) {
         e.preventDefault();
         var id = $(this).attr("data");

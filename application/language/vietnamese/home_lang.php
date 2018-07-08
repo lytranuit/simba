@@ -6,7 +6,7 @@
 $lang['info'] = 'Cá nhân';
 $lang['logout'] = 'Đăng xuất';
 $lang['login'] = 'Đăng nhập';
-$lang['help_login'] = 'Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Oishii.vn';
+$lang['help_login'] = 'Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Simba';
 $lang['login_identity_label'] = 'Tên đăng nhập';
 $lang['login_password_label'] = 'Mật khẩu';
 /*
@@ -61,4 +61,6 @@ $lang['alert_400'] = "Cảm ơn bạn đã góp ý cho chúng tôi!";
 $lang['alert_501'] = "Tài khoản hoặc mật khẩu không đúng!";
 
 $lang['mua_hang'] = "Mời bạn chọn mua sản phẩm tại www.oishii.vn hoặc gọi 1800 9469 (miễn phí)";
+$lang['search'] = "Tìm kiếm";
+$lang['no_data'] = "Không có dữ liệu";
 ?>

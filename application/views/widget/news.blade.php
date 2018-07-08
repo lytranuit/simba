@@ -9,7 +9,7 @@
             <div id="search-new" class="col-md-6 col-12">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control input_search" placeholder="Tìm kiếm">
+                        <input type="text" class="form-control input_search" placeholder="{{lang("search")}}">
                         <div class="input-group-append bg-success border-primary button_search" style="cursor: pointer;">
                             <span class="input-group-text bg-transparent text-white"><i class="fa fa-search"></i></span>
                         </div>
@@ -32,7 +32,7 @@
             <div id="search-new" class="col-md-6 col-12">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control input_search" placeholder="Tìm kiếm">
+                        <input type="text" class="form-control input_search" placeholder="{{lang("search")}}">
                         <div class="input-group-append bg-success border-primary button_search" style="cursor: pointer;">
                             <span class="input-group-text bg-transparent text-white"><i class="fa fa-search"></i></span>
                         </div>

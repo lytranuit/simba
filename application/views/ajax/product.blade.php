@@ -60,6 +60,6 @@
 @endif
 @else
 <h3 class="no-data text-center col-12">
-    No data
+   {{lang('no_data')}}
 </h3>
 @endif

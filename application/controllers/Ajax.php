@@ -247,8 +247,8 @@ class Ajax extends MY_Controller {
     function modalfeedback() {
         $this->load->model("customersimba_model");
         $this->load->model("productsimba_model");
-        $this->data['customers'] = $this->customersimba_model->where(array('deleted' => 0))->as_array()->get_all();
-        $this->data['products'] = $this->productsimba_model->as_array()->get_all();
+        $this->data['customers'] = $this->customersimba_model->where(array('deleted' => 0))->limit(10)->as_array()->get_all();
+        $this->data['products'] = $this->productsimba_model->limit(10)->as_array()->get_all();
         echo $this->blade->view()->make('ajax/modalfeedback', $this->data)->render();
     }
 
@@ -267,6 +267,30 @@ class Ajax extends MY_Controller {
         } else {
             echo json_encode(array('code' => 402, 'msg' => "Vui lòng nhập đầy đủ thông tin."));
         }
+    }
+
+    function feedbackcustomer() {
+        $this->load->model("customersimba_model");
+        $search = $this->input->post("data");
+        $search = $search['q'];
+        $data = $this->customersimba_model->where("deleted = 0 AND (code like '%$search%' OR name like '%$search%')", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        $results = array();
+        foreach ($data as $row) {
+            $results[] = array("id" => $row['id'], 'text' => $row['code'] . ' - ' . $row['name']);
+        }
+        echo json_encode(array('q' => $search, 'results' => $results));
+    }
+
+    function feedbackproduct() {
+        $this->load->model("productsimba_model");
+        $search = $this->input->post("data");
+        $search = $search['q'];
+        $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%')", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        $results = array();
+        foreach ($data as $row) {
+            $results[] = array("id" => $row['id'], 'text' => $row['code'] . ' - ' . $row['name_vi']);
+        }
+        echo json_encode(array('q' => $search, 'results' => $results));
     }
 
     function updatemenu() {
