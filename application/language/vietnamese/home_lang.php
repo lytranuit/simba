@@ -32,7 +32,7 @@ $lang['Your_Phone'] = 'Điện thoại';
 $lang['Your_Email'] = 'Email';
 $lang['Message'] = 'Nội dung';
 $lang['text_gop_y'] = 'Góp ý khác';
-$lang['Send_Message'] = 'Gửi liên hệ';
+$lang['Send_Message'] = 'Gửi góp ý';
 /*
  * PRODUCT
  */

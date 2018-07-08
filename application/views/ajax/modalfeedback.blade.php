@@ -11,9 +11,9 @@
             <b>Khách hàng</b>
             <div  class="col-12">
                 <select id="select_customer" name="customer_id" required="">
-<!--                    @foreach($customers as $row)
-                    <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name']}}</option>
-                    @endforeach-->
+                    <!--                    @foreach($customers as $row)
+                                        <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name']}}</option>
+                                        @endforeach-->
                 </select>
             </div>
         </div>
@@ -21,9 +21,9 @@
             <b>Sản phẩm</b>
             <div  class="col-12">
                 <select id="select_product" name="product_id" required="">
-<!--                    @foreach($products as $row)
-                    <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name_vi']}}</option>
-                    @endforeach-->
+                    <!--                    @foreach($products as $row)
+                                        <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name_vi']}}</option>
+                                        @endforeach-->
                 </select>
             </div>
         </div>
@@ -32,7 +32,7 @@
         </div>
         <div>
             <button class="btn btn-success btn-sm">
-                <?= lang('Comment') ?>
+                <?= lang('Send_Message') ?>
             </button>
         </div>
     </form>
