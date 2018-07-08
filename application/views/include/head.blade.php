@@ -19,6 +19,8 @@
 @endforeach
 <script>
     var path = '<?= base_url() ?>';
+    var alert_406 = '<?= lang('alert_406') ?>';
+    var alert_407 = '<?= lang('alert_407') ?>';
 </script>
 @foreach($javascript_tag as $url)
 <script src="{{$url}}"></script>

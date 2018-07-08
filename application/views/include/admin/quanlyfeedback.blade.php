@@ -19,6 +19,7 @@
                             <th>Sản phẩm</th>
                             <th>Nội dung</th>
                             <th>Ngày</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,9 +28,24 @@
                             <td>{{$key+1}}</td>
                             <td>{{$tin->name}}</td>
                             <td><?= isset($tin->customer) ? $tin->customer->code . "-" . $tin->customer->name : "" ?></td>
-                             <td><?= isset($tin->product) ? $tin->product->code . "-" . $tin->product->name_vi : "" ?></td>
+                            <td><?= isset($tin->product) ? $tin->product->code . "-" . $tin->product->name_vi : "" ?></td>
                             <td>{{$tin->content}}</td>
                             <td>{{date("Y-m-d",$tin->date)}}</td>
+                            <td>
+                                @if(is_permission("editfeedback"))
+                                <a href="{{base_url()}}admin/editfeedback/{{$tin->id}}" class="btn btn-default" title="edit">
+                                    <i class="ace-icon fa fa-pencil bigger-120">
+                                    </i>
+                                </a>
+                                @endif
+                                @if(is_permission("removefeedback"))
+                                <a href="{{base_url()}}admin/removefeedback/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
+                                    <i class="ace-icon fa fa-trash-o bigger-120">
+                                    </i>
+                                </a>
+
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

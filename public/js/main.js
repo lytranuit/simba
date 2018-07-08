@@ -268,7 +268,7 @@ jQuery(document).ready(function ($) {
     $(".category-carousel").owlCarousel({
         autoplay: true,
         dots: true,
-        loop: false,
+        loop: true,
         margin: 15,
         responsive: {0: {items: 2, slideBy: 2}, 768: {items: 3, slideBy: 3}, 900: {items: 3, slideBy: 3}}
     });
@@ -305,7 +305,9 @@ jQuery(document).ready(function ($) {
                         callback(param);
                     } else {
                         var role = data.role;
+                        var role_feedback = data.role_feedback;
                         $button_login.attr("role", role);
+                        $("#advanced_comment").attr("role_feedback", role_feedback);
                         if (role == "1") {
                             location.href = path + "admin";
                         }
@@ -317,8 +319,10 @@ jQuery(document).ready(function ($) {
     });
     $("#advanced_comment").click(function (e) {
         e.preventDefault();
-        if ($(".logged").length) {
-            console.log($('#comment-modal .modal-body').is(":empty"));
+        var $is_logged = $(".logged").length;
+        var $role_user = $(".logged").attr("role");
+        var $role_feedback = $("#advanced_comment").attr("role_feedback") ? $("#advanced_comment").attr("role_feedback").split(",") : [];
+        if ($is_logged && ($role_user == "1" || $.inArray($role_user, $role_feedback) != -1)) {
             if ($('#comment-modal .modal-body').is(":empty"))
                 $('#comment-modal .modal-body').load(path + "ajax/modalfeedback", function (result) {
                     $("#select_product").chosen({width: "100%"});
@@ -359,9 +363,12 @@ jQuery(document).ready(function ($) {
                         }
                     });
                 });
-        } else {
+        } else if (!$is_logged) {
             $(document).data("callback", click_gopy);
             $(".button_login").trigger("click");
+            return false;
+        } else if ($.inArray($role_user, $role_feedback) == -1) {
+            alert(alert_407);
             return false;
         }
     });
@@ -494,5 +501,5 @@ function download_file(...param) {
     if (role_user && $.inArray(role_user, role_download.split(",")) != -1)
         location.href = path + "ajax/downloadfile?id=" + id;
     else
-        alert("Bạn không có quyền download file này. Liên hệ Simba");
+        alert(alert_406);
 }

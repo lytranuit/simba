@@ -1029,6 +1029,37 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
+    public function editfeedback($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("feedback_model");
+            $data = $_POST;
+            $data_up = $this->feedback_model->create_object($data);
+            $this->feedback_model->update($data_up, $id);
+            redirect('admin/quanlyfeedback', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("feedback_model");
+            $tin = $this->feedback_model->with_product()->with_customer()->where(array('id' => $id))->as_object()->get();
+//            echo "<pre>";
+//            print_r($tin);
+//            die();
+            $this->load->model("customersimba_model");
+            $this->load->model("productsimba_model");
+            $this->data['customers'] = $this->customersimba_model->where(array('deleted' => 0))->as_array()->get_all();
+            $this->data['products'] = $this->productsimba_model->as_array()->get_all();
+            $this->data['tin'] = $tin;
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removefeedback($params) {
+        $this->load->model("feedback_model");
+        $id = $params[0];
+        $this->feedback_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
     /*
      * Role
      */

@@ -103,7 +103,7 @@ Footer
                                     <button id="send_message"class="btn btn-success btn-sm" name="submit" type="submit">
                                         <?= lang('Send_Message') ?>
                                     </button>
-                                    <a id="advanced_comment" class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal">
+                                    <a id="advanced_comment" class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal" role_feedback="{{$role_feedback}}">
                                         <?= lang('text_gop_y') ?>
                                     </a>
                                 </div>

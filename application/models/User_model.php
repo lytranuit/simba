@@ -100,6 +100,16 @@ class User_model extends MY_Model {
         return TRUE;
     }
 
+    public function role_permission($id_permission) {
+        $query = $this->db->from("role_permission")
+                        ->where('id_permission', $id_permission)->group_by("id_role")->get();
+        $permission = $query->result_array();
+        $permission = array_map(function($item) {
+            return $item['id_role'];
+        }, $permission);
+        return $permission;
+    }
+
     /**
      * logout
      *

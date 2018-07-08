@@ -50,7 +50,8 @@ $lang['heading_product'] = "Products";
 /*
  * Ajax
  */
-$lang['alert_406'] = "You don't have access to download this file";
+$lang['alert_407'] = "Sorry, you have no access authority. Please contact Simba";
+$lang['alert_406'] = "Sorry, you have no access to download this file. Please contact Simba";
 $lang['alert_405'] = "This file does not exist";
 $lang['alert_404'] = "not enough information";
 $lang['alert_403'] = "Please log in";

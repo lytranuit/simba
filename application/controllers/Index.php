@@ -37,7 +37,7 @@ class Index extends MY_Controller {
             base_url() . 'public/lib/isotope/isotope.pkgd.min.js',
             base_url() . 'public/lib/fancybox/jquery.fancybox.min.js',
             base_url() . 'public/lib/touchSwipe/jquery.touchSwipe.min.js',
-            base_url() . "public/admin/plugins/chosen/chosen.jquery.min.js",
+            base_url() . "public/admin/plugins/chosen/chosen.jquery.js",
             base_url() . 'public/js/main.js?v=' . $version,
         );
     }

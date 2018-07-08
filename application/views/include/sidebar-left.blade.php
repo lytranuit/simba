@@ -175,6 +175,9 @@
                         </a>
                     </li>
                 <?php endif; ?>
+                    <li style="height: 50px;">
+                         <span></span>
+                    </li>
             </ul>
         </div>
         <!-- #Menu -->
