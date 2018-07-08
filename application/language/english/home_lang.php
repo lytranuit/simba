@@ -3,59 +3,62 @@
 /*
  * LOGIN
  */
-$lang['info'] = 'Cá nhân';
-$lang['logout'] = 'Đăng xuất';
-$lang['login'] = 'Đăng nhập';
-$lang['help_login'] = 'Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Oishii.vn';
-$lang['login_identity_label'] = 'Tên đăng nhập';
-$lang['login_password_label'] = 'Mật khẩu';
+$lang['info'] = 'Your Administration';
+$lang['logout'] = 'Sign Out';
+$lang['login'] = 'Sign In';
+$lang['help_login'] = 'Please contact Simba to get ID and Password';
+$lang['login_identity_label'] = 'ID';
+$lang['login_password_label'] = 'password';
 /*
  * TITLE HOME
  */
 
-$lang['Home'] = 'Trang chủ';
-$lang['SIMBA'] = 'Sim Ba';
-$lang['News'] = 'Công bố thông tin';
-$lang['News_product'] = 'CBCL Sản phẩm';
-$lang['Clients'] = 'Đối tác';
+$lang['Home'] = 'Home';
+$lang['SIMBA'] = 'Indentifying Simba';
+$lang['News'] = 'News Release';
+$lang['News_product'] = 'Products Registration';
+$lang['Clients'] = 'Partners';
 /*
  * TITLE FOTTER
  */
-$lang['Comment'] = 'Góp ý';
-$lang['Contact'] = 'Liên hệ';
-$lang['Links'] = 'Liên kết';
+$lang['Comment'] = 'Comments';
+$lang['Contact'] = 'Contact';
+$lang['Links'] = 'Links';
 /*
  * FOOTER
  */
-$lang['Your_Name'] = 'Tên';
-$lang['Your_Phone'] = 'Điện thoại';
+$lang['Your_Name'] = 'Your Name';
+$lang['Your_Phone'] = 'Phone Number';
 $lang['Your_Email'] = 'Email';
-$lang['Message'] = 'Nội dung';
-$lang['text_gop_y'] = 'Góp ý khác';
-$lang['Send_Message'] = 'Gửi liên hệ';
+$lang['Message'] = 'Message';
+$lang['text_gop_y'] = 'Other Comments';
+$lang['Send_Message'] = 'Send Message';
 /*
  * PRODUCT
  */
-$lang['product_tomtat'] = "Thông tin tóm tắt";
-$lang['product_code'] = "Mã hàng";
-$lang['product_xuatxu'] = "Xuất xứ";
-$lang['product_dungtich'] = "Dung tích/Trọng lượng";
-$lang['product_baoquan'] = "Bảo quản";
-$lang['product_mota'] = "Mô tả";
-$lang['product_file'] = "File CBCL Sản phẩm";
+$lang['product_tomtat'] = "Product information";
+$lang['product_code'] = "Product ID";
+$lang['product_xuatxu'] = "Origin";
+$lang['product_dungtich'] = "Volume/Weight";
+$lang['product_baoquan'] = "Storage Condition";
+$lang['product_mota'] = "Description";
+$lang['product_file'] = "Download Products Registration File";
 /*
  * CATEGORY
  */
-$lang['heading_product'] = "Sản phẩm";
+$lang['heading_product'] = "Products";
 /*
  * Ajax
  */
-$lang['alert_406'] = "Bạn không có quyền download file!";
-$lang['alert_405'] = "File không tồn tại!";
-$lang['alert_404'] = "Thiếu thông số.";
-$lang['alert_403'] = "Yêu cầu đăng nhập.";
-$lang['alert_402'] = "Vui lòng nhập đầy đủ thông tin.";
-$lang['alert_401'] = "Vui lòng nhấn nút Captcha.";
-$lang['alert_400'] = "Cảm ơn bạn đã góp ý cho chúng tôi!";
-$lang['alert_501'] = "Tài khoản hoặc mật khẩu không đúng!";
+$lang['alert_406'] = "You don't have access to download this file";
+$lang['alert_405'] = "This file does not exist";
+$lang['alert_404'] = "not enough information";
+$lang['alert_403'] = "Please log in";
+$lang['alert_402'] = "Please fullfill required information";
+$lang['alert_401'] = "Please tick Captcha";
+$lang['alert_400'] = "Thank you very much for your comments!";
+$lang['alert_501'] = "ID or password is not correct";
+
+
+$lang['mua_hang'] = "Please shop online at www.oishii.vn or call 1800 9469";
 ?>

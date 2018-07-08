@@ -305,6 +305,7 @@ jQuery(document).ready(function ($) {
                         callback(param);
                     } else {
                         var role = data.role;
+                        $button_login.attr("role", role);
                         if (role == "1") {
                             location.href = path + "admin";
                         }
@@ -368,9 +369,9 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         var id = $(this).attr("data");
         if ($(".logged").length) {
-            download_file(id);
+            download_file(this);
         } else {
-            $(document).data("param", id);
+            $(document).data("param", this);
             $(document).data("callback", download_file);
             $(".button_login").trigger("click");
             return false;
@@ -486,9 +487,12 @@ function click_gopy(...param) {
     $("#advanced_comment").trigger("click");
 }
 function download_file(...param) {
-    var id = param[0];
-    window.open(
-            path + "ajax/downloadfile?id=" + id,
-            '_blank' // <- This is what makes it open in a new window.
-            );
+    var $this = param[0];
+    var id = $($this).attr("data");
+    var role_download = $($this).attr("role");
+    var role_user = $(".button_login").attr("role");
+    if (role_user && $.inArray(role_user, role_download.split(",")) != -1)
+        location.href = path + "ajax/downloadfile?id=" + id;
+    else
+        alert("Bạn không có quyền download file này. Liên hệ Simba");
 }

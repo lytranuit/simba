@@ -10,7 +10,7 @@
         </div>
         <div class="pull-right hidden-md-down" style="margin: 5px;">
             <?php if ($is_login): ?> 
-                <a class="button_login logged" href="<?= base_url() ?>admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="button_login logged" href="<?= base_url() ?>admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="{{$_SESSION['role']}}">
                     <span class="btn-get-started" style="font-size: 0.8rem;padding: 5px 8px;margin: 0;">
                         <?= $userdata['identity'] ?>
                     </span>

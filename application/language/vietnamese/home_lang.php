@@ -58,4 +58,7 @@ $lang['alert_402'] = "Vui lòng nhập đầy đủ thông tin.";
 $lang['alert_401'] = "Vui lòng nhấn nút Captcha.";
 $lang['alert_400'] = "Cảm ơn bạn đã góp ý cho chúng tôi!";
 $lang['alert_501'] = "Tài khoản hoặc mật khẩu không đúng!";
+
+
+$lang['mua_hang'] = "Mời bạn chọn mua sản phẩm tại www.oishii.vn hoặc gọi 1800 9469 (miễn phí)";
 ?>

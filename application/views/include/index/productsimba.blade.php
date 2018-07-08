@@ -36,7 +36,7 @@
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_mota')}}:</label>
-                                        <span>{{$tin[pick_language($tin,'description_')]}} <p><a href="http://www.oishii.vn/product/view/{{$tin['id']}}/{{sluggable($tin[pick_language($tin,'name_')])}}" target="_blank">Hãy chọn mua Sản phẩm tại www.oishii.com.vn</a></p></span>
+                                        <span>{{$tin[pick_language($tin,'description_')]}} <p><a href="http://www.oishii.vn/product/view/{{$tin['id']}}/{{sluggable($tin[pick_language($tin,'name_')])}}" target="_blank">{{lang('mua_hang')}}</a></p></span>
                                     </li>
                                 </ul>
                             </div>
