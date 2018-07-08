@@ -16,7 +16,7 @@ $lang['login_password_label'] = 'Mật khẩu';
 $lang['Home'] = 'Trang chủ';
 $lang['SIMBA'] = 'CÔNG TY TNHH TM SIM BA';
 $lang['News'] = 'Công bố thông tin';
-$lang['News_product'] = 'CBCL Sản phẩm';
+$lang['News_product'] = 'Công bố chất lượng sản phẩm';
 $lang['Clients'] = 'Đối tác';
 /*
  * TITLE FOTTER
