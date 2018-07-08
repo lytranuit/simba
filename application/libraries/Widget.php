@@ -40,7 +40,7 @@ class Widget {
         $this->data['lienket'] = $lienket;
         $role_gopy = "";
         if ($this->data['is_login']) {
-            $role_gopy = implode(",", $this->CI->user_model->role_permission(31));
+            $role_gopy = implode(",", $this->CI->user_model->role_permission(29));
         }
         $this->data['role_feedback'] = $role_gopy;
         $this->data['captcha'] = $this->CI->recaptcha->getWidget(array('style' => 'transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;'));
