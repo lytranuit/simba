@@ -26,7 +26,7 @@ $arr_permission = count($tin['permission']) ? array_keys($tin['permission']) : a
                         @if($tin['id'] != 1)
                         @foreach($permission as $key=>$row)
                         <div class="col-md-12">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 {{$row['module_alias']}}
                             </div>
                             @foreach($row['child'] as $key1=>$row1)

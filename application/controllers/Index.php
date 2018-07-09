@@ -129,6 +129,8 @@ class Index extends MY_Controller {
         $tin['product']['preservation'] = $this->productsimba_model->preservation($tin['product']['preservation_id']);
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
+        $this->data['role_permission_download'] = $this->user_model->role_permission(32);
+
 //        echo "<pre>";
 //        print_r($tin);
 //        die();

@@ -44,7 +44,7 @@
                                         <label class="col-md-4 col-6">{{lang('product_file')}}:</label>
                                         <div>
                                             @foreach($tin['files'] as $row)
-                                            <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}' role="{{$row['role_download']}}">
+                                            <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}' role="{{implode(",",array_merge(explode(",",$row['role_download']),$role_permission_download))}}">
                                                 <i class="file-icon" data-type="<?= pathinfo($row['real_hinhanh'], PATHINFO_EXTENSION); ?>"></i>
                                                 {{$row['real_hinhanh']}}
                                             </a>
