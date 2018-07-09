@@ -1,10 +1,13 @@
 <?php
 $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "public/img/preview.png";
-$role_download = array();
+
 if (count((array) $tin->files)) {
+    $role_download = array();
     foreach ($tin->files as $key => $row):
         $role_download = explode(",", $row->role_download);
     endforeach;
+}else {
+    $role_download = explode(",", $role_download->content);
 }
 ?>
 

@@ -11,4 +11,12 @@ class Option_model extends MY_Model {
         parent::__construct();
     }
 
+    function update_role_download($role) {
+        $sql = "UPDATE tbl_hinhanh AS a JOIN tbl_product_file AS b ON a.`id_hinhanh` = b.`id_file` SET a.role_download = '$role'";
+        echo $sql;
+//        die();
+        $query = $this->db->query($sql);
+//        return $query->result();
+    }
+
 }

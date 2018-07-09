@@ -1,4 +1,6 @@
-
+<?php
+$role_download = explode(",", $role_download->content);
+?>
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">CBCL Sản phẩm</a></li>
@@ -10,13 +12,38 @@
                 <h2>CBCL Sản phẩm</h2>
             </div>
             <div class="body">
-                @if(is_permission("themproduct"))
+
                 <div class="row">
-                    <div class="col-md-12" style="margin:20px 0px;">
+                    @if(is_permission("themproduct"))
+                    <div class="col-md-4" style="margin:20px 0px;">
                         <a class="btn btn-success" href="{{base_url()}}admin/themproduct">Thêm CBCL Sản phẩm</a>
                     </div>
+                    @endif
+                    @if(is_permission("editproduct"))
+                    <form method="POST" action="{{base_url()}}admin/updatedownload" id="form-update" class="col-md-8">
+
+                        <div class="col-md-12 text-center">
+                            <b>Update toàn bộ quyền download file CBCL </b>
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-control" name="role_download[]" id="role_download" multiple="">
+                                @foreach($role as $row)
+                                @if(in_array($row['id'],$role_download))
+                                <option value="{{$row['id']}}" selected="">{{$row['name']}}</option>
+                                @else 
+                                <option value="{{$row['id']}}">{{$row['name']}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="hidden" value="info" name="updatedownload" />
+                            <button class="btn btn-primary" data-type="updatedownload">Update</button>
+                        </div>
+                    </form>
+                    @endif
                 </div>
-                @endif
+
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -27,31 +54,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($arr_tin as $key=>$tin)
-                        <tr>
-                            <td>{{$key+1}}</td>
-                            <td><img src='{{base_url()}}{{$tin->hinhanh->thumb_src or 'public/img/preview.png'}}' width="50"/></td>
-                            <td>{{$tin->name_vi}}</td>
-                            <td>
-                                @if(is_permission("editproduct"))
-                                <a href="{{base_url()}}admin/updateproduct/{{$tin->id}}" class="btn btn-default" title="update">
-                                    <i class="fa fa-star">
-                                    </i>
-                                </a>
-                                <a href="{{base_url()}}admin/editproduct/{{$tin->id}}" class="btn btn-default" title="edit">
-                                    <i class="ace-icon fa fa-pencil bigger-120">
-                                    </i>
-                                </a>
-                                @endif
-                                @if(is_permission("removeproduct"))
-                                <a href="{{base_url()}}admin/removeproduct/{{$tin->id}}" class="btn btn-default" data-type='confirm' title="remove">
-                                    <i class="ace-icon fa fa-trash-o bigger-120">
-                                    </i>
-                                </a>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -61,6 +64,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#role_download").chosen();
         $('#quanlytin').DataTable({
             "processing": true,
             "serverSide": true,

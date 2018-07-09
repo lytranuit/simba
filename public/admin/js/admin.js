@@ -402,7 +402,7 @@ $.AdminBSB.dropdownMenu = {
 }
 $.AdminBSB.Custom = {
     activate: function () {
-        $("a[data-type=confirm]").click(function (e) {
+        $(document).off("click", "a[data-type=confirm]").on("click", "a[data-type=confirm]", function (e) {
             e.preventDefault();
             var href = $(this).attr("href");
             swal({
@@ -414,6 +414,19 @@ $.AdminBSB.Custom = {
                 closeOnConfirm: false
             }, function () {
                 location.href = href;
+            });
+        });
+        $(document).off("click", "[data-type=updatedownload]").on("click", "[data-type=updatedownload]", function (e) {
+            e.preventDefault();
+            swal({
+                title: "Bạn có muốn update lại toàn bộ Role Download?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes!",
+                closeOnConfirm: false
+            }, function () {
+                $("#form-update").submit();
             });
         });
     }

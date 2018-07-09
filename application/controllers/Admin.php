@@ -442,6 +442,11 @@ class Admin extends MY_Controller {
         $this->data['arr_tin'] = array();
 //        print_r($this->data['arr_tin']);
 //        die();
+        $this->load->model("role_model");
+        $this->load->model("option_model");
+
+        $this->data['role'] = $this->role_model->as_array()->get_all();
+        $this->data['role_download'] = $this->option_model->where("name", "role_download")->get();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
@@ -456,7 +461,7 @@ class Admin extends MY_Controller {
             $data_up = $this->product_model->create_object($data);
             $id = $this->product_model->insert($data_up);
             $files = $this->input->post('id_files');
-            $role_download = implode(",", $this->input->post('role_download'));
+            $role_download = is_array($this->input->post('role_download')) ? implode(",", $this->input->post('role_download')) : "";
 //            $this->productfile_model->where('id_product', $id)->delete();
             if (count($files) > 0) {
                 foreach ($files as $file) {
@@ -469,6 +474,8 @@ class Admin extends MY_Controller {
             $this->data['menu_active'] = "product";
             $this->load->model("productsimba_model");
             $this->load->model("role_model");
+            $this->load->model("option_model");
+            $this->data['role_download'] = $this->option_model->where("name", "role_download")->get();
             $this->data['role'] = $this->role_model->as_array()->get_all();
             $this->data['arr_category'] = $this->productsimba_model->as_object()->get_all();
             load_inputfile($this->data);
@@ -487,7 +494,7 @@ class Admin extends MY_Controller {
             $data_up = $this->product_model->create_object($data);
             $this->product_model->update($data_up, $id);
             $files = $this->input->post('id_files');
-            $role_download = implode(",", $this->input->post('role_download'));
+            $role_download = is_array($this->input->post('role_download')) ? implode(",", $this->input->post('role_download')) : "";
             $this->productfile_model->where('id_product', $id)->delete();
             if (count($files) > 0) {
                 foreach ($files as $file) {
@@ -501,6 +508,8 @@ class Admin extends MY_Controller {
             $this->load->model("productsimba_model");
             $this->load->model("product_model");
             $this->load->model("role_model");
+            $this->load->model("option_model");
+            $this->data['role_download'] = $this->option_model->where("name", "role_download")->get();
             $this->data['role'] = $this->role_model->as_array()->get_all();
             $this->data['arr_category'] = $this->productsimba_model->as_object()->get_all();
 
@@ -517,6 +526,17 @@ class Admin extends MY_Controller {
         $this->load->model("product_model");
         $id = $params[0];
         $this->product_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    function updatedownload() {
+        if (isset($_POST['updatedownload'])) {
+            $this->load->model("option_model");
+            $role_download = implode(",", $this->input->post('role_download'));
+            $this->option_model->where("name", 'role_download')->update(array("content" => $role_download));
+            $this->option_model->update_role_download($role_download);
+        }
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }

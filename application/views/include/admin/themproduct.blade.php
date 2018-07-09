@@ -1,3 +1,6 @@
+<?php
+$role_download = explode(",", $role_download->content);
+?>
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">Thêm CBCL Sản phẩm</a></li>
@@ -33,7 +36,7 @@
                             <b class="form-label">Role Download:</b>
                             <select class="form-control" name="role_download[]" id="role_download" multiple="">
                                 @foreach($role as $row)
-                                @if(in_array($row['id'],array(1,2)))
+                                @if(in_array($row['id'],$role_download))
                                 <option value="{{$row['id']}}" selected="">{{$row['name']}}</option>
                                 @else 
                                 <option value="{{$row['id']}}">{{$row['name']}}</option>
