@@ -77,6 +77,8 @@ class Widget {
     }
 
     function news() {
+        $this->CI->load->model("categorysimba_model");
+        $this->data['category'] = $this->CI->categorysimba_model->where("is_displayed", 1)->as_array()->get_all();
         echo $this->blade->view()->make('widget/news', $this->data)->render();
     }
 

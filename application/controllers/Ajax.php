@@ -73,35 +73,44 @@ class Ajax extends MY_Controller {
 
     function product() {
         $this->load->model("product_model");
+        $this->load->model("categorysimba_model");
+        $category = $this->input->get("category");
         $search = $this->input->get("search");
         $page = $this->input->get("page");
         $limit = $this->input->get("limit");
         $page = $page != "" ? $page : 1;
         $limit = $limit != "" ? $limit : 10;
+        $sql_where = "deleted = 0";
+        if ($category > 0) {
+            $category = $this->categorysimba_model->where('id', $category)->with_product()->as_array()->get();
+//            echo "<pre>";
+//            print_r($category);
+//            die();
+            if (isset($category['product']) && count($category['product'])) {
+                $array_product = array_keys($category['product']);
+                $str_product = implode(",", $array_product);
+                $sql_where .= " AND id_product IN ($str_product)";
+            }
+        }
+        if ($search != "") {
+            $short_language = short_language_current();
+            $sql_where .= " AND (name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))";
+        }
+
         /*
          * TINH COUNT
          */
-        if ($search != "") {
-            $short_language = short_language_current();
-            $where = $this->product_model->where("deleted = 0 AND (name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))", NULL, NULL, FALSE, FALSE, TRUE);
-        } else
-            $where = $this->product_model->where(array('deleted' => 0));
-
-        $count = $where->count_rows();
+        $count = $this->product_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE)->count_rows();
         /*
          * LAY DATA
          */
-        if ($search != "") {
-            $short_language = short_language_current();
-            $where = $this->product_model->where("deleted = 0 AND (name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_files()->as_array();
-        } else
-            $where = $this->product_model->where(array('deleted' => 0))->order_by("date", "DESC")->with_files()->as_array();
-        $data = $where->paginate($limit, NULL, $page);
-
-        $max_page = ceil($count / $limit);
+        $data = $this->product_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_files()->as_array()->paginate($limit, NULL, $page);
 //        echo "<pre>";
-//        print_r($data);
+//        print_r($count);
+//        print_r($limit);
 //        die();
+        $max_page = ceil($count / $limit);
+
         $this->data['count'] = $count;
         $this->data['data'] = $data;
         $this->data['current_page'] = $page;

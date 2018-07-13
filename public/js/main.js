@@ -2,6 +2,8 @@
 $(window).scroll();
 jQuery(document).ready(function ($) {
     $(".fancybox").fancybox();
+
+//    $("#filter_categorry").chosen();
     $("#contactForm").validate({
         highlight: function (input) {
             $(input).parents('.form-group').addClass('error');
@@ -460,6 +462,9 @@ jQuery(document).ready(function ($) {
         var page = parseInt($("#product .pagination li.active a").text());
         load_page_product(page - 1);
     });
+    $("#filter_category").change(function () {
+        load_page_product();
+    });
     $("#product .button_search").click(function () {
         load_page_product();
     });
@@ -502,7 +507,8 @@ function load_page_news(page = 1) {
 
 function load_page_product(page = 1) {
     var search = $("#product .input_search").val();
-    var data = {page: page, search: search};
+    var category = $("#filter_category").val();
+    var data = {page: page, search: search, category: category};
     $.ajax({
         dataType: "HTML",
         url: path + "ajax/product",
