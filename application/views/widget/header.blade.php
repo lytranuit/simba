@@ -3,11 +3,6 @@
     ============================-->
 <header id="header">
     <div class="container">
-        <div class="pull-left" id="logo">
-            <a href="<?= base_url(); ?>">
-                <img alt="" src="<?= base_url(); ?>public/img/logo.png" title=""/>
-            </a>
-        </div>
         <div class="pull-right hidden-md-down" style="margin: 5px;">
             <?php if ($is_login): ?> 
                 <a class="button_login logged" href="<?= base_url() ?>admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="{{$userdata['role']}}"data-name="{{$userdata['identity']}}">
@@ -35,20 +30,27 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        <div class="hidden-sm-down row">
-            <a target="_blank" style="font-size: 12px;margin-right: 5px;" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
-                <span class="fa fa-shopping-cart text-danger"></span>
-                <span>
-                    App SimBa Fresh
-                </span>
+        <div class="pull-left" >
+            <a href="<?= base_url(); ?>" id="logo">
+                <img alt="" src="<?= base_url(); ?>public/img/logo.png" title=""/>
             </a>
-            <a target="_blank" style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.oishii.vn/" id="oishii-web">
-                <span class="fa fa-shopping-cart text-danger"></span>
-                <span>
-                    SimBa Shop Oishii
-                </span>
-            </a>
-            <form class="mt-2 col-6 col-lg-7" action="<?= base_url() ?>index/search" id="form_search"> 
+            <div class="hidden-sm-down pull-left">
+                <a target="_blank" style="font-size: 12px;margin-right: 5px;" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
+                    <span class="fa fa-shopping-cart text-danger"></span>
+                    <span>
+                        App SimBa Fresh
+                    </span>
+                </a>
+                <a target="_blank" style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.oishii.vn/" id="oishii-web">
+                    <span class="fa fa-shopping-cart text-danger"></span>
+                    <span>
+                        SimBa Shop Oishii
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <form class="mt-2 col-12" action="<?= base_url() ?>index/search" id="form_search"> 
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
                         <select name="category" class="filter_category">
@@ -67,7 +69,6 @@
                 </div>
             </form>
         </div>
-    </div>
 </header>
 <div id="menu" class="blue-grdt">
     <div class="container">
