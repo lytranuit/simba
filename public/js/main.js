@@ -571,3 +571,19 @@ function download_file(...param) {
     else
         alert(alert_406);
 }
+function resize_search() {
+    var width_contain = $("#header .container").outerWidth(true);
+    var width_right = $("#header .container > .pull-right").outerWidth(true);
+    var width_left = $("#header .container > .pull-left").outerWidth(true);
+    var width_search = width_contain - width_right - width_left - 20;
+    $("#form_search").css({
+        'width': width_search + 'px',
+        'margin': '10px',
+        'float': 'left'
+    });
+    console.log(width_contain);
+    console.log(width_right);
+    console.log(width_left);
+
+    console.log(width_search);
+}

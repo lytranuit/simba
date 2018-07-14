@@ -600,6 +600,33 @@ a:hover{
 #header.header-scrolled #menu-nav{
     display:block;
 }   
+#header #form_search{
+    width:450px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    #header #form_search{
+        width:300px;
+    }
+}
+@media only screen and (min-width: 767px) and (max-width: 992px){
+    #header #form_search{
+        width:260px;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    #header #form_search{
+        width:200px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    #header #form_search{
+        width:160px;
+    }
+
+}
+
 /* Nav Meu Styling */
 .nav-menu a {
     padding: 15px;
