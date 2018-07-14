@@ -606,17 +606,17 @@ a:hover{
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     #header #form_search{
-        width:300px;
+        width:260px;
     }
 }
 @media only screen and (min-width: 767px) and (max-width: 992px){
     #header #form_search{
-        width:260px;
+        width:200px;
     }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     #header #form_search{
-        width:200px;
+        width:160px;
     }
 }
 
