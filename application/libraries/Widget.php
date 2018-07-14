@@ -23,10 +23,13 @@ class Widget {
 //        echo "tran";die();
 //        echo APPPATH;die();
         $this->CI->load->model("menu_model");
+        $this->CI->load->model("categorysimba_model");
         $all_menu = $this->CI->menu_model->where("deleted", 0)->order_by(array('id_parent' => "ASC", 'order' => "ASC"))->as_array()->get_all();
 //        array_unshift($all_menu, array('id' => 0, 'id_page' => 0, 'text' => "Trang chủ", 'id_parent' => 0));
         $this->data['menu'] = $all_menu;
         $this->data['language_list'] = $this->CI->config->item('language_list');
+        $this->data['category'] = $this->CI->categorysimba_model->where("is_displayed", 1)->as_array()->get_all();
+
 //        echo "<pre>";
 //        print_r($this->data['menu']);
 //        die();

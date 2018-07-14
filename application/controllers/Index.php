@@ -93,6 +93,38 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
+    function search() {
+        $search = $this->input->get("q");
+        $category = $this->input->get("category");
+        $this->load->model("productsimba_model");
+        $this->load->model("categorysimba_model");
+        $category = $category != "" ? $category : 0;
+
+        $sql_where = "status = 1";
+        if ($search != "") {
+            $short_language = short_language_current();
+            $sql_where .= " AND (code like '%" . $search . "%' OR  name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))";
+        }
+        if ($category > 0) {
+            $category = $this->categorysimba_model->where('id', $category)->with_product()->as_array()->get();
+//            echo "<pre>";
+//            print_r($category);
+//            die();
+            if (isset($category['product']) && count($category['product'])) {
+                $array_product = array_keys($category['product']);
+                $str_product = implode(",", $array_product);
+                $sql_where .= " AND id IN ($str_product)";
+            }
+        }
+
+        $data = $this->productsimba_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE)->as_array()->get_all();
+        $this->data['product'] = $data;
+//        echo "<pre>";
+//        print_r($data);
+//        die();
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
     public function news($param) {
         $id = $param[0];
         $this->load->model("tintuc_model");

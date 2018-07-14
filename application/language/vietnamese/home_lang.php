@@ -63,4 +63,6 @@ $lang['alert_501'] = "Tài khoản hoặc mật khẩu không đúng!";
 $lang['mua_hang'] = "Mời bạn chọn mua sản phẩm tại www.oishii.vn hoặc gọi 1800 9469 (miễn phí)";
 $lang['search'] = "Tìm kiếm";
 $lang['no_data'] = "Không có dữ liệu";
+$lang['search_product'] = "Vui lòng nhập mã hoặc tên sản phẩm";
+$lang['search_heading'] = "Kết quả tìm kiếm";
 ?>

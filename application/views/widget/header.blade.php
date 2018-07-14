@@ -35,8 +35,8 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        <div class="hidden-sm-down">
-            <a target="_blank" style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
+        <div class="hidden-sm-down row">
+            <a target="_blank" style="font-size: 12px;margin-right: 5px;" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
                 <span class="fa fa-shopping-cart text-danger"></span>
                 <span>
                     App SimBa Fresh
@@ -48,6 +48,24 @@
                     SimBa Shop Oishii
                 </span>
             </a>
+            <form class="mt-2 col-6 col-lg-7" action="<?= base_url() ?>index/search" id="form_search"> 
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <select name="category" class="filter_category">
+                            <option value="0">All</option>
+                            @foreach($category as $row)
+                            <option value="{{$row['id']}}">{{$row[pick_language($row,"name_")]}}</option>
+                            @endforeach
+                        </select>
+                    </div> 
+                    <input type="text" name="q"class="form-control border-right-0 border" placeholder="{{lang("search_product")}}">
+                    <span class="input-group-append">
+                        <button class="btn bg-white border-left-0 border" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
         </div>
     </div>
 </header>

@@ -64,4 +64,6 @@ $lang['alert_501'] = "ID or password is not correct";
 $lang['mua_hang'] = "Please shop online at www.oishii.vn or call 1800 9469";
 $lang['search'] = "Search";
 $lang['no_data'] = "No data";
+$lang['search_product'] = "Please enter product name or ID...";
+$lang['search_heading'] = "Results";
 ?>

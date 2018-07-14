@@ -32,7 +32,7 @@
             <div id="search-new" class="col-md-6 col-12">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <select id="filter_category">
+                        <select class="filter_category">
                             <option value="0">All</option>
                             @foreach($category as $row)
                             <option value="{{$row['id']}}">{{$row[pick_language($row,"name_")]}}</option>

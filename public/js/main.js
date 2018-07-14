@@ -4,6 +4,30 @@ jQuery(document).ready(function ($) {
     $(".fancybox").fancybox();
 
 //    $("#filter_categorry").chosen();
+    $("#form_search").validate({
+        highlight: function (input) {
+            $(input).parents('.form-group').addClass('error');
+        },
+        unhighlight: function (input) {
+            $(input).parents('.form-group').removeClass('error');
+        },
+        errorPlacement: function (error, element) {
+//            $(element).parents('.form-group').append(error);
+        },
+        submitHandler: function (form) {
+            var result = {};
+            $.each($(form).serializeArray(), function () {
+                result[this.name] = this.value;
+            });
+            if (result['category'] == 0 && result['q'] == "") {
+                var placeholder = $("input[name=q]").attr("placeholder");
+                alert(placeholder);
+                return false;
+            }
+
+            form.submit();
+        }
+    });
     $("#contactForm").validate({
         highlight: function (input) {
             $(input).parents('.form-group').addClass('error');
@@ -462,7 +486,7 @@ jQuery(document).ready(function ($) {
         var page = parseInt($("#product .pagination li.active a").text());
         load_page_product(page - 1);
     });
-    $("#filter_category").change(function () {
+    $("#product .filter_category").change(function () {
         load_page_product();
     });
     $("#product .button_search").click(function () {
@@ -507,7 +531,7 @@ function load_page_news(page = 1) {
 
 function load_page_product(page = 1) {
     var search = $("#product .input_search").val();
-    var category = $("#filter_category").val();
+    var category = $("#product .filter_category").val();
     var data = {page: page, search: search, category: category};
     $.ajax({
         dataType: "HTML",

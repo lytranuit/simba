@@ -4,61 +4,65 @@
  * LOGIN
  */
 $lang['info'] = 'Cá nhân';
-$lang['logout'] = 'Đăng xuất';
-$lang['login'] = 'Đăng nhập';
-$lang['help_login'] = 'Bạn chưa có tài khoản đăng nhập! Vui lòng liên hệ Oishii.vn';
-$lang['login_identity_label'] = 'Tên đăng nhập';
-$lang['login_password_label'] = 'Mật khẩu';
+$lang['logout'] = 'サインアウト';
+$lang['login'] = 'サインイン';
+$lang['help_login'] = 'IDとパスワード取得をご希望の方は、Simbaまでご連絡ください';
+$lang['login_identity_label'] = 'ID';
+$lang['login_password_label'] = 'パスワード';
 /*
  * TITLE HOME
  */
 
-$lang['Home'] = 'Trang chủ';
-$lang['SIMBA'] = 'CÔNG TY TNHH TM SIM BA';
-$lang['News'] = 'Công bố thông tin';
-$lang['News_product'] = 'CBCL Sản phẩm';
-$lang['Clients'] = 'Đối tác';
+$lang['Home'] = 'ホーム';
+$lang['SIMBA'] = '会社情報';
+$lang['News'] = 'ニュースリリース';
+$lang['News_product'] = '商品登録';
+$lang['Clients'] = 'パートナー';
 /*
  * TITLE FOTTER
  */
-$lang['Comment'] = 'Góp ý';
-$lang['Contact'] = 'Liên hệ';
-$lang['Links'] = 'Liên kết';
+$lang['Comment'] = 'パートナー';
+$lang['Contact'] = 'お問い合わせ';
+$lang['Links'] = 'リンク';
 /*
  * FOOTER
  */
-$lang['Your_Name'] = 'Tên';
-$lang['Your_Phone'] = 'Điện thoại';
-$lang['Your_Email'] = 'Email';
-$lang['Message'] = 'Nội dung';
-$lang['text_gop_y'] = 'Góp ý khác';
-$lang['Send_Message'] = 'Gửi liên hệ';
+$lang['Your_Name'] = 'お名前';
+$lang['Your_Phone'] = '電話番号';
+$lang['Your_Email'] = 'メールアドレス';
+$lang['Message'] = 'お問い合わせ内容';
+$lang['text_gop_y'] = 'その他';
+$lang['Send_Message'] = '送信';
 /*
  * PRODUCT
  */
-$lang['product_tomtat'] = "Thông tin tóm tắt";
-$lang['product_code'] = "Mã hàng";
-$lang['product_xuatxu'] = "Xuất xứ";
-$lang['product_dungtich'] = "Dung tích/Trọng lượng";
-$lang['product_baoquan'] = "Bảo quản";
-$lang['product_mota'] = "Mô tả";
-$lang['product_file'] = "File CBCL Sản phẩm";
+$lang['product_tomtat'] = "商品情報";
+$lang['product_code'] = "商品コード";
+$lang['product_xuatxu'] = "原産地";
+$lang['product_dungtich'] = "重量";
+$lang['product_baoquan'] = "保管条件";
+$lang['product_mota'] = "詳細";
+$lang['product_file'] = "商品登録証ダウンロード";
 /*
  * CATEGORY
  */
-$lang['heading_product'] = "Sản phẩm";
+$lang['heading_product'] = "商品";
 /*
  * Ajax
  */
-$lang['alert_407'] = "Bạn không có quyền truy cập. Vui lòng liên hệ Simba!";
-$lang['alert_406'] = "Bạn không có quyền download file này. Vui lòng liên hệ Sim Ba!";
-$lang['alert_405'] = "File không tồn tại!";
-$lang['alert_404'] = "Thiếu thông số.";
-$lang['alert_403'] = "Yêu cầu đăng nhập.";
-$lang['alert_402'] = "Vui lòng nhập đầy đủ thông tin.";
-$lang['alert_401'] = "Vui lòng nhấn nút Captcha.";
-$lang['alert_400'] = "Cảm ơn bạn đã góp ý cho chúng tôi!";
-$lang['alert_501'] = "Tài khoản hoặc mật khẩu không đúng!";
+$lang['alert_407'] = "アクセス権がありません、お手数ですがSimbaまでお問い合わせください";
+$lang['alert_406'] = "アクセス権がありません、お手数ですがSimbaまでお問い合わせください";
+$lang['alert_405'] = "このファイルは存在しません";
+$lang['alert_404'] = "入力情報が不足しています";
+$lang['alert_403'] = "ログインしてください";
+$lang['alert_402'] = "必要情報を入力してください";
+$lang['alert_401'] = "私はロボットではありませんへチェックしてください";
+$lang['alert_400'] = "お問い合わせありがとうございました！";
+$lang['alert_501'] = "IDもしくはパスワードに誤りがあります";
 
-$lang['mua_hang'] = "Mời bạn chọn mua sản phẩm tại www.oishii.vn hoặc gọi 1800 9469 (miễn phí)";
+$lang['mua_hang'] = "ご注文はウェブショップ www.oishii.vn もしくは お電話 1800 9469 にて承ります";
+$lang['search'] = "検索";
+$lang['no_data'] = "一致する情報は見つかりませんでした";
+$lang['search_product'] = "商品名か検索名をご入力ください。...";
+$lang['search_heading'] = "結果";
 ?>
