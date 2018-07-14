@@ -49,7 +49,7 @@
                 </a>
             </div>
         </div>
-        <form class="pull-left mt-2 ml-2" action="<?= base_url() ?>index/search" id="form_search"> 
+        <form class="pull-left mt-2 ml-2 hidden-md-down" action="<?= base_url() ?>index/search" id="form_search"> 
             <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
                     <select name="category" class="filter_category">
