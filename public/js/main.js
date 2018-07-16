@@ -486,6 +486,15 @@ jQuery(document).ready(function ($) {
         var page = parseInt($("#product .pagination li.active a").text());
         load_page_product(page - 1);
     });
+    $(".filter_category").change(function () {
+        var id = $(this).val();
+        var text = $("option[value=" + id + "]", $(this)).text();
+        if (text.length > 5) {
+            $(this).css("width", "100px");
+        } else {
+            $(this).css("width", "50px");
+        }
+    })
     $("#product .filter_category").change(function () {
         load_page_product();
     });

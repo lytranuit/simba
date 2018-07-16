@@ -997,9 +997,10 @@ NEWS
     position: relative;
 }
 .filter_category{
-    max-width: 80px;
+    max-width: 100px;
+    width: 50px;
     text-align: center;
-    background: linear-gradient(to bottom, rgb(243, 243, 243), rgb(204, 210, 185));
+    background: linear-gradient(to bottom, rgb(243, 243, 243), rgb(208, 207, 207));
     text-align-last: center;
     border: 1px solid #c1c1c1;
     box-shadow: 0px 0px 0px 0px #737373;
