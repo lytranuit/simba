@@ -4,30 +4,6 @@ jQuery(document).ready(function ($) {
     $(".fancybox").fancybox();
 
 //    $("#filter_categorry").chosen();
-    $("#form_search").validate({
-        highlight: function (input) {
-            $(input).parents('.form-group').addClass('error');
-        },
-        unhighlight: function (input) {
-            $(input).parents('.form-group').removeClass('error');
-        },
-        errorPlacement: function (error, element) {
-//            $(element).parents('.form-group').append(error);
-        },
-        submitHandler: function (form) {
-            var result = {};
-            $.each($(form).serializeArray(), function () {
-                result[this.name] = this.value;
-            });
-            if (result['category'] == 0 && result['q'] == "") {
-                var placeholder = $("input[name=q]").attr("placeholder");
-                alert(placeholder);
-                return false;
-            }
-
-            form.submit();
-        }
-    });
     $("#contactForm").validate({
         highlight: function (input) {
             $(input).parents('.form-group').addClass('error');
@@ -133,6 +109,9 @@ jQuery(document).ready(function ($) {
         var $mobile_nav = $('#nav-menu-container').clone().prop({
             id: 'mobile-nav'
         });
+        var search = $("#form_search").clone().prop({
+            id: 'form_search_mobile'
+        }).removeClass().addClass("mx-2").wrap("<li></li>").parent();
         var $hr = $("<li class='dropdown-divider'></li>");
         var $web_oishii = $("#oishii-web").clone().removeClass().wrap("<li></li>").parent();
         var $app_simba = $("#simba-app").clone().removeClass().wrap("<li></li>").parent();
@@ -143,7 +122,7 @@ jQuery(document).ready(function ($) {
             $logout = $(".logout").first().clone().wrap("<li></li>").parent();
         }
         var $language = $("#language").clone().wrap("<li></li>").parent();
-        $("ul", $mobile_nav).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($logout).append($language);
+        $("ul", $mobile_nav).append(search).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($logout).append($language);
         $mobile_nav.find('> ul').attr({
             'class': '',
             'id': ''
@@ -179,6 +158,30 @@ jQuery(document).ready(function ($) {
         $("#mobile-nav, #mobile-nav-toggle").hide();
     }
 
+    $("#form_search,#form_search_mobile").validate({
+        highlight: function (input) {
+            $(input).parents('.form-group').addClass('error');
+        },
+        unhighlight: function (input) {
+            $(input).parents('.form-group').removeClass('error');
+        },
+        errorPlacement: function (error, element) {
+//            $(element).parents('.form-group').append(error);
+        },
+        submitHandler: function (form) {
+            var result = {};
+            $.each($(form).serializeArray(), function () {
+                result[this.name] = this.value;
+            });
+            if (result['category'] == 0 && result['q'] == "") {
+                var placeholder = $("input[name=q]").attr("placeholder");
+                alert(placeholder);
+                return false;
+            }
+
+            form.submit();
+        }
+    });
     // Smooth scroll for the menu and links with .scrollto classes
     $(document).off("click", '.nav-menu a, #mobile-nav a, .scrollto').on('click', '.nav-menu a, #mobile-nav a, .scrollto', function () {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -579,20 +582,4 @@ function download_file(...param) {
         location.href = path + "ajax/downloadfile?id=" + id;
     else
         alert(alert_406);
-}
-function resize_search() {
-    var width_contain = $("#header .container").outerWidth(true);
-    var width_right = $("#header .container > .pull-right").outerWidth(true);
-    var width_left = $("#header .container > .pull-left").outerWidth(true);
-    var width_search = width_contain - width_right - width_left - 20;
-    $("#form_search").css({
-        'width': width_search + 'px',
-        'margin': '10px',
-        'float': 'left'
-    });
-    console.log(width_contain);
-    console.log(width_right);
-    console.log(width_left);
-
-    console.log(width_search);
 }
