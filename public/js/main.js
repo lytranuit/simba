@@ -251,7 +251,8 @@ jQuery(document).ready(function ($) {
             $('#header,#menu').removeClass('header-scrolled');
         }
     });
-    $(".toggle-search").click(function () {
+    $(".toggle-search").click(function (e) {
+        e.preventDefault();
         var parent = $(this).parents("li");
         $(".dropdown-menu", parent).css({
             "width": "400px", "left": "inherit", "right": "0px", "border": "1px solid #c7c2c2",
