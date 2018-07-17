@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="container pt-5" id="product">
+    <div class="container py-5" id="product">
         <header class="section-header">
             <h3>
                 {{lang('News_product')}}

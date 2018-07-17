@@ -66,4 +66,5 @@ $lang['search'] = "Search";
 $lang['no_data'] = "No data";
 $lang['search_product'] = "Please enter product name or ID...";
 $lang['search_heading'] = "Results";
+$lang['diachi'] = "R1-08-03 The EverRich Building, 968 Ba Thang Hai Street, District 11, HCMC, Vietnam;";
 ?>

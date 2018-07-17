@@ -14,7 +14,7 @@ $lang['login_password_label'] = 'Mật khẩu';
  */
 
 $lang['Home'] = 'Trang chủ';
-$lang['SIMBA'] = 'CÔNG TY TNHH TM SIM BA';
+$lang['SIMBA'] = 'CÔNG TY TNHH THƯƠNG MẠI SIM BA';
 $lang['News'] = 'Công bố thông tin';
 $lang['News_product'] = 'Công bố chất lượng sản phẩm';
 $lang['Clients'] = 'Đối tác';
@@ -65,4 +65,5 @@ $lang['search'] = "Tìm kiếm";
 $lang['no_data'] = "Không có dữ liệu";
 $lang['search_product'] = "Vui lòng nhập mã hoặc tên sản phẩm";
 $lang['search_heading'] = "Kết quả tìm kiếm";
+$lang['diachi'] = "R1-08-03 Tòa nhà EverRich, số 968 Ba Tháng Hai, Phường 15, Quận 11, Tp.HCM";
 ?>

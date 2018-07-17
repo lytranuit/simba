@@ -37,12 +37,11 @@ Footer
                     <p>
                         <i class="ion-ios-location-outline">
                         </i>
-                        R1-08-03, Tòa nhà Everich, số 968 Ba Tháng Hai,
-                        Phường 15, Quận 11, Thành phố Hồ Chí Minh
+                        {{lang("diachi")}}
                         <br>
                         <i class="ion-ios-telephone-outline">
                         </i>
-                        18009469
+                        +84 28 62999700
                         <br>
                     </p>
                     <div class="social-links">

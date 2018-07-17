@@ -49,24 +49,6 @@
                 </a>
             </div>
         </div>
-        <form class="pull-left mt-2 ml-2 hidden-md-down" action="<?= base_url() ?>index/search" id="form_search"> 
-            <div class="input-group input-group-sm">
-                <div class="input-group-prepend">
-                    <select name="category" class="filter_category">
-                        <option value="0">All</option>
-                        @foreach($category as $row)
-                        <option value="{{$row['id']}}">{{$row[pick_language($row,"name_")]}}</option>
-                        @endforeach
-                    </select>
-                </div> 
-                <input type="text" name="q"class="form-control border-right-0 border" placeholder="{{lang("search_product")}}">
-                <span class="input-group-append">
-                    <button class="btn bg-white border-left-0 border" type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
-        </form>
 </header>
 <div id="menu" class="blue-grdt">
     <div class="container">
@@ -80,7 +62,29 @@
                         </a>
                     </li>
                     @endforeach
-
+                    <li class="pull-right dropdown hidden-md-down"> 
+                        <a href="#" class="toggle-search">
+                            <i class="fa fa-search"></i> 
+                        </a>
+                        <form class="dropdown-menu" action="<?= base_url() ?>index/search" id="form_search"> 
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <select name="category" class="filter_category">
+                                        <option value="0">All</option>
+                                        @foreach($category as $row)
+                                        <option value="{{$row['id']}}">{{$row[pick_language($row,"name_")]}}</option>
+                                        @endforeach
+                                    </select>
+                                </div> 
+                                <input type="text" name="q"class="form-control border-right-0 border" placeholder="{{lang("search_product")}}">
+                                <span class="input-group-append">
+                                    <button class="btn bg-white border-left-0 border" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </li>
                 </ul>
             </nav>
             <!-- #nav-menu-container -->
@@ -88,6 +92,7 @@
     </div>
 </div>
 <!-- Login Modal-->
+
 <div aria-hidden="true" aria-labelledby="login-modalLabel" class="modal fade" id="login-modal" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

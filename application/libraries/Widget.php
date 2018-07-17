@@ -39,7 +39,9 @@ class Widget {
     function footer() {
         $this->CI->load->model("pageweb_model");
         $this->CI->load->model("user_model");
-        $lienket = $this->CI->pageweb_model->where(array('deleted' => 0, 'active' => 1))->order_by(array('id' => "ASC"))->limit(5)->as_array()->get_all();
+        $hl = short_language_current();
+        $hl = $hl == "jp" ? "ja" : $hl;
+        $lienket = $this->CI->pageweb_model->where(array('deleted' => 0, 'active' => 1))->order_by('date', "DESC")->limit(5)->as_array()->get_all();
         $this->data['lienket'] = $lienket;
         $role_gopy = "";
         if ($this->data['is_login']) {
@@ -47,7 +49,7 @@ class Widget {
         }
         $this->data['role_feedback'] = $role_gopy;
         $this->data['captcha'] = $this->CI->recaptcha->getWidget(array('style' => 'transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;'));
-        $this->data['scriptCap'] = $this->CI->recaptcha->getScriptTag(array('hl' => short_language_current()));
+        $this->data['scriptCap'] = $this->CI->recaptcha->getScriptTag(array('hl' => $hl));
         echo $this->blade->view()->make('widget/footer', $this->data)->render();
     }
 

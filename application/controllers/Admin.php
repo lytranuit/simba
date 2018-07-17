@@ -82,6 +82,9 @@ class Admin extends MY_Controller {
             case 'viewtin':
                 $method = 'quanlynoibo';
                 break;
+            case 'updatepage':
+                $method = "editpage";
+                break;
             case 'slider':
             case 'saveslider':
             case 'gioithieu':
@@ -245,7 +248,7 @@ class Admin extends MY_Controller {
     public function quanlypage() {
         $this->load->model("pageweb_model");
         $this->data['menu_active'] = "page";
-        $this->data['arr_tin'] = $this->pageweb_model->where(array('deleted' => 0))->as_object()->get_all();
+        $this->data['arr_tin'] = $this->pageweb_model->where(array('deleted' => 0))->order_by('date', "DESC")->as_object()->get_all();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
@@ -283,6 +286,14 @@ class Admin extends MY_Controller {
             load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
+    }
+
+    function updatepage($params) {
+        $this->load->model("pageweb_model");
+        $id = $params[0];
+        $this->pageweb_model->update(array("date" => time()), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
     }
 
     function removepage($params) {
@@ -828,6 +839,7 @@ class Admin extends MY_Controller {
             $data = $_POST;
             $data['id_user'] = $this->session->userdata('user_id');
             $data['active'] = 1;
+            $data['date'] = time();
             $data['is_highlight'] = 1;
             $data_up = $this->tintuc_model->create_object($data);
             $this->tintuc_model->update($data_up, $id);

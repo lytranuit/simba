@@ -337,7 +337,9 @@ class Ajax extends MY_Controller {
                     $real_name = $file['real_hinhanh'];
                     $src = FCPATH . $file['src'];
                     header("Cache-Control: public");
-                    header("Content-Description: File Transfer");
+                    header("Content-Type: application/force-download");
+                    header("Content-Type: application/octet-stream");
+                    header("Content-Type: application/download");
                     header("Content-Disposition: attachment; filename=" . $real_name);
                     header("Content-Transfer-Encoding: binary");
                     readfile($src);

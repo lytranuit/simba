@@ -36,6 +36,10 @@
                             <td>{{$tin->title_jp}}</td>   
                             <td>
                                 @if(is_permission("editpage"))
+                                <a href="{{base_url()}}admin/updatepage/{{$tin->id}}" class="btn btn-default" title="update">
+                                    <i class="fa fa-star">
+                                    </i>
+                                </a>
                                 <a href="{{base_url()}}admin/editpage/{{$tin->id}}" class="btn btn-default" title="edit">
                                     <i class="ace-icon fa fa-pencil bigger-120">
                                     </i>

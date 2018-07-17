@@ -122,7 +122,7 @@ jQuery(document).ready(function ($) {
             $logout = $(".logout").first().clone().wrap("<li></li>").parent();
         }
         var $language = $("#language").clone().wrap("<li></li>").parent();
-        $("ul", $mobile_nav).append(search).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($logout).append($language);
+        $("ul.nav-menu", $mobile_nav).append(search).append($hr.clone()).append($app_simba).append($web_oishii).append($hr).append($button_login).append($logout).append($language);
         $mobile_nav.find('> ul').attr({
             'class': '',
             'id': ''
@@ -157,7 +157,6 @@ jQuery(document).ready(function ($) {
     } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
         $("#mobile-nav, #mobile-nav-toggle").hide();
     }
-
     $("#form_search").validate({
         highlight: function (input) {
 //            $(input).parents('.form-group').addClass('error');
@@ -252,7 +251,12 @@ jQuery(document).ready(function ($) {
             $('#header,#menu').removeClass('header-scrolled');
         }
     });
-
+    $(".toggle-search").click(function () {
+        var parent = $(this).parents("li");
+        $(".dropdown-menu", parent).css({
+            "width": "400px", "left": "inherit", "right": "0px", "border": "0"
+        }).toggle();
+    })
     // Intro carousel
     var introCarousel = $(".carousel");
     var introCarouselIndicators = $(".carousel-indicators");

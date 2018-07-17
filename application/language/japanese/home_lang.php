@@ -3,7 +3,7 @@
 /*
  * LOGIN
  */
-$lang['info'] = 'Cá nhân';
+$lang['info'] = 'スタッフログイン';
 $lang['logout'] = 'サインアウト';
 $lang['login'] = 'サインイン';
 $lang['help_login'] = 'IDとパスワード取得をご希望の方は、Simbaまでご連絡ください';
@@ -21,7 +21,7 @@ $lang['Clients'] = 'パートナー';
 /*
  * TITLE FOTTER
  */
-$lang['Comment'] = 'パートナー';
+$lang['Comment'] = 'コメント';
 $lang['Contact'] = 'お問い合わせ';
 $lang['Links'] = 'リンク';
 /*
@@ -56,7 +56,7 @@ $lang['alert_405'] = "このファイルは存在しません";
 $lang['alert_404'] = "入力情報が不足しています";
 $lang['alert_403'] = "ログインしてください";
 $lang['alert_402'] = "必要情報を入力してください";
-$lang['alert_401'] = "私はロボットではありませんへチェックしてください";
+$lang['alert_401'] = '"私はロボットではありません"へチェックしてください';
 $lang['alert_400'] = "お問い合わせありがとうございました！";
 $lang['alert_501'] = "IDもしくはパスワードに誤りがあります";
 
@@ -65,4 +65,5 @@ $lang['search'] = "検索";
 $lang['no_data'] = "一致する情報は見つかりませんでした";
 $lang['search_product'] = "商品名か検索名をご入力ください。...";
 $lang['search_heading'] = "結果";
+$lang['diachi'] = "R1-08-03 The EverRich Building, 968 Ba Thang Hai Street, District 11, HCMC, Vietnam;";
 ?>
