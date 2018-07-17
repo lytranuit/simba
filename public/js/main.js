@@ -254,7 +254,8 @@ jQuery(document).ready(function ($) {
     $(".toggle-search").click(function () {
         var parent = $(this).parents("li");
         $(".dropdown-menu", parent).css({
-            "width": "400px", "left": "inherit", "right": "0px", "border": "0"
+            "width": "400px", "left": "inherit", "right": "0px", "border": "1px solid #c7c2c2",
+            "box-shadow": "rgb(73, 73, 73) 0px 0px 10px 0px"
         }).toggle();
     })
     // Intro carousel
