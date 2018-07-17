@@ -34,7 +34,7 @@ Intro Section
                 <!-- Single Blog Post -->
                 @foreach($list_tintuc as $key => $row)
                 <div class="single-blog-post post-style-2 d-flex align-items-center">
-                    @if($row[pick_language($row, 'title_')] != "")
+                    @if($row['only_image'] != "1")
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
                         <a href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" >

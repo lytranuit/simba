@@ -26,6 +26,10 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                             <img src="<?= base_url() . $hinh_preview ?>" id='hinh_preview' style="display:block;cursor: pointer;width: 125px;"/>
                             <input id="kv-explorer" type="file" name="hinhanh[]" accept="image/*" class='upload_hinhanh'>
                         </div>
+                        <div class="col-md-2">
+                            <input type="checkbox" id="only_image" class="filled-in chk-col-blue" name="only_image" value="1">
+                            <label for="only_image">Chỉ hiện thị hình ảnh</label>
+                        </div>
                         <div class="col-md-6">
                             <b class="form-label">File: </b><span><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files <i class='fa fa-close remove_file' style='cursor: pointer;'></i>" : "" ?></span>
                             <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">

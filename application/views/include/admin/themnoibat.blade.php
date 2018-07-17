@@ -16,6 +16,10 @@
                             <img src="<?= base_url() . "public/img/preview.png" ?>" id='hinh_preview' style="display:block;cursor: pointer;width: 125px;"/>
                             <input id="kv-explorer" type="file" name="hinhanh[]" accept="image/*" class='upload_hinhanh'>
                         </div>
+                        <div class="col-md-2">
+                            <input type="checkbox" id="only_image" class="filled-in chk-col-blue" name="only_image" value="1">
+                            <label for="only_image">Chỉ hiện thị hình ảnh</label>
+                        </div>
                         <div class="col-md-6">
                             <b class="form-label">File:</b>
                             <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
