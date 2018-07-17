@@ -36,13 +36,13 @@ Intro Section
                 <div class="single-blog-post post-style-2 d-flex align-items-center">
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
-                        <a href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" target="_blank">
+                        <a href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" >
                             <img src="{{base_url()}}{{$row['hinhanh']['thumb_src'] or 'public/img/preview.png'}}" alt="">
                         </a>
                     </div>
                     <!-- Post Content -->
                     <div class="post-content">
-                        <a href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" target="_blank" class="headline">
+                        <a href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" class="headline">
                             <h5><?= mb_strlen($row[pick_language($row, 'title_')]) < 50 ? $row[pick_language($row, 'title_')] : mb_substr($row[pick_language($row, 'title_')], 0, 50) . "..."; ?></h5>
                         </a>
                         <!-- Post Meta -->
