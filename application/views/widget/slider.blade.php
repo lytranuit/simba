@@ -34,6 +34,7 @@ Intro Section
                 <!-- Single Blog Post -->
                 @foreach($list_tintuc as $key => $row)
                 <div class="single-blog-post post-style-2 d-flex align-items-center">
+                    @if($row[pick_language($row, 'title_')] != "")
                     <!-- Post Thumbnail -->
                     <div class="post-thumbnail">
                         <a href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" >
@@ -50,6 +51,11 @@ Intro Section
                             <p>admin on {{date("F j, Y, g:i a",$row['date'])}}</p>
                         </div>
                     </div>
+                    @else 
+                    <a class='w-100 h-100' href="<?= get_url_seo("index/news", array($row['id'], sluggable($row[pick_language($row, 'title_')]))) ?>" >
+                        <img src="{{base_url()}}{{$row['hinhanh']['src'] or 'public/img/preview.png'}}" alt="" class='w-100 h-100'>
+                    </a>
+                    @endif
                 </div>
                 @endforeach
             </div>
