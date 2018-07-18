@@ -174,10 +174,16 @@
                             <span>Role</span>
                         </a>
                     </li>
-                <?php endif; ?>
-                    <li style="height: 50px;">
-                         <span></span>
+                    <li data='language'>
+                        <a href="<?= base_url() ?>admin/quanlylanguage">
+                            <i class="material-icons">list</i>
+                            <span>Language</span>
+                        </a>
                     </li>
+                <?php endif; ?>
+                <li style="height: 50px;">
+                    <span></span>
+                </li>
             </ul>
         </div>
         <!-- #Menu -->

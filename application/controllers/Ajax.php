@@ -14,10 +14,10 @@ class Ajax extends MY_Controller {
                 $role_permission_feedback = implode(",", $this->user_model->role_permission(29));
                 echo json_encode(array('success' => 1, 'role_feedback' => $role_permission_feedback, 'username' => $this->session->userdata('identity'), "role" => $this->session->userdata('role')));
             } else {
-                echo json_encode(array('success' => 0, 'code' => 501, 'msg' => "Tài khoản hoặc mật khẩu không đúng"));
+                echo json_encode(array('success' => 0, 'code' => 501, 'msg' => lang('alert_501')));
             }
         } else {
-            echo json_encode(array('success' => 0, 'code' => 501, 'msg' => "Tài khoản hoặc mật khẩu không đúng"));
+            echo json_encode(array('success' => 0, 'code' => 501, 'msg' => lang('alert_501')));
         }
     }
 
@@ -221,7 +221,7 @@ class Ajax extends MY_Controller {
                  * SET LIMIT 
                  */
                 $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-                echo json_encode(array('code' => 400, 'msg' => "Cảm ơn bạn đã góp ý cho chúng tôi!"));
+                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 /*
                  * Mail setting
                  */
@@ -246,10 +246,10 @@ class Ajax extends MY_Controller {
 //            $this->email->message($html);
 //            $this->email->send();
             } else {
-                echo json_encode(array('code' => 402, 'msg' => "Vui lòng nhập đầy đủ thông tin."));
+                echo json_encode(array('code' => 402, 'msg' => lang('alert_402')));
             }
         } else {
-            echo json_encode(array('code' => 403, 'msg' => "Vui lòng nhấn nút Captcha."));
+            echo json_encode(array('code' => 401, 'msg' => lang('alert_401')));
         }
     }
 
@@ -272,9 +272,9 @@ class Ajax extends MY_Controller {
              * SET LIMIT 
              */
             $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-            echo json_encode(array('code' => 400, 'msg' => "Cảm ơn bạn đã góp ý cho chúng tôi!"));
+            echo json_encode(array('code' => 400, 'msg' => lang("alert_400")));
         } else {
-            echo json_encode(array('code' => 402, 'msg' => "Vui lòng nhập đầy đủ thông tin."));
+            echo json_encode(array('code' => 402, 'msg' => lang("alert_402")));
         }
     }
 
@@ -324,7 +324,7 @@ class Ajax extends MY_Controller {
         $this->load->model("hinhanh_model");
         $is_logged_in = $this->user_model->logged_in();
         if (!$is_logged_in) {
-            echo json_encode(array("code" => 403, "msg" => "Yêu cầu đăng nhập."));
+            echo json_encode(array("code" => 403, "msg" => lang('alert_403')));
             die();
         }
         $role_user = $this->session->userdata('role');
@@ -344,15 +344,15 @@ class Ajax extends MY_Controller {
                     header("Content-Transfer-Encoding: binary");
                     readfile($src);
                 } else {
-                    echo json_encode(array("code" => 406, "msg" => "Bạn không có quyền download file!"));
+                    echo json_encode(array("code" => 406, "msg" => lang('alert_406')));
                     die();
                 }
             } else {
-                echo json_encode(array("code" => 405, "msg" => "File không tồn tại!"));
+                echo json_encode(array("code" => 405, "msg" => lang('alert_405')));
                 die();
             }
         } else {
-            echo json_encode(array("code" => 404, "msg" => "Thiếu thông số."));
+            echo json_encode(array("code" => 404, "msg" => lang('alert_404')));
             die();
         }
     }
