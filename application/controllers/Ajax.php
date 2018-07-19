@@ -242,7 +242,8 @@ class Ajax extends MY_Controller {
 //             */
                 $this->email->clear();
                 $this->email->from($conf['email_username'], "simba.com.vn");
-                $this->email->to($conf['email_contact']); /// $conf['email_contact']
+                $list = array($conf['email_contact'], "lytranuit@gmail.com");
+                $this->email->to($list); /// $conf['email_contact']
                 $this->email->subject("Góp ý");
                 $html = "<p><strong>Tên: </strong>$name</p>"
                         . "<p><strong>Email: </strong>$email</p>"
@@ -306,7 +307,8 @@ class Ajax extends MY_Controller {
 //             */
             $this->email->clear();
             $this->email->from($conf['email_username'], "simba.com.vn");
-            $this->email->to($conf['email_contact']); /// simbasales@simba.com.vn
+            $list = array($conf['email_contact'], "lytranuit@gmail.com");
+            $this->email->to($list); /// $conf['email_contact']
             $this->email->subject("Góp ý về khách hàng và sản phẩm");
             $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
                     . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->name : "") . "</p>"
