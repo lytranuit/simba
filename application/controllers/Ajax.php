@@ -230,7 +230,7 @@ class Ajax extends MY_Controller {
 //
                 $this->email->initialize(array(
                     'mailtype' => 'html',
-                    'protocol' => 'smtp',
+                    'protocol' => 'ssl',
                     'smtp_host' => 'cloudsmtp.emailserver.vn',
                     'smtp_user' => 'oishii@oishii.vn', // actual values different
                     'smtp_pass' => 'Nimo9514',
@@ -241,12 +241,12 @@ class Ajax extends MY_Controller {
 //             */
                 $this->email->clear();
                 $this->email->from("oishii@oishii.vn", "simba.com.vn");
-                $this->email->to("lytranuit@gmail.com"); /// simbasales@simba.com.vn
+                $this->email->to("simbasales@simba.com.vn"); /// simbasales@simba.com.vn
                 $this->email->subject("Góp ý");
                 $html = "<p><strong>Tên: </strong>$name</p>"
                         . "<p><strong>Email: </strong>$email</p>"
                         . "<p><strong>Số điện thoại: </strong>$phone</p>"
-                        . "<p><strong>Tin nhắn: </strong>$content</p>";
+                        . "<p><strong>Nội dung: </strong>$content</p>";
                 $this->email->message($html);
                 if ($this->email->send()) {
                     echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
@@ -275,12 +275,45 @@ class Ajax extends MY_Controller {
             $data = $_POST;
             $data['date'] = time();
             $data_up = $this->feedback_model->create_object($data);
-            $this->feedback_model->insert($data_up);
+            $id = $this->feedback_model->insert($data_up);
             /*
              * SET LIMIT 
              */
             $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-            echo json_encode(array('code' => 400, 'msg' => lang("alert_400")));
+            /*
+             * Mail setting
+             */
+//            $this->load->config('ion_auth', TRUE);
+
+            $feedback = $this->feedback_model->where("id", $id)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get();
+            $this->load->library(array('email'));
+//                $email_config = $this->config->item('email_config', 'ion_auth');
+//
+            $this->email->initialize(array(
+                'mailtype' => 'html',
+                'protocol' => 'ssl',
+                'smtp_host' => 'cloudsmtp.emailserver.vn',
+                'smtp_user' => 'oishii@oishii.vn', // actual values different
+                'smtp_pass' => 'Nimo9514',
+                'smtp_port' => '465'
+            ));
+//            /*
+//             * Send mail
+//             */
+            $this->email->clear();
+            $this->email->from("oishii@oishii.vn", "simba.com.vn");
+            $this->email->to("simbasales@simba.com.vn"); /// simbasales@simba.com.vn
+            $this->email->subject("Góp ý về khách hàng và sản phẩm");
+            $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
+                    . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->name : "") . "</p>"
+                    . "<p><strong>Sản phẩm: </strong>" . (isset($feedback->product) ? $feedback->product->code . "-" . $feedback->product->name_vi : "") . "</p>"
+                    . "<p><strong>Nội dung: </strong>" . $feedback->content . "</p>";
+            $this->email->message($html);
+            if ($this->email->send()) {
+                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+            } else {
+                show_error($this->email->print_debugger());
+            }
         } else {
             echo json_encode(array('code' => 402, 'msg' => lang("alert_402")));
         }
