@@ -608,7 +608,7 @@ function download_file(...param) {
     var id = $($this).attr("data");
     var role_download = $($this).attr("role");
     var role_user = $(".button_login").attr("role");
-    if (role_user && $.inArray(role_user, role_download.split(",")) != -1)
+    if (role_user && (role_download == "0" || $.inArray(role_user, role_download.split(",")) != -1))
         location.href = path + "ajax/downloadfile?id=" + id;
     else
         alert(alert_406);
