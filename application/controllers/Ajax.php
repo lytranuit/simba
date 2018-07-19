@@ -226,25 +226,30 @@ class Ajax extends MY_Controller {
                  * Mail setting
                  */
 //            $this->load->config('ion_auth', TRUE);
-//            $this->load->library(array('email'));
-//            $email_config = $this->config->item('email_config', 'ion_auth');
+                $this->load->library(array('email'));
+//                $email_config = $this->config->item('email_config', 'ion_auth');
 //
-//            if ($this->config->item('use_ci_email', 'ion_auth') && isset($email_config) && is_array($email_config)) {
-//                $this->email->initialize($email_config);
-//            }
+                $this->email->initialize(array(
+                    'mailtype' => 'html',
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'cloudsmtp.emailserver.vn',
+                    'smtp_user' => 'oishii@oishii.vn', // actual values different
+                    'smtp_pass' => 'Nimo9514',
+                    'smtp_port' => '465'
+                ));
 //            /*
 //             * Send mail
 //             */
-//            $this->email->clear();
-//            $this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
-//            $this->email->to(config_item("email_dk"));
-//            $this->email->subject($this->config->item('site_title', 'ion_auth') . ' - Tin nhắn');
-//            $html = "<p><strong>Tên:</strong>$name</p>"
-//                    . "<p><strong>Email:</strong>$email</p>"
-//                    . "<p><strong>Số điện thoại:</strong>$sodt</p>"
-//                    . "<p><strong>Tin nhắn:</strong>$message</p>";
-//            $this->email->message($html);
-//            $this->email->send();
+                $this->email->clear();
+                $this->email->from("oishii@oishii.vn", "simba.com.vn");
+                $this->email->to("lytranuit@gmail.com"); /// simbasales@simba.com.vn
+                $this->email->subject("Góp ý");
+                $html = "<p><strong>Tên: </strong>$name</p>"
+                        . "<p><strong>Email: </strong>$email</p>"
+                        . "<p><strong>Số điện thoại: </strong>$phone</p>"
+                        . "<p><strong>Tin nhắn: </strong>$content</p>";
+                $this->email->message($html);
+                $this->email->send();
             } else {
                 echo json_encode(array('code' => 402, 'msg' => lang('alert_402')));
             }
