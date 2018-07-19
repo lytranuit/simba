@@ -103,7 +103,6 @@
         $("#kv-file").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'admin/uploadfile',
-            maxFileCount: 3,
             showPreview: false,
             showRemove: false,
             showUpload: false,
