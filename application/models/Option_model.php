@@ -13,10 +13,23 @@ class Option_model extends MY_Model {
 
     function update_role_download($role) {
         $sql = "UPDATE tbl_hinhanh AS a JOIN tbl_product_file AS b ON a.`id_hinhanh` = b.`id_file` SET a.role_download = '$role'";
-        echo $sql;
+//        echo $sql;
 //        die();
         $query = $this->db->query($sql);
-//        return $query->result();
+        return $query->result();
+    }
+
+    function get_setting_mail() {
+        $sql = "SELECT * FROM settings where group_name = 'system_fresh_email'";
+//        echo $sql;
+//        die();
+        $query = $this->db->query($sql);
+        $data = $query->result_array();
+        $result = array();
+        foreach ($data as $row) {
+            $result[$row['opt_key']] = $row['opt_value'];
+        }
+        return $result;
     }
 
 }

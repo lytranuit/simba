@@ -204,6 +204,7 @@ class Ajax extends MY_Controller {
         $response = $this->recaptcha->verifyResponse($recaptcha);
         if (isset($response['success']) and $response['success'] === true) {
             $this->load->model("comment_model");
+            $this->load->model("option_model");
             if (isset($_POST['content'])) {
                 $name = $_POST['name'];
                 $email = $_POST['email'];
@@ -227,21 +228,21 @@ class Ajax extends MY_Controller {
 //            $this->load->config('ion_auth', TRUE);
                 $this->load->library(array('email'));
 //                $email_config = $this->config->item('email_config', 'ion_auth');
-//
+                $conf = $this->option_model->get_setting_mail();
                 $this->email->initialize(array(
                     'mailtype' => 'html',
-                    'protocol' => 'ssl',
-                    'smtp_host' => 'cloudsmtp.emailserver.vn',
-                    'smtp_user' => 'oishii@oishii.vn', // actual values different
-                    'smtp_pass' => 'Nimo9514',
-                    'smtp_port' => '465'
+                    'protocol' => $conf['email_security'],
+                    'smtp_host' => $conf['email_server'],
+                    'smtp_user' => $conf['email_username'], // actual values different
+                    'smtp_pass' => $conf['email_password'],
+                    'smtp_port' => $conf['email_port']
                 ));
 //            /*
 //             * Send mail
 //             */
                 $this->email->clear();
-                $this->email->from("oishii@oishii.vn", "simba.com.vn");
-                $this->email->to("simbasales@simba.com.vn"); /// simbasales@simba.com.vn
+                $this->email->from($conf['email_username'], "simba.com.vn");
+                $this->email->to($conf['email_contact']); /// $conf['email_contact']
                 $this->email->subject("Góp ý");
                 $html = "<p><strong>Tên: </strong>$name</p>"
                         . "<p><strong>Email: </strong>$email</p>"
@@ -271,6 +272,7 @@ class Ajax extends MY_Controller {
 
     function feedback() {
         $this->load->model("feedback_model");
+        $this->load->model("option_model");
         if (isset($_POST['content'])) {
             $data = $_POST;
             $data['date'] = time();
@@ -288,21 +290,23 @@ class Ajax extends MY_Controller {
             $feedback = $this->feedback_model->where("id", $id)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get();
             $this->load->library(array('email'));
 //                $email_config = $this->config->item('email_config', 'ion_auth');
-//
+            $conf = $this->option_model->get_setting_mail();
+//            print_r($conf);
+//            die();
             $this->email->initialize(array(
                 'mailtype' => 'html',
-                'protocol' => 'ssl',
-                'smtp_host' => 'cloudsmtp.emailserver.vn',
-                'smtp_user' => 'oishii@oishii.vn', // actual values different
-                'smtp_pass' => 'Nimo9514',
-                'smtp_port' => '465'
+                'protocol' => $conf['email_security'],
+                'smtp_host' => $conf['email_server'],
+                'smtp_user' => $conf['email_username'], // actual values different
+                'smtp_pass' => $conf['email_password'],
+                'smtp_port' => $conf['email_port']
             ));
 //            /*
 //             * Send mail
 //             */
             $this->email->clear();
-            $this->email->from("oishii@oishii.vn", "simba.com.vn");
-            $this->email->to("simbasales@simba.com.vn"); /// simbasales@simba.com.vn
+            $this->email->from($conf['email_username'], "simba.com.vn");
+            $this->email->to($conf['email_contact']); /// simbasales@simba.com.vn
             $this->email->subject("Góp ý về khách hàng và sản phẩm");
             $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
                     . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->name : "") . "</p>"
