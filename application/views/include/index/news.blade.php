@@ -14,7 +14,7 @@
                         @if(count($tin['files']))
                         <div>
                             @foreach($tin['files'] as $row)
-                            <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}'>
+                            <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}' role="{{$row['role_download']}}">
                                 <i class="file-icon" data-type="<?= pathinfo($row['real_hinhanh'], PATHINFO_EXTENSION); ?>"></i>
                                 {{$row['real_hinhanh']}}
                             </a>
