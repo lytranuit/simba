@@ -221,7 +221,6 @@ class Ajax extends MY_Controller {
                  * SET LIMIT 
                  */
                 $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 /*
                  * Mail setting
                  */
@@ -249,7 +248,11 @@ class Ajax extends MY_Controller {
                         . "<p><strong>Số điện thoại: </strong>$phone</p>"
                         . "<p><strong>Tin nhắn: </strong>$content</p>";
                 $this->email->message($html);
-                $this->email->send();
+                if ($this->email->send()) {
+                    echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+                } else {
+                    show_error($this->email->print_debugger());
+                }
             } else {
                 echo json_encode(array('code' => 402, 'msg' => lang('alert_402')));
             }
