@@ -226,21 +226,27 @@ class Ajax extends MY_Controller {
                  * Mail setting
                  */
 //            $this->load->config('ion_auth', TRUE);
-                $this->load->library(array('email'));
-                $this->email->initialize(array(
+                $config = array(
                     'mailtype' => 'html',
                     'protocol' => "smtp",
-                    'smtp_host' => "ssl://smtp.gmail.com",
+                    'smtp_host' => "smtp.googlemail.com",
                     'smtp_user' => "cskh@simba.com.vn", // actual values different
                     'smtp_pass' => "Cusser@1968",
-                    'smtp_port' => 465
-                ));
+                    'charset' => "utf-8",
+                    'smtp_crypto' => 'ssl',
+                    'wordwrap' => TRUE,
+                    'smtp_port' => 465,
+                    'starttls' => true,
+                    'newline' => "\r\n"
+                );
+                $this->load->library("email", $config);
+
 //            /*
 //             * Send mail
 //             */
-                $this->email->clear();
+//            $this->email->clear();
                 $this->email->from("cskh@simba.com.vn", "CÔNG TY TNHH THƯƠNG MẠI SIM BA");
-                $list = array("cskh@simba.com.vn", "lytranuit@gmail.com", "nguyenkhanhyen@yahoo.com", "simbasales@simba.com.vn");
+                $list = array("cskh@simba.com.vn", "simbasales@simba.com.vn");
                 $this->email->to($list); /// $conf['email_contact']
                 $this->email->subject("Góp ý");
                 $html = "<p><strong>Tên: </strong>$name</p>"
@@ -287,21 +293,27 @@ class Ajax extends MY_Controller {
 //            $this->load->config('ion_auth', TRUE);
 
             $feedback = $this->feedback_model->where("id", $id)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get();
-            $this->load->library(array('email'));
-            $this->email->initialize(array(
+            $config = array(
                 'mailtype' => 'html',
                 'protocol' => "smtp",
-                'smtp_host' => "ssl://smtp.gmail.com",
+                'smtp_host' => "smtp.googlemail.com",
                 'smtp_user' => "cskh@simba.com.vn", // actual values different
                 'smtp_pass' => "Cusser@1968",
-                'smtp_port' => 465
-            ));
+                'charset' => "utf-8",
+                'smtp_crypto' => 'ssl',
+                'wordwrap' => TRUE,
+                'smtp_port' => 465,
+                'starttls' => true,
+                'newline' => "\r\n"
+            );
+            $this->load->library("email", $config);
+
 //            /*
 //             * Send mail
 //             */
-            $this->email->clear();
+//            $this->email->clear();
             $this->email->from("cskh@simba.com.vn", "CÔNG TY TNHH THƯƠNG MẠI SIM BA");
-            $list = array("cskh@simba.com.vn", "lytranuit@gmail.com", "nguyenkhanhyen@yahoo.com", "simbasales@simba.com.vn");
+            $list = array("cskh@simba.com.vn", "simbasales@simba.com.vn");
             $this->email->to($list); /// $conf['email_contact']
             $this->email->subject("Góp ý về khách hàng và sản phẩm");
             $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
