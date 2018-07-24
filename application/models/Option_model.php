@@ -20,7 +20,7 @@ class Option_model extends MY_Model {
     }
 
     function get_setting_mail() {
-        $sql = "SELECT * FROM settings where group_name = 'system_fresh_email'";
+        $sql = "SELECT * FROM settings where group_name = 'system_simba_email'";
 //        echo $sql;
 //        die();
         $query = $this->db->query($sql);
