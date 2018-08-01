@@ -1847,49 +1847,32 @@ class Admin extends MY_Controller {
         echo json_encode(1);
     }
 
-    public function renameImage() {//gets the job done but you might want to add error checking and security
-        $this->load->model('hinhanh_model');
-        $files = $this->hinhanh_model->as_array()->get_all();
-        $success = 0;
-        foreach ($files as $file) {
-            $ext = pathinfo($file['src'], PATHINFO_EXTENSION);
-            $id = $file['id_hinh_anh'];
-            $data = array();
-            if (file_exists($file['src'])) {
-                $name = "public/uploads/2018-08-01/$id.$ext";
-                $success = rename($file['src'], $name);
-                $data['src'] = $name;
-            }
-            if (file_exists($file['thumb_src'])) {
-                $name = "public/uploads/2018-08-01/$id-thumb.$ext";
-                $success = rename($file['thumb_src'], $name);
-                $data['thumb_src'] = $name;
-            }
-            if (file_exists($file['bg_src'])) {
-                $name = "public/uploads/2018-08-01/$id-bg.$ext";
-                $success = rename($file['bg_src'], $name);
-                $data['bg_src'] = $name;
-            }
-            if (file_exists($file['slider_src'])) {
-                $name = "public/uploads/2018-08-01/$id-slider.$ext";
-                $success = rename($file['slider_src'], $name);
-                $data['slider_src'] = $name;
-            }
-            if (count($data))
-                $this->hinhanh_model->update($data, $id);
-        }
-//        $info = new StdClass;
-//        $info->sucess = $success;
-//        if (IS_AJAX) {
-////I don't think it matters if this is set but good for error checking in the console/firebug
-//            echo json_encode(array($info));
-//        } else {
-////here you will need to decide what you want to show for a successful delete        
-//            $file_data['delete_data'] = $file;
-////$this->load->view('admin/delete_success', $file_data);
+//    public function renameimage() {//gets the job done but you might want to add error checking and security
+////        echo 1;die();
+//        error_reporting(1);
+//        error_reporting('On');
+//        $this->load->model('hinhanh_model');
+//        $files = $this->hinhanh_model->as_array()->get_all();
+//        $success = 0;
+//        if (!file_exists("public/uploads/2018-08-01/")) {
+//            mkdir("public/uploads/2018-08-01/", 0777, true);
 //        }
-        echo json_encode(1);
-    }
+//        foreach ($files as $file) {
+//            $ext = pathinfo($file['ten_hinhanh'], PATHINFO_EXTENSION);
+//            $id = $file['id_hinhanh'];
+//            $data = array();
+//            $date = date("Y-m-d", strtotime($file['date']));
+////            print_r($file);
+////            die();
+////            $success
+//            if ($file['src'] != "" && file_exists(FCPATH . "public/uploads/$date/" . $file['ten_hinhanh'])) {
+//                $name = "public/uploads/2018-08-01/$id.$ext";
+//                $success = copy("public/uploads/$date/" . $file['ten_hinhanh'], FCPATH . $name);
+//                $data['src'] = $name;
+//            }
+//            if (count($data))
+//                $this->hinhanh_model->update($data, $id);
+//        }
 
     function _load_language() {
         $translations = array();
