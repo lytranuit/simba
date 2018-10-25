@@ -3501,3 +3501,9 @@ textarea.input100 {
         -o-transform: rotate(-130deg);
         -webkit-transform: rotate(-130deg);
         transform: rotate(-130deg); } }
+
+
+.offline_sale{width: 80%; border: 1px solid rgb(202, 202, 202); margin: 10px auto; background-color: rgb(253, 237, 238); border-radius: 10px; padding: 4px 0px;}
+.offline_sale  span{font-weight:bold;text-align:center;padding:0px 5px;margin:0;display:block;}
+.offline_sale .os_contact{font-style:italic;color:black;}
+.offline_sale .os_phone{color:#ff2b00;font-weight:bold;}

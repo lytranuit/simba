@@ -105,6 +105,9 @@ class Index extends MY_Controller {
             $short_language = short_language_current();
             $sql_where .= " AND (code like '%" . $search . "%' OR  name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))";
         }
+        if (!$this->data['is_login']) {
+            $sql_where .= " AND require_year_old = 0";
+        }
         if ($category > 0) {
             $category = $this->categorysimba_model->where('id', $category)->with_product()->as_array()->get();
 //            echo "<pre>";
@@ -143,6 +146,7 @@ class Index extends MY_Controller {
         $this->load->model("category_model");
         $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->with_products()->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
+        $tin['products'] = array_values($tin['products']);
 //        echo "<pre>";
 //        print_r($tin);
 //        die();

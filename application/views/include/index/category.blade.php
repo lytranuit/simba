@@ -1,3 +1,4 @@
+
 <div id="content">
     <div class="container">
         <div class="row">
@@ -18,6 +19,10 @@
                     <div class="card-header">{{lang('heading_product')}}</div>
                     <div class="card-body row">
                         @if(count($tin['products']))
+                        @if($tin['products'][0]['require_year_old'] == 1)
+                        <div class="offline_sale" style="margin: 50px auto;"><span class="os_contact">Liên hệ</span><span class="os_phone">Hotline miễn phí 18009469</span></div>
+
+                        @else
                         @foreach($tin['products'] as $row)
                         @if($row['status'] == 1)
                         <a class="col-md-3 col-6 text-center hover_product" href="<?= get_url_seo('index/productsimba', array($row['id'], sluggable($row[pick_language($row, 'name_')]))) ?>" style="color: black;">
@@ -29,6 +34,7 @@
                         </a>
                         @endif
                         @endforeach
+                        @endif
                         @endif
                         <div class="col-12 d-none">
                             <nav aria-label="Page navigation example">
