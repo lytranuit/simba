@@ -146,7 +146,9 @@ class Index extends MY_Controller {
         $this->load->model("category_model");
         $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->with_products()->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
-        $tin['products'] = array_values($tin['products']);
+//        print_r($tin['products']);
+//        die();
+        $tin['products'] = isset($tin['products']) ? array_values($tin['products']) : array();
 //        echo "<pre>";
 //        print_r($tin);
 //        die();

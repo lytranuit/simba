@@ -89,8 +89,14 @@ class Widget {
 
     function category() {
         $this->CI->load->model("category_model");
-        $this->data['data'] = $this->CI->category_model->where(array('deleted' => 0))->order_by("date", "DESC")->with_hinhanh()->as_array()->get_all();
-//        echo "<pre>";
+
+        if ($this->data['is_login']) {
+            $role_user = $this->CI->session->userdata('role');
+            $this->data['data'] = $this->CI->category_model->where("deleted = 0 AND (role_show IS NULL OR role_show = '' OR FIND_IN_SET($role_user,role_show))", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_hinhanh()->as_array()->get_all();
+        } else {
+            $this->data['data'] = $this->CI->category_model->where("deleted = 0 AND (role_show IS NULL OR role_show = '')", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_hinhanh()->as_array()->get_all();
+        }
+        //        echo "<pre>";
 //        print_r($this->data['data']);
 //        die();
         echo $this->blade->view()->make('widget/category', $this->data)->render();

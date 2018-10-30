@@ -24,7 +24,6 @@
 
                         @else
                         @foreach($tin['products'] as $row)
-                        @if($row['status'] == 1)
                         <a class="col-md-3 col-6 text-center hover_product" href="<?= get_url_seo('index/productsimba', array($row['id'], sluggable($row[pick_language($row, 'name_')]))) ?>" style="color: black;">
                             <img class="img-fluid" src="http://www.oishii.vn{{$row['image_url']}}" alt="Card image cap" style="max-height: 180px;"> 
                             <div class="">
@@ -32,7 +31,6 @@
                                 <p>{{$row[pick_language($row,'name_')]}}</p>
                             </div>
                         </a>
-                        @endif
                         @endforeach
                         @endif
                         @endif

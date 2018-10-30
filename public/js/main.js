@@ -369,6 +369,8 @@ jQuery(document).ready(function ($) {
                     } else {
                         if (role == "1") {
                             location.href = path + "admin";
+                        } else {
+                            location.reload();
                         }
                     }
                 }

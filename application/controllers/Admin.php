@@ -442,6 +442,7 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("category_model");
+            $data['role_show'] = isset($data['role_show']) ? implode(",", $data['role_show']) : null;
             $data['date'] = time();
             $data_up = $this->category_model->create_object($data);
             $this->category_model->insert($data_up);
@@ -449,6 +450,8 @@ class Admin extends MY_Controller {
         } else {
             $this->data['menu_active'] = "category";
             $this->load->model("categorysimba_model");
+            $this->load->model("role_model");
+            $this->data['role'] = $this->role_model->as_array()->get_all();
             $this->data['arr_category'] = $this->categorysimba_model->as_object()->get_all();
             load_inputfile($this->data);
             load_editor($this->data);
@@ -461,6 +464,7 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("category_model");
+            $data['role_show'] = isset($data['role_show']) ? implode(",", $data['role_show']) : null;
             $data_up = $this->category_model->create_object($data);
             $this->category_model->update($data_up, $id);
             redirect('admin/quanlycategory', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
@@ -468,12 +472,14 @@ class Admin extends MY_Controller {
             $this->data['menu_active'] = "category";
             $this->load->model("categorysimba_model");
             $this->load->model("category_model");
+            $this->load->model("role_model");
 
             $this->data['arr_category'] = $this->categorysimba_model->as_object()->get_all();
 
             $tin = $this->category_model->with_hinhanh()->where(array('id' => $id))->as_object()->get();
             $this->data['tin'] = $tin;
 
+            $this->data['role'] = $this->role_model->as_array()->get_all();
             load_inputfile($this->data);
             load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();

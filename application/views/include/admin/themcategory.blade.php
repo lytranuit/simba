@@ -1,3 +1,4 @@
+
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">Thêm nhóm hàng</a></li>
@@ -21,6 +22,14 @@
                             <select class="form-control" name="id_category" id="id_category">
                                 @foreach($arr_category as $row)
                                 <option value="{{$row->id}}">{{$row->name_vi}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <b class="form-label">Role:</b>
+                            <select class="form-control" name="role_show[]" id="role_show" multiple="">
+                                @foreach($role as $row)
+                                <option value="{{$row['id']}}">{{$row['name']}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -98,6 +107,7 @@
 
 <script type='text/javascript'>
     $(document).ready(function () {
+        $("#role_show").chosen();
         $("#id_category").chosen();
         $("#kv-explorer").fileinput({
             'theme': 'explorer-fa',

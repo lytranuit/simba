@@ -1,7 +1,7 @@
 <?php
 $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "public/img/preview.png";
+$role_show = explode(",", $tin->role_show);
 ?>
-
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">Nhóm hàng</a></li>
@@ -26,6 +26,18 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                             <select class="form-control" name="id_category" id="id_category">
                                 @foreach($arr_category as $row)
                                 <option value="{{$row->id}}">{{$row->name_vi}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <b class="form-label">Role:</b>
+                            <select class="form-control" name="role_show[]" id="role_show" multiple="">
+                                @foreach($role as $row)
+                                @if(in_array($row['id'],$role_show))
+                                <option value="{{$row['id']}}" selected="">{{$row['name']}}</option>
+                                @else 
+                                <option value="{{$row['id']}}">{{$row['name']}}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
@@ -105,6 +117,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
     $(document).ready(function () {
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
+        $("#role_show").chosen();
         $("#id_category").chosen();
         $("#kv-explorer").fileinput({
             'theme': 'explorer-fa',
