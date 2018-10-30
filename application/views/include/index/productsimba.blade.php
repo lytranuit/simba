@@ -35,6 +35,10 @@
                                         <span>{{$tin['preservation'][pick_language($tin['preservation'],'name_')]}}</span>
                                     </li>
                                     <li>
+                                        <label class="col-md-4 col-6">{{lang('product_tonkho')}}:</label>
+                                        <span>{{$tin['number_of_product']}}</span>
+                                    </li>
+                                    <li>
                                         <label class="col-md-4">{{lang('product_mota')}}:</label>
                                         <span>{{$tin[pick_language($tin,'description_')]}} <p><a href="http://www.oishii.vn/product/view/{{$tin['id']}}/{{sluggable($tin[pick_language($tin,'name_')])}}" target="_blank">{{lang('mua_hang')}}</a></p></span>
                                     </li>
