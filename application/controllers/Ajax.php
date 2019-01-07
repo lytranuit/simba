@@ -316,10 +316,10 @@ class Ajax extends MY_Controller {
 //             */
 //            $this->email->clear();
             $this->email->from($conf['email_email'], $conf['email_name']);
-            $this->email->to('cskh@simba.com.vn', 'simbasales@simba.com.vn'); /// $conf['email_contact']
+            $this->email->to('simbasales@simba.com.vn'); /// $conf['email_contact']
             $this->email->subject($feedback->subject);
             $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
-                    . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->name : "") . "</p>"
+                    . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->short_name : "") . "</p>"
                     . "<p><strong>Sản phẩm: </strong>" . (isset($feedback->product) ? $feedback->product->code . "-" . $feedback->product->name_vi : "") . "</p>"
                     . "<p><strong>Nội dung: </strong>" . $feedback->content . "</p>";
             $this->email->message($html);
