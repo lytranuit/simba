@@ -8,6 +8,12 @@
             </label>
         </div>
         <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" name="subject" placeholder="Subject" required="">
+            <label class="label-input100" for="subject">
+                
+            </label>
+        </div>
+        <div class="wrap-input100 validate-input">
             <b>Khách hàng</b>
             <div  class="col-12">
                 <select id="select_customer" name="customer_id" required="">

@@ -15,7 +15,7 @@ class Feedback_model extends MY_Model {
 
     function create_object($data) {
         $array = array(
-            'name', 'customer_id', 'product_id', 'content', 'date'
+            'name', 'customer_id', 'product_id', 'content', 'date', 'subject'
         );
         $obj = array();
         foreach ($array as $key) {
