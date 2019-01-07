@@ -337,10 +337,10 @@ class Ajax extends MY_Controller {
         $this->load->model("customersimba_model");
         $search = $this->input->post("data");
         $search = $search['q'];
-        $data = $this->customersimba_model->where("deleted = 0 AND (code like '%$search%' OR name like '%$search%')", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        $data = $this->customersimba_model->where("deleted = 0 AND (code like '%$search%' OR short_name like '%$search%')", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
         $results = array();
         foreach ($data as $row) {
-            $results[] = array("id" => $row['id'], 'text' => $row['code'] . ' - ' . $row['name']);
+            $results[] = array("id" => $row['id'], 'text' => $row['code'] . ' - ' . $row['short_name']);
         }
         echo json_encode(array('q' => $search, 'results' => $results));
     }
