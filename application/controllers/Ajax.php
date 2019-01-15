@@ -316,7 +316,7 @@ class Ajax extends MY_Controller {
 //             */
 //            $this->email->clear();
             $this->email->from($conf['email_email'], $conf['email_name']);
-            $this->email->to('simbasales@simba.com.vn'); /// $conf['email_contact']
+            $this->email->to('simbasalesrun@simba.com.vn'); /// $conf['email_contact']
             $this->email->subject($feedback->subject);
             $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
                     . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->short_name : "") . "</p>"
