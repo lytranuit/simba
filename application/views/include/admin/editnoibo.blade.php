@@ -1,3 +1,7 @@
+
+<?php
+$hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "public/img/preview.png";
+?>
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">Sửa tin tức</a></li>
@@ -16,6 +20,12 @@
                         <input type='hidden' name='id_files[]' value='{{$key}}' class='id_files'/>
                         @endforeach
                         @endif
+                        <input type="hidden" name='id_hinhanh' value='{{$tin->id_hinhanh}}' class='id_hinhanh'/>
+                        <div class="col-md-2">
+                            <b class="form-label">Hình ảnh đại diện:</b>
+                            <img src="<?= base_url() . $hinh_preview ?>" id='hinh_preview' style="display:block;cursor: pointer;width: 125px;"/>
+                            <input id="kv-explorer" type="file" name="hinhanh[]" accept="image/*" class='upload_hinhanh'>
+                        </div>
                         <div class="col-md-6">
                             <b class="form-label">File: </b><span><?= count((array) $tin->files) > 0 ? count((array) $tin->files) . " files <i class='fa fa-close remove_file' style='cursor: pointer;'></i>" : "" ?></span>
                             <input id="kv-file" type="file" name="file_up[]" multiple data-show-preview="false">
@@ -96,6 +106,31 @@
     $(document).ready(function () {
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
+        $("#kv-explorer").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': path + 'admin/uploadhinhanh',
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+            maxFileCount: 1,
+            showPreview: false,
+            showRemove: false,
+            showUpload: false,
+            showCancel: false,
+            browseLabel: "",
+        }).on("filebatchselected", function (event, files) {
+            $("#form-dang-tin .id_hinhanh").remove();
+            $(this).fileinput("upload");
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var id = data.response.key;
+            var src = data.response.initialPreview[0];
+            $("#hinh_preview").attr("src", src);
+            var append = "<input type='hidden' name='id_hinhanh' value='" + id + "' class='id_hinhanh'/>";
+            $("#form-dang-tin").append(append);
+        });
+        $("#kv-explorer").parents(".file-input").hide();
+
+        $("#hinh_preview").click(function () {
+            $("#kv-explorer").click();
+        });
         $(".remove_file").click(function () {
             $(this).parent().remove();
             $("#form-dang-tin .id_files").remove();

@@ -11,6 +11,11 @@
             <div class="body">
                 <div class="row">
                     <form method="POST" action="" id="form-dang-tin" class="col-md-12">
+                        <div class="col-md-2">
+                            <b class="form-label">Hình ảnh đại diện:</b>
+                            <img src="<?= base_url() . "public/img/preview.png" ?>" id='hinh_preview' style="display:block;cursor: pointer;width: 125px;"/>
+                            <input id="kv-explorer" type="file" name="hinhanh[]" accept="image/*" class='upload_hinhanh'>
+                        </div>
                         <div class="col-md-4">
                             <b class="form-label">Type (*):</b>
                             <select class="form-control" name="type">
@@ -97,6 +102,33 @@
 
 <script type='text/javascript'>
     $(document).ready(function () {
+        $("#kv-explorer").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': path + 'admin/uploadhinhanh',
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+            maxFileCount: 1,
+            showPreview: false,
+            showRemove: false,
+            showUpload: false,
+            showCancel: false,
+            browseLabel: "",
+            initialPreviewConfig: [
+                {caption: "Business 1.jpg", size: 762980, url: "$urlD", key: 11},
+            ]
+        }).on("filebatchselected", function (event, files) {
+            $("#form-dang-tin .id_hinhanh").remove();
+            $(this).fileinput("upload");
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var id = data.response.key;
+            var src = data.response.initialPreview[0];
+            $("#hinh_preview").attr("src", src);
+            var append = "<input type='hidden' name='id_hinhanh' value='" + id + "' class='id_hinhanh'/>";
+            $("#form-dang-tin").append(append);
+        });
+        $("#kv-explorer").parents(".file-input").hide();
+        $("#hinh_preview").click(function () {
+            $("#kv-explorer").click();
+        });
         $("#kv-file").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'admin/uploadfile',
