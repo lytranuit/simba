@@ -252,7 +252,7 @@ class Ajax extends MY_Controller {
                 $html = "<p><strong>Tên: </strong>$name</p>"
                         . "<p><strong>Email: </strong>$email</p>"
                         . "<p><strong>Số điện thoại: </strong>$phone</p>"
-                        . "<p><strong>Nội dung: </strong>$content</p>";
+                        . "<p><strong>Nội dung: </strong>" . nl2br($content) . "</p>";
                 $this->email->message($html);
                 if ($this->email->send()) {
                     echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
@@ -321,7 +321,7 @@ class Ajax extends MY_Controller {
             $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
                     . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->short_name : "") . "</p>"
                     . "<p><strong>Sản phẩm: </strong>" . (isset($feedback->product) ? $feedback->product->code . "-" . $feedback->product->name_vi : "") . "</p>"
-                    . "<p><strong>Nội dung: </strong>" . $feedback->content . "</p>";
+                    . "<p><strong>Nội dung: </strong>" . nl2br($feedback->content) . "</p>";
             $this->email->message($html);
             if ($this->email->send()) {
                 echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
