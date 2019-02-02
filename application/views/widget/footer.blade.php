@@ -126,7 +126,7 @@ Footer
                     + MST: 0303582244
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                    <a href=" http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=27522" target="_blank" class="bocongthuong">
+                    <a href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=52435" target="_blank" class="bocongthuong">
                         <p>Chứng nhận SGD TMĐT</p>
                         <img src="http://www.oishii.vn/img/bct.png" alt="TMĐT">
                     </a>
