@@ -268,11 +268,11 @@ class Ajax extends MY_Controller {
     }
 
     function modalfeedback() {
-        $this->load->model("customersimba_model");
-        $this->load->model("productsimba_model");
-        $this->data['customers'] = $this->customersimba_model->where(array('deleted' => 0))->limit(10)->as_array()->get_all();
-        $this->data['products'] = $this->productsimba_model->limit(10)->as_array()->get_all();
         echo $this->blade->view()->make('ajax/modalfeedback', $this->data)->render();
+    }
+
+    function modallogbook() {
+        echo $this->blade->view()->make('ajax/modallogbook', $this->data)->render();
     }
 
     function feedback() {
@@ -322,6 +322,79 @@ class Ajax extends MY_Controller {
                     . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->short_name : "") . "</p>"
                     . "<p><strong>Sản phẩm: </strong>" . (isset($feedback->product) ? $feedback->product->code . "-" . $feedback->product->name_vi : "") . "</p>"
                     . "<p><strong>Nội dung: </strong></p><p>" . nl2br($feedback->content) . "</p>";
+            $this->email->message($html);
+            if ($this->email->send()) {
+                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+            } else {
+                show_error($this->email->print_debugger());
+            }
+        } else {
+            echo json_encode(array('code' => 402, 'msg' => lang("alert_402")));
+        }
+    }
+
+    function logbook() {
+        $this->load->model("logbook_model");
+        $this->load->model("option_model");
+        if (isset($_POST['content'])) {
+            $data = $_POST;
+            $data['date'] = time();
+            $data_up = $this->logbook_model->create_object($data);
+            $id = $this->logbook_model->insert($data_up);
+            /*
+             * SET LIMIT 
+             */
+            $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
+            /*
+             * Mail setting
+             */
+//            $this->load->config('ion_auth', TRUE);
+//            echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+//            die();
+            /*
+             * LAY EMAIL
+             */
+            $role_user = $this->session->userdata('role');
+            $this->load->model("role_model");
+            $role_obj = $this->role_model->where(array("id" => $role_user))->get();
+            $email_to = $this->role_model->get_email_role($role_user, $role_obj->parent_id);
+            if (empty($email_to)) {
+                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+                die();
+            }
+            /*
+             * DATA
+             */
+            $logbook = $this->logbook_model->where("id", $id)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get();
+
+            $conf = $this->option_model->get_setting_mail();
+//            $this->load->config('ion_auth', TRUE);
+            $config = array(
+                'mailtype' => 'html',
+                'protocol' => "smtp",
+                'smtp_host' => $conf['email_server'],
+                'smtp_user' => $conf['email_username'], // actual values different
+                'smtp_pass' => $conf['email_password'],
+                'charset' => "utf-8",
+                'smtp_crypto' => $conf['email_security'],
+                'wordwrap' => TRUE,
+                'smtp_port' => 465,
+                'starttls' => true,
+                'newline' => "\r\n"
+            );
+            $this->load->library("email", $config);
+
+//            /*
+//             * Send mail
+//             */
+//            $this->email->clear();
+            $this->email->from($conf['email_email'], $conf['email_name']);
+            $this->email->to($email_to); /// $conf['email_contact']
+            $this->email->subject($logbook->subject);
+            $html = "<p><strong>Tên nhân viên: </strong>" . $logbook->name . "</p>"
+                    . "<p><strong>Nhà cung cấp / Khách hàng: </strong>" . (isset($logbook->customer) ? $logbook->customer : "") . "</p>"
+                    . "<p><strong>Ngày: </strong>" . date("Y-m-d", $logbook->date) . "</p>"
+                    . "<p><strong>Nội dung: </strong></p><div class='fr-view'>" . $logbook->content . "</div>";
             $this->email->message($html);
             if ($this->email->send()) {
                 echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
@@ -410,6 +483,23 @@ class Ajax extends MY_Controller {
             echo json_encode(array("code" => 404, "msg" => lang('alert_404')));
             die();
         }
+    }
+
+    function saveorderrole() {
+        $this->load->model("role_model");
+        $data = json_decode($this->input->post('data'), true);
+        foreach ($data as $key => $row) {
+            if (isset($row['id'])) {
+                $id = $row['id'];
+                $parent_id = isset($row['parent_id']) && $row['parent_id'] != "" ? $row['parent_id'] : 0;
+                $array = array(
+                    'parent_id' => $parent_id,
+                    'sort' => $key
+                );
+                $this->role_model->update($array, $id);
+            }
+        }
+        echo 1;
     }
 
     ////////////

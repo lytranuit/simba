@@ -471,6 +471,76 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    $("#logbook").click(function (e) {
+        e.preventDefault();
+        var $is_logged = $(".logged").length;
+        var $role_user = $(".logged").attr("role");
+        var $role_feedback = $("#logbook").attr("role_feedback") ? $("#logbook").attr("role_feedback").split(",") : [];
+        if ($is_logged && ($role_user == "1" || $.inArray($role_user, $role_feedback) != -1)) {
+            if ($('#logbook-modal .modal-body').is(":empty"))
+                $('#logbook-modal .modal-body').load(path + "ajax/modallogbook", function (result) {
+                    var name = $(".logged").first().attr("data-name");
+                    $("#name2").val(name);
+                    $("#logbook-modal .edit").froalaEditor({
+                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+                        heightMin: 200,
+                        imageUploadURL: path + 'admin/uploadimage',
+                        // Set request type.
+                        imageUploadMethod: 'POST',
+                        // Set max image size to 5MB.
+                        imageMaxSize: 5 * 1024 * 1024,
+                        // Allow to upload PNG and JPG.
+                        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+                        htmlRemoveTags: [],
+                    });
+//                    $('#myModal').modal({show: true});
+                    $("#logbook_form").validate({
+                        highlight: function (input) {
+                            $(input).parents('.wrap-input100').addClass('error');
+                        },
+                        unhighlight: function (input) {
+                            $(input).parents('.wrap-input100').removeClass('error');
+                        },
+                        errorPlacement: function (error, element) {
+//            $(element).parents('.form-group').append(error);
+                        },
+                        submitHandler: function (form) {
+                            if ($("#logbook_form").data("requestRunning"))
+                                return false;
+                            $.ajax({
+                                url: path + 'ajax/logbook',
+                                data: $("#logbook_form").serialize(),
+                                dataType: "JSON",
+                                type: "POST",
+                                beforeSend: function () {
+                                    $("#logbook_form").data("requestRunning", true);
+                                },
+                                success: function (data) {
+                                    $("#logbook_form").data("requestRunning", false);
+                                    var code = data.code;
+                                    var msg = data.msg;
+                                    alert(msg);
+                                    if (code == 400) {
+                                        location.reload();
+                                    }
+                                }
+                            });
+                            return false;
+                        }
+                    });
+                });
+        } else if (!$is_logged) {
+            $(document).data("callback", click_nhatky);
+            $(".button_login").trigger("click");
+            return false;
+        } else if ($.inArray($role_user, $role_feedback) == -1) {
+            alert(alert_407);
+            return false;
+        }
+    });
+
     $(".files").click(function (e) {
         e.preventDefault();
         var id = $(this).attr("data");
@@ -604,6 +674,10 @@ function load_page_product(page = 1) {
 }
 function click_gopy(...param) {
     $("#advanced_comment").trigger("click");
+}
+
+function click_nhatky(...param) {
+    $("#logbook").trigger("click");
 }
 function download_file(...param) {
     var $this = param[0];

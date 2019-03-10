@@ -23,6 +23,7 @@ if (!function_exists('load_datatable')) {
 
         array_push($data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/jquery.dataTables.js");
         array_push($data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js");
+        array_push($data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/jquery.highlight.js");
     }
 
 }
@@ -65,6 +66,19 @@ if (!function_exists('load_editor')) {
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/save.min.js");
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/url.min.js");
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/video.min.js");
+    }
+
+}
+
+
+if (!function_exists('load_sort_nest')) {
+
+    function load_sort_nest(&$data) {
+        array_push($data['stylesheet_tag'], base_url() . "public/admin/plugins/shortable-nestable/sort-nest.css");
+        /////////// Plugin
+//        array_push($data['javascript_tag'], base_url() . "public/admin/vendor/shortable-nestable/Sortable.min.js");
+        array_push($data['javascript_tag'], base_url() . "public/admin/plugins/shortable-nestable/jquery.mjs.nestedSortable.js");
+//        array_push($data['javascript_tag'], base_url() . "public/admin/vendor/shortable-nestable/jquery.nestable.js");
     }
 
 }

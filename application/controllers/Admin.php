@@ -85,6 +85,15 @@ class Admin extends MY_Controller {
             case 'updatepage':
                 $method = "editpage";
                 break;
+            case 'quanlylogbook':
+                $method = 'quanlyfeedback';
+                break;
+            case 'editlogbook':
+                $method = 'editfeedback';
+                break;
+            case 'removelogbook':
+                $method = 'removefeedback';
+                break;
             case 'slider':
             case 'saveslider':
             case 'gioithieu':
@@ -1152,14 +1161,61 @@ class Admin extends MY_Controller {
     }
 
     /*
+     * Logbook
+     */
+
+    public function quanlylogbook() {
+        $this->load->model("logbook_model");
+        $this->data['menu_active'] = "logbook";
+        load_datatable($this->data);
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/froala_editor/froala_style.min.css");
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function editlogbook($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("logbook_model");
+            $data = $_POST;
+            $data_up = $this->logbook_model->create_object($data);
+            $this->logbook_model->update($data_up, $id);
+            redirect('admin/quanlylogbook', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("logbook_model");
+            $tin = $this->logbook_model->where(array('id' => $id))->as_object()->get();
+//            echo "<pre>";
+//            print_r($tin);
+//            die();
+            $this->data['tin'] = $tin;
+
+            load_editor($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removelogbook($params) {
+        $this->load->model("logbook_model");
+        $id = $params[0];
+        $this->logbook_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    /*
      * Role
      */
 
     public function quanlyrole() {
         $this->data['menu_active'] = "role";
         $this->load->model("role_model");
-        $this->data['arr_tin'] = $this->role_model->where(array('deleted' => 0))->as_object()->get_all();
-        load_datatable($this->data);
+//        $this->data['arr_tin'] = $this->role_model->where(array('deleted' => 0))->as_object()->get_all();
+
+        $category = $this->role_model->where(array('deleted' => 0))->order_by('sort', "ASC")->as_array()->get_all();
+        $this->data['html_nestable'] = html_nestable($category, 'parent_id', 0);
+//        load_datatable($this->data);
+        array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery/jquery-ui.min.js");
+        load_sort_nest($this->data);
+
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
@@ -1167,7 +1223,8 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $this->load->model("role_model");
             $this->load->model("rolepermission_model");
-            $data_up = array('name' => $_POST['name']);
+            $data = $_POST;
+            $data_up = $this->role_model->create_object($data);
             $id = $this->role_model->insert($data_up);
             if (isset($_POST['permission'])) {
                 $permission = $_POST['permission'];
@@ -1195,7 +1252,8 @@ class Admin extends MY_Controller {
         if (isset($_POST['dangtin'])) {
             $this->load->model("role_model");
             $this->load->model("rolepermission_model");
-            $data_up = array('name' => $_POST['name']);
+            $data = $_POST;
+            $data_up = $this->role_model->create_object($data);
             $this->role_model->update($data_up, $id);
             if (isset($_POST['permission'])) {
                 $permission = $_POST['permission'];
@@ -1398,6 +1456,74 @@ class Admin extends MY_Controller {
                 }
                 if (is_permission("removeproduct")) {
                     $action .= '<a href="' . base_url() . 'admin/removeproduct/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                $nestedData['action'] = $action;
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
+    /*
+     * TABLE Logbook
+     */
+
+    function tablelogbook() {
+        $this->load->model("logbook_model");
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $page = ($start / $limit) + 1;
+        $where = $this->logbook_model->where("deleted", 0);
+
+        $totalData = $where->count_rows();
+        $totalFiltered = $totalData;
+
+        if (empty($this->input->post('search')['value'])) {
+//            $max_page = ceil($totalFiltered / $limit);
+
+            $where = $this->logbook_model->where("deleted", 0);
+        } else {
+            $search = $this->input->post('search')['value'];
+            $sql_where = "deleted = 0 AND (name like '%" . $search . "%' OR customer like '%" . $search . "%' OR subject like '%" . $search . "%' OR content like '%" . $search . "%')";
+            $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+            $totalFiltered = $where->count_rows();
+            $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+        }
+
+        $posts = $where->order_by("date", "DESC")->paginate($limit, NULL, $page);
+//        echo "<pre>";
+//        print_r($posts);
+//        die();
+        $data = array();
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+
+                $nestedData['id'] = $post->id;
+                $nestedData['name'] = $post->name;
+                $nestedData['customer'] = $post->customer;
+                $nestedData['subject'] = $post->subject;
+                $nestedData['content'] = "<div class='fr-view'>$post->content</div>";
+                $nestedData['date'] = date("Y-m-d", $post->date);
+                $action = "";
+                if (is_permission("editfeedback")) {
+                    $action .= '<a href="' . base_url() . 'admin/editlogbook/' . $post->id . '" class="btn btn-default" title="edit">'
+                            . '<i class="ace-icon fa fa-pencil bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                if (is_permission("removefeedback")) {
+                    $action .= '<a href="' . base_url() . 'admin/removelogbook/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
                             . '<i class="ace-icon fa fa-trash-o bigger-120">'
                             . '</i>'
                             . '</a>';

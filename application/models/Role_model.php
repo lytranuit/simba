@@ -23,4 +23,38 @@ class Role_model extends MY_Model {
         parent::__construct();
     }
 
+    function create_object($data) {
+        $array = array(
+            'name', 'email', 'parent_id', 'sort'
+        );
+        $obj = array();
+        foreach ($array as $key) {
+            if (isset($data[$key])) {
+                $obj[$key] = $data[$key];
+            } else
+                continue;
+        }
+
+        return $obj;
+    }
+
+    function get_email_role($role, $parent) {
+//        return "lytranuit@gmail.com";
+        $return = array();
+        if ($parent == 0) {
+            return $return;
+        }
+        $query = $this->db->select('id,parent_id,email')
+                ->where('id', $parent)
+                ->limit(1)
+                ->get("role");
+        if ($query->num_rows() === 1) {
+            $parent_obj = $query->row();
+            array_push($return, $parent_obj->email);
+            $return = array_merge($return, $this->get_email_role($parent, $parent_obj->parent_id));
+        }
+        return $return;
+//        $this_role =    }
+    }
+
 }

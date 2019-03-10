@@ -10,16 +10,13 @@
         <div class="wrap-input100 validate-input">
             <input class="input100" type="text" name="subject" placeholder="Subject" required="">
             <label class="label-input100" for="subject">
-                
+
             </label>
         </div>
         <div class="wrap-input100 validate-input">
             <b>Khách hàng</b>
             <div  class="col-12">
                 <select id="select_customer" name="customer_id" required="">
-                    <!--                    @foreach($customers as $row)
-                                        <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name']}}</option>
-                                        @endforeach-->
                 </select>
             </div>
         </div>
@@ -27,9 +24,6 @@
             <b>Sản phẩm</b>
             <div  class="col-12">
                 <select id="select_product" name="product_id" required="">
-                    <!--                    @foreach($products as $row)
-                                        <option value="{{$row['id']}}">{{$row['code']}} - {{$row['name_vi']}}</option>
-                                        @endforeach-->
                 </select>
             </div>
         </div>

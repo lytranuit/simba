@@ -156,3 +156,45 @@ if (!function_exists('has_permission')) {
     }
 
 }
+
+if (!function_exists('html_nestable')) {
+
+    function html_nestable($array, $column, $parent) {
+        $html = "";
+        $return = array_filter($array, function($item) use($column, $parent) {
+            return $item[$column] == $parent;
+        });
+        ///Bebin Tag
+        if ($parent == 0) {
+            $id_nestable = "id='nestable'";
+        } else {
+            $id_nestable = "";
+        }
+        $html .= '<ol class="dd-list" ' . $id_nestable . '>';
+        ///Content
+        foreach ($return as $row) {
+            $btn_remove = "";
+            if (!in_array($row['id'], array(1, 2, 3))) {
+                $btn_remove = '<a class="btn btn-sm btn-default" href="' . base_url() . 'admin/removerole/' . $row['id'] . '" title="delete" data-type="confirm"><i class="fa fa-trash"></i></a>';
+            }
+            if ($row['email'] != "") {
+                $row['email'] = " (" . $row['email'] . ")";
+            }
+            $html .= '<li class="dd-item" id="menuItem_' . $row['id'] . '" data-id="' . $row['id'] . '">
+                            <div class="dd-handle"> <span class="drag-indicator"></span>
+                                <div>' . $row['name'] . $row['email'] . '</div>
+                                <div class="dd-nodrag btn-group pull-right">
+                                    <a class="btn btn-sm btn-default" href="' . base_url() . 'admin/editrole/' . $row['id'] . '"><i class="fa fa-pencil"></i></a> 
+                                    ' . $btn_remove . '    
+                                </div>
+                            </div>';
+            $html .= html_nestable($array, $column, $row['id']);
+            $html .= '</li>';
+        }
+        ///End Tag
+        $html .= '</ol>';
+
+        return $html;
+    }
+
+}

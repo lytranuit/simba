@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 $lang['alert_400'] = 'Thank you very much for your comments!';
 $lang['alert_401'] = 'Please tick Captcha';
 $lang['alert_402'] = 'Please fullfill required information';
@@ -23,7 +22,7 @@ $lang['login_identity_label'] = 'ID';
 $lang['login_password_label'] = 'password';
 $lang['logout'] = 'Sign Out';
 $lang['Message'] = 'Message';
-$lang['mua_hang'] = 'Please shop online at www.oishii.vn or call 1800 9469';
+$lang['mua_hang'] = 'Please shop online at http://simbaeshop.com or call 1800 9469';
 $lang['News'] = 'News Release';
 $lang['News_product'] = 'Products Registration';
 $lang['no_data'] = 'No data';
@@ -33,6 +32,7 @@ $lang['product_dungtich'] = 'Volume/Weight';
 $lang['product_file'] = 'Download Products Registration File';
 $lang['product_mota'] = 'Description';
 $lang['product_tomtat'] = 'Product information';
+$lang['product_tonkho'] = 'Tồn kho';
 $lang['product_xuatxu'] = 'Origin';
 $lang['search'] = 'Search';
 $lang['search_heading'] = 'Results';
@@ -43,4 +43,6 @@ $lang['text_gop_y'] = 'Other Comments';
 $lang['Your_Email'] = 'Email';
 $lang['Your_Name'] = 'Your Name';
 $lang['Your_Phone'] = 'Phone Number';
+
+
 ?>

@@ -21,6 +21,15 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <b class="form-label">Group mail:</b>
+                                <div class="form-line">
+                                    <input type="text" name='email' class="form-control" required="" aria-required="true">
+                                    <label class="form-label"></label>
+                                </div>
+                            </div>
+                        </div>
                         @foreach($permission as $key=>$row)
                         <div class="col-md-12">
                             <div class="col-md-2">

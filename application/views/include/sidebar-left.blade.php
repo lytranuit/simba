@@ -160,6 +160,14 @@
                     </a>
                 </li>
                 @endif
+                @if(is_permission("quanlyfeedback"))
+                <li data='logbook'>
+                    <a href="<?= base_url() ?>admin/quanlylogbook">
+                        <i class="material-icons">list</i>
+                        <span>Nhật ký</span>
+                    </a>
+                </li>
+                @endif
                 <?php if ($userdata['role'] == 1): ?>
                     <li class="header">User</li>
                     <li data='user'>

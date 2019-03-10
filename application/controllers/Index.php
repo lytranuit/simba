@@ -41,6 +41,7 @@ class Index extends MY_Controller {
             base_url() . "public/lib/ajaxchosen/chosen.ajaxaddition.jquery.js",
             base_url() . 'public/js/main.js?v=' . $version,
         );
+        load_editor($this->data);
     }
 
     public function _remap($method, $params = array()) {

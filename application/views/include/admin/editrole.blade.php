@@ -16,9 +16,18 @@ $arr_permission = count($tin['permission']) ? array_keys($tin['permission']) : a
                     <form method="POST" action="" id="form-dang-tin" class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group form-float">
-                                <b class="form-label">Tên</b>
+                                <b class="form-label">Tên:</b>
                                 <div class="form-line">
                                     <input type="text" name='name' class="form-control" required="" aria-required="true">
+                                    <label class="form-label"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <b class="form-label">Group mail:</b>
+                                <div class="form-line">
+                                    <input type="text" name='email' class="form-control" required="" aria-required="true">
                                     <label class="form-label"></label>
                                 </div>
                             </div>
