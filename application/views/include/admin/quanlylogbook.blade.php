@@ -14,9 +14,11 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tên Nhân viên</th>
-                            <th>Đối tác/Khách hàng</th>
-                            <th>Mô tả sơ lược</th>
+                            <th>Tên nhà cung cấp</th>
+                            <th>Nhân sự tham gia</th>
+                            <th>Nhân sự khác</th>
+                            <th>Sản phẩm chính</th>
+                            <th>Khách hàng chính</th>
                             <th>Nội dung</th>
                             <th>Ngày</th>
                             <th>Hành động</th>
@@ -41,9 +43,11 @@
             },
             "columns": [
                 {"data": "id"},
-                {"data": "name"},
-                {"data": "customer"},
-                {"data": "subject"},
+                {"data": "ncc"},
+                {"data": "nhansu"},
+                {"data": "nhansukhac"},
+                {"data": "products"},
+                {"data": "customers"},
                 {"data": "content"},
                 {"data": "date"},
                 {"data": "action"},

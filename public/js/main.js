@@ -481,7 +481,67 @@ jQuery(document).ready(function ($) {
                 $('#logbook-modal .modal-body').load(path + "ajax/modallogbook", function (result) {
                     var name = $(".logged").first().attr("data-name");
                     $("#name2").val(name);
-                    $("#logbook-modal .edit").froalaEditor({
+                    $("#product_logbook").ajaxChosen({
+                        dataType: 'json',
+                        type: 'POST',
+                        url: path + "ajax/feedbackproduct",
+                    }, {
+                        loadingImg: path + 'public/img/loading.gif'
+                    }, {width: "100%", allow_single_deselect: true});
+                    $("#customer_logbook").ajaxChosen({
+                        dataType: 'json',
+                        type: 'POST',
+                        url: path + "ajax/feedbackcustomer",
+                    }, {
+                        loadingImg: path + 'public/img/loading.gif'
+                    }, {width: "100%", allow_single_deselect: true});
+                    $("#logbook-modal .edit-ncc").froalaEditor({
+                        placeholderText: '-Tên \n - Địa chỉ \n - Website \n -Số điện thoại \n - Email \n - Người liên hệ \n ....',
+                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+                        heightMin: 250,
+                        imageUploadURL: path + 'admin/uploadimage',
+                        // Set request type.
+                        imageUploadMethod: 'POST',
+                        // Set max image size to 5MB.
+                        imageMaxSize: 5 * 1024 * 1024,
+                        // Allow to upload PNG and JPG.
+                        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+                        htmlRemoveTags: [],
+                    });
+                    $("#logbook-modal .edit-nhansu").froalaEditor({
+                        placeholderText: '-Nhân sự 1 - Chức vụ - Chi tiết liên hệ \n -Nhân sự 2 - Chức vụ - Chi tiết liên hệ \n ....',
+                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+                        heightMin: 250,
+                        imageUploadURL: path + 'admin/uploadimage',
+                        // Set request type.
+                        imageUploadMethod: 'POST',
+                        // Set max image size to 5MB.
+                        imageMaxSize: 5 * 1024 * 1024,
+                        // Allow to upload PNG and JPG.
+                        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+                        htmlRemoveTags: [],
+                    });
+                    $("#logbook-modal .edit-nhansu-khac").froalaEditor({
+                        placeholderText: '- Nhà xuất khẩu \n - Nhà tư vấn \n - Công ty khác',
+                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+                        heightMin: 250,
+                        imageUploadURL: path + 'admin/uploadimage',
+                        // Set request type.
+                        imageUploadMethod: 'POST',
+                        // Set max image size to 5MB.
+                        imageMaxSize: 5 * 1024 * 1024,
+                        // Allow to upload PNG and JPG.
+                        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+                        htmlRemoveTags: [],
+                    });
+                    $("#logbook-modal .content_logbook").froalaEditor({
+                        placeholderText: 'Nội dung cuộc họp',
                         toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
                         toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
@@ -498,15 +558,25 @@ jQuery(document).ready(function ($) {
 //                    $('#myModal').modal({show: true});
                     $("#logbook_form").validate({
                         highlight: function (input) {
-                            $(input).parents('.wrap-input100').addClass('error');
+//                            $(input).parents('.wrap-input100').addClass('error');
                         },
                         unhighlight: function (input) {
-                            $(input).parents('.wrap-input100').removeClass('error');
+//                            $(input).parents('.wrap-input100').removeClass('error');
                         },
                         errorPlacement: function (error, element) {
 //            $(element).parents('.form-group').append(error);
                         },
                         submitHandler: function (form) {
+                            var customers = $("#customer_logbook").val();
+                            var products = $("#product_logbook").val();
+                            if (!customers.length) {
+                                alert("Chọn tên khách hàng!");
+                                return false;
+                            }
+                            if (!products.length) {
+                                alert("Chọn sản phẩm chính!");
+                                return false;
+                            }
                             if ($("#logbook_form").data("requestRunning"))
                                 return false;
                             $.ajax({
@@ -522,9 +592,9 @@ jQuery(document).ready(function ($) {
                                     var code = data.code;
                                     var msg = data.msg;
                                     alert(msg);
-                                    if (code == 400) {
-                                        location.reload();
-                                    }
+//                                    if (code == 400) {
+//                                        location.reload();
+//                                    }
                                 }
                             });
                             return false;

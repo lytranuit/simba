@@ -335,12 +335,33 @@ class Ajax extends MY_Controller {
 
     function logbook() {
         $this->load->model("logbook_model");
+        $this->load->model("logbookcustomer_model");
+        $this->load->model("logbookproduct_model");
         $this->load->model("option_model");
         if (isset($_POST['content'])) {
             $data = $_POST;
             $data['date'] = time();
             $data_up = $this->logbook_model->create_object($data);
             $id = $this->logbook_model->insert($data_up);
+            if (isset($data['customers'])) {
+                foreach ($data['customers'] as $row) {
+                    $data_up = array(
+                        'logbook_id' => $id,
+                        'customer_id' => $row
+                    );
+                    $this->logbookcustomer_model->insert($data_up);
+                }
+            }
+            if (isset($data['products'])) {
+                foreach ($data['products'] as $row) {
+                    $data_up = array(
+                        'logbook_id' => $id,
+                        'product_id' => $row
+                    );
+                    $this->logbookproduct_model->insert($data_up);
+                }
+            }
+
             /*
              * SET LIMIT 
              */
@@ -358,15 +379,28 @@ class Ajax extends MY_Controller {
             $this->load->model("role_model");
             $role_obj = $this->role_model->where(array("id" => $role_user))->get();
             $email_to = $this->role_model->get_email_role($role_user, $role_obj->parent_id);
-            if (empty($email_to)) {
-                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
-                die();
-            }
+//            if (empty($email_to)) {
+//                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+//                die();
+//            }
             /*
              * DATA
              */
-            $logbook = $this->logbook_model->where("id", $id)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get();
-
+            $logbook = $this->logbook_model->where("id", $id)->with_products()->with_customers()->order_by("date", "DESC")->as_object()->get();
+            $products = $customers = array();
+            if (isset($logbook->products)) {
+                foreach ($logbook->products as $row) {
+                    array_push($products, "- $row->code - $row->name_vi");
+                }
+            }
+            if (isset($logbook->customers)) {
+                foreach ($logbook->customers as $row) {
+                    array_push($customers, "- $row->code - $row->short_name");
+                }
+            }
+//            echo "<pre>";
+//            print_r($logbook);
+//            die();
             $conf = $this->option_model->get_setting_mail();
 //            $this->load->config('ion_auth', TRUE);
             $config = array(
@@ -388,11 +422,15 @@ class Ajax extends MY_Controller {
 //             * Send mail
 //             */
 //            $this->email->clear();
+
             $this->email->from($conf['email_email'], $conf['email_name']);
             $this->email->to($email_to); /// $conf['email_contact']
-            $this->email->subject($logbook->subject);
-            $html = "<p><strong>Tên nhân viên: </strong>" . $logbook->name . "</p>"
-                    . "<p><strong>Nhà cung cấp / Khách hàng: </strong>" . (isset($logbook->customer) ? $logbook->customer : "") . "</p>"
+            $this->email->subject("Báo cáo nội bộ");
+            $html = "<p><strong>Nhà cung cấp: </strong></p><div class='fr-view'>" . $logbook->ncc . "</div>"
+                    . "<p><strong>Nhân sự tham gia: </strong></p><div class='fr-view'>" . $logbook->nhansu . "</div>"
+                    . "<p><strong>Nhân sự khác: </strong></p><div class='fr-view'>" . $logbook->nhansukhac . "</div>"
+                    . "<p><strong>Sản phẩm chính: </strong>" . implode("<br>", $products) . "</p>"
+                    . "<p><strong>Khách hàng chính: </strong>" . implode("<br>", $customers) . "</p>"
                     . "<p><strong>Ngày: </strong>" . date("Y-m-d", $logbook->date) . "</p>"
                     . "<p><strong>Nội dung: </strong></p><div class='fr-view'>" . $logbook->content . "</div>";
             $this->email->message($html);

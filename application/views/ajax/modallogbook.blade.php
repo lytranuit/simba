@@ -1,36 +1,37 @@
 <div class="main">
-                   <!--<p>Sign up once and watch any of our free demos.</p>-->
     <form id="logbook_form" method="post" action="#">
-        <div class="wrap-input100 validate-input">
-            <input class="input100" id="name2" type="text" name="name" placeholder="Tên của bạn" required="">
-            <label class="label-input100" for="name">
-                <span class="fa fa-user"></span>
-            </label>
+        <div class="row">
+            <div class="col-md-4">
+                <h6>1.Nhà cung cấp</h6>
+                <textarea class="edit-ncc" name="ncc" required=""></textarea>
+            </div>
+            <div class="col-md-4">
+                <h6>2.Các nhân sự tham gia</h6>
+                <textarea class="edit-nhansu" name="nhansu" required=""></textarea>
+            </div>
+            <div class="col-md-4">
+
+                <h6>3.Nhân sự của công ty khác(nếu có)</h6>
+                <textarea class="edit-nhansu-khac" name="nhansukhac"></textarea>
+            </div>
+            <div class="col-md-4">
+                <h6>4.Khách hàng</h6>
+                <select id="customer_logbook" name="customers[]"  multiple="" required="">
+                </select>
+                <h6>5.Sản phẩm chính</h6>
+                <select id="product_logbook" name="products[]"  multiple="" required="">
+                </select>
+                <h6 class="mt-1">6.Thời gian cuộc họp</h6>
+                <input class="form-control" name="date" type="date" value="<?= date("Y-m-d") ?>" required>
+            </div>
+            <div class="col-md-8">
+                <h6>7.Nội dung cuộc họp</h6>
+                <textarea class="content_logbook" name="content"></textarea>
+            </div>
         </div>
-        <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" name="customer" placeholder="Nhà cung cấp/Khách hàng" required="">
-            <label class="label-input100" for="customer">
-                <i class="fa fa-male"></i>
-            </label>
-        </div>
-        <div class="wrap-input100 validate-input">
-            <input class="input100" type="date" name="date" placeholder="Ngày" required="" value="<?= date("Y-m-d") ?>">
-            <label class="label-input100" for="date">
-                <i class="fa fa-clock-o"></i>
-            </label>
-        </div>
-        <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" name="subject" placeholder="Mô tả sơ lược" required="">
-            <label class="label-input100" for="subject">
-                <i class="fa fa-envelope"></i>
-            </label>
-        </div>
-        <div class="wrap-input100 validate-input" data-validate="Message is required">
-            <textarea class="input100 edit" name="content" placeholder="Nội dung" required=""></textarea>
-        </div>
-        <div>
+        <div class="mt-1">
             <button class="btn btn-success btn-sm">
-                <?= lang('Send_Message') ?>
+                Hoàn tất
             </button>
         </div>
     </form>

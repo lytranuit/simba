@@ -44,6 +44,6 @@ $lang['Your_Email'] = 'Email';
 $lang['Your_Name'] = 'Tên';
 $lang['Your_Phone'] = 'Điện thoại';
 
-$lang['text_nhat_ky'] = 'Nhật kí';
+$lang['text_nhat_ky'] = 'Báo cáo nội bộ';
 
 ?>

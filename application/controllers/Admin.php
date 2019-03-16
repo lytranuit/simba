@@ -35,7 +35,8 @@ class Admin extends MY_Controller {
             base_url() . "public/admin/plugins/morrisjs/morris.js",
             base_url() . "public/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
             base_url() . "public/admin/plugins/sweetalert/sweetalert.min.js",
-            base_url() . "public/admin/plugins/chosen/chosen.jquery.min.js",
+            base_url() . "public/admin/plugins/chosen/chosen.jquery.js",
+            base_url() . "public/lib/ajaxchosen/chosen.ajaxaddition.jquery.js",
             base_url() . "public/admin/js/admin.js?v=" . $version
         );
     }
@@ -1182,7 +1183,8 @@ class Admin extends MY_Controller {
             redirect('admin/quanlylogbook', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->load->model("logbook_model");
-            $tin = $this->logbook_model->where(array('id' => $id))->as_object()->get();
+            $tin = $this->logbook_model->where(array('id' => $id))->with_customers()->with_products()->as_object()->get();
+            $this->data['customers'] = implode(",", array_keys((array) $tin->customers));
 //            echo "<pre>";
 //            print_r($tin);
 //            die();
@@ -1495,24 +1497,36 @@ class Admin extends MY_Controller {
             $where = $this->logbook_model->where("deleted", 0);
         } else {
             $search = $this->input->post('search')['value'];
-            $sql_where = "deleted = 0 AND (name like '%" . $search . "%' OR customer like '%" . $search . "%' OR subject like '%" . $search . "%' OR content like '%" . $search . "%')";
+            $sql_where = "deleted = 0 AND (ncc like '%" . $search . "%' OR nhansu like '%" . $search . "%' OR nhansukhac like '%" . $search . "%' OR content like '%" . $search . "%')";
             $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
             $totalFiltered = $where->count_rows();
             $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
         }
 
-        $posts = $where->order_by("date", "DESC")->paginate($limit, NULL, $page);
+        $posts = $where->with_customers()->with_products()->order_by("date", "DESC")->paginate($limit, NULL, $page);
 //        echo "<pre>";
-//        print_r($posts);
+//        print_r($posts);f
 //        die();
         $data = array();
         if (!empty($posts)) {
             foreach ($posts as $post) {
-
+                $products = $customers = array();
+                if (isset($post->products)) {
+                    foreach ($post->products as $row) {
+                        array_push($products, "- $row->code - $row->name_vi");
+                    }
+                }
+                if (isset($post->customers)) {
+                    foreach ($post->customers as $row) {
+                        array_push($customers, "- $row->code - $row->short_name");
+                    }
+                }
                 $nestedData['id'] = $post->id;
-                $nestedData['name'] = $post->name;
-                $nestedData['customer'] = $post->customer;
-                $nestedData['subject'] = $post->subject;
+                $nestedData['ncc'] = $post->ncc;
+                $nestedData['customers'] = implode("<br>", $customers);
+                $nestedData['products'] = implode("<br>", $products);
+                $nestedData['nhansu'] = $post->nhansu;
+                $nestedData['nhansukhac'] = $post->nhansukhac;
                 $nestedData['content'] = "<div class='fr-view'>$post->content</div>";
                 $nestedData['date'] = date("Y-m-d", $post->date);
                 $action = "";
