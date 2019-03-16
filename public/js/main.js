@@ -364,6 +364,7 @@ jQuery(document).ready(function ($) {
                     $('.modal').modal('hide');
                     $button_login.attr("role", role).attr("data-name", username);
                     $("#advanced_comment").attr("role_feedback", role_feedback);
+                    $("#logbook").attr("role_feedback", role_feedback);
                     if (typeof callback === "function") {
                         callback(param);
                     } else {
