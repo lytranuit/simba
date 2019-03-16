@@ -592,9 +592,9 @@ jQuery(document).ready(function ($) {
                                     var code = data.code;
                                     var msg = data.msg;
                                     alert(msg);
-//                                    if (code == 400) {
-//                                        location.reload();
-//                                    }
+                                    if (code == 400) {
+                                        location.reload();
+                                    }
                                 }
                             });
                             return false;
