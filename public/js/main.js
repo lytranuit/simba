@@ -502,6 +502,7 @@ jQuery(document).ready(function ($) {
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
                         heightMin: 250,
                         imageUploadURL: path + 'admin/uploadimage',
+                        toolbarSticky: false,
                         // Set request type.
                         imageUploadMethod: 'POST',
                         // Set max image size to 5MB.
@@ -514,6 +515,7 @@ jQuery(document).ready(function ($) {
                         placeholderText: '-Nhân sự 1 - Chức vụ - Chi tiết liên hệ \n -Nhân sự 2 - Chức vụ - Chi tiết liên hệ \n ....',
                         toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
                         toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarSticky: false,
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
                         heightMin: 250,
                         imageUploadURL: path + 'admin/uploadimage',
@@ -529,6 +531,7 @@ jQuery(document).ready(function ($) {
                         placeholderText: '- Nhà xuất khẩu \n - Nhà tư vấn \n - Công ty khác',
                         toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
                         toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarSticky: false,
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
                         heightMin: 250,
                         imageUploadURL: path + 'admin/uploadimage',
