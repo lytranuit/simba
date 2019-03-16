@@ -34,36 +34,39 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
                                 <?= $tin->nhansukhac ?>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class='col-md-4'>
-                                <div>
-                                    <b>4.Khách hàng chính</b>
-                                    @if(isset($tin->customers))
-                                    @foreach($tin->customers as $row)
-                                    <p>- {{$row->code ."-".$row->name}}</p>
-                                    @endforeach
-                                    @endif
-                                </div>
-                                <div>
-                                    <b>5.Sản phẩm chính</b>
-                                    @if(isset($tin->products))
-                                    @foreach($tin->products as $row)
-                                    <p>- {{$row->code ."-".$row->name_vi}}</p>
-                                    @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <b>6.Nội dung</b>
-                                <div class='fr-view'>
-                                    <?= $tin->content ?>
-                                </div>
+                        <div class="" style="clear: both;">
+                        </div>
+                        <div class='col-md-4'>
+                            <div>
+                                <b>4.Khách hàng chính</b>
+                                @if(isset($tin->customers))
+                                @foreach($tin->customers as $row)
+                                <p>- {{$row->code ."-".$row->name}}</p>
+                                @endforeach
+                                @endif
                             </div>
                         </div>
-
-                    </form>
+                        <div class="col-md-4">
+                            <div>
+                                <b>5.Sản phẩm chính</b>
+                                @if(isset($tin->products))
+                                @foreach($tin->products as $row)
+                                <p>- {{$row->code ."-".$row->name_vi}}</p>
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <b>6.Nội dung</b>
+                            <div class='fr-view'>
+                                <?= $tin->content ?>
+                            </div>
+                        </div>
                 </div>
+
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
