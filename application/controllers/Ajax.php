@@ -379,10 +379,10 @@ class Ajax extends MY_Controller {
             $this->load->model("role_model");
             $role_obj = $this->role_model->where(array("id" => $role_user))->get();
             $email_to = $this->role_model->get_email_role($role_user, $role_obj->parent_id);
-//            if (empty($email_to)) {
-//                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
-//                die();
-//            }
+            if (empty($email_to)) {
+                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+                die();
+            }
             /*
              * DATA
              */
