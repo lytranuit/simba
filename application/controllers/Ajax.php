@@ -272,6 +272,8 @@ class Ajax extends MY_Controller {
     }
 
     function modallogbook() {
+        $this->load->model("role_model");
+        $this->data['roles'] = $this->role_model->where(array("deleted" => 0))->as_object()->get_all();
         echo $this->blade->view()->make('ajax/modallogbook', $this->data)->render();
     }
 
@@ -340,6 +342,7 @@ class Ajax extends MY_Controller {
         $this->load->model("option_model");
         if (isset($_POST['content'])) {
             $data = $_POST;
+            $email_to = array_unique(array_filter($data['send_to']));
             $data['date'] = time();
             $data_up = $this->logbook_model->create_object($data);
             $id = $this->logbook_model->insert($data_up);
@@ -375,10 +378,12 @@ class Ajax extends MY_Controller {
             /*
              * LAY EMAIL
              */
-            $role_user = $this->session->userdata('role');
-            $this->load->model("role_model");
-            $role_obj = $this->role_model->where(array("id" => $role_user))->get();
-            $email_to = $this->role_model->get_email_role($role_user, $role_obj->parent_id);
+//            print_r($email_to);
+//            die();
+//            $role_user = $this->session->userdata('role');
+//            $this->load->model("role_model");
+//            $role_obj = $this->role_model->where(array("id" => $role_user))->get();
+//            $email_to = $this->role_model->get_email_role($role_user, $role_obj->parent_id);
             if (empty($email_to)) {
                 echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 die();

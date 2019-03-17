@@ -23,9 +23,15 @@
                 </select>
                 <h6 class="mt-1">6.Thời gian cuộc họp</h6>
                 <input class="form-control" name="date" type="date" value="<?= date("Y-m-d") ?>" required>
+                <h6 class="mt-1">7.Chia sẽ thông tin</h6>
+                <select class="form-control" id='send_to' name="send_to[]" required="" multiple="">
+                    @foreach($roles as $row)
+                    <option value="{{$row->email}}">{{$row->name}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-8">
-                <h6>7.Nội dung cuộc họp</h6>
+                <h6>8.Nội dung cuộc họp</h6>
                 <textarea class="content_logbook" name="content"></textarea>
             </div>
         </div>

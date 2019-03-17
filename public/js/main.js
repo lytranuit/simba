@@ -482,6 +482,7 @@ jQuery(document).ready(function ($) {
                 $('#logbook-modal .modal-body').load(path + "ajax/modallogbook", function (result) {
                     var name = $(".logged").first().attr("data-name");
                     $("#name2").val(name);
+                    $("#send_to").chosen({width: "100%"});
                     $("#product_logbook").ajaxChosen({
                         dataType: 'json',
                         type: 'POST',
@@ -498,8 +499,8 @@ jQuery(document).ready(function ($) {
                     }, {width: "100%", allow_single_deselect: true});
                     $("#logbook-modal .edit-ncc").froalaEditor({
                         placeholderText: '-Tên \n - Địa chỉ \n - Website \n -Số điện thoại \n - Email \n - Người liên hệ \n ....',
-                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
-                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
                         heightMin: 250,
                         imageUploadURL: path + 'admin/uploadimage',
@@ -514,8 +515,8 @@ jQuery(document).ready(function ($) {
                     });
                     $("#logbook-modal .edit-nhansu").froalaEditor({
                         placeholderText: '-Nhân sự 1 - Chức vụ - Chi tiết liên hệ \n -Nhân sự 2 - Chức vụ - Chi tiết liên hệ \n ....',
-                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
-                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
                         toolbarSticky: false,
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
                         heightMin: 250,
@@ -530,8 +531,8 @@ jQuery(document).ready(function ($) {
                     });
                     $("#logbook-modal .edit-nhansu-khac").froalaEditor({
                         placeholderText: '- Nhà xuất khẩu \n - Nhà tư vấn \n - Công ty khác',
-                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
-                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
                         toolbarSticky: false,
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
                         heightMin: 250,
@@ -546,8 +547,8 @@ jQuery(document).ready(function ($) {
                     });
                     $("#logbook-modal .content_logbook").froalaEditor({
                         placeholderText: 'Nội dung cuộc họp',
-                        toolbarButtons: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
-                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'insertImage', 'fullscreen'],
+                        toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+                        toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
 //                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
                         heightMin: 200,
                         imageUploadURL: path + 'admin/uploadimage',
@@ -583,6 +584,7 @@ jQuery(document).ready(function ($) {
                             }
                             if ($("#logbook_form").data("requestRunning"))
                                 return false;
+                            $(".page-loader-wrapper").show();
                             $.ajax({
                                 url: path + 'ajax/logbook',
                                 data: $("#logbook_form").serialize(),
@@ -690,11 +692,12 @@ jQuery(document).ready(function ($) {
 });
 
 function load_page_news(page = 1) {
+    return false;
     var search = $("#tintuc .input_search").val();
     var data = {page: page, search: search};
     $.ajax({
         dataType: "HTML",
-        url: path + "ajax/news",
+        url: "http://simba.com.vn/ajax/news",
         data: data,
         beforeSend: function () {
             var height = $("#tintuc .data").outerHeight(true);

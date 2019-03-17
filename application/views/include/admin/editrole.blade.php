@@ -1,5 +1,5 @@
 <?php
-$arr_permission = count($tin['permission']) ? array_keys($tin['permission']) : array();
+$arr_permission = $tin['permission'] ? array_keys($tin['permission']) : array();
 ?>
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
