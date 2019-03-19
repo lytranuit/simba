@@ -342,8 +342,15 @@ class Ajax extends MY_Controller {
         $this->load->model("option_model");
         if (isset($_POST['content'])) {
             $data = $_POST;
-            $email_to = array_unique(array_filter($data['send_to']));
-            $data['date'] = time();
+            $email_to = array();
+            if (isset($data['send_to'])) {
+                foreach ($data['send_to'] as $row) {
+                    $email = explode(",", $row);
+                    $email_to = array_merge($email_to, $email);
+                }
+                $email_to = array_unique(array_filter($email_to));
+            }
+            $data['date'] = strtotime($data['date']);
             $data_up = $this->logbook_model->create_object($data);
             $id = $this->logbook_model->insert($data_up);
             if (isset($data['customers'])) {
@@ -427,7 +434,8 @@ class Ajax extends MY_Controller {
 //             * Send mail
 //             */
 //            $this->email->clear();
-
+//            print_r($email_to);
+//            die();
             $this->email->from($conf['email_email'], $conf['email_name']);
             $this->email->to($email_to); /// $conf['email_contact']
             $this->email->subject("Báo cáo nội bộ");

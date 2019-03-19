@@ -164,7 +164,7 @@
                 <li data='logbook'>
                     <a href="<?= base_url() ?>admin/quanlylogbook">
                         <i class="material-icons">list</i>
-                        <span>Nhật ký</span>
+                        <span>Báo cáo nội bộ</span>
                     </a>
                 </li>
                 @endif

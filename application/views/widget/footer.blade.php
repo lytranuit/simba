@@ -105,7 +105,7 @@ Footer
                                     <a id="advanced_comment" class="btn btn-secondary btn-sm" href="#" data-target="#comment-modal" data-toggle="modal" role_feedback="{{$role_feedback}}">
                                         <?= lang('text_gop_y') ?>
                                     </a>
-                                    <a id="logbook" class="btn btn-secondary btn-sm" href="#" data-target="#logbook-modal" data-toggle="modal" role_feedback="{{$role_feedback}}">
+                                    <a id="logbook" class="btn btn-secondary btn-sm" href="{{base_url()}}index/formlogbook" target="_blank" role_feedback="{{$role_feedback}}">
                                         <?= lang('text_nhat_ky') ?>
                                     </a>
                                 </div>
@@ -160,24 +160,6 @@ Footer
 <!-- #footer -->
 
 
-<!-- Logbook Modal-->
-<div aria-hidden="true" aria-labelledby="comment-modalLabel" class="modal fade" id="logbook-modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="comment-modalLabel">
-                    <?= lang('text_nhat_ky') ?>
-                </h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">
-                        x
-                    </span>
-                </button>
-            </div>
-            <div class="modal-body"></div>
-        </div>
-    </div>
-</div>
 <!-- #footer -->
 <a class="back-to-top" href="#">
     <i class="fa fa-chevron-up">

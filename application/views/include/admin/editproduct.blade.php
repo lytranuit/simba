@@ -136,7 +136,7 @@ if (count((array) $tin->files)) {
     $(document).ready(function () {
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
-        $("#id_product").chosen();
+        $("#id_product").chosen({search_contains: true});
         $("#role_download").chosen();
         $(".remove_file").click(function () {
             $(this).parent().remove();

@@ -65,6 +65,35 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/404-page', $this->data)->render();
     }
 
+    public function formlogbook() {
+        $this->load->model("logbook_model");
+        $this->load->model("logbookcustomer_model");
+        $this->load->model("logbookproduct_model");
+        $this->load->model("option_model");
+
+        $this->load->model("user_model");
+        // check to see if the user is logging in
+        $role_feedback = $this->user_model->role_permission(29);
+        $role_user = $this->session->userdata('role');
+        if (!$this->user_model->logged_in() || ($role_user != "1" && !in_array($role_user, $role_feedback))) {
+            echo "<p>" . lang('alert_407') . " <a href='" . base_url() . "'>" . lang('Home') . "</a>";
+            die();
+        }
+        $this->load->model("role_model");
+        $this->data['roles'] = $this->role_model->where(array("deleted" => 0))->as_object()->get_all();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.time.css");
+
+        array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery-inputmask/jquery.inputmask.bundle.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.date.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.time.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/legacy.js");
+        $this->data['template'] = 'page';
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
     public function delete_img() {
         $this->load->model("hinhanh_model");
         $hinh = $this->hinhanh_model->hinhanh_sudung();

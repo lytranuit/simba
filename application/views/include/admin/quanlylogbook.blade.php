@@ -1,26 +1,25 @@
 
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
-    <li class="active"><a href="javascript:void(0);">Nhật ký</a></li>
+    <li class="active"><a href="javascript:void(0);">Báo cáo nội bộ</a></li>
 </ol>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Quản lý nhật ký</h2>
+                <h2>Quản lý báo cáo nội bộ</h2>
             </div>
             <div class="body">
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tên nhà cung cấp</th>
-                            <th>Nhân sự tham gia</th>
-                            <th>Nhân sự khác</th>
+                            <th>Nhà cung cấp</th>
                             <th>Sản phẩm chính</th>
                             <th>Khách hàng chính</th>
                             <th>Nội dung</th>
                             <th>Ngày</th>
+                            <th>Tình trạng</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -44,12 +43,11 @@
             "columns": [
                 {"data": "id"},
                 {"data": "ncc"},
-                {"data": "nhansu"},
-                {"data": "nhansukhac"},
                 {"data": "products"},
                 {"data": "customers"},
                 {"data": "content"},
                 {"data": "date"},
+                {"data": "stauts", "className": "text-center"},
                 {"data": "action"},
             ]
 

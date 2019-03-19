@@ -1175,7 +1175,7 @@ class Admin extends MY_Controller {
 
     public function editlogbook($param) { ////////// Trang dang tin
         $id = $param[0];
-        if (isset($_POST['dangtin'])) {
+        if (isset($_POST['status'])) {
             $this->load->model("logbook_model");
             $data = $_POST;
             $data_up = $this->logbook_model->create_object($data);
@@ -1497,7 +1497,7 @@ class Admin extends MY_Controller {
             $where = $this->logbook_model->where("deleted", 0);
         } else {
             $search = $this->input->post('search')['value'];
-            $sql_where = "deleted = 0 AND (ncc like '%" . $search . "%' OR nhansu like '%" . $search . "%' OR nhansukhac like '%" . $search . "%' OR content like '%" . $search . "%')";
+            $sql_where = "deleted = 0 AND (ncc like '%" . $search . "%' OR content like '%" . $search . "%')";
             $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
             $totalFiltered = $where->count_rows();
             $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
@@ -1523,12 +1523,11 @@ class Admin extends MY_Controller {
                 }
                 $nestedData['id'] = $post->id;
                 $nestedData['ncc'] = $post->ncc;
-                $nestedData['customers'] = implode("<br>", $customers);
-                $nestedData['products'] = implode("<br>", $products);
-                $nestedData['nhansu'] = $post->nhansu;
-                $nestedData['nhansukhac'] = $post->nhansukhac;
+                $nestedData['customers'] = implode("<br>", $customers) . "<br>$post->new_customer";
+                $nestedData['products'] = implode("<br>", $products) . "<br>$post->new_product";
                 $nestedData['content'] = "<div class='fr-view'>$post->content</div>";
                 $nestedData['date'] = date("Y-m-d", $post->date);
+                $nestedData['stauts'] = $post->status == 1 ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>';
                 $action = "";
                 if (is_permission("editfeedback")) {
                     $action .= '<a href="' . base_url() . 'admin/editlogbook/' . $post->id . '" class="btn btn-default" title="edit">'
