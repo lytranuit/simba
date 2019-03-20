@@ -30,6 +30,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <b class="form-label">Chia sẻ thông tin:</b>
+                                <div>
+                                    <input type="hidden" class="input-tmp" name="filter" value="0">
+                                    <input type="checkbox" id="md_checkbox_filter" class="filled-in chk-col-blue" name="filter" value="1">
+                                    <label for="md_checkbox_filter"></label>
+                                </div>
+                            </div>
+                        </div>
                         @foreach($permission as $key=>$row)
                         <div class="col-md-12">
                             <div class="col-md-2">

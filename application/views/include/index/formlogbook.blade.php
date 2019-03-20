@@ -1,3 +1,18 @@
+<div class="page-loader-wrapper" style="display: none;">
+    <div class="loader">
+        <div class="preloader">
+            <div class="spinner-layer pl-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <p>Please wait...</p>
+    </div>
+</div>
 <div class="container-fluid">
     <form id="logbook_form" method="post" action="#">
         <div class="row">
@@ -36,7 +51,7 @@
                 </div>
                 <h6 class="mt-1">6.Thời gian cuộc họp</h6>
                 <input class="form-control" name="date" value="<?= date("Y-m-d H:i:s") ?>" id='pickadatetime' required>
-                <h6 class="mt-1">7.Chia sẽ thông tin</h6>
+                <h6 class="mt-1">7.Chia sẻ thông tin</h6>
                 <select class="form-control" id='send_to' name="send_to[]" multiple="">
                     @foreach($roles as $row)
                     <option value="{{$row->email}}">{{$row->name}}</option>

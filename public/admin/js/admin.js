@@ -502,6 +502,8 @@ $.AdminBSB.function = {
         $('input, select, textarea', form).each(function () {
             var type = $(this).attr('type');
             var value = "";
+            if ($(this).hasClass("input-tmp"))
+                return;
             if ($.type(data[$(this).attr('name')]) !== "undefined") {
                 value = data[$(this).attr('name')];
             } else {

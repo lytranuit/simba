@@ -25,7 +25,7 @@ class Role_model extends MY_Model {
 
     function create_object($data) {
         $array = array(
-            'name', 'email', 'parent_id', 'sort'
+            'name', 'email', 'parent_id', 'sort', 'filter'
         );
         $obj = array();
         foreach ($array as $key) {

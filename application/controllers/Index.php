@@ -80,7 +80,7 @@ class Index extends MY_Controller {
             die();
         }
         $this->load->model("role_model");
-        $this->data['roles'] = $this->role_model->where(array("deleted" => 0))->as_object()->get_all();
+        $this->data['roles'] = $this->role_model->where(array("deleted" => 0, 'filter' => 1))->as_object()->get_all();
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.time.css");
