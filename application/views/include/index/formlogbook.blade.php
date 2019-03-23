@@ -54,9 +54,13 @@
                 <h6 class="mt-1">7.Chia sẻ thông tin</h6>
                 <select class="form-control" id='send_to' name="send_to[]" multiple="">
                     @foreach($roles as $row)
-                    <option value="{{$row->email}}">{{$row->name}}</option>
+                    <option value="{{$row->id}}">{{$row->name}}</option>
                     @endforeach
                 </select>
+                <a href="#" class="text-success fa fa-plus" id="button_new_email"style="font-size:20px;margin-top: 5px;"></a>
+                <div id="box_new_email" class="d-none">
+                    <input class="form-control" name='email_add' placeholder="email1@simba.com.vn,email2@simba.com.vn,..."/>
+                </div>
             </div>
             <div class="col-md-8">
                 <h6>8.Nội dung cuộc họp</h6>
@@ -102,6 +106,7 @@
             event.stopPropagation();
             datepicker.open();
         });
+        $("#send_to").val(1);
         $("#send_to").chosen({width: "100%"});
         $("#button_new_customer").click(function (e) {
             e.preventDefault();
@@ -110,6 +115,10 @@
         $("#button_new_product").click(function (e) {
             e.preventDefault();
             $("#box_new_product").toggleClass("d-none");
+        });
+        $("#button_new_email").click(function (e) {
+            e.preventDefault();
+            $("#box_new_email").toggleClass("d-none");
         });
         $("#product_logbook").ajaxChosen({
             dataType: 'json',
@@ -249,9 +258,10 @@
             submitHandler: function (form) {
                 var customers = $("#customer_logbook").val();
                 var products = $("#product_logbook").val();
+                var ncc = $("[name=ncc]").val();
                 var new_customer = $(".new_customer").val();
                 var new_product = $(".new_product").val();
-                if (!customers.length && new_customer == "") {
+                if (!customers.length && new_customer == "" && ncc == "") {
                     alert("Chọn tên khách hàng!");
                     return false;
                 }

@@ -339,18 +339,26 @@ class Ajax extends MY_Controller {
         $this->load->model("logbook_model");
         $this->load->model("logbookcustomer_model");
         $this->load->model("logbookproduct_model");
+        $this->load->model("logbookrole_model");
+        $this->load->model("role_model");
         $this->load->model("option_model");
         if (isset($_POST['content'])) {
             $data = $_POST;
             $email_to = array();
             if (isset($data['send_to'])) {
                 foreach ($data['send_to'] as $row) {
-                    $email = explode(",", $row);
+                    $data_role = $this->role_model->where(array("id" => $row))->as_object()->get();
+                    $email = explode(",", $data_role->email);
                     $email_to = array_merge($email_to, $email);
                 }
-                $email_to = array_unique(array_filter($email_to));
             }
+            if (isset($data['email_add']) && $data['email_add'] != "") {
+                $email = explode(",", $data['email_add']);
+                $email_to = array_merge($email_to, $email);
+            }
+            $email_to = array_unique(array_filter($email_to));
             $data['date'] = strtotime($data['date']);
+            $data['email_send'] = implode(",", $email_to);
             $data['user_id'] = $this->session->userdata('user_id');
             $data_up = $this->logbook_model->create_object($data);
             $id = $this->logbook_model->insert($data_up);
@@ -373,6 +381,15 @@ class Ajax extends MY_Controller {
                 }
             }
 
+            if (isset($data['send_to'])) {
+                foreach ($data['send_to'] as $row) {
+                    $data_up = array(
+                        'logbook_id' => $id,
+                        'role_id' => $row
+                    );
+                    $this->logbookrole_model->insert($data_up);
+                }
+            }
             /*
              * SET LIMIT 
              */
@@ -440,13 +457,15 @@ class Ajax extends MY_Controller {
             $this->email->from($conf['email_email'], $conf['email_name']);
             $this->email->to($email_to); /// $conf['email_contact']
             $this->email->subject("Báo cáo nội bộ");
-            $html = "<p><strong>Nhà cung cấp: </strong></p><div class='fr-view'>" . $logbook->ncc . "</div>"
-                    . "<p><strong>Nhân sự tham gia: </strong></p><div class='fr-view'>" . $logbook->nhansu . "</div>"
-                    . "<p><strong>Nhân sự khác: </strong></p><div class='fr-view'>" . $logbook->nhansukhac . "</div>"
-                    . "<p><strong>Sản phẩm chính: </strong>" . implode("<br>", $products) . "</p>"
-                    . "<p><strong>Khách hàng chính: </strong>" . implode("<br>", $customers) . "</p>"
-                    . "<p><strong>Ngày: </strong>" . date("Y-m-d", $logbook->date) . "</p>"
-                    . "<p><strong>Nội dung: </strong></p><div class='fr-view'>" . $logbook->content . "</div>";
+            $html = "<p><strong>1.Nhà cung cấp: </strong></p><div class='fr-view'>" . $logbook->ncc . "</div>"
+                    . "<p><strong>2.Nhân sự tham gia: </strong></p><div class='fr-view'>" . $logbook->nhansu . "</div>"
+                    . "<p><strong>3.Nhân sự khác: </strong></p><div class='fr-view'>" . $logbook->nhansukhac . "</div>"
+                    . "<p><strong>4.Khách hàng chính: </strong></p></p>" . implode("<br>", $customers) . "<br>$logbook->new_customer</p>"
+                    . "<p><strong>5.Sản phẩm chính: </strong></p></p>" . implode("<br>", $products) . "<br>$logbook->new_product</p>"
+                    . "<p><strong>6.Thời gian cuộc họp: </strong>" . date("Y-m-d H:i:s", $logbook->date) . "</p>"
+                    . "<p><strong>7.Chia sẻ thông tin: </strong>" . $logbook->email_send . "</p>"
+                    . "<p><strong>8.Nội dung: </strong></p><div class='fr-view'>" . $logbook->content . "</div>"
+                    . "<p><strong>9.Lưu ý đặc biệt: </strong></p><div class='fr-view'>" . $logbook->note . "</div>";
             $this->email->message($html);
             if ($this->email->send()) {
                 echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
