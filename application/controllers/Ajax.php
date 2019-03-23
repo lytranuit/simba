@@ -458,16 +458,19 @@ class Ajax extends MY_Controller {
             $this->email->from($conf['email_email'], $conf['email_name']);
             $this->email->to($email_to); /// $conf['email_contact']
             $this->email->subject("$fullname - Báo cáo - " . date("Y-m-d H:i:s", $logbook->date));
-            $html = "<link href='" . base_url() . "public/lib/froala_editor/froala_style.min.css'rel='stylesheet'>"
-                    . "<p><strong>1.Nhà cung cấp: </strong></p><div class='fr-view'>" . $logbook->ncc . "</div>"
-                    . "<p><strong>2.Nhân sự tham gia: </strong></p><div class='fr-view'>" . $logbook->nhansu . "</div>"
-                    . "<p><strong>3.Nhân sự khác: </strong></p><div class='fr-view'>" . $logbook->nhansukhac . "</div>"
-                    . "<p><strong>4.Khách hàng chính: </strong></p></p>" . implode("<br>", $customers) . "<br>$logbook->new_customer</p>"
-                    . "<p><strong>5.Sản phẩm chính: </strong></p></p>" . implode("<br>", $products) . "<br>$logbook->new_product</p>"
-                    . "<p><strong>6.Thời gian cuộc họp: </strong>" . date("Y-m-d H:i:s", $logbook->date) . "</p>"
-                    . "<p><strong>7.Chia sẻ thông tin: </strong>" . $logbook->email_send . "</p>"
-                    . "<p><strong>8.Nội dung: </strong></p><div class='fr-view'>" . $logbook->content . "</div>"
-                    . "<p><strong>9.Lưu ý đặc biệt: </strong></p><div class='fr-view'>" . $logbook->note . "</div>";
+            $html = "";
+            $this->data['ncc'] = $logbook->ncc;
+            $this->data['nhansu'] = $logbook->nhansu;
+            $this->data['nhansukhac'] = $logbook->nhansukhac;
+            $this->data['new_customer'] = $logbook->new_customer;
+            $this->data['new_product'] = $logbook->new_product;
+            $this->data['listcustomer'] = implode("<br>", $customers);
+            $this->data['listproduct'] = implode("<br>", $products);
+            $this->data['date'] = date("Y-m-d H:i:s", $logbook->date);
+            $this->data['email_send'] = $logbook->email_send;
+            $this->data['content'] = $logbook->content;
+            $this->data['note'] = $logbook->note;
+            $html = $this->blade->view()->make('email/baocao', $this->data)->render();
             $this->email->message($html);
             if ($this->email->send()) {
                 echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
