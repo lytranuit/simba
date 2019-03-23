@@ -448,6 +448,7 @@ class Ajax extends MY_Controller {
             );
             $this->load->library("email", $config);
 
+            $fullname = $this->session->userdata('fullname');
 //            /*
 //             * Send mail
 //             */
@@ -456,8 +457,9 @@ class Ajax extends MY_Controller {
 //            die();
             $this->email->from($conf['email_email'], $conf['email_name']);
             $this->email->to($email_to); /// $conf['email_contact']
-            $this->email->subject("Báo cáo nội bộ");
-            $html = "<p><strong>1.Nhà cung cấp: </strong></p><div class='fr-view'>" . $logbook->ncc . "</div>"
+            $this->email->subject("$fullname - Báo cáo - " . date("Y-m-d H:i:s", $logbook->date));
+            $html = "<link href='" . base_url() . "public/lib/froala_editor/froala_style.min.css'rel='stylesheet'>"
+                    . "<p><strong>1.Nhà cung cấp: </strong></p><div class='fr-view'>" . $logbook->ncc . "</div>"
                     . "<p><strong>2.Nhân sự tham gia: </strong></p><div class='fr-view'>" . $logbook->nhansu . "</div>"
                     . "<p><strong>3.Nhân sự khác: </strong></p><div class='fr-view'>" . $logbook->nhansukhac . "</div>"
                     . "<p><strong>4.Khách hàng chính: </strong></p></p>" . implode("<br>", $customers) . "<br>$logbook->new_customer</p>"

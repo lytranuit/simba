@@ -48,7 +48,7 @@ class User_model extends MY_Model {
         if (empty($identity) || empty($password)) {
             return FALSE;
         }
-        $query = $this->db->select('username,id,password,active,customer_id,role')
+        $query = $this->db->select('username,fullname,id,password,active,customer_id,role')
                 ->where('username', $identity)
                 ->limit(1)
                 ->get("user");
@@ -78,6 +78,7 @@ class User_model extends MY_Model {
         $session_data = array(
             'identity' => $user->username,
             'username' => $user->username,
+            'fullname' => $user->fullname,
             'role' => $user->role,
             'customer_id' => $user->customer_id,
             'user_id' => $user->id, //everyone likes to overwrite id so we'll use user_id
