@@ -457,7 +457,7 @@ class Ajax extends MY_Controller {
 //            die();
             $this->email->from($conf['email_email'], $conf['email_name']);
             $this->email->to($email_to); /// $conf['email_contact']
-            $this->email->subject("$fullname - Báo cáo - " . date("Y-m-d H:i:s", $logbook->date));
+            $this->email->subject("$fullname - Báo cáo - $logbook->subject - " . date("Y/m/d", $logbook->date));
             $html = "";
             $this->data['ncc'] = $logbook->ncc;
             $this->data['nhansu'] = $logbook->nhansu;

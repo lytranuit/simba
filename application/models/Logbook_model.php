@@ -37,7 +37,7 @@ class Logbook_model extends MY_Model {
 
     function create_object($data) {
         $array = array(
-            'ncc', 'nhansu', 'nhansukhac', 'content', 'date', 'deleted', 'new_product', 'new_customer', 'note', 'status', 'user_id', 'email_send'
+            'ncc', 'nhansu', 'nhansukhac', 'content', 'date', 'deleted', 'new_product', 'new_customer', 'note', 'status', 'user_id', 'email_send', 'subject'
         );
         $obj = array();
         foreach ($array as $key) {

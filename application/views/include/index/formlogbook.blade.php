@@ -61,6 +61,8 @@
                 <div id="box_new_email" class="d-none">
                     <input class="form-control" name='email_add' placeholder="email1@simba.com.vn,email2@simba.com.vn,..."/>
                 </div>
+                <h6 class="mt-1">Tiêu đề báo cáo</h6>
+                <input class="form-control" name="subject" placeholder="Subject Title" required>
             </div>
             <div class="col-md-8">
                 <h6>8.Nội dung cuộc họp</h6>
