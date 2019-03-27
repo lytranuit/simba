@@ -565,12 +565,11 @@ jQuery(document).ready(function ($) {
 });
 
 function load_page_news(page = 1) {
-    return false;
     var search = $("#tintuc .input_search").val();
     var data = {page: page, search: search};
     $.ajax({
         dataType: "HTML",
-        url: "http://simba.com.vn/ajax/news",
+        url: path + "ajax/news",
         data: data,
         beforeSend: function () {
             var height = $("#tintuc .data").outerHeight(true);
