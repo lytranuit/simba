@@ -39,7 +39,7 @@
                                         <label class="col-md-4 col-6">{{lang('product_mota')}}:</label>
                                         <span>{{$tin['product'][pick_language($tin['product'],'description_')]}}</span>
                                     </li>
-                                    @if(count($tin['files']))
+                                    @if(!empty($tin['files']))
                                     <li>
                                         <label class="col-md-4 col-6">{{lang('product_file')}}:</label>
                                         <div>

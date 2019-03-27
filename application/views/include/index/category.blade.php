@@ -18,7 +18,7 @@
                 <div class="card card-style1 mb-3">
                     <div class="card-header">{{lang('heading_product')}}</div>
                     <div class="card-body row">
-                        @if(count($tin['products']))
+                        @if(!empty($tin['products']))
                         @if(!$is_login && $tin['products'][0]['require_year_old'] == 1)
                         <div class="offline_sale" style="margin: 50px auto;"><span class="os_contact">Liên hệ</span><span class="os_phone">Hotline miễn phí 18009469</span></div>
 
