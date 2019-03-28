@@ -18,16 +18,16 @@
         <div class="row">
             <div class="col-md-4">
                 <h6>1.Nhà cung cấp</h6>
-                <textarea class="edit-ncc" name="ncc" required=""></textarea>
+                <textarea class="edit-ncc form-control" name="ncc" rows="10" placeholder="-Tên &#10;-Địa chỉ&#10;-Website &#10;-Số điện thoại&#10;-Email&#10;-Người liên hệ&#10;...."></textarea>
             </div>
             <div class="col-md-4">
                 <h6>2.Các nhân sự tham gia</h6>
-                <textarea class="edit-nhansu" name="nhansu" required=""></textarea>
+                <textarea class="edit-nhansu form-control" name="nhansu" required="" rows="10" placeholder="-Nhân sự 1 - Chức vụ - Chi tiết liên hệ &#10;-Nhân sự 2 - Chức vụ - Chi tiết liên hệ&#10; ...."></textarea>
             </div>
             <div class="col-md-4">
 
                 <h6>3.Nhân sự của công ty khác(nếu có)</h6>
-                <textarea class="edit-nhansu-khac" name="nhansukhac"></textarea>
+                <textarea class="edit-nhansu-khac form-control" name="nhansukhac" rows="10" placeholder="- Nhà xuất khẩu &#10;- Nhà tư vấn &#10;- Công ty khác"></textarea>
             </div>
             <div class="col-md-4">
                 <div>
@@ -36,7 +36,7 @@
                     </select>
                     <a href="#" class="text-success fa fa-plus" id="button_new_customer" style="font-size:20px;margin-top: 5px;"></a>
                     <div id="box_new_customer" class="d-none">
-                        <textarea class="new_customer" name="new_customer"></textarea>
+                        <textarea class="new_customer form-control" name="new_customer" rows="10" placeholder="Thông tin khách hàng mới: &#10; - Tên &#10; - Địa chỉ:&#10; - Người liên hệ - số điện thoại - Email liên lạc"></textarea>
                     </div>
                 </div>
                 <div>
@@ -45,7 +45,7 @@
                     </select>
                     <a href="#" class="text-success fa fa-plus" id="button_new_product"style="font-size:20px;margin-top: 5px;"></a>
                     <div id="box_new_product" class="d-none">
-                        <textarea class="new_product" name="new_product"></textarea>
+                        <textarea class="new_product form-control" name="new_product" rows="10" placeholder="Thông tin sản phẩm mới: &#10; - Hình ảnh đính kèm &#10; - Tên sản phẩm:&#10; - Quy cách đóng gói:&#10; - Hạn sử dụng:&#10; - Bảo quản: &#10; - Cách sử dụng:"></textarea>
                     </div>
 
                 </div>
@@ -58,17 +58,16 @@
                     @endforeach
                 </select>
                 <a href="#" class="text-success fa fa-plus" id="button_new_email"style="font-size:20px;margin-top: 5px;"></a>
-                <div id="box_new_email" class="d-none">
-                    <input class="form-control" name='email_add' placeholder="email1@simba.com.vn,email2@simba.com.vn,..."/>
-                </div>
-                <h6 class="mt-1">Tiêu đề báo cáo</h6>
+                <h6 class="mt-1">8.Tiêu đề báo cáo</h6>
                 <input class="form-control" name="subject" placeholder="Subject Title" required>
             </div>
             <div class="col-md-8">
-                <h6>8.Nội dung cuộc họp</h6>
-                <textarea class="content_logbook" name="content"></textarea>
-                <h6 class="text-danger">9.Lưu ý đặc biệt</h6>
-                <textarea class="contentkhac_logbook" name="note"></textarea>
+                <h6>9.Nội dung cuộc họp</h6>
+                <textarea class="content_logbook form-control" name="content" rows="15" required=""placeholder="-Nội dung cuộc họp"></textarea>
+                <h6 class="text-danger">10.File đính kèm</h6>
+                <input id="kv-file" type="file" name="file_up[]" multiple>
+                <h6 class="text-danger">11.Lưu ý đặc biệt</h6>
+                <textarea class="contentkhac_logbook form-control" name="note"></textarea>
             </div>
         </div>
         <div class="mt-1">
@@ -83,6 +82,26 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#kv-file").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': path + 'admin/uploadfilev2',
+            maxFileCount: 5,
+            validateInitialCount: true,
+            showRemove: false,
+            showUpload: false,
+            showCancel: false,
+            browseLabel: "",
+            overwriteInitial: false,
+        }).on("filebatchselected", function (event, files) {
+//            $("#form-dang-tin .id_files").remove();
+            $(this).fileinput("upload");
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            var id = data.response.key;
+            var append = "<input type='hidden' name='id_files[]' value='" + id + "' class='id_files'/>";
+            $("#logbook_form").append(append);
+        }).on('filedeleted', function (event, key) {
+            $(".id_files[value='" + key + "'").remove();
+        });
         var datepicker = $('#date').pickadate({
             format: 'yyyy-mm-dd',
             // editable: true,
@@ -120,7 +139,10 @@
         });
         $("#button_new_email").click(function (e) {
             e.preventDefault();
-            $("#box_new_email").toggleClass("d-none");
+            var html = '<div id="box_new_email" class="my-1">'
+                    + '<input class="form-control" name="email_add[]" placeholder="email@simba.com.vn"/>'
+                    + '</div>';
+            $($(this)).after(html);
         });
         $("#product_logbook").ajaxChosen({
             dataType: 'json',
@@ -136,116 +158,119 @@
         }, {
             loadingImg: path + 'public/img/loading.gif'
         }, {width: "100%", allow_single_deselect: true});
-        $(".edit-ncc").froalaEditor({
-            placeholderText: '-Tên \n - Địa chỉ \n - Website \n -Số điện thoại \n - Email \n - Người liên hệ \n ....',
-            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
-            heightMin: 250,
-            imageUploadURL: path + 'admin/uploadimage',
-            toolbarSticky: false,
-            // Set request type.
-            imageUploadMethod: 'POST',
-            // Set max image size to 5MB.
-            imageMaxSize: 5 * 1024 * 1024,
-            // Allow to upload PNG and JPG.
-            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-            htmlRemoveTags: [],
-        });
-        $(".edit-nhansu").froalaEditor({
-            placeholderText: '-Nhân sự 1 - Chức vụ - Chi tiết liên hệ \n -Nhân sự 2 - Chức vụ - Chi tiết liên hệ \n ....',
-            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarSticky: false,
-//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
-            heightMin: 250,
-            imageUploadURL: path + 'admin/uploadimage',
-            // Set request type.
-            imageUploadMethod: 'POST',
-            // Set max image size to 5MB.
-            imageMaxSize: 5 * 1024 * 1024,
-            // Allow to upload PNG and JPG.
-            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-            htmlRemoveTags: [],
-        });
-        $(".edit-nhansu-khac").froalaEditor({
-            placeholderText: '- Nhà xuất khẩu \n - Nhà tư vấn \n - Công ty khác',
-            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarSticky: false,
-//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
-            heightMin: 250,
-            imageUploadURL: path + 'admin/uploadimage',
-            // Set request type.
-            imageUploadMethod: 'POST',
-            // Set max image size to 5MB.
-            imageMaxSize: 5 * 1024 * 1024,
-            // Allow to upload PNG and JPG.
-            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-            htmlRemoveTags: [],
-        });
-        $(".content_logbook").froalaEditor({
-            placeholderText: 'Nội dung cuộc họp',
-            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
-            heightMin: 200,
-            imageUploadURL: path + 'admin/uploadimage',
-            // Set request type.
-            imageUploadMethod: 'POST',
-            // Set max image size to 5MB.
-            imageMaxSize: 5 * 1024 * 1024,
-            // Allow to upload PNG and JPG.
-            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-            htmlRemoveTags: [],
-        });
-        $(".contentkhac_logbook").froalaEditor({
-            placeholderText: 'Lưu ý đặc biệt',
-            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
-            heightMin: 200,
-            imageUploadURL: path + 'admin/uploadimage',
-            // Set request type.
-            imageUploadMethod: 'POST',
-            // Set max image size to 5MB.
-            imageMaxSize: 5 * 1024 * 1024,
-            // Allow to upload PNG and JPG.
-            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-            htmlRemoveTags: [],
-        });
-        $(".new_customer").froalaEditor({
-            placeholderText: 'Thông tin khách hàng mới:\n- Tên\n- Địa chỉ:\n- Người liên hệ - số điện thoại:\n- Email liên lạc:',
-            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
-            heightMin: 250,
-            imageUploadURL: path + 'admin/uploadimage',
-            toolbarSticky: false,
-            // Set request type.
-            imageUploadMethod: 'POST',
-            // Set max image size to 5MB.
-            imageMaxSize: 5 * 1024 * 1024,
-            // Allow to upload PNG and JPG.
-            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-            htmlRemoveTags: [],
-        });
-        $(".new_product").froalaEditor({
-            placeholderText: 'Thông tin sản phẩm mới: \n- Hình ảnh đính kèm\n- Tên sản phẩm:\n- Quy cách đóng gói:\n- Hạn sử dụng:\n- Bảo quản: \n- Cách sử dụng: ',
-            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
-//                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
-            heightMin: 250,
-            imageUploadURL: path + 'admin/uploadimage',
-            toolbarSticky: false,
-            // Set request type.
-            imageUploadMethod: 'POST',
-            // Set max image size to 5MB.
-            imageMaxSize: 5 * 1024 * 1024,
-            // Allow to upload PNG and JPG.
-            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-            htmlRemoveTags: [],
-        });
+//        $(".edit-ncc").froalaEditor({
+//            placeholderText: '-Tên \n - Địa chỉ \n - Website \n -Số điện thoại \n - Email \n - Người liên hệ \n ....',
+//            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+//            heightMin: 250,
+//            imageUploadURL: path + 'admin/uploadimage',
+//            toolbarSticky: false,
+//            // Set request type.
+//            imageUploadMethod: 'POST',
+//            // Set max image size to 5MB.
+//            imageMaxSize: 5 * 1024 * 1024,
+//            // Allow to upload PNG and JPG.
+//            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+//            htmlRemoveTags: [],
+//        });
+//        $(".edit-nhansu").froalaEditor({
+//            placeholderText: '-Nhân sự 1 - Chức vụ - Chi tiết liên hệ \n -Nhân sự 2 - Chức vụ - Chi tiết liên hệ \n ....',
+//            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarSticky: false,
+////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+//            heightMin: 250,
+//            imageUploadURL: path + 'admin/uploadimage',
+//            // Set request type.
+//            imageUploadMethod: 'POST',
+//            // Set max image size to 5MB.
+//            imageMaxSize: 5 * 1024 * 1024,
+//            // Allow to upload PNG and JPG.
+//            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+//            htmlRemoveTags: [],
+//        });
+//        $(".edit-nhansu-khac").froalaEditor({
+//            placeholderText: '- Nhà xuất khẩu \n - Nhà tư vấn \n - Công ty khác',
+//            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarSticky: false,
+////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+//            heightMin: 250,
+//            imageUploadURL: path + 'admin/uploadimage',
+//            // Set request type.
+//            imageUploadMethod: 'POST',
+//            // Set max image size to 5MB.
+//            imageMaxSize: 5 * 1024 * 1024,
+//            // Allow to upload PNG and JPG.
+//            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+//            htmlRemoveTags: [],
+//        });
+//        $(".content_logbook").froalaEditor({
+//            placeholderText: 'Nội dung cuộc họp',
+//            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+//            heightMin: 200,
+//            imageUploadURL: path + 'admin/uploadimage',
+//            // Set request type.
+//            imageUploadMethod: 'POST',
+//            // Set max image size to 5MB.
+//            imageMaxSize: 5 * 1024 * 1024,
+//            // Allow to upload PNG and JPG.
+//            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+//            htmlRemoveTags: [],
+//        });
+//        $(".contentkhac_logbook").froalaEditor({
+//            toolbarInline: true,
+//            toolbarVisibleWithoutSelection: true,
+//            placeholderText: 'Lưu ý đặc biệt',
+//            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+//            heightMin: 200,
+//            imageUploadURL: path + 'admin/uploadimage',
+//            // Set request type.
+//            imageUploadMethod: 'POST',
+//            // Set max image size to 5MB.
+//            imageMaxSize: 5 * 1024 * 1024,
+//            // Allow to upload PNG and JPG.
+//            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+//            htmlRemoveTags: [],
+//        });
+//        $(".new_customer").froalaEditor({
+//            placeholderText: 'Thông tin khách hàng mới:\n- Tên\n- Địa chỉ:\n- Người liên hệ - số điện thoại:\n- Email liên lạc:',
+//            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+//            heightMin: 250,
+//            imageUploadURL: path + 'admin/uploadimage',
+//            toolbarSticky: false,
+//            // Set request type.
+//            imageUploadMethod: 'POST',
+//            // Set max image size to 5MB.
+//            imageMaxSize: 5 * 1024 * 1024,
+//            // Allow to upload PNG and JPG.
+//            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+//            htmlRemoveTags: [],
+//        });
+//        $(".new_product").froalaEditor({
+//            placeholderText: 'Thông tin sản phẩm mới: \n- Hình ảnh đính kèm\n- Tên sản phẩm:\n- Quy cách đóng gói:\n- Hạn sử dụng:\n- Bảo quản: \n- Cách sử dụng: ',
+//            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+//            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
+////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
+//            heightMin: 250,
+//            toolbarInline: true,
+//            imageUploadURL: path + 'admin/uploadimage',
+//            toolbarSticky: false,
+//            // Set request type.
+//            imageUploadMethod: 'POST',
+//            // Set max image size to 5MB.
+//            imageMaxSize: 5 * 1024 * 1024,
+//            // Allow to upload PNG and JPG.
+//            imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+//            htmlRemoveTags: [],
+//        });
 //                    $('#myModal').modal({show: true});
         $("#logbook_form").validate({
             highlight: function (input) {
@@ -302,4 +327,5 @@
         margin: 5px;
     }
     #date,#time{display:none;}
+    textarea.form-control{font-size: 12px;}
 </style>

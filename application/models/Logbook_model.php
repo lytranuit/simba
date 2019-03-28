@@ -32,6 +32,19 @@ class Logbook_model extends MY_Model {
             'foreign_key' => 'id',
             'get_relate' => TRUE /* another optional setting, which is explained below */
         );
+
+        $this->has_many_pivot['files'] = array(
+            'foreign_model' => 'Hinhanh_model',
+            'pivot_table' => 'tbl_logbook_file',
+            'local_key' => 'id',
+            'pivot_local_key' => 'logbook_id', /* this is the related key in the pivot table to the local key
+              this is an optional key, but if your column name inside the pivot table
+              doesn't respect the format of "singularlocaltable_primarykey", then you must set it. In the next title
+              you will see how a pivot table should be set, if you want to  skip these keys */
+            'pivot_foreign_key' => 'id_hinhanh', /* this is also optional, the same as above, but for foreign table's keys */
+            'foreign_key' => 'id_hinhanh',
+            'get_relate' => TRUE /* another optional setting, which is explained below */
+        );
         parent::__construct();
     }
 

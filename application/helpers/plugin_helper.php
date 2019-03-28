@@ -44,7 +44,7 @@ if (!function_exists('load_editor')) {
         array_push($data['stylesheet_tag'], base_url() . "public/lib/froala_editor/plugins/image.css");
         array_push($data['stylesheet_tag'], base_url() . "public/lib/froala_editor/plugins/image_manager.css");
         array_push($data['stylesheet_tag'], base_url() . "public/lib/froala_editor/plugins/line_breaker.css");
-        array_push($data['stylesheet_tag'], base_url() . "public/lib/froala_editor/plugins/quick_insert.css");
+//        array_push($data['stylesheet_tag'], base_url() . "public/lib/froala_editor/plugins/quick_insert.css");
         array_push($data['stylesheet_tag'], base_url() . "public/lib/froala_editor/plugins/table.css");
 
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/froala_editor.min.js");
@@ -62,7 +62,7 @@ if (!function_exists('load_editor')) {
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/lists.min.js");
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/paragraph_format.min.js");
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/paragraph_style.min.js");
-        array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/quick_insert.min.js");
+//        array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/quick_insert.min.js");
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/save.min.js");
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/url.min.js");
         array_push($data['javascript_tag'], base_url() . "public/lib/froala_editor/plugins/video.min.js");

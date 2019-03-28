@@ -41,7 +41,6 @@ class Index extends MY_Controller {
             base_url() . "public/lib/ajaxchosen/chosen.ajaxaddition.jquery.js",
             base_url() . 'public/js/main.js?v=' . $version,
         );
-        load_editor($this->data);
     }
 
     public function _remap($method, $params = array()) {
@@ -91,6 +90,9 @@ class Index extends MY_Controller {
         array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.time.js");
         array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/legacy.js");
         $this->data['template'] = 'page';
+
+        load_editor($this->data);
+        load_inputfile($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 

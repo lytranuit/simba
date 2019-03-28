@@ -20,22 +20,15 @@
                         </div>
                         <div class="col-md-4">
                             <b>1.Nhà cung cấp:</b>
-                            <div class='fr-view'>
-                                <?= $tin->ncc ?>
-                            </div>
+                            <div class='fr-view'style="white-space: pre"><?= $tin->ncc ?></div>
                         </div>
                         <div class="col-md-4">
                             <b>2.Nhân sự tham gia</b>
-
-                            <div class='fr-view'>
-                                <?= $tin->nhansu ?>
-                            </div>
+                            <div class='fr-view' style="white-space: pre"><?= $tin->nhansu ?></div>
                         </div>
                         <div  class="col-md-4" >
                             <b>3.Nhân sự công ty khác</b>
-                            <div class='fr-view'>
-                                <?= $tin->nhansukhac ?>
-                            </div>
+                            <div class='fr-view' style="white-space: pre"><?= $tin->nhansukhac ?></div>
                         </div>
                         <div class="" style="clear: both;">
                         </div>
@@ -48,9 +41,7 @@
                                 @endforeach
                                 @endif
 
-                                <div class='fr-view'>
-                                    <?= $tin->new_customer ?>
-                                </div>
+                                <div class='fr-view' style="white-space: pre"><?= $tin->new_customer ?></div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -61,33 +52,76 @@
                                 <p>- {{$row->code ."-".$row->name_vi}}</p>
                                 @endforeach
                                 @endif 
-                                <div class='fr-view'>
-                                    <?= $tin->new_product ?>
-                                </div>
+                                <div class='fr-view' style="white-space: pre"><?= $tin->new_product ?></div>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div>
-                                <b>7.Thời gian cuộc họp</b>
+                                <b>6.Thời gian cuộc họp</b>
                                 <div class='fr-view'>
                                     <?= date("Y-m-d H:i:s", $tin->date) ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <b>8.Nội dung</b>
-                            <div class='fr-view'>
-                                <?= $tin->content ?>
+
+                        <div class="" style="clear: both;">
+                        </div>
+                        <div class="col-md-4">
+                            <div>
+                                <b>7.Chia sẻ thông tin</b>
+                                <div class='fr-view'>
+                                    <?php
+                                    $emails = explode(",", $tin->email_send);
+                                    foreach ($emails as $row):
+                                        echo "- <a href='#'>$row</a> <br>";
+                                    endforeach;
+                                    ?>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div>
-                                <b class="text-danger">9.Lưu ý đặc biệt</b>
-                                <div class='fr-view'>
-                                    <?= $tin->note ?>
+                                <b>8.Tiêu đề báo cáo</b>
+                                <div class='fr-view' style="white-space: pre"><?= $tin->subject ?></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <b>9.Nội dung</b>
+                            <div class='fr-view' style="white-space: pre"><?= $tin->content ?></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <b>9.File đính kèm</b>
+                            <div>
+                                @if(!empty($tin->files))
+                                @foreach($tin->files as $row)
+                                @if(strpos($row->type,'image') === FALSE)
+                                <div>
+                                    <a href="{{base_url()}}{{$row->src}}" class="files d-block mt-1" data='{{$row->id_hinhanh}}'>
+                                        <i class="file-icon" data-type="<?= pathinfo($row->real_hinhanh, PATHINFO_EXTENSION); ?>"></i>
+                                        {{$row->real_hinhanh}}
+                                    </a>
                                 </div>
+                                @else
+                                <!--                                <div>
+                                                                    <img class='img-responsive' src="{{base_url()}}{{$row->src}}" />
+                                                                </div>-->
+                                <div>
+                                    <a href="{{base_url()}}{{$row->src}}" class="files d-block mt-1" data='{{$row->id_hinhanh}}'>
+                                        {{$row->real_hinhanh}}
+                                    </a>
+                                </div>
+                                @endif
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div>
+                                <b class="text-danger">11.Lưu ý đặc biệt</b>
+                                <div class='fr-view' style="white-space: pre"><?= $tin->note ?></div>
                             </div>
                         </div>
 

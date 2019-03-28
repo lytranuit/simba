@@ -176,6 +176,7 @@ if (count((array) $tin->files)) {
             showUpload: false,
             showCancel: false,
             browseLabel: "",
+            overwriteInitial: false,
             initialPreviewConfig: []
         }).on("filebatchselected", function (event, files) {
             $(".remove_file").trigger("click");

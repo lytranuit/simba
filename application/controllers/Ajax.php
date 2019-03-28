@@ -340,6 +340,7 @@ class Ajax extends MY_Controller {
         $this->load->model("logbookcustomer_model");
         $this->load->model("logbookproduct_model");
         $this->load->model("logbookrole_model");
+        $this->load->model("logbookfile_model");
         $this->load->model("role_model");
         $this->load->model("option_model");
         if (isset($_POST['content'])) {
@@ -352,9 +353,11 @@ class Ajax extends MY_Controller {
                     $email_to = array_merge($email_to, $email);
                 }
             }
-            if (isset($data['email_add']) && $data['email_add'] != "") {
-                $email = explode(",", $data['email_add']);
-                $email_to = array_merge($email_to, $email);
+            if (isset($data['email_add'])) {
+                foreach ($data['email_add'] as $row) {
+                    $email = trim($row);
+                    $email_to[] = $email;
+                }
             }
             $email_to = array_unique(array_filter($email_to));
             $data['date'] = strtotime($data['date']);
@@ -390,6 +393,19 @@ class Ajax extends MY_Controller {
                     $this->logbookrole_model->insert($data_up);
                 }
             }
+
+            if (isset($data['id_files'])) {
+                foreach ($data['id_files'] as $row) {
+                    $data_up = array(
+                        'logbook_id' => $id,
+                        'id_hinhanh' => $row
+                    );
+                    $this->logbookfile_model->insert($data_up);
+                }
+            }
+
+            echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+            die();
             /*
              * SET LIMIT 
              */
