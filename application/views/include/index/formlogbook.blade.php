@@ -67,7 +67,7 @@
                 <h6 class="text-danger">10.File đính kèm</h6>
                 <input id="kv-file" type="file" name="file_up[]" multiple>
                 <h6 class="text-danger">11.Lưu ý đặc biệt</h6>
-                <textarea class="contentkhac_logbook form-control" name="note"></textarea>
+                <textarea class="contentkhac_logbook form-control" name="note" rows="4"></textarea>
             </div>
         </div>
         <div class="mt-1">
@@ -222,8 +222,8 @@
 //            htmlRemoveTags: [],
 //        });
 //        $(".contentkhac_logbook").froalaEditor({
-//            toolbarInline: true,
-//            toolbarVisibleWithoutSelection: true,
+////            toolbarInline: true,
+////            toolbarVisibleWithoutSelection: true,
 //            placeholderText: 'Lưu ý đặc biệt',
 //            toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
 //            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
@@ -260,7 +260,7 @@
 //            toolbarButtonsXS: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
 ////                        pluginsEnabled: ['image', 'fullscreen', 'charCounter', 'imageManager', 'file'],
 //            heightMin: 250,
-//            toolbarInline: true,
+////            toolbarInline: true,
 //            imageUploadURL: path + 'admin/uploadimage',
 //            toolbarSticky: false,
 //            // Set request type.

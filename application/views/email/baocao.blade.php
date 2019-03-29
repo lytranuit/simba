@@ -255,14 +255,14 @@
         </style>
     </head>
     <body>
-        <p><strong>1.Nhà cung cấp: </strong></p><div class='fr-view'><?= $ncc ?></div>
-        <p><strong>2.Nhân sự tham gia: </strong></p><div class='fr-view'><?= $nhansu ?></div>
-        <p><strong>3.Nhân sự khác: </strong></p><div class='fr-view'><?= $nhansukhac ?></div>
-        <p><strong>4.Khách hàng chính: </strong></p><div><?= $listcustomer ?></div><div class='fr-view'><?= $new_customer ?></div>
-        <p><strong>5.Sản phẩm chính: </strong></p><div><?= $listproduct ?></div><div class='fr-view'><?= $new_product ?></div>
+        <p><strong>1.Nhà cung cấp: </strong></p><div class='fr-view' style="white-space: pre"><?= $ncc ?></div>
+        <p><strong>2.Nhân sự tham gia: </strong></p><div class='fr-view' style="white-space: pre"><?= $nhansu ?></div>
+        <p><strong>3.Nhân sự khác: </strong></p><div class='fr-view' style="white-space: pre"><?= $nhansukhac ?></div>
+        <p><strong>4.Khách hàng chính: </strong></p><div><?= $listcustomer ?></div><div class='fr-view' style="white-space: pre"><?= $new_customer ?></div>
+        <p><strong>5.Sản phẩm chính: </strong></p><div><?= $listproduct ?></div><div class='fr-view' style="white-space: pre"><?= $new_product ?></div>
         <p><strong>6.Thời gian cuộc họp: </strong><?= $date ?></p>
         <p><strong>7.Chia sẻ thông tin: </strong><?= $email_send ?></p>
-        <p><strong>8.Nội dung: </strong></p><div class='fr-view'><?= $content ?></div>
-        <p><strong>9.Lưu ý đặc biệt: </strong></p><div class='fr-view'><?= $note ?></div>
+        <p><strong>8.Nội dung: </strong></p><div class='fr-view' style="white-space: pre"><?= $content ?></div>
+        <p><strong>9.Lưu ý đặc biệt: </strong></p><div class='fr-view' style="white-space: pre"><?= $note ?></div>
     </body>
 </html>

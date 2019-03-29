@@ -64,6 +64,96 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/404-page', $this->data)->render();
     }
 
+    public function cronjonsendmail() {
+        $this->load->model("logbook_model");
+        $this->load->model("option_model");
+        $logbooks = $this->logbook_model->where(array("is_sent" => 0))->with_author()->with_customers()->with_products()->with_files()->as_object()->get_all();
+
+        $conf = $this->option_model->get_setting_mail();
+        $config = array(
+            'mailtype' => 'html',
+            'protocol' => "smtp",
+            'smtp_host' => $conf['email_server'],
+            'smtp_user' => $conf['email_username'], // actual values different
+            'smtp_pass' => $conf['email_password'],
+            'charset' => "utf-8",
+            'smtp_crypto' => $conf['email_security'],
+            'wordwrap' => TRUE,
+            'smtp_port' => 465,
+            'starttls' => true,
+            'newline' => "\r\n"
+        );
+        $this->load->library("email", $config);
+        foreach ($logbooks as $logbook) {
+            $email_to = explode(",", $logbook->email_send);
+            if (empty($email_to)) {
+                continue;
+            }
+
+            $products = $customers = array();
+            if (isset($logbook->products)) {
+                foreach ($logbook->products as $row) {
+                    array_push($products, "- $row->code - $row->name_vi");
+                }
+            }
+            if (isset($logbook->customers)) {
+                foreach ($logbook->customers as $row) {
+                    array_push($customers, "- $row->code - $row->short_name");
+                }
+            }
+            $fullname = $logbook->author->fullname;
+//            /*
+//             * Send mail
+//             */
+//            $this->email->clear();
+//            print_r($email_to);
+//            die();
+
+            $this->email->clear(TRUE);
+            $this->email->from($conf['email_email'], $conf['email_name']);
+            $this->email->to($email_to); /// $conf['email_contact']
+            $this->email->subject("$fullname - Báo cáo - $logbook->subject - " . date("Y/m/d", $logbook->date));
+            $html = "";
+            $this->data['ncc'] = $logbook->ncc;
+            $this->data['nhansu'] = $logbook->nhansu;
+            $this->data['nhansukhac'] = $logbook->nhansukhac;
+            $this->data['new_customer'] = $logbook->new_customer;
+            $this->data['new_product'] = $logbook->new_product;
+            $this->data['listcustomer'] = implode("<br>", $customers);
+            $this->data['listproduct'] = implode("<br>", $products);
+            $this->data['date'] = date("Y-m-d H:i:s", $logbook->date);
+            $this->data['email_send'] = $logbook->email_send;
+            $this->data['content'] = $logbook->content;
+            $this->data['note'] = $logbook->note;
+            $html = $this->blade->view()->make('email/baocao', $this->data)->render();
+            $this->email->message($html);
+            if (!empty($logbook->files)) {
+                foreach ($logbook->files as $row) {
+                    $this->email->attach(base_url() . $row->src);
+                }
+            }
+
+            if ($this->email->send()) {
+                $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
+//                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+            } else {
+                $file_log = './log_' . time() . '.log';
+                file_put_contents($file_log, $this->email->print_debugger(), FILE_APPEND);
+//                show_error($this->email->print_debugger());
+                /*
+                 * SEND MAIL ADMIN
+                 */
+                $this->email->clear(TRUE);
+                $this->email->from($conf['email_email'], $conf['email_name']);
+                $this->email->to("lytranuit@gmail.com"); /// $conf['email_contact']
+                $this->email->subject("Báo cáo send fail Simba CronJob");
+                $html = "ID: $logbook->id <br> File Log: $file_log";
+                $this->email->message($html);
+                $this->email->send();
+            }
+        }
+    }
+
     public function formlogbook() {
         $this->load->model("logbook_model");
         $this->load->model("logbookcustomer_model");

@@ -45,12 +45,14 @@ class Logbook_model extends MY_Model {
             'foreign_key' => 'id_hinhanh',
             'get_relate' => TRUE /* another optional setting, which is explained below */
         );
+
+        $this->has_one['author'] = array('foreign_model' => 'User_model', 'foreign_table' => 'user', 'foreign_key' => 'id', 'local_key' => 'user_id');
         parent::__construct();
     }
 
     function create_object($data) {
         $array = array(
-            'ncc', 'nhansu', 'nhansukhac', 'content', 'date', 'deleted', 'new_product', 'new_customer', 'note', 'status', 'user_id', 'email_send', 'subject'
+            'ncc', 'nhansu', 'nhansukhac', 'content', 'date', 'deleted', 'new_product', 'new_customer', 'note', 'status', 'user_id', 'email_send', 'subject', 'is_sent'
         );
         $obj = array();
         foreach ($array as $key) {
