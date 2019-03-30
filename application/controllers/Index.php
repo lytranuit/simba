@@ -152,6 +152,7 @@ class Index extends MY_Controller {
                 $this->email->send();
             }
         }
+        echo 1;
     }
 
     public function formlogbook() {
