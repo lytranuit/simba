@@ -11,7 +11,7 @@
                             <?= $tin[pick_language($tin, 'content_')] ?>
                         </div>
 
-                        @if(count($tin['files']))
+                        @if(!empty($tin['files']))
                         <div>
                             @foreach($tin['files'] as $row)
                             <a href="#" class="files d-block mt-1" data='{{$row['id_hinhanh']}}' role="{{$row['role_download']}}">
