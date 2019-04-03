@@ -75,6 +75,7 @@
                 Hoàn tất
             </button>
         </div>
+        <input type="hidden" name="user_id" value="{{$userdata['user_id']}}"/>
         <input type="hidden" id="date"/>
         <input type="hidden" id="time"/>
     </form>
