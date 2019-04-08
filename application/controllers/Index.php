@@ -134,8 +134,9 @@ class Index extends MY_Controller {
                 }
             }
 
+
+            $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
             if ($this->email->send()) {
-                $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
 //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
             } else {
                 $file_log = './log_' . time() . '.log';
