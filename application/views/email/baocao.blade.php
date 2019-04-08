@@ -260,9 +260,10 @@
         <p><strong>3.Nhân sự khác: </strong></p><div class='fr-view' style="white-space: pre"><?= $nhansukhac ?></div>
         <p><strong>4.Khách hàng chính: </strong></p><div><?= $listcustomer ?></div><div class='fr-view' style="white-space: pre"><?= $new_customer ?></div>
         <p><strong>5.Sản phẩm chính: </strong></p><div><?= $listproduct ?></div><div class='fr-view' style="white-space: pre"><?= $new_product ?></div>
-        <p><strong>6.Thời gian cuộc họp: </strong><?= $date ?></p>
-        <p><strong>7.Chia sẻ thông tin: </strong><?= $email_send ?></p>
-        <p><strong>8.Nội dung: </strong></p><div class='fr-view' style="white-space: pre"><?= $content ?></div>
-        <p><strong>9.Lưu ý đặc biệt: </strong></p><div class='fr-view' style="white-space: pre"><?= $note ?></div>
+        <p><strong>6.Thời gian bắt đầu: </strong><?= $date ?></p>
+        <p><strong>7.Thời gian kết thúc: </strong><?= $date_end ?></p>
+        <p><strong>8.Chia sẻ thông tin: </strong><?= $email_send ?></p>
+        <p><strong>9.Nội dung: </strong></p><div class='fr-view' style="white-space: pre"><?= $content ?></div>
+        <p><strong>10.Lưu ý đặc biệt: </strong></p><div class='fr-view' style="white-space: pre"><?= $note ?></div>
     </body>
 </html>

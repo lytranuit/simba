@@ -122,6 +122,7 @@ class Index extends MY_Controller {
             $this->data['listcustomer'] = implode("<br>", $customers);
             $this->data['listproduct'] = implode("<br>", $products);
             $this->data['date'] = date("Y-m-d H:i:s", $logbook->date);
+            $this->data['date_end'] = date("Y-m-d H:i:s", $logbook->date_end);
             $this->data['email_send'] = $logbook->email_send;
             $this->data['content'] = $logbook->content;
             $this->data['note'] = $logbook->note;
@@ -171,6 +172,26 @@ class Index extends MY_Controller {
         }
         $this->load->model("role_model");
         $this->data['roles'] = $this->role_model->where(array("deleted" => 0, 'filter' => 1))->as_object()->get_all();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.time.css");
+
+        array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery-inputmask/jquery.inputmask.bundle.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.date.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.time.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/legacy.js");
+        $this->data['template'] = 'page';
+
+        load_editor($this->data);
+        load_inputfile($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function formquote() {
+        $this->load->model("option_model");
+
+        $this->load->model("user_model");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.time.css");

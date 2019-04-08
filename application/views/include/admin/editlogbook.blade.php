@@ -56,20 +56,30 @@
                             </div>
                         </div>
 
+                        <div class="" style="clear: both;">
+                        </div>
                         <div class="col-md-4">
                             <div>
-                                <b>6.Thời gian cuộc họp</b>
+                                <b>6.Thời gian bắt đầu</b>
                                 <div class='fr-view'>
                                     <?= date("Y-m-d H:i:s", $tin->date) ?>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-md-4">
+                            <div>
+                                <b>7.Thời gian kết thúc</b>
+                                <div class='fr-view'>
+                                    <?= date("Y-m-d H:i:s", $tin->date_end) ?>
+                                </div>
+                            </div>
+                        </div>
                         <div class="" style="clear: both;">
                         </div>
                         <div class="col-md-4">
                             <div>
-                                <b>7.Chia sẻ thông tin</b>
+                                <b>8.Chia sẻ thông tin</b>
                                 <div class='fr-view'>
                                     <?php
                                     $emails = explode(",", $tin->email_send);
@@ -83,17 +93,17 @@
 
                         <div class="col-md-4">
                             <div>
-                                <b>8.Tiêu đề báo cáo</b>
+                                <b>9.Tiêu đề báo cáo</b>
                                 <div class='fr-view' style="white-space: pre"><?= $tin->subject ?></div>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <b>9.Nội dung</b>
+                            <b>10.Nội dung</b>
                             <div class='fr-view' style="white-space: pre"><?= $tin->content ?></div>
                         </div>
 
                         <div class="col-md-12">
-                            <b>9.File đính kèm</b>
+                            <b>11.File đính kèm</b>
                             <div>
                                 @if(!empty($tin->files))
                                 @foreach($tin->files as $row)
@@ -120,7 +130,7 @@
                         </div>
                         <div class="col-md-4">
                             <div>
-                                <b class="text-danger">11.Lưu ý đặc biệt</b>
+                                <b class="text-danger">12.Lưu ý đặc biệt</b>
                                 <div class='fr-view' style="white-space: pre"><?= $tin->note ?></div>
                             </div>
                         </div>

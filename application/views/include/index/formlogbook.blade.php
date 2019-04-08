@@ -51,22 +51,24 @@
                 </div>
                 <h6 class="mt-1">6.Thời gian cuộc họp</h6>
                 <input class="form-control" name="date" value="<?= date("Y-m-d H:i:s") ?>" id='pickadatetime' required>
-                <h6 class="mt-1">7.Chia sẻ thông tin</h6>
+                <h6 class="mt-1">7.Thời gian kết thúc</h6>
+                <input class="form-control" name="date_end" value="<?= date("Y-m-d H:i:s") ?>" id='pickadatetime1' required>
+                <h6 class="mt-1">8.Chia sẻ thông tin</h6>
                 <select class="form-control" id='send_to' name="send_to[]" multiple="">
                     @foreach($roles as $row)
                     <option value="{{$row->id}}">{{$row->name}}</option>
                     @endforeach
                 </select>
                 <a href="#" class="text-success fa fa-plus" id="button_new_email"style="font-size:20px;margin-top: 5px;"></a>
-                <h6 class="mt-1">8.Tiêu đề báo cáo</h6>
+                <h6 class="mt-1">9.Tiêu đề báo cáo</h6>
                 <input class="form-control" name="subject" placeholder="Subject Title" required>
             </div>
             <div class="col-md-8">
-                <h6>9.Nội dung cuộc họp</h6>
+                <h6>10.Nội dung cuộc họp</h6>
                 <textarea class="content_logbook form-control" name="content" rows="15" required=""placeholder="-Nội dung cuộc họp"></textarea>
-                <h6 class="text-danger">10.File đính kèm</h6>
+                <h6 class="text-danger">11.File đính kèm</h6>
                 <input id="kv-file" type="file" name="file_up[]" multiple>
-                <h6 class="text-danger">11.Lưu ý đặc biệt</h6>
+                <h6 class="text-danger">12.Lưu ý đặc biệt</h6>
                 <textarea class="contentkhac_logbook form-control" name="note" rows="4"></textarea>
             </div>
         </div>
@@ -78,6 +80,8 @@
         <input type="hidden" name="user_id" value="{{$userdata['user_id']}}"/>
         <input type="hidden" id="date"/>
         <input type="hidden" id="time"/>
+        <input type="hidden" id="date1"/>
+        <input type="hidden" id="time1"/>
     </form>
 
 </div>
@@ -127,6 +131,31 @@
         $('#pickadatetime').on('focus', datepicker.open).on('click', function (event) {
             event.stopPropagation();
             datepicker.open();
+        });
+        var datepicker1 = $('#date1').pickadate({
+            format: 'yyyy-mm-dd',
+            // editable: true,
+            closeOnSelect: true,
+            closeOnClear: false,
+            // Formats
+            onSet: function (item) {
+                if ('select' in item)
+                    setTimeout(timepicker1.open, 0);
+            }
+        }).pickadate('picker');
+        var timepicker1 = $('#time1').pickatime({
+            format: 'H:i:00',
+            interval: 60,
+            onSet: function (item) {
+                if ('select' in item)
+                    setTimeout(function () {
+                        $('#pickadatetime1').val(datepicker1.get() + ' ' + timepicker1.get());
+                    }, 0)
+            }
+        }).pickatime('picker');
+        $('#pickadatetime1').on('focus', datepicker1.open).on('click', function (event) {
+            event.stopPropagation();
+            datepicker1.open();
         });
         $("#send_to").val(1);
         $("#send_to").chosen({width: "100%"});
@@ -327,6 +356,6 @@
     h6{
         margin: 5px;
     }
-    #date,#time{display:none;}
+    #date,#time,#date1,#time1{display:none;}
     textarea.form-control{font-size: 12px;}
 </style>
