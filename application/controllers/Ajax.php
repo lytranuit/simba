@@ -363,6 +363,7 @@ class Ajax extends MY_Controller {
             }
             $email_to = array_unique(array_filter($email_to));
             $data['date'] = strtotime($data['date']);
+            $data['date_end'] = strtotime($data['date_end']);
             $data['email_send'] = implode(",", $email_to);
             $data_up = $this->logbook_model->create_object($data);
             $id = $this->logbook_model->insert($data_up);
@@ -407,93 +408,6 @@ class Ajax extends MY_Controller {
 
             echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
             die();
-            /*
-             * SET LIMIT 
-             */
-            $_SESSION['timer_contact'] = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-            /*
-             * Mail setting
-             */
-//            $this->load->config('ion_auth', TRUE);
-//            echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
-//            die();
-            /*
-             * LAY EMAIL
-             */
-//            print_r($email_to);
-//            die();
-//            $role_user = $this->session->userdata('role');
-//            $this->load->model("role_model");
-//            $role_obj = $this->role_model->where(array("id" => $role_user))->get();
-//            $email_to = $this->role_model->get_email_role($role_user, $role_obj->parent_id);
-            if (empty($email_to)) {
-                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
-                die();
-            }
-            /*
-             * DATA
-             */
-            $logbook = $this->logbook_model->where("id", $id)->with_products()->with_customers()->order_by("date", "DESC")->as_object()->get();
-            $products = $customers = array();
-            if (isset($logbook->products)) {
-                foreach ($logbook->products as $row) {
-                    array_push($products, "- $row->code - $row->name_vi");
-                }
-            }
-            if (isset($logbook->customers)) {
-                foreach ($logbook->customers as $row) {
-                    array_push($customers, "- $row->code - $row->short_name");
-                }
-            }
-//            echo "<pre>";
-//            print_r($logbook);
-//            die();
-            $conf = $this->option_model->get_setting_mail();
-//            $this->load->config('ion_auth', TRUE);
-            $config = array(
-                'mailtype' => 'html',
-                'protocol' => "smtp",
-                'smtp_host' => $conf['email_server'],
-                'smtp_user' => $conf['email_username'], // actual values different
-                'smtp_pass' => $conf['email_password'],
-                'charset' => "utf-8",
-                'smtp_crypto' => $conf['email_security'],
-                'wordwrap' => TRUE,
-                'smtp_port' => 465,
-                'starttls' => true,
-                'newline' => "\r\n"
-            );
-            $this->load->library("email", $config);
-
-            $fullname = $this->session->userdata('fullname');
-//            /*
-//             * Send mail
-//             */
-//            $this->email->clear();
-//            print_r($email_to);
-//            die();
-            $this->email->from($conf['email_email'], $conf['email_name']);
-            $this->email->to($email_to); /// $conf['email_contact']
-            $this->email->subject("$fullname - Báo cáo - $logbook->subject - " . date("Y/m/d", $logbook->date));
-            $html = "";
-            $this->data['ncc'] = $logbook->ncc;
-            $this->data['nhansu'] = $logbook->nhansu;
-            $this->data['nhansukhac'] = $logbook->nhansukhac;
-            $this->data['new_customer'] = $logbook->new_customer;
-            $this->data['new_product'] = $logbook->new_product;
-            $this->data['listcustomer'] = implode("<br>", $customers);
-            $this->data['listproduct'] = implode("<br>", $products);
-            $this->data['date'] = date("Y-m-d H:i:s", $logbook->date);
-            $this->data['email_send'] = $logbook->email_send;
-            $this->data['content'] = $logbook->content;
-            $this->data['note'] = $logbook->note;
-            $html = $this->blade->view()->make('email/baocao', $this->data)->render();
-            $this->email->message($html);
-            if ($this->email->send()) {
-                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
-            } else {
-                show_error($this->email->print_debugger());
-            }
         } else {
             echo json_encode(array('code' => 402, 'msg' => lang("alert_402")));
         }
