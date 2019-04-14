@@ -18,6 +18,7 @@
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                     <thead>
                         <tr>
+                            <th>STT</th>
                             <th>Key</th>
                             <th>Tiếng Việt</th>
                             <th>Tiếng Anh</th>
@@ -25,8 +26,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i = 0 ?>
                         @foreach($moduleData as $key=>$row)
+
+                        <?php $i++ ?>
                         <tr>
+                            <td>{{$i}}</td>
                             <td class="key">{{$key}}</td>
                             <td><input type='text' style="width:100%;" class="form-control vietnamese" value='{{$row['vietnamese'] or ""}}' /></td>
                             <td><input type='text' style="width:100%;" class="form-control english" value='{{$row['english'] or ""}}' /></td>

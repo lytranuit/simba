@@ -89,7 +89,7 @@
     $(document).ready(function () {
         $("#kv-file").fileinput({
             'theme': 'explorer-fa',
-            'uploadUrl': path + 'admin/uploadfilev2',
+            'uploadUrl': path + 'ajax/uploadfilev2',
             maxFileCount: 5,
             validateInitialCount: true,
             showRemove: false,

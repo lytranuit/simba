@@ -43,7 +43,40 @@ $lang['text_gop_y'] = 'Góp ý khác';
 $lang['Your_Email'] = 'Email';
 $lang['Your_Name'] = 'Tên';
 $lang['Your_Phone'] = 'Điện thoại';
-
 $lang['text_nhat_ky'] = 'Báo cáo nội bộ';
+$lang['ngon_ngu'] = 'Chọn ngôn ngữ';
+$lang['ma_ncc'] = 'Mã';
+$lang['ten_ncc'] = 'Tên';
+$lang['diachi_ncc'] = 'Địa chỉ';
+$lang['dienthoai_ncc'] = 'Điện thoại';
+$lang['email_ncc'] = 'Email';
+$lang['fax_ncc'] = 'Fax';
+$lang['nlh_ncc'] = 'Người liên hệ - Chức vụ';
+$lang['ma_sp'] = 'Mã Sản phẩm';
+$lang['ten_vi_sp'] = 'Tên Sản phẩm tiếng Việt';
+$lang['ten_en_sp'] = 'Tên Sản phẩm tiếng Anh';
+$lang['ten_jp_sp'] = 'Tên Sản phẩm tiếng Nhật';
+$lang['des_sp'] = 'Mô tả sơ lược Sản phẩm';
+$lang['detail_sp'] = 'Mô tả chi tiết Sản phẩm';
+$lang['special_unit_sp'] = 'Đơn vị tính/Quy cách';
+$lang['des_unit_sp'] = 'Mô tả quy cách';
+$lang['special_order_sp'] = 'Quy cách đặt hàng';
+$lang['volume_sp'] = 'Thể tích thực';
+$lang['concentration_sp'] = 'Nồng độ';
+$lang['element_sp'] = 'Thành phần';
+$lang['guide_sp'] = 'Hướng dẫn sử dụng';
+$lang['preservation_sp'] = 'Hướng dẫn bảo quản';
+$lang['material_sp'] = 'Chất liệu bao bì';
+$lang['origin_sp'] = 'Xuất xứ';
+$lang['begin_date_sp'] = 'Ngày sản xuất';
+$lang['expiry_date_sp'] = 'Hạn sử dụng';
+$lang['number_publish_sp'] = 'Số công bố chất lượng';
+$lang['price_sp'] = 'Giá chào: VND/USD/JPY';
+$lang['import_company_sp'] = 'Công ty nhập khẩu';
+$lang['ten_nsx_sp'] = 'Tên Nhà sản xuất';
+$lang['diachi_nsx_sp'] = 'Địa chỉ Nhà sản xuất';
+$lang['video_sp'] = 'URL Clip video SP';
+$lang['file_sp'] = 'Hình ảnh hoặc file đính kèm của sản phẩm';
+
 
 ?>
