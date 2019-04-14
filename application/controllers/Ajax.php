@@ -415,10 +415,36 @@ class Ajax extends MY_Controller {
 
     function supplier() {
         $this->load->model("supplier_model");
-        if (isset($_POST['content'])) {
+        $recaptcha = $this->input->post('g-recaptcha-response');
+        $response = $this->recaptcha->verifyResponse($recaptcha);
+        if (isset($response['success']) and $response['success'] === true) {
             $data = $_POST;
             $data_up = $this->supplier_model->create_object($data);
             $id = $this->supplier_model->insert($data_up);
+            echo json_encode(array('code' => 400, 'msg' => $id));
+            die();
+        } else {
+            echo json_encode(array('code' => 402, 'msg' => lang("alert_402")));
+        }
+    }
+
+    function supplierproduct() {
+        $this->load->model("supplierproduct_model");
+        $this->load->model("supplierproductfile_model");
+        if (isset($_POST['content'])) {
+            $data = $_POST;
+            $data_up = $this->supplierproduct_model->create_object($data);
+            $id = $this->supplierproduct_model->insert($data_up);
+
+            if (isset($data['id_files'])) {
+                foreach ($data['id_files'] as $row) {
+                    $data_up = array(
+                        'supplier_product_id' => $id,
+                        'file_id' => $row
+                    );
+                    $this->supplierproductfile_model->insert($data_up);
+                }
+            }
             echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
             die();
         } else {

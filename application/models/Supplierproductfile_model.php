@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class About_model extends MY_Model {
+class Supplierproductfile_model extends MY_Model {
 
     public function __construct() {
         $this->table = 'tbl_supplier_product_file';

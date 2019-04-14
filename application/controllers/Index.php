@@ -191,7 +191,7 @@ class Index extends MY_Controller {
 
     public function formquote() {
         $this->load->model("option_model");
-
+//        $this->load->library("recaptcha");
         $this->load->model("user_model");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
@@ -206,6 +206,11 @@ class Index extends MY_Controller {
 
         load_editor($this->data);
         load_inputfile($this->data);
+
+        $hl = short_language_current();
+        $hl = $hl == "jp" ? "ja" : $hl;
+        $this->data['captcha'] = $this->recaptcha->getWidget(array('style' => 'transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;display:inline-block;vertical-align:middle;'));
+        $this->data['scriptCap'] = $this->recaptcha->getScriptTag(array('hl' => $hl));
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 

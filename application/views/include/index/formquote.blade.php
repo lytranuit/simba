@@ -78,151 +78,152 @@
 
         </form>
         <form id="product_form" method="post" action="#" class="col-md-6 py-1">
+            <input hidden="" name="content" />
             <fieldset>   	
                 <legend>Thông tin Sản phẩm</legend>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("ma_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("ma_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("ma_sp")}}" name="code"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("ten_vi_sp")}}:<span class="text-danger">*</span></b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("ten_vi_sp")}}" required=""/>
+                        <input class="form-control" placeholder="{{lang("ten_vi_sp")}}" required="" name="name_vi"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("ten_en_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("ten_en_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("ten_en_sp")}}" name="name_en"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("ten_jp_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("ten_jp_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("ten_jp_sp")}}" name="name_jp"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("des_sp")}}:</b>
                     <div class="col-md-9">
-                        <textarea class="form-control" placeholder="{{lang("des_sp")}}" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="{{lang("des_sp")}}" rows="5" name="description"></textarea>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("detail_sp")}}:</b>
                     <div class="col-md-9">
-                        <textarea class="form-control" placeholder="{{lang("detail_sp")}}" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="{{lang("detail_sp")}}" rows="5" name="detail"></textarea>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("special_unit_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("special_unit_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("special_unit_sp")}}" name="special_unit"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("des_unit_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("des_unit_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("des_unit_sp")}}" name="description_unit"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("special_order_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("special_order_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("special_order_sp")}}" name="special_order"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("volume_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("volume_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("volume_sp")}}" name="volume"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("concentration_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("concentration_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("concentration_sp")}}" name="concentration"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("element_sp")}}:</b>
                     <div class="col-md-9">
-                        <textarea class="form-control" placeholder="{{lang("element_sp")}}" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="{{lang("element_sp")}}" rows="5" name="element"></textarea>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("guide_sp")}}:</b>
                     <div class="col-md-9">
-                        <textarea class="form-control" placeholder="{{lang("guide_sp")}}" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="{{lang("guide_sp")}}" rows="5" name="guide"></textarea>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("preservation_sp")}}:</b>
                     <div class="col-md-9">
-                        <textarea class="form-control" placeholder="{{lang("preservation_sp")}}" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="{{lang("preservation_sp")}}" rows="5" name="preservation"></textarea>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("material_sp")}}:</b>
                     <div class="col-md-9">
-                        <textarea class="form-control" placeholder="{{lang("material_sp")}}" rows="5"></textarea>
+                        <textarea class="form-control" placeholder="{{lang("material_sp")}}" rows="5"  name="material"></textarea>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("origin_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("origin_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("origin_sp")}}"  name="origin"/>
                     </div>
                 </div>
 
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("begin_date_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("begin_date_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("begin_date_sp")}}" name="begin_date" type="date"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("expiry_date_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("expiry_date_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("expiry_date_sp")}}"  name="expiry_date" type="date"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("number_publish_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("number_publish_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("number_publish_sp")}}" name="number_publish"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("price_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("price_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("price_sp")}}" name="price"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("import_company_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("import_company_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("import_company_sp")}}" name="import_company"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("ten_nsx_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("ten_nsx_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("ten_nsx_sp")}}" name="name_nsx"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("diachi_nsx_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("diachi_nsx_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("diachi_nsx_sp")}}" name="address_nsx"/>
                     </div>
                 </div>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("video_sp")}}:</b>
                     <div class="col-md-9">
-                        <input class="form-control" placeholder="{{lang("video_sp")}}"/>
+                        <input class="form-control" placeholder="{{lang("video_sp")}}" name="video"/>
                     </div>
                 </div>
                 <div class="row py-1">
@@ -233,11 +234,14 @@
                 </div>
             </fieldset>	
         </form>
-        <div class="col-md-12 py-5 text-center">
-            <button class="btn btn-success" id="save">
+
+        <form id="auth" class="col-md-12 py-5 text-center">
+            <button class="btn btn-success" id="save" name="content">
                 Hoàn tất
             </button>
-        </div>
+            <?= $scriptCap ?>
+            <?= $captcha ?>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
@@ -281,54 +285,22 @@
 //            // Formats
 //            onSet: function (item) {
 //                if ('select' in item)
-//                    setTimeout(timepicker.open, 0);
+//                    $('#pickadatetime').val(datepicker.get());
 //            }
 //        }).pickadate('picker');
-//        var timepicker = $('#time').pickatime({
-//            format: 'H:i:00',
-//            interval: 60,
-//            onSet: function (item) {
-//                if ('select' in item)
-//                    setTimeout(function () {
-//                        $('#pickadatetime').val(datepicker.get() + ' ' + timepicker.get());
-//                    }, 0)
-//            }
-//        }).pickatime('picker');
 //        $('#pickadatetime').on('focus', datepicker.open).on('click', function (event) {
 //            event.stopPropagation();
 //            datepicker.open();
 //        });
-//        var datepicker1 = $('#date1').pickadate({
-//            format: 'yyyy-mm-dd',
-//            // editable: true,
-//            closeOnSelect: true,
-//            closeOnClear: false,
-//            // Formats
-//            onSet: function (item) {
-//                if ('select' in item)
-//                    setTimeout(timepicker1.open, 0);
-//            }
-//        }).pickadate('picker');
-//        var timepicker1 = $('#time1').pickatime({
-//            format: 'H:i:00',
-//            interval: 60,
-//            onSet: function (item) {
-//                if ('select' in item)
-//                    setTimeout(function () {
-//                        $('#pickadatetime1').val(datepicker1.get() + ' ' + timepicker1.get());
-//                    }, 0)
-//            }
-//        }).pickatime('picker');
-//        $('#pickadatetime1').on('focus', datepicker1.open).on('click', function (event) {
-//            event.stopPropagation();
-//            datepicker1.open();
-//        });
-        $('#save').click(function () {
+        $('#save').click(function (e) {
+            e.preventDefault();
             if (!$("#product_form").valid() || !$("#ncc_form").valid())
                 return false;
-            var ncc = $.ajax({
+
+            $(".page-loader-wrapper").show();
+            $.ajax({
                 url: path + 'ajax/supplier',
-                data: $("#ncc_form").serialize(),
+                data: $("#ncc_form").serialize() + '&' + $("#auth").serialize(),
                 dataType: "JSON",
                 type: "POST",
                 beforeSend: function () {
@@ -337,10 +309,28 @@
                 success: function (data) {
                     $("#ncc_form").data("requestRunning", false);
                     var code = data.code;
-                    var msg = data.msg;
-                    alert(msg);
                     if (code == 400) {
-//                        location.reload();
+                        $.ajax({
+                            url: path + 'ajax/supplierproduct',
+                            data: $("#product_form").serialize() + '&supplier_id=' + data.msg,
+                            dataType: "JSON",
+                            type: "POST",
+                            beforeSend: function () {
+                                $("#product_form").data("requestRunning", true);
+                            },
+                            success: function (data) {
+                                $("#product_form").data("requestRunning", false);
+                                var code = data.code;
+                                if (code == 400) {
+                                    alert(data.msg);
+                                    location.reload();
+                                } else {
+                                    alert(data.msg);
+                                }
+                            }
+                        });
+                    } else {
+                        alert(data.msg);
                     }
                 }
             });
