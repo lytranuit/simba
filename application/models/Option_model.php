@@ -32,4 +32,17 @@ class Option_model extends MY_Model {
         return $result;
     }
 
+    function get_setting_mail_quote() {
+        $sql = "SELECT * FROM settings where group_name = 'system_simba_quote_email'";
+//        echo $sql;
+//        die();
+        $query = $this->db->query($sql);
+        $data = $query->result_array();
+        $result = array();
+        foreach ($data as $row) {
+            $result[$row['opt_key']] = $row['opt_value'];
+        }
+        return $result;
+    }
+
 }
