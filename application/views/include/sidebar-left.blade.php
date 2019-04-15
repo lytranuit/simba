@@ -173,7 +173,15 @@
                 <li data='supplier'>
                     <a href="<?= base_url() ?>admin/quanlyncc">
                         <i class="material-icons">list</i>
-                        <span>Nhà cung cấp</span>
+                        <span>Nhà sản xuất</span>
+                    </a>
+                </li>
+                @endif
+                @if(is_permission("supplier_product"))
+                <li data='supplier_product'>
+                    <a href="<?= base_url() ?>admin/quanlysp">
+                        <i class="material-icons">list</i>
+                        <span>Sản phẩm chào hàng</span>
                     </a>
                 </li>
                 @endif

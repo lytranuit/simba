@@ -1,18 +1,18 @@
 
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
-    <li class="active"><a href="javascript:void(0);">Nhà sản xuất</a></li>
+    <li class="active"><a href="javascript:void(0);">Sản phẩm chào hàng</a></li>
 </ol>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Nhà sản xuất</h2>
+                <h2>Sản phẩm chào hàng</h2>
             </div>
             <div class="body">
-                @if(is_permission("themncc"))
+                @if(is_permission("themsp"))
                 <div style="margin:20px 0px;">
-                    <a class="btn btn-success" href="http://localhost/simba/admin/themncc">Thêm</a>
+                    <a class="btn btn-success" href="http://localhost/simba/admin/themsp">Thêm</a>
                 </div>
                 @endif
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%" style="white-space: pre-line">
@@ -21,11 +21,7 @@
                             <th>ID</th>
                             <th>Mã</th>
                             <th>Tên</th>
-                            <th>Địa chỉ</th>
-                            <th>Điện thoại</th>
-                            <th>Fax</th>
-                            <th>Email</th>
-                            <th>Người liên hệ</th>
+                            <th>Nhà sản xuất</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -42,19 +38,15 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": path + "admin/tablencc",
+                "url": path + "admin/tablesp",
                 "dataType": "json",
                 "type": "POST",
             },
             "columns": [
                 {"data": "id"},
                 {"data": "code"},
-                {"data": "name"},
-                {"data": "address"},
-                {"data": "phone"},
-                {"data": "fax"},
-                {"data": "email"},
-                {"data": "note"},
+                {"data": "name_vi"},
+                {"data": "supplier"},
                 {"data": "action"},
             ]
 

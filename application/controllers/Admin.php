@@ -1251,6 +1251,224 @@ class Admin extends MY_Controller {
         exit;
     }
 
+    function tablencc() {
+        $this->load->model("supplier_model");
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $page = ($start / $limit) + 1;
+        $where = $this->supplier_model->where("deleted", 0);
+
+        $totalData = $where->count_rows();
+        $totalFiltered = $totalData;
+
+        if (empty($this->input->post('search')['value'])) {
+//            $max_page = ceil($totalFiltered / $limit);
+
+            $where = $this->supplier_model->where("deleted", 0);
+        } else {
+            $search = $this->input->post('search')['value'];
+            $sql_where = "deleted = 0 AND (code like '%" . $search . "%' OR name like '%" . $search . "%')";
+            $where = $this->supplier_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+            $totalFiltered = $where->count_rows();
+            $where = $this->supplier_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+        }
+
+        $posts = $where->supplier_model->order_by("id", "DESC")->paginate($limit, NULL, $page);
+//        echo "<pre>";
+//        print_r($posts);f
+//        die();
+        $data = array();
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+                $nestedData['id'] = $post->id;
+                $nestedData['code'] = $post->code;
+                $nestedData['name'] = $post->name;
+                $nestedData['address'] = $post->address;
+                $nestedData['phone'] = $post->phone;
+                $nestedData['fax'] = $post->fax;
+                $nestedData['email'] = $post->email;
+                $nestedData['note'] = $post->note;
+                $action = "";
+                if (is_permission("editncc")) {
+                    $action .= '<a href="' . base_url() . 'admin/editncc/' . $post->id . '" class="btn btn-default" title="edit">'
+                            . '<i class="ace-icon fa fa-pencil bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                if (is_permission("removencc")) {
+                    $action .= '<a href="' . base_url() . 'admin/removencc/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                $nestedData['action'] = $action;
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
+    /*
+     * Sản phẩm chào hàng
+     */
+
+    public function quanlysp() {
+        $this->load->model("supplier_model");
+        $this->data['menu_active'] = "supplier_product";
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themsp() { ////////// Trang dang tin
+//        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("supplierproduct_model");
+            $this->load->model("supplierproductfile_model");
+            $data = $_POST;
+            $data_up = $this->supplierproduct_model->create_object($data);
+            $id = $this->supplierproduct_model->insert($data_up);
+
+            /*
+             * FILE HINH ANH
+             */
+            $files = $this->input->post('id_files');
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->supplierproductfile_model->insert(array('supplier_product_id' => $id, 'file_id' => $file));
+                }
+            }
+            redirect('admin/quanlysp', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("supplier_model");
+            $this->data['supplier'] = $this->supplier_model->where(array('deleted' => 0))->as_object()->get_all();
+            load_inputfile($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    public function editsp($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("supplierproduct_model");
+            $this->load->model("supplierproductfile_model");
+            $data = $_POST;
+            $data_up = $this->supplierproduct_model->create_object($data);
+            $this->supplierproduct_model->update($data_up, $id);
+
+            /*
+             * FILE HINH ANH
+             */
+            $files = $this->input->post('id_files');
+            $this->supplierproductfile_model->where('supplier_product_id', $id)->delete();
+            if (count($files) > 0) {
+                foreach ($files as $file) {
+                    $this->supplierproductfile_model->insert(array('supplier_product_id' => $id, 'file_id' => $file));
+                }
+            }
+            redirect('admin/quanlysp', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("supplier_model");
+            $this->load->model("supplierproduct_model");
+            $tin = $this->supplierproduct_model->with_files()->where(array('id' => $id))->as_object()->get();
+            $this->data['tin'] = $tin;
+            /* IMAGE */
+            $htmlconf = $html = array();
+            if (isset($tin->files)) {
+                foreach ($tin->files as $file) {
+//                    $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
+                    array_push($html, "<img src='" . base_url() . $file->src . "' class='file-preview-image img-fluid' alt='" . $file->ten_hinhanh . "' title='" . $file->ten_hinhanh . "'>");
+                    array_push($htmlconf, array(
+                        'caption' => $file->ten_hinhanh,
+                        'url' => base_url() . '/index/success/' . $file->id_hinhanh,
+                        'key' => $file->id_hinhanh
+                    ));
+                }
+            }
+            $this->data['html'] = $html;
+            $this->data['htmlconf'] = $htmlconf;
+            $this->data['supplier'] = $this->supplier_model->where(array('deleted' => 0))->as_object()->get_all();
+            load_inputfile($this->data);
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removesp($params) {
+        $this->load->model("supplierproduct_model");
+        $id = $params[0];
+        $this->supplierproduct_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    function tablesp() {
+        $this->load->model("supplierproduct_model");
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $page = ($start / $limit) + 1;
+        $where = $this->supplierproduct_model->where("deleted", 0);
+
+        $totalData = $where->count_rows();
+        $totalFiltered = $totalData;
+
+        if (empty($this->input->post('search')['value'])) {
+//            $max_page = ceil($totalFiltered / $limit);
+
+            $where = $this->supplierproduct_model->where("deleted", 0);
+        } else {
+            $search = $this->input->post('search')['value'];
+            $sql_where = "deleted = 0 AND (code like '%" . $search . "%' OR name_vi like '%" . $search . "%')";
+            $where = $this->supplierproduct_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+            $totalFiltered = $where->count_rows();
+            $where = $this->supplierproduct_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+        }
+
+        $posts = $where->supplierproduct_model->with_supplier()->order_by("id", "DESC")->paginate($limit, NULL, $page);
+//        echo "<pre>";
+//        print_r($posts);
+//        die();
+        $data = array();
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+                $nestedData['id'] = $post->id;
+                $nestedData['code'] = $post->code;
+                $nestedData['name_vi'] = $post->name_vi;
+                $nestedData['supplier'] = isset($post->supplier->name) ? "<a href='" . base_url() . 'admin/editncc/' . $post->supplier_id . "'>" . $post->supplier->name . "</a>" : "";
+                $action = "";
+                if (is_permission("editsp")) {
+                    $action .= '<a href="' . base_url() . 'admin/editsp/' . $post->id . '" class="btn btn-default" title="edit">'
+                            . '<i class="ace-icon fa fa-pencil bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                if (is_permission("removesp")) {
+                    $action .= '<a href="' . base_url() . 'admin/removesp/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                $nestedData['action'] = $action;
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
     /*
      * Role
      */
@@ -1585,75 +1803,6 @@ class Admin extends MY_Controller {
                 }
                 if (is_permission("removefeedback")) {
                     $action .= '<a href="' . base_url() . 'admin/removelogbook/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                            . '</i>'
-                            . '</a>';
-                }
-                $nestedData['action'] = $action;
-                $data[] = $nestedData;
-            }
-        }
-
-        $json_data = array(
-            "draw" => intval($this->input->post('draw')),
-            "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data" => $data
-        );
-
-        echo json_encode($json_data);
-    }
-
-    /*
-     * TABLE Nhà cung cấp
-     */
-
-    function tablencc() {
-        $this->load->model("supplier_model");
-        $limit = $this->input->post('length');
-        $start = $this->input->post('start');
-        $page = ($start / $limit) + 1;
-        $where = $this->supplier_model->where("deleted", 0);
-
-        $totalData = $where->count_rows();
-        $totalFiltered = $totalData;
-
-        if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
-
-            $where = $this->supplier_model->where("deleted", 0);
-        } else {
-            $search = $this->input->post('search')['value'];
-            $sql_where = "deleted = 0 AND (code like '%" . $search . "%' OR name like '%" . $search . "%')";
-            $where = $this->supplier_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
-            $totalFiltered = $where->count_rows();
-            $where = $this->supplier_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
-        }
-
-        $posts = $where->supplier_model->order_by("id", "DESC")->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);f
-//        die();
-        $data = array();
-        if (!empty($posts)) {
-            foreach ($posts as $post) {
-                $nestedData['id'] = $post->id;
-                $nestedData['code'] = $post->code;
-                $nestedData['name'] = $post->name;
-                $nestedData['address'] = $post->address;
-                $nestedData['phone'] = $post->phone;
-                $nestedData['fax'] = $post->fax;
-                $nestedData['email'] = $post->email;
-                $nestedData['note'] = $post->note;
-                $action = "";
-                if (is_permission("editncc")) {
-                    $action .= '<a href="' . base_url() . 'admin/editncc/' . $post->id . '" class="btn btn-default" title="edit">'
-                            . '<i class="ace-icon fa fa-pencil bigger-120">'
-                            . '</i>'
-                            . '</a>';
-                }
-                if (is_permission("removencc")) {
-                    $action .= '<a href="' . base_url() . 'admin/removencc/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
                             . '<i class="ace-icon fa fa-trash-o bigger-120">'
                             . '</i>'
                             . '</a>';
