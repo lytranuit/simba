@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 $lang['alert_400'] = 'Cảm ơn bạn đã góp ý cho chúng tôi!';
 $lang['alert_401'] = 'Vui lòng nhấn nút Captcha';
 $lang['alert_402'] = 'Vui lòng nhập đầy đủ thông tin.';
@@ -45,6 +46,8 @@ $lang['Your_Name'] = 'Tên';
 $lang['Your_Phone'] = 'Điện thoại';
 $lang['text_nhat_ky'] = 'Báo cáo nội bộ';
 $lang['ngon_ngu'] = 'Chọn ngôn ngữ';
+$lang['ncc_info'] = 'Thông tin nhà cung cấp';
+$lang['product_info'] = 'Thông tin sản phẩm';
 $lang['ma_ncc'] = 'Mã';
 $lang['ten_ncc'] = 'Tên';
 $lang['diachi_ncc'] = 'Địa chỉ';
@@ -77,6 +80,4 @@ $lang['ten_nsx_sp'] = 'Tên Nhà sản xuất';
 $lang['diachi_nsx_sp'] = 'Địa chỉ Nhà sản xuất';
 $lang['video_sp'] = 'URL Clip video SP';
 $lang['file_sp'] = 'Hình ảnh hoặc file đính kèm của sản phẩm';
-
-
 ?>

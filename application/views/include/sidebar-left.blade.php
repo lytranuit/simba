@@ -168,6 +168,15 @@
                     </a>
                 </li>
                 @endif
+
+                @if(is_permission("supplier"))
+                <li data='supplier'>
+                    <a href="<?= base_url() ?>admin/quanlyncc">
+                        <i class="material-icons">list</i>
+                        <span>Nhà cung cấp</span>
+                    </a>
+                </li>
+                @endif
                 <?php if ($userdata['role'] == 1): ?>
                     <li class="header">User</li>
                     <li data='user'>

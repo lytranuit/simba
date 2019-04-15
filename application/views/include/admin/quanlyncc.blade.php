@@ -10,6 +10,11 @@
                 <h2>Nhà cung cấp</h2>
             </div>
             <div class="body">
+                @if(is_permission("themncc"))
+                <div style="margin:20px 0px;">
+                    <a class="btn btn-success" href="http://localhost/simba/admin/themncc">Thêm</a>
+                </div>
+                @endif
                 <table id="quanlytin" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%" style="white-space: pre-line">
                     <thead>
                         <tr>

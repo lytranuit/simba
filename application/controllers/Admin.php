@@ -1214,24 +1214,30 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
+    public function themncc() { ////////// Trang dang tin
+//        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("supplier_model");
+            $data = $_POST;
+            $data_up = $this->supplier_model->create_object($data);
+            $this->supplier_model->insert($data_up);
+            redirect('admin/quanlyncc', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
     public function editncc($param) { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
-            $this->load->model("feedback_model");
+            $this->load->model("supplier_model");
             $data = $_POST;
-            $data_up = $this->feedback_model->create_object($data);
-            $this->feedback_model->update($data_up, $id);
-            redirect('admin/quanlyfeedback', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+            $data_up = $this->supplier_model->create_object($data);
+            $this->supplier_model->update($data_up, $id);
+            redirect('admin/quanlyncc', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
-            $this->load->model("feedback_model");
-            $tin = $this->feedback_model->with_product()->with_customer()->where(array('id' => $id))->as_object()->get();
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
-            $this->load->model("customersimba_model");
-            $this->load->model("productsimba_model");
-            $this->data['customers'] = $this->customersimba_model->where(array('deleted' => 0))->as_array()->get_all();
-            $this->data['products'] = $this->productsimba_model->as_array()->get_all();
+            $this->load->model("supplier_model");
+            $tin = $this->supplier_model->where(array('id' => $id))->as_object()->get();
             $this->data['tin'] = $tin;
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
@@ -1640,13 +1646,13 @@ class Admin extends MY_Controller {
                 $nestedData['email'] = $post->email;
                 $nestedData['note'] = $post->note;
                 $action = "";
-                if (is_permission("editfeedback")) {
+                if (is_permission("editncc")) {
                     $action .= '<a href="' . base_url() . 'admin/editncc/' . $post->id . '" class="btn btn-default" title="edit">'
                             . '<i class="ace-icon fa fa-pencil bigger-120">'
                             . '</i>'
                             . '</a>';
                 }
-                if (is_permission("removefeedback")) {
+                if (is_permission("removencc")) {
                     $action .= '<a href="' . base_url() . 'admin/removencc/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
                             . '<i class="ace-icon fa fa-trash-o bigger-120">'
                             . '</i>'

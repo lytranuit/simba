@@ -31,7 +31,7 @@
         <form id="ncc_form" method="post" action="#" class="col-md-6 py-1">
             <input hidden="" name="content" />
             <fieldset>   	
-                <legend>Thông tin Nhà sản xuất</legend>
+                <legend>{{lang("ncc_info")}}</legend>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("ma_ncc")}}:</b>
                     <div class="col-md-9">
@@ -80,7 +80,7 @@
         <form id="product_form" method="post" action="#" class="col-md-6 py-1">
             <input hidden="" name="content" />
             <fieldset>   	
-                <legend>Thông tin Sản phẩm</legend>
+                <legend>{{lang("product_info")}}</legend>
                 <div class="row py-1">
                     <b class="col-md-3">{{lang("ma_sp")}}:</b>
                     <div class="col-md-9">
