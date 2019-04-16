@@ -69,7 +69,7 @@ class Index extends MY_Controller {
         $this->load->model("option_model");
         $logbooks = $this->logbook_model->where(array("is_sent" => 0))->with_author()->with_customers()->with_products()->with_files()->as_object()->get_all();
         if (!empty($logbooks)) {
-            $conf = $this->option_model->get_setting_mail();
+            $conf = $this->option_model->get_setting_mail_report();
             $config = array(
                 'mailtype' => 'html',
                 'protocol' => "smtp",
