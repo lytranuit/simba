@@ -238,8 +238,11 @@ class Index extends MY_Controller {
             echo "<p>" . lang('alert_407') . " <a href='" . base_url() . "'>" . lang('Home') . "</a>";
             die();
         }
+
         $this->load->model("role_model");
         $this->data['roles'] = $this->role_model->where(array("deleted" => 0, 'filter' => 1))->as_object()->get_all();
+        $this->load->model("ncc_model");
+        $this->data['ncc'] = $this->ncc_model->where(array("deleted" => 0))->as_object()->get_all();
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.time.css");

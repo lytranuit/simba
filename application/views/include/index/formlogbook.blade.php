@@ -17,8 +17,15 @@
     <form id="logbook_form" method="post" action="#">
         <div class="row">
             <div class="col-md-4">
-                <h6>1.Nhà cung cấp</h6>
-                <textarea class="edit-ncc form-control" name="ncc" rows="10" placeholder="-Tên &#10;-Địa chỉ&#10;-Website &#10;-Số điện thoại&#10;-Email&#10;-Người liên hệ&#10;...."></textarea>
+                <h6>1.Nhà cung cấp:</h6>
+                <select id="select_ncc" name="ncc_id">
+                    @foreach($ncc as $row)
+                    <option value="{{$row->id}}">{{$row->code}} - {{$row->short_name}}</option>
+                    @endforeach
+                </select>
+                <div style="margin-top:5px;">
+                    <textarea class="edit-ncc form-control" name="ncc" rows="10" placeholder="-Tên &#10;-Địa chỉ&#10;-Website &#10;-Số điện thoại&#10;-Email&#10;-Người liên hệ&#10;...."></textarea>
+                </div>
             </div>
             <div class="col-md-4">
                 <h6>2.Các nhân sự tham gia</h6>
@@ -158,6 +165,7 @@
             datepicker1.open();
         });
         $("#send_to").val(1);
+        $("#select_ncc").chosen({width: "100%"});
         $("#send_to").chosen({width: "100%"});
         $("#button_new_customer").click(function (e) {
             e.preventDefault();
