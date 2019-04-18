@@ -364,6 +364,7 @@ class Ajax extends MY_Controller {
             $email_to = array_unique(array_filter($email_to));
             $data['date'] = strtotime($data['date']);
             $data['date_end'] = strtotime($data['date_end']);
+            $data['date_report'] = time();
             $data['email_send'] = implode(",", $email_to);
             $data_up = $this->logbook_model->create_object($data);
             $id = $this->logbook_model->insert($data_up);
