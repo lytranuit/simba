@@ -20,7 +20,7 @@
                         </div>
                         <div class="col-md-4">
                             <b>1.Nhà cung cấp:</b>
-                            <div class='fr-view'style="white-space: pre"><?= $tin->ncc ?></div>
+                            <div class='fr-view'style="white-space: pre"><?= isset($tin->nccObject) ? $tin->nccObject->code . "-" . $tin->nccObject->short_name : "" ?> <?= $tin->ncc ?></div>
                         </div>
                         <div class="col-md-4">
                             <b>2.Nhân sự tham gia</b>

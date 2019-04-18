@@ -67,7 +67,7 @@ class Index extends MY_Controller {
     public function cronjonsendmail() {
         $this->load->model("logbook_model");
         $this->load->model("option_model");
-        $logbooks = $this->logbook_model->where(array("is_sent" => 0))->with_author()->with_customers()->with_products()->with_files()->as_object()->get_all();
+        $logbooks = $this->logbook_model->where(array("is_sent" => 0))->with_author()->with_customers()->with_products()->with_nccObject()->with_files()->as_object()->get_all();
         if (!empty($logbooks)) {
             $conf = $this->option_model->get_setting_mail_report();
             $config = array(
@@ -114,7 +114,11 @@ class Index extends MY_Controller {
                 $this->email->to($email_to); /// $conf['email_contact']
                 $this->email->subject("$fullname - Báo cáo - $logbook->subject - " . date("Y/m/d", $logbook->date));
                 $html = "";
-                $this->data['ncc'] = $logbook->ncc;
+                $ncc = $logbook->ncc;
+                if (isset($logbook->nccObject)) {
+                    $ncc = $logbook->nccObject->code . "-" . $logbook->nccObject->short_name . $post->ncc;
+                }
+                $this->data['ncc'] = $ncc;
                 $this->data['nhansu'] = $logbook->nhansu;
                 $this->data['nhansukhac'] = $logbook->nhansukhac;
                 $this->data['new_customer'] = $logbook->new_customer;

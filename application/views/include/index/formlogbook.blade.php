@@ -19,6 +19,7 @@
             <div class="col-md-4">
                 <h6>1.Nhà cung cấp:</h6>
                 <select id="select_ncc" name="ncc_id">
+                    <option value="0">Chọn Nhà cung cấp</option>
                     @foreach($ncc as $row)
                     <option value="{{$row->id}}">{{$row->code}} - {{$row->short_name}}</option>
                     @endforeach

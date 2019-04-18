@@ -1183,7 +1183,7 @@ class Admin extends MY_Controller {
             redirect('admin/quanlylogbook', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->load->model("logbook_model");
-            $tin = $this->logbook_model->where(array('id' => $id))->with_customers()->with_products()->with_files()->as_object()->get();
+            $tin = $this->logbook_model->where(array('id' => $id))->with_customers()->with_products()->with_files()->with_nccObject()->as_object()->get();
             $this->data['customers'] = implode(",", array_keys((array) $tin->customers));
 //            echo "<pre>";
 //            print_r($tin);
@@ -1201,6 +1201,89 @@ class Admin extends MY_Controller {
         $this->logbook_model->update(array("deleted" => 1), $id);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
+    }
+
+    /*
+     * TABLE Logbook
+     */
+
+    function tablelogbook() {
+        $this->load->model("logbook_model");
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $page = ($start / $limit) + 1;
+        $where = $this->logbook_model->where("deleted", 0);
+
+        $totalData = $where->count_rows();
+        $totalFiltered = $totalData;
+
+        if (empty($this->input->post('search')['value'])) {
+//            $max_page = ceil($totalFiltered / $limit);
+
+            $where = $this->logbook_model->where("deleted", 0);
+        } else {
+            $search = $this->input->post('search')['value'];
+            $sql_where = "deleted = 0 AND (ncc like '%" . $search . "%' OR content like '%" . $search . "%')";
+            $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+            $totalFiltered = $where->count_rows();
+            $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+        }
+
+        $posts = $where->with_customers()->with_products()->with_nccObject()->order_by("id", "DESC")->paginate($limit, NULL, $page);
+//        echo "<pre>";
+//        print_r($posts);f
+//        die();
+        $data = array();
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+                $products = $customers = array();
+                $ncc = $post->ncc;
+                if (isset($post->products)) {
+                    foreach ($post->products as $row) {
+                        array_push($products, "- $row->code - $row->name_vi");
+                    }
+                }
+                if (isset($post->customers)) {
+                    foreach ($post->customers as $row) {
+                        array_push($customers, "- $row->code - $row->short_name");
+                    }
+                }
+                if (isset($post->nccObject)) {
+                    $ncc = $post->nccObject->code . "-" . $post->nccObject->short_name . "<br>" . $post->ncc;
+                }
+                $nestedData['id'] = $post->id;
+                $nestedData['ncc'] = $ncc;
+                $nestedData['customers'] = implode("<br>", $customers) . "<br>$post->new_customer";
+                $nestedData['products'] = implode("<br>", $products) . "<br>$post->new_product";
+                $nestedData['content'] = "<div class='fr-view'>$post->content</div>";
+                $nestedData['date'] = date("Y-m-d", $post->date);
+                $nestedData['stauts'] = $post->status == 1 ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>';
+                $action = "";
+                if (is_permission("editfeedback")) {
+                    $action .= '<a href="' . base_url() . 'admin/editlogbook/' . $post->id . '" class="btn btn-default" title="edit">'
+                            . '<i class="ace-icon fa fa-pencil bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                if (is_permission("removefeedback")) {
+                    $action .= '<a href="' . base_url() . 'admin/removelogbook/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                $nestedData['action'] = $action;
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+
+        echo json_encode($json_data);
     }
 
     /*
@@ -1837,85 +1920,6 @@ class Admin extends MY_Controller {
                 }
                 if (is_permission("removeproduct")) {
                     $action .= '<a href="' . base_url() . 'admin/removeproduct/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                            . '</i>'
-                            . '</a>';
-                }
-                $nestedData['action'] = $action;
-                $data[] = $nestedData;
-            }
-        }
-
-        $json_data = array(
-            "draw" => intval($this->input->post('draw')),
-            "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data" => $data
-        );
-
-        echo json_encode($json_data);
-    }
-
-    /*
-     * TABLE Logbook
-     */
-
-    function tablelogbook() {
-        $this->load->model("logbook_model");
-        $limit = $this->input->post('length');
-        $start = $this->input->post('start');
-        $page = ($start / $limit) + 1;
-        $where = $this->logbook_model->where("deleted", 0);
-
-        $totalData = $where->count_rows();
-        $totalFiltered = $totalData;
-
-        if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
-
-            $where = $this->logbook_model->where("deleted", 0);
-        } else {
-            $search = $this->input->post('search')['value'];
-            $sql_where = "deleted = 0 AND (ncc like '%" . $search . "%' OR content like '%" . $search . "%')";
-            $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
-            $totalFiltered = $where->count_rows();
-            $where = $this->logbook_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
-        }
-
-        $posts = $where->with_customers()->with_products()->order_by("date", "DESC")->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);f
-//        die();
-        $data = array();
-        if (!empty($posts)) {
-            foreach ($posts as $post) {
-                $products = $customers = array();
-                if (isset($post->products)) {
-                    foreach ($post->products as $row) {
-                        array_push($products, "- $row->code - $row->name_vi");
-                    }
-                }
-                if (isset($post->customers)) {
-                    foreach ($post->customers as $row) {
-                        array_push($customers, "- $row->code - $row->short_name");
-                    }
-                }
-                $nestedData['id'] = $post->id;
-                $nestedData['ncc'] = $post->ncc;
-                $nestedData['customers'] = implode("<br>", $customers) . "<br>$post->new_customer";
-                $nestedData['products'] = implode("<br>", $products) . "<br>$post->new_product";
-                $nestedData['content'] = "<div class='fr-view'>$post->content</div>";
-                $nestedData['date'] = date("Y-m-d", $post->date);
-                $nestedData['stauts'] = $post->status == 1 ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>';
-                $action = "";
-                if (is_permission("editfeedback")) {
-                    $action .= '<a href="' . base_url() . 'admin/editlogbook/' . $post->id . '" class="btn btn-default" title="edit">'
-                            . '<i class="ace-icon fa fa-pencil bigger-120">'
-                            . '</i>'
-                            . '</a>';
-                }
-                if (is_permission("removefeedback")) {
-                    $action .= '<a href="' . base_url() . 'admin/removelogbook/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
                             . '<i class="ace-icon fa fa-trash-o bigger-120">'
                             . '</i>'
                             . '</a>';

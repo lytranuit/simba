@@ -46,6 +46,7 @@ class Logbook_model extends MY_Model {
             'get_relate' => TRUE /* another optional setting, which is explained below */
         );
 
+        $this->has_one['nccObject'] = array('foreign_model' => 'Ncc_model', 'foreign_table' => 'tbl_ncc', 'foreign_key' => 'id', 'local_key' => 'ncc_id');
         $this->has_one['author'] = array('foreign_model' => 'User_model', 'foreign_table' => 'user', 'foreign_key' => 'id', 'local_key' => 'user_id');
         parent::__construct();
     }
