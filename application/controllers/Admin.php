@@ -1204,7 +1204,7 @@ class Admin extends MY_Controller {
     }
 
     /*
-     * Ncc
+     * Nhà sản xuất
      */
 
     public function quanlyncc() {
@@ -1297,6 +1297,119 @@ class Admin extends MY_Controller {
                 }
                 if (is_permission("removencc")) {
                     $action .= '<a href="' . base_url() . 'admin/removencc/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                $nestedData['action'] = $action;
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
+    /*
+     * Ncc real
+     */
+
+    public function quanlynccv2() {
+        $this->load->model("ncc_model");
+        $this->data['menu_active'] = "ncc";
+        load_datatable($this->data);
+        echo $this->blade->view()->make('page/page', $this->data)->render();
+    }
+
+    public function themnccv2() { ////////// Trang dang tin
+//        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("ncc_model");
+            $data = $_POST;
+            $data_up = $this->ncc_model->create_object($data);
+            $this->ncc_model->insert($data_up);
+            redirect('admin/quanlynccv2', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    public function editnccv2($param) { ////////// Trang dang tin
+        $id = $param[0];
+        if (isset($_POST['dangtin'])) {
+            $this->load->model("ncc_model");
+            $data = $_POST;
+            $data_up = $this->ncc_model->create_object($data);
+            $this->ncc_model->update($data_up, $id);
+            redirect('admin/quanlynccv2', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        } else {
+            $this->load->model("ncc_model");
+            $tin = $this->ncc_model->where(array('id' => $id))->as_object()->get();
+            $this->data['tin'] = $tin;
+            echo $this->blade->view()->make('page/page', $this->data)->render();
+        }
+    }
+
+    function removenccv2($params) {
+        $this->load->model("ncc_model");
+        $id = $params[0];
+        $this->ncc_model->update(array("deleted" => 1), $id);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
+    function tablenccv2() {
+        $this->load->model("ncc_model");
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $page = ($start / $limit) + 1;
+        $where = $this->ncc_model->where("deleted", 0);
+
+        $totalData = $where->count_rows();
+        $totalFiltered = $totalData;
+
+        if (empty($this->input->post('search')['value'])) {
+//            $max_page = ceil($totalFiltered / $limit);
+
+            $where = $this->ncc_model->where("deleted", 0);
+        } else {
+            $search = $this->input->post('search')['value'];
+            $sql_where = "deleted = 0 AND (code like '%" . $search . "%' OR name like '%" . $search . "%')";
+            $where = $this->ncc_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+            $totalFiltered = $where->count_rows();
+            $where = $this->ncc_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE);
+        }
+
+        $posts = $where->ncc_model->order_by("id", "DESC")->paginate($limit, NULL, $page);
+//        echo "<pre>";
+//        print_r($posts);f
+//        die();
+        $data = array();
+        if (!empty($posts)) {
+            foreach ($posts as $post) {
+                $nestedData['id'] = $post->id;
+                $nestedData['code'] = $post->code;
+                $nestedData['name'] = $post->name;
+                $nestedData['short_name'] = $post->short_name;
+                $nestedData['address'] = $post->address;
+                $nestedData['phone'] = $post->phone;
+                $nestedData['fax'] = $post->fax;
+                $nestedData['email'] = $post->email;
+                $action = "";
+                if (is_permission("editnccv2")) {
+                    $action .= '<a href="' . base_url() . 'admin/editnccv2/' . $post->id . '" class="btn btn-default" title="edit">'
+                            . '<i class="ace-icon fa fa-pencil bigger-120">'
+                            . '</i>'
+                            . '</a>';
+                }
+                if (is_permission("removenccv2")) {
+                    $action .= '<a href="' . base_url() . 'admin/removenccv2/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
                             . '<i class="ace-icon fa fa-trash-o bigger-120">'
                             . '</i>'
                             . '</a>';

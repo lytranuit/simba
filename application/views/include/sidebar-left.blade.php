@@ -169,6 +169,14 @@
                 </li>
                 @endif
 
+                @if(is_permission("ncc"))
+                <li data='ncc'>
+                    <a href="<?= base_url() ?>admin/quanlynccv2">
+                        <i class="material-icons">list</i>
+                        <span>Nhà Cung cấp</span>
+                    </a>
+                </li>
+                @endif
                 @if(is_permission("supplier"))
                 <li data='supplier'>
                     <a href="<?= base_url() ?>admin/quanlyncc">
