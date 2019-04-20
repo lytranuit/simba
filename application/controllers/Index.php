@@ -116,7 +116,7 @@ class Index extends MY_Controller {
                 $html = "";
                 $ncc = $logbook->ncc;
                 if (isset($logbook->nccObject)) {
-                    $ncc = $logbook->nccObject->code . "-" . $logbook->nccObject->short_name . $post->ncc;
+                    $ncc = $logbook->nccObject->code . "-" . $logbook->nccObject->short_name . $logbook->ncc;
                 }
                 $this->data['ncc'] = $ncc;
                 $this->data['nhansu'] = $logbook->nhansu;
