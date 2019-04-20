@@ -139,11 +139,11 @@ class Index extends MY_Controller {
                 }
 
 
-                $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
                 if ($this->email->send()) {
+                    $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
 //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 } else {
-                    $file_log = './log_' . time() . '.log';
+                    $file_log = './log_' . $logbook->id . '.log';
                     file_put_contents($file_log, $this->email->print_debugger(), FILE_APPEND);
 //                show_error($this->email->print_debugger());
                     /*
@@ -205,11 +205,11 @@ class Index extends MY_Controller {
                 }
 
 
-                $this->supplierproduct_model->update(array("is_sent" => 1), $quote->id);
                 if ($this->email->send()) {
+                    $this->supplierproduct_model->update(array("is_sent" => 1), $quote->id);
 //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 } else {
-                    $file_log = './log_' . time() . '.log';
+                    $file_log = './log_' . $quote->id . '.log';
                     file_put_contents($file_log, $this->email->print_debugger(), FILE_APPEND);
 //                show_error($this->email->print_debugger());
                     /*
