@@ -139,23 +139,12 @@ class Index extends MY_Controller {
                 }
 
 
+                $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
                 if ($this->email->send()) {
-                    $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
 //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 } else {
                     $file_log = './log_' . $logbook->id . '.log';
                     file_put_contents($file_log, $this->email->print_debugger(), FILE_APPEND);
-//                show_error($this->email->print_debugger());
-                    /*
-                     * SEND MAIL ADMIN
-                     */
-                    $this->email->clear(TRUE);
-                    $this->email->from($conf['email_email'], $conf['email_name']);
-                    $this->email->to("lytranuit@gmail.com"); /// $conf['email_contact']
-                    $this->email->subject("Báo cáo send fail Simba CronJob");
-                    $html = "ID: $logbook->id <br> File Log: $file_log";
-                    $this->email->message($html);
-                    $this->email->send();
                 }
             }
         }
@@ -205,23 +194,12 @@ class Index extends MY_Controller {
                 }
 
 
+                $this->supplierproduct_model->update(array("is_sent" => 1), $quote->id);
                 if ($this->email->send()) {
-                    $this->supplierproduct_model->update(array("is_sent" => 1), $quote->id);
 //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 } else {
                     $file_log = './log_' . $quote->id . '.log';
                     file_put_contents($file_log, $this->email->print_debugger(), FILE_APPEND);
-//                show_error($this->email->print_debugger());
-                    /*
-                     * SEND MAIL ADMIN
-                     */
-                    $this->email->clear(TRUE);
-                    $this->email->from($conf['email_email'], $conf['email_name']);
-                    $this->email->to("lytranuit@gmail.com"); /// $conf['email_contact']
-                    $this->email->subject("Báo giá online send fail Simba CronJob");
-                    $html = "ID: $quote->id <br> File Log: $file_log";
-                    $this->email->message($html);
-                    $this->email->send();
                 }
             }
         }
