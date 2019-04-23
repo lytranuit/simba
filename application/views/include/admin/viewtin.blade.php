@@ -12,7 +12,7 @@
                 <div class="fr-view">
                     <?= $tin['content_vi'] ?>
                 </div>
-                @if(count($tin['files']))
+                @if(!empty($tin['files']))
                 <p>
                     <b>File đính kèm:</b>
                 <p>

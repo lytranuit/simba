@@ -15,7 +15,7 @@ $hinh_preview = isset($tin->hinhanh->thumb_src) ? $tin->hinhanh->thumb_src : "pu
             <div class="body">
                 <div class="row">
                     <form method="POST" action="" id="form-dang-tin" class="col-md-12">
-                        @if(count($tin->files))
+                        @if(!empty($tin->files))
                         @foreach($tin->files as $key =>$row)
                         <input type='hidden' name='id_files[]' value='{{$key}}' class='id_files'/>
                         @endforeach
