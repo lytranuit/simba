@@ -302,7 +302,7 @@ class Index extends MY_Controller {
         $this->load->model("categorysimba_model");
         $category = $category != "" ? $category : 0;
 
-        $sql_where = "status = 1";
+        $sql_where = "status = 1 AND id NOT IN (SELECT product_id FROM product_private WHERE deleted = 0)";
         if ($search != "") {
             $short_language = short_language_current();
             $sql_where .= " AND (code like '%" . $search . "%' OR  name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))";
