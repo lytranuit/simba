@@ -322,6 +322,10 @@
 //            $(element).parents('.form-group').append(error);
             },
             submitHandler: function (form) {
+                var r = confirm("Bạn có chắc chắn muốn gửi báo cáo?");
+                if (r == false) {
+                    return false;
+                }
                 var customers = $("#customer_logbook").val();
                 var products = $("#product_logbook").val();
                 var ncc = $("[name=ncc]").val();
@@ -335,8 +339,9 @@
 //                    alert("Chọn sản phẩm chính!");
 //                    return false;
 //                }
-                if ($("#logbook_form").data("requestRunning"))
+                if ($("#logbook_form").data("requestRunning")) {
                     return false;
+                }
                 $(".page-loader-wrapper").show();
                 $.ajax({
                     url: path + 'ajax/logbook',
