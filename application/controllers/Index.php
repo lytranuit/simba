@@ -225,15 +225,19 @@ class Index extends MY_Controller {
         $this->data['roles'] = $this->role_model->where(array("deleted" => 0, 'filter' => 1))->as_object()->get_all();
         $this->load->model("ncc_model");
         $this->data['ncc'] = $this->ncc_model->where(array("deleted" => 0))->as_object()->get_all();
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/jqueryui/jquery-ui.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.time.css");
+        array_push($this->data['stylesheet_tag'], base_url() . "public/lib/tag-it/css/jquery.tagit.css");
 
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/jqueryui/jquery-ui.js");
         array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery-inputmask/jquery.inputmask.bundle.js");
         array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.js");
         array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.date.js");
         array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/picker.time.js");
         array_push($this->data['javascript_tag'], base_url() . "public/lib/pickadate/legacy.js");
+        array_push($this->data['javascript_tag'], base_url() . "public/lib/tag-it/js/tag-it.js");
         $this->data['template'] = 'page';
 
         load_editor($this->data);

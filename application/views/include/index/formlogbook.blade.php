@@ -14,7 +14,14 @@
     </div>
 </div>
 <div class="container-fluid">
-    <form id="logbook_form" method="post" action="#">
+    <form id="logbook_form" method="post" action="#" class="my-5">
+        <h2 class="text-center text-danger my-3">Mẫu báo cáo</h2>
+        <div class="text-center my-3">
+            <select id="type_bc" name="type_bc" style="padding:5px;">
+                <option value="1">Báo cáo riêng</option>
+                <option value="2">Báo cáo chung</option>
+            </select>
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <h6>1.Nhà cung cấp:</h6>
@@ -24,38 +31,39 @@
                     <option value="{{$row->id}}">{{$row->code}} - {{$row->short_name}}</option>
                     @endforeach
                 </select>
-                <div style="margin-top:5px;">
+                <a href="#" class="text-success fa fa-plus" id="button_new_ncc"style="font-size:20px;margin-top: 5px;"></a>
+                <div id="box_new_ncc" class="d-none">
                     <textarea class="edit-ncc form-control" name="ncc" rows="10" placeholder="-Tên &#10;-Địa chỉ&#10;-Website &#10;-Số điện thoại&#10;-Email&#10;-Người liên hệ&#10;...."></textarea>
                 </div>
             </div>
             <div class="col-md-4">
-                <h6>2.Các nhân sự tham gia</h6>
-                <textarea class="edit-nhansu form-control" name="nhansu" required="" rows="10" placeholder="-Nhân sự 1 - Chức vụ - Chi tiết liên hệ &#10;-Nhân sự 2 - Chức vụ - Chi tiết liên hệ&#10; ...."></textarea>
+                <h6>2.Khách hàng</h6>
+                <select id="customer_logbook" name="customers[]"  multiple="" required="">
+                </select>
+                <a href="#" class="text-success fa fa-plus" id="button_new_customer" style="font-size:20px;margin-top: 5px;"></a>
+                <div id="box_new_customer" class="d-none">
+                    <textarea class="new_customer form-control" name="new_customer" rows="10" placeholder="Thông tin khách hàng mới: &#10; - Tên &#10; - Địa chỉ:&#10; - Người liên hệ - số điện thoại - Email liên lạc"></textarea>
+                </div>
             </div>
             <div class="col-md-4">
+                <h6>3.Sản phẩm chính</h6>
+                <select id="product_logbook" name="products[]"  multiple="" required="">
+                </select>
+                <a href="#" class="text-success fa fa-plus" id="button_new_product"style="font-size:20px;margin-top: 5px;"></a>
+                <div id="box_new_product" class="d-none">
+                    <textarea class="new_product form-control" name="new_product" rows="10" placeholder="Thông tin sản phẩm mới: &#10; - Hình ảnh đính kèm &#10; - Tên sản phẩm:&#10; - Quy cách đóng gói:&#10; - Hạn sử dụng:&#10; - Bảo quản: &#10; - Cách sử dụng:"></textarea>
+                </div>
 
-                <h6>3.Nhân sự của công ty khác(nếu có)</h6>
-                <textarea class="edit-nhansu-khac form-control" name="nhansukhac" rows="10" placeholder="- Nhà xuất khẩu &#10;- Nhà tư vấn &#10;- Công ty khác"></textarea>
             </div>
+
             <div class="col-md-4">
                 <div>
-                    <h6>4.Khách hàng</h6>
-                    <select id="customer_logbook" name="customers[]"  multiple="" required="">
-                    </select>
-                    <a href="#" class="text-success fa fa-plus" id="button_new_customer" style="font-size:20px;margin-top: 5px;"></a>
-                    <div id="box_new_customer" class="d-none">
-                        <textarea class="new_customer form-control" name="new_customer" rows="10" placeholder="Thông tin khách hàng mới: &#10; - Tên &#10; - Địa chỉ:&#10; - Người liên hệ - số điện thoại - Email liên lạc"></textarea>
-                    </div>
+                    <h6>4.Các nhân sự tham gia</h6>
+                    <textarea class="edit-nhansu form-control" name="nhansu" required="" rows="10" placeholder="-Nhân sự 1 - Chức vụ - Chi tiết liên hệ &#10;-Nhân sự 2 - Chức vụ - Chi tiết liên hệ&#10; ...."></textarea>
                 </div>
                 <div>
-                    <h6>5.Sản phẩm chính</h6>
-                    <select id="product_logbook" name="products[]"  multiple="" required="">
-                    </select>
-                    <a href="#" class="text-success fa fa-plus" id="button_new_product"style="font-size:20px;margin-top: 5px;"></a>
-                    <div id="box_new_product" class="d-none">
-                        <textarea class="new_product form-control" name="new_product" rows="10" placeholder="Thông tin sản phẩm mới: &#10; - Hình ảnh đính kèm &#10; - Tên sản phẩm:&#10; - Quy cách đóng gói:&#10; - Hạn sử dụng:&#10; - Bảo quản: &#10; - Cách sử dụng:"></textarea>
-                    </div>
-
+                    <h6>5.Nhân sự của công ty khác(nếu có)</h6>
+                    <textarea class="edit-nhansu-khac form-control" name="nhansukhac" rows="10" placeholder="- Nhà xuất khẩu &#10;- Nhà tư vấn &#10;- Công ty khác"></textarea>
                 </div>
                 <h6 class="mt-1">6.Thời gian cuộc họp</h6>
                 <input class="form-control" name="date" value="<?= date("Y-m-d H:i:s") ?>" id='pickadatetime' required>
@@ -78,6 +86,8 @@
                 <input id="kv-file" type="file" name="file_up[]" multiple>
                 <h6 class="text-danger">12.Lưu ý đặc biệt</h6>
                 <textarea class="contentkhac_logbook form-control" name="note" rows="4"></textarea>
+                <h6 class="text-danger">13.Từ khóa tìm kiếm</h6>
+                <input id="content-search" class="form-control" name="search" placeholder="Từ khóa" value="{{date('Y-m-d')}}"/>
             </div>
         </div>
         <div class="mt-1">
@@ -95,6 +105,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#content-search").tagit();
         $("#kv-file").fileinput({
             'theme': 'explorer-fa',
             'uploadUrl': path + 'ajax/uploadfilev2',
@@ -128,7 +139,7 @@
         }).pickadate('picker');
         var timepicker = $('#time').pickatime({
             format: 'H:i:00',
-            interval: 60,
+            interval: 15,
             onSet: function (item) {
                 if ('select' in item)
                     setTimeout(function () {
@@ -153,7 +164,7 @@
         }).pickadate('picker');
         var timepicker1 = $('#time1').pickatime({
             format: 'H:i:00',
-            interval: 60,
+            interval: 15,
             onSet: function (item) {
                 if ('select' in item)
                     setTimeout(function () {
@@ -176,6 +187,10 @@
             e.preventDefault();
             $("#box_new_product").toggleClass("d-none");
         });
+        $("#button_new_ncc").click(function (e) {
+            e.preventDefault();
+            $("#box_new_ncc").toggleClass("d-none");
+        });
         $("#button_new_email").click(function (e) {
             e.preventDefault();
             var html = '<div id="box_new_email" class="my-1">'
@@ -188,14 +203,16 @@
             type: 'POST',
             url: path + "ajax/feedbackproduct",
         }, {
-            loadingImg: path + 'public/img/loading.gif'
+            loadingImg: path + 'public/img/loading.gif',
+            minLength: 0
         }, {width: "100%", allow_single_deselect: true});
         $("#customer_logbook").ajaxChosen({
             dataType: 'json',
             type: 'POST',
             url: path + "ajax/feedbackcustomer",
         }, {
-            loadingImg: path + 'public/img/loading.gif'
+            loadingImg: path + 'public/img/loading.gif',
+            minLength: 0
         }, {width: "100%", allow_single_deselect: true});
         $(".edit-ncc").froalaEditor({
             placeholderText: '-Tên \n - Địa chỉ \n - Website \n -Số điện thoại \n - Email \n - Người liên hệ \n ....',
@@ -326,15 +343,20 @@
                 if (r == false) {
                     return false;
                 }
+                var search = $("#content-search").tagit("assignedTags");
                 var customers = $("#customer_logbook").val();
                 var products = $("#product_logbook").val();
                 var ncc = $("[name=ncc]").val();
+                var select_ncc = $("#select_ncc").val();
                 var new_customer = $(".new_customer").val();
                 var new_product = $(".new_product").val();
-//                if (!customers.length && new_customer == "" && ncc == "") {
-//                    alert("Chọn tên khách hàng!");
-//                    return false;
-//                }
+//                console.log(new_customer);
+
+                if (!customers.length && new_customer == "" && select_ncc == "0" && ncc == "" && !products.length && new_product == "") {
+                    alert("Điền đầy đủ mục Nhà cung cấp hoặc Khách hàng hoặc Sản phẩm!");
+                    return false;
+                }
+//                return false;
 //                if (!products.length && new_product == "") {
 //                    alert("Chọn sản phẩm chính!");
 //                    return false;
@@ -342,10 +364,13 @@
                 if ($("#logbook_form").data("requestRunning")) {
                     return false;
                 }
+                var extra = "&content-search=" + encodeURI(search.join(","));
+//                console.log($("#logbook_form").serialize() + extra);
+//                return false;
                 $(".page-loader-wrapper").show();
                 $.ajax({
                     url: path + 'ajax/logbook',
-                    data: $("#logbook_form").serialize(),
+                    data: $("#logbook_form").serialize() + extra,
                     dataType: "JSON",
                     type: "POST",
                     beforeSend: function () {
