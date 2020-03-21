@@ -468,8 +468,13 @@ class Ajax extends MY_Controller {
     function feedbackproduct() {
         $this->load->model("productsimba_model");
         $search = $this->input->post("data");
+        $type = $this->input->post("type");
         $search = $search['q'];
-        $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%')", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        if ($type == 2) {
+            $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%')", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        } else {
+            $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%') AND id IN (SELECT DISTINCT product_id FROM product_order WHERE order_date > DATE_SUB(now(), INTERVAL 6 MONTH))", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        }
         $results = array();
         foreach ($data as $row) {
             $results[] = array("id" => $row['id'], 'text' => $row['code'] . ' - ' . $row['name_vi']);

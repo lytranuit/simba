@@ -22,19 +22,10 @@
                             <b>1.Nhà cung cấp:</b>
                             <div class='fr-view'style="white-space: pre"><?= isset($tin->nccObject) ? $tin->nccObject->code . "-" . $tin->nccObject->short_name : "" ?> <?= $tin->ncc ?></div>
                         </div>
-                        <div class="col-md-4">
-                            <b>2.Nhân sự tham gia</b>
-                            <div class='fr-view' style="white-space: pre"><?= $tin->nhansu ?></div>
-                        </div>
-                        <div  class="col-md-4" >
-                            <b>3.Nhân sự công ty khác</b>
-                            <div class='fr-view' style="white-space: pre"><?= $tin->nhansukhac ?></div>
-                        </div>
-                        <div class="" style="clear: both;">
-                        </div>
+
                         <div class='col-md-4'>
                             <div>
-                                <b>4.Khách hàng chính</b>
+                                <b>2.Khách hàng chính</b>
                                 @if(isset($tin->customers))
                                 @foreach($tin->customers as $row)
                                 <p>- {{$row->code ."-".$row->name}}</p>
@@ -46,7 +37,7 @@
                         </div>
                         <div class="col-md-4">
                             <div>
-                                <b>5.Sản phẩm chính</b>
+                                <b>3.Sản phẩm chính</b>
                                 @if(isset($tin->products))
                                 @foreach($tin->products as $row)
                                 <p>- {{$row->code ."-".$row->name_vi}}</p>
@@ -54,6 +45,17 @@
                                 @endif 
                                 <div class='fr-view' style="white-space: pre"><?= $tin->new_product ?></div>
                             </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <b>4.Nhân sự tham gia</b>
+                            <div class='fr-view' style="white-space: pre"><?= $tin->nhansu ?></div>
+                        </div>
+                        <div  class="col-md-4" >
+                            <b>5.Nhân sự công ty khác</b>
+                            <div class='fr-view' style="white-space: pre"><?= $tin->nhansukhac ?></div>
+                        </div>
+                        <div class="" style="clear: both;">
                         </div>
 
                         <div class="" style="clear: both;">
@@ -134,7 +136,12 @@
                                 <div class='fr-view' style="white-space: pre"><?= $tin->note ?></div>
                             </div>
                         </div>
-
+                        <div class="col-md-4">
+                            <div>
+                                <b class="text-danger">13.Từ khóa tìm kiếm</b>
+                                <div class='fr-view' style="white-space: pre"><?= $tin->search ?></div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

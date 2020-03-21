@@ -87,7 +87,7 @@
                 <h6 class="text-danger">12.Lưu ý đặc biệt</h6>
                 <textarea class="contentkhac_logbook form-control" name="note" rows="4"></textarea>
                 <h6 class="text-danger">13.Từ khóa tìm kiếm</h6>
-                <input id="content-search" class="form-control" name="search" placeholder="Từ khóa" value="{{date('Y-m-d')}}"/>
+                <input id="content-search" class="form-control" name="content-search" placeholder="Từ khóa" value="{{date('Y-m-d')}}"/>
             </div>
         </div>
         <div class="mt-1">
@@ -201,6 +201,7 @@
         $("#product_logbook").ajaxChosen({
             dataType: 'json',
             type: 'POST',
+            data: {type: $("#type_bc").val()},
             url: path + "ajax/feedbackproduct",
         }, {
             loadingImg: path + 'public/img/loading.gif',
@@ -364,7 +365,7 @@
                 if ($("#logbook_form").data("requestRunning")) {
                     return false;
                 }
-                var extra = "&content-search=" + encodeURI(search.join(","));
+                var extra = "&search=" + encodeURI(search.join(","));
 //                console.log($("#logbook_form").serialize() + extra);
 //                return false;
                 $(".page-loader-wrapper").show();
