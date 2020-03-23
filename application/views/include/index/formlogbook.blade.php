@@ -215,6 +215,34 @@
             loadingImg: path + 'public/img/loading.gif',
             minLength: 0
         }, {width: "100%", allow_single_deselect: true});
+        $("#customer_logbook").change(function () {
+            var value = $(this).val();
+            var type = $("#type_bc").val();
+            if (type == 2 && value.length > 0) {
+                $.ajax({
+                    url: path + 'ajax/productgd',
+                    data: {customers: value.join(",")},
+                    dataType: "JSON",
+                    type: "POST",
+                    success: function (data) {
+                        var options = "";
+                        data = $.map(data.results, function (n) {
+                            options += '<option value="' + n.id + '" selected>' + n.text + '</option>';
+                            return n.id;
+                        });
+                        $(options).appendTo($("#product_logbook"));
+                        $("#product_logbook").trigger("chosen:updated");
+//                        $("#product_logbook").val(data);
+                    }
+                });
+            } else {
+                $("#product_logbook").val([]);
+                $("#product_logbook").trigger("chosen:updated");
+            }
+        });
+        $("#type_bc").change(function () {
+           $("#customer_logbook").change(); 
+        });
         $(".edit-ncc").froalaEditor({
             placeholderText: '-Tên \n - Địa chỉ \n - Website \n -Số điện thoại \n - Email \n - Người liên hệ \n ....',
             toolbarButtons: ['bold', 'italic', 'underline', 'align', 'insertImage', 'fullscreen'],
