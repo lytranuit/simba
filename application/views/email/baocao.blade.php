@@ -265,5 +265,6 @@
         <p><strong>8.Chia sẻ thông tin: </strong><?= $email_send ?></p>
         <p><strong>9.Nội dung: </strong></p><div class='fr-view' style="white-space: pre"><?= $content ?></div>
         <p><strong>10.Lưu ý đặc biệt: </strong></p><div class='fr-view' style="white-space: pre"><?= $note ?></div>
+        <p><strong>11.Từ khóa: </strong></p><div class='fr-view' style="white-space: pre"><?= $search ?></div>
     </body>
 </html>

@@ -130,6 +130,7 @@ class Index extends MY_Controller {
                 $this->data['email_send'] = $logbook->email_send;
                 $this->data['content'] = $logbook->content;
                 $this->data['note'] = $logbook->note;
+                $this->data['search'] = $logbook->search;
                 $html = $this->blade->view()->make('email/baocao', $this->data)->render();
                 $this->email->message($html);
                 if (!empty($logbook->files)) {
