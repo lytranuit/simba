@@ -41,7 +41,7 @@ Footer
                         <br>
                         <i class="ion-ios-telephone-outline">
                         </i>
-                        +84 28 62999700
+                        {{$phone}}
                         <br>
                     </p>
                     <div class="social-links">

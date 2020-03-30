@@ -19,6 +19,16 @@ class Option_model extends MY_Model {
         return $query->result();
     }
 
+    function get_phone() {
+        $sql = "SELECT opt_value FROM settings where group_name = 'system_phone' and opt_key = 'phone'";
+//        echo $sql;
+//        die();
+        $query = $this->db->query($sql);
+        $data = $query->result_array();
+        $result = $data[0]['opt_value'];
+        return $result;
+    }
+
     function get_setting_mail() {
         $sql = "SELECT * FROM settings where group_name = 'system_simba_email'";
 //        echo $sql;
