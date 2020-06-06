@@ -1,12 +1,15 @@
 <?php
 
-class Ajax extends MY_Controller {
+class Ajax extends MY_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function login() {
+    function login()
+    {
         if (isset($_POST['identity']) && isset($_POST['password'])) {
             $this->load->model("user_model");
             // check to see if the user is logging in
@@ -21,7 +24,8 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function listslider() {
+    function listslider()
+    {
         $this->load->model("slider_model");
         $this->load->model("hinhanh_model");
         $arr_slider = $this->slider_model->where(array('deleted' => 0))->as_array()->get_all();
@@ -32,7 +36,8 @@ class Ajax extends MY_Controller {
         echo json_encode($arr_slider);
     }
 
-    function news() {
+    function news()
+    {
         $this->load->model("tintuc_model");
         $search = $this->input->get("search");
         $page = $this->input->get("page");
@@ -44,7 +49,9 @@ class Ajax extends MY_Controller {
          */
         if ($search != "") {
             $short_language = short_language_current();
-            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND is_highlight = 0 AND (title_" . $short_language . " like '%" . $search . "%' OR (title_vi like '%" . $search . "%' AND title_" . $short_language . " IN(NULL,'')))", NULL, NULL, FALSE, FALSE, TRUE);
+            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND is_highlight = 0 AND (title_" . $short_language . " like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' OR (title_vi like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' AND title_" . $short_language . " IN(NULL,'')))", NULL, NULL, FALSE, FALSE, TRUE);
         } else
             $where = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0, 'is_highlight' => 0));
 
@@ -54,15 +61,17 @@ class Ajax extends MY_Controller {
          */
         if ($search != "") {
             $short_language = short_language_current();
-            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND is_highlight = 0 AND (title_" . $short_language . " like '%" . $search . "%' OR (title_vi like '%" . $search . "%' AND title_" . $short_language . " IN(NULL,'')))", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
+            $where = $this->tintuc_model->where("deleted = 0 AND is_private = 0 AND is_highlight = 0 AND (title_" . $short_language . " like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' OR (title_vi like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' AND title_" . $short_language . " IN(NULL,'')))", NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
         } else
             $where = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 0, 'is_highlight' => 0))->order_by("date", "DESC")->with_files()->with_typeobj()->as_array();
         $data = $where->paginate($limit, NULL, $page);
 
         $max_page = ceil($count / $limit);
-//        echo "<pre>";
-//        print_r($data);
-//        die();
+        //        echo "<pre>";
+        //        print_r($data);
+        //        die();
         $this->data['count'] = $count;
         $this->data['data'] = $data;
         $this->data['current_page'] = $page;
@@ -71,7 +80,8 @@ class Ajax extends MY_Controller {
         echo $this->blade->view()->make('ajax/news', $this->data)->render();
     }
 
-    function product() {
+    function product()
+    {
         $this->load->model("product_model");
         $this->load->model("categorysimba_model");
         $category = $this->input->get("category");
@@ -83,9 +93,9 @@ class Ajax extends MY_Controller {
         $sql_where = "deleted = 0";
         if ($category > 0) {
             $category = $this->categorysimba_model->where('id', $category)->with_product()->as_array()->get();
-//            echo "<pre>";
-//            print_r($category);
-//            die();
+            //            echo "<pre>";
+            //            print_r($category);
+            //            die();
             if (isset($category['product']) && count($category['product'])) {
                 $array_product = array_keys($category['product']);
                 $str_product = implode(",", $array_product);
@@ -94,7 +104,9 @@ class Ajax extends MY_Controller {
         }
         if ($search != "") {
             $short_language = short_language_current();
-            $sql_where .= " AND (name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))";
+            $sql_where .= " AND (name_" . $short_language . " like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' OR (name_vi like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' AND name_" . $short_language . " IN(NULL,'')))";
         }
 
         /*
@@ -105,10 +117,10 @@ class Ajax extends MY_Controller {
          * LAY DATA
          */
         $data = $this->product_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE)->order_by("date", "DESC")->with_files()->as_array()->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($count);
-//        print_r($limit);
-//        die();
+        //        echo "<pre>";
+        //        print_r($count);
+        //        print_r($limit);
+        //        die();
         $max_page = ceil($count / $limit);
 
         $this->data['count'] = $count;
@@ -119,7 +131,8 @@ class Ajax extends MY_Controller {
         echo $this->blade->view()->make('ajax/product', $this->data)->render();
     }
 
-    function editpage() {
+    function editpage()
+    {
         $id = $this->input->get('id');
         $link = $this->input->get('link');
         $seo = $this->input->get('seo');
@@ -136,7 +149,8 @@ class Ajax extends MY_Controller {
         $this->page_model->update($array, $id);
     }
 
-    function addpage() {
+    function addpage()
+    {
         $link = $this->input->get('link');
         $seo = $this->input->get('seo');
         $template = $this->input->get('template');
@@ -152,12 +166,14 @@ class Ajax extends MY_Controller {
         $this->page_model->insert($array);
     }
 
-    function removepage() {
+    function removepage()
+    {
         $id = $this->input->get('id');
         $this->page_model->update(array("deleted" => 1), $id);
     }
 
-    function rowpage() {
+    function rowpage()
+    {
         //$dirmodule = APPPATH . 'modules/';
         $dir = APPPATH . 'controllers/';
         $this->load->library('directoryinfo');
@@ -165,9 +181,9 @@ class Ajax extends MY_Controller {
         $arr = array($arr);
         // $sortedarray2 = $this->directoryinfo->readDirectory($dirmodule, true);
         // $arr = array_merge(array($sortedarray1), $sortedarray2);
-//        echo "<pre>";
-//        print_r($arr);
-//        die();
+        //        echo "<pre>";
+        //        print_r($arr);
+        //        die();
         $dataselect = array();
         foreach ($arr as $key => $row) {
             $module = mb_strtolower($key, 'UTF-8');
@@ -185,7 +201,7 @@ class Ajax extends MY_Controller {
             }
         }
         $arr_page = $this->page_model->where(array("deleted" => 0))->as_array()->get_all();
-        $page_ava = array_map(function($item) {
+        $page_ava = array_map(function ($item) {
             return $item['link'];
         }, $arr_page);
         $this->data['page_ava'] = $page_ava;
@@ -193,12 +209,13 @@ class Ajax extends MY_Controller {
         echo $this->blade->view()->make('ajax/ajaxpage', $this->data)->render();
     }
 
-    function contactsubmit() {
+    function contactsubmit()
+    {
 
-//        if (isset($_SESSION['timer_contact']) && $_SESSION['timer_contact'] > date("Y-m-d H:i:s")) {
-//            echo json_encode(array('msg' => "Xin chờ trong ít phút", 'timer' => $_SESSION['timer_contact'], 'code' => 401));
-//            die();
-//        }
+        //        if (isset($_SESSION['timer_contact']) && $_SESSION['timer_contact'] > date("Y-m-d H:i:s")) {
+        //            echo json_encode(array('msg' => "Xin chờ trong ít phút", 'timer' => $_SESSION['timer_contact'], 'code' => 401));
+        //            die();
+        //        }
 
         $recaptcha = $this->input->post('g-recaptcha-response');
         $response = $this->recaptcha->verifyResponse($recaptcha);
@@ -226,7 +243,7 @@ class Ajax extends MY_Controller {
                  * Mail setting
                  */
                 $conf = $this->option_model->get_setting_mail();
-//            $this->load->config('ion_auth', TRUE);
+                //            $this->load->config('ion_auth', TRUE);
                 $config = array(
                     'mailtype' => 'html',
                     'protocol' => "smtp",
@@ -242,17 +259,17 @@ class Ajax extends MY_Controller {
                 );
                 $this->load->library("email", $config);
 
-//            /*
-//             * Send mail
-//             */
-//            $this->email->clear();
+                //            /*
+                //             * Send mail
+                //             */
+                //            $this->email->clear();
                 $this->email->from($conf['email_email'], $conf['email_name']);
                 $this->email->to(array("binh.nguyen@simba.com.vn", "nsl@simba.com.vn")); /// $conf['email_contact']
                 $this->email->subject("Góp ý");
                 $html = "<p><strong>Tên: </strong>$name</p>"
-                        . "<p><strong>Email: </strong>$email</p>"
-                        . "<p><strong>Số điện thoại: </strong>$phone</p>"
-                        . "<p><strong>Nội dung: </strong></p><p>" . nl2br($content) . "</p>";
+                    . "<p><strong>Email: </strong>$email</p>"
+                    . "<p><strong>Số điện thoại: </strong>$phone</p>"
+                    . "<p><strong>Nội dung: </strong></p><p>" . nl2br($content) . "</p>";
                 $this->email->message($html);
                 if ($this->email->send()) {
                     echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
@@ -267,17 +284,20 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function modalfeedback() {
+    function modalfeedback()
+    {
         echo $this->blade->view()->make('ajax/modalfeedback', $this->data)->render();
     }
 
-    function modallogbook() {
+    function modallogbook()
+    {
         $this->load->model("role_model");
         $this->data['roles'] = $this->role_model->where(array("deleted" => 0))->as_object()->get_all();
         echo $this->blade->view()->make('ajax/modallogbook', $this->data)->render();
     }
 
-    function feedback() {
+    function feedback()
+    {
         $this->load->model("feedback_model");
         $this->load->model("option_model");
         if (isset($_POST['content'])) {
@@ -292,12 +312,12 @@ class Ajax extends MY_Controller {
             /*
              * Mail setting
              */
-//            $this->load->config('ion_auth', TRUE);
+            //            $this->load->config('ion_auth', TRUE);
 
             $feedback = $this->feedback_model->where("id", $id)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get();
 
             $conf = $this->option_model->get_setting_mail();
-//            $this->load->config('ion_auth', TRUE);
+            //            $this->load->config('ion_auth', TRUE);
             $config = array(
                 'mailtype' => 'html',
                 'protocol' => "smtp",
@@ -313,17 +333,17 @@ class Ajax extends MY_Controller {
             );
             $this->load->library("email", $config);
 
-//            /*
-//             * Send mail
-//             */
-//            $this->email->clear();
+            //            /*
+            //             * Send mail
+            //             */
+            //            $this->email->clear();
             $this->email->from($conf['email_email'], $conf['email_name']);
             $this->email->to(array("binh.nguyen@simba.com.vn", "nsl@simba.com.vn")); /// $conf['email_contact']
             $this->email->subject($feedback->subject);
             $html = "<p><strong>Tên: </strong>" . $feedback->name . "</p>"
-                    . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->short_name : "") . "</p>"
-                    . "<p><strong>Sản phẩm: </strong>" . (isset($feedback->product) ? $feedback->product->code . "-" . $feedback->product->name_vi : "") . "</p>"
-                    . "<p><strong>Nội dung: </strong></p><p>" . nl2br($feedback->content) . "</p>";
+                . "<p><strong>Khách hàng: </strong>" . (isset($feedback->customer) ? $feedback->customer->code . "-" . $feedback->customer->short_name : "") . "</p>"
+                . "<p><strong>Sản phẩm: </strong>" . (isset($feedback->product) ? $feedback->product->code . "-" . $feedback->product->name_vi : "") . "</p>"
+                . "<p><strong>Nội dung: </strong></p><p>" . nl2br($feedback->content) . "</p>";
             $this->email->message($html);
             if ($this->email->send()) {
                 echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
@@ -335,7 +355,8 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function logbook() {
+    function logbook()
+    {
         $this->load->model("logbook_model");
         $this->load->model("logbookcustomer_model");
         $this->load->model("logbookproduct_model");
@@ -414,7 +435,8 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function supplier() {
+    function supplier()
+    {
         $this->load->model("supplier_model");
         $recaptcha = $this->input->post('g-recaptcha-response');
         $response = $this->recaptcha->verifyResponse($recaptcha);
@@ -429,7 +451,8 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function supplierproduct() {
+    function supplierproduct()
+    {
         $this->load->model("supplierproduct_model");
         $this->load->model("supplierproductfile_model");
         if (isset($_POST['content'])) {
@@ -453,7 +476,8 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function feedbackcustomer() {
+    function feedbackcustomer()
+    {
         $this->load->model("customersimba_model");
         $search = $this->input->post("data");
         $search = $search['q'];
@@ -465,16 +489,17 @@ class Ajax extends MY_Controller {
         echo json_encode(array('q' => $search, 'results' => $results));
     }
 
-    function feedbackproduct() {
+    function feedbackproduct()
+    {
         $this->load->model("productsimba_model");
         $search = $this->input->post("data");
         $type = $this->input->post("type");
         $search = $search['q'];
-//        if ($type == 2) {
+        //        if ($type == 2) {
         $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%')", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
-//        } else {
-//            $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%') AND id IN (SELECT DISTINCT product_id FROM product_order WHERE order_date > DATE_SUB(now(), INTERVAL 6 MONTH))", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
-//        }
+        //        } else {
+        //            $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%') AND id IN (SELECT DISTINCT product_id FROM product_order WHERE order_date > DATE_SUB(now(), INTERVAL 6 MONTH))", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        //        }
         $results = array();
         foreach ($data as $row) {
             $results[] = array("id" => $row['id'], 'text' => $row['code'] . ' - ' . $row['name_vi']);
@@ -482,15 +507,16 @@ class Ajax extends MY_Controller {
         echo json_encode(array('q' => $search, 'results' => $results));
     }
 
-    function productgd() {
+    function productgd()
+    {
         $this->load->model("productsimba_model");
         $customers = $this->input->post("customers");
-//        $search = $search['q'];
-//        if ($type == 2) {
+        //        $search = $search['q'];
+        //        if ($type == 2) {
         $data = $this->productsimba_model->where("(id IN (SELECT DISTINCT product_id FROM product_order WHERE customer_id IN($customers) ))", NULL, NULL, FALSE, FALSE, TRUE)->as_array()->get_all();
-//        } else {
-//            $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%') AND id IN (SELECT DISTINCT product_id FROM product_order WHERE order_date > DATE_SUB(now(), INTERVAL 6 MONTH))", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
-//        }
+        //        } else {
+        //            $data = $this->productsimba_model->where("(code like '%$search%' OR name_vi like '%$search%') AND id IN (SELECT DISTINCT product_id FROM product_order WHERE order_date > DATE_SUB(now(), INTERVAL 6 MONTH))", NULL, NULL, FALSE, FALSE, TRUE)->limit(20)->as_array()->get_all();
+        //        }
         $results = array();
         foreach ($data as $row) {
             $results[] = array("id" => $row['id'], 'text' => $row['code'] . ' - ' . $row['name_vi']);
@@ -498,7 +524,8 @@ class Ajax extends MY_Controller {
         echo json_encode(array('results' => $results));
     }
 
-    function updatemenu() {
+    function updatemenu()
+    {
         $this->load->model("menu_model");
         $array = json_decode($_POST["data"], true);
         $this->menu_model->delete(array('deleted' => 0));
@@ -510,12 +537,14 @@ class Ajax extends MY_Controller {
         echo json_encode($return);
     }
 
-    function setlanguage() {
+    function setlanguage()
+    {
         $_SESSION['language_current'] = $_POST['language'];
         echo 1;
     }
 
-    function downloadfile() {
+    function downloadfile()
+    {
         $this->load->model("user_model");
         $this->load->model("hinhanh_model");
         $is_logged_in = $this->user_model->logged_in();
@@ -553,7 +582,8 @@ class Ajax extends MY_Controller {
         }
     }
 
-    function saveorderrole() {
+    function saveorderrole()
+    {
         $this->load->model("role_model");
         $data = json_decode($this->input->post('data'), true);
         foreach ($data as $key => $row) {
@@ -570,7 +600,8 @@ class Ajax extends MY_Controller {
         echo 1;
     }
 
-    public function uploadfilev2() {
+    public function uploadfilev2()
+    {
         ini_set('post_max_size', '64M');
         ini_set('upload_max_filesize', '64M');
         $this->load->helper('file');
@@ -587,9 +618,9 @@ class Ajax extends MY_Controller {
         $files = $_FILES;
 
         $file_count = count($_FILES['file_up']['name']);
-//        echo "<pre>";
-//        print_r($_FILES['file_up']);
-//        die();
+        //        echo "<pre>";
+        //        print_r($_FILES['file_up']);
+        //        die();
         for ($i = 0; $i < $file_count; $i++) {
 
             $ext = pathinfo($_FILES['file_up']['name'][$i], PATHINFO_EXTENSION);

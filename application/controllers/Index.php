@@ -1,11 +1,13 @@
 <?php
 
-class Index extends MY_Controller {
+class Index extends MY_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
-////////////////////////////////
-////////////
+        ////////////////////////////////
+        ////////////
         $this->data['is_login'] = $this->user_model->logged_in();
         $this->data['userdata'] = $this->session->userdata();
         $version = $this->config->item("version");
@@ -43,14 +45,16 @@ class Index extends MY_Controller {
         );
     }
 
-    public function _remap($method, $params = array()) {
+    public function _remap($method, $params = array())
+    {
         if (!method_exists($this, $method)) {
             show_404();
         }
         $this->$method($params);
     }
 
-    public function listall() {
+    public function listall()
+    {
         //echo __DIR__;
         $dirmodule = APPPATH . 'modules/';
         $dir = APPPATH . 'controllers/';
@@ -60,11 +64,13 @@ class Index extends MY_Controller {
         $arr = array_merge(array($sortedarray1), $sortedarray2);
     }
 
-    public function page_404() {
+    public function page_404()
+    {
         echo $this->blade->view()->make('page/404-page', $this->data)->render();
     }
 
-    public function cronjonsendmail() {
+    public function cronjonsendmail()
+    {
         $this->load->model("logbook_model");
         $this->load->model("option_model");
         $logbooks = $this->logbook_model->where(array("is_sent" => 0))->with_author()->with_customers()->with_products()->with_nccObject()->with_files()->as_object()->get_all();
@@ -102,12 +108,12 @@ class Index extends MY_Controller {
                     }
                 }
                 $fullname = $logbook->author->fullname;
-//            /*
-//             * Send mail
-//             */
-//            $this->email->clear();
-//            print_r($email_to);
-//            die();
+                //            /*
+                //             * Send mail
+                //             */
+                //            $this->email->clear();
+                //            print_r($email_to);
+                //            die();
 
                 $this->email->clear(TRUE);
                 $this->email->from($conf['email_email'], $conf['email_name']);
@@ -142,7 +148,7 @@ class Index extends MY_Controller {
 
                 $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
                 if ($this->email->send()) {
-//                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+                    //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 } else {
                     $file_log = './log_' . $logbook->id . '.log';
                     file_put_contents($file_log, $this->email->print_debugger(), FILE_APPEND);
@@ -173,12 +179,12 @@ class Index extends MY_Controller {
             $this->load->library("email", $config);
             foreach ($quotes as $quote) {
 
-//            /*
-//             * Send mail
-//             */
-//            $this->email->clear();
-//            print_r($email_to);
-//            die();
+                //            /*
+                //             * Send mail
+                //             */
+                //            $this->email->clear();
+                //            print_r($email_to);
+                //            die();
 
                 $this->email->clear(TRUE);
                 $this->email->from($conf['email_email'], $conf['email_name']);
@@ -197,7 +203,7 @@ class Index extends MY_Controller {
 
                 $this->supplierproduct_model->update(array("is_sent" => 1), $quote->id);
                 if ($this->email->send()) {
-//                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
+                    //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 } else {
                     $file_log = './log_' . $quote->id . '.log';
                     file_put_contents($file_log, $this->email->print_debugger(), FILE_APPEND);
@@ -207,7 +213,8 @@ class Index extends MY_Controller {
         echo 1;
     }
 
-    public function formlogbook() {
+    public function formlogbook()
+    {
         $this->load->model("logbook_model");
         $this->load->model("logbookcustomer_model");
         $this->load->model("logbookproduct_model");
@@ -246,9 +253,10 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function formquote() {
+    public function formquote()
+    {
         $this->load->model("option_model");
-//        $this->load->library("recaptcha");
+        //        $this->load->library("recaptcha");
         $this->load->model("user_model");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/pickadate/themes/default.date.css");
@@ -271,7 +279,8 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function delete_img() {
+    public function delete_img()
+    {
         $this->load->model("hinhanh_model");
         $hinh = $this->hinhanh_model->hinhanh_sudung();
         $this->hinhanh_model->delete_img_not($hinh[0]['id']);
@@ -280,18 +289,21 @@ class Index extends MY_Controller {
         die();
     }
 
-    public function index() {
+    public function index()
+    {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    function gioithieu() {
+    function gioithieu()
+    {
         $this->load->model("option_model");
         $gioithieu = $this->option_model->where(array("name" => 'gioi-thieu'))->as_array()->get_all();
         $this->data['gioithieu'] = $gioithieu[0];
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function page($param) {
+    public function page($param)
+    {
         $id = $param[0];
         $this->load->model("pageweb_model");
         $tin = $this->pageweb_model->where(array('id' => $id))->as_array()->get();
@@ -300,7 +312,8 @@ class Index extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    function search() {
+    function search()
+    {
         $search = $this->input->get("q");
         $category = $this->input->get("category");
         $this->load->model("productsimba_model");
@@ -310,16 +323,19 @@ class Index extends MY_Controller {
         $sql_where = "status = 1 AND id NOT IN (SELECT product_id FROM product_private WHERE deleted = 0)";
         if ($search != "") {
             $short_language = short_language_current();
-            $sql_where .= " AND (code like '%" . $search . "%' OR  name_" . $short_language . " like '%" . $search . "%' OR (name_vi like '%" . $search . "%' AND name_" . $short_language . " IN(NULL,'')))";
+            $sql_where .= " AND (code like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' OR  name_" . $short_language . " like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' OR (name_vi like '%" .
+                $this->db->escape_like_str($search) . "%' ESCAPE '!' AND name_" . $short_language . " IN(NULL,'')))";
         }
         if (!$this->data['is_login']) {
             $sql_where .= " AND require_year_old = 0";
         }
         if ($category > 0) {
             $category = $this->categorysimba_model->where('id', $category)->with_product()->as_array()->get();
-//            echo "<pre>";
-//            print_r($category);
-//            die();
+            //            echo "<pre>";
+            //            print_r($category);
+            //            die();
             if (isset($category['product']) && count($category['product'])) {
                 $array_product = array_keys($category['product']);
                 $str_product = implode(",", $array_product);
@@ -329,42 +345,45 @@ class Index extends MY_Controller {
 
         $data = $this->productsimba_model->where($sql_where, NULL, NULL, FALSE, FALSE, TRUE)->as_array()->get_all();
         $this->data['product'] = $data;
-//        echo "<pre>";
-//        print_r($data);
-//        die();
+        //        echo "<pre>";
+        //        print_r($data);
+        //        die();
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function news($param) {
+    public function news($param)
+    {
         $id = $param[0];
         $this->load->model("tintuc_model");
         $tin = $this->tintuc_model->where(array('id' => $id))->with_author()->with_hinhanh()->with_files()->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'title_')];
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
+        //        echo "<pre>";
+        //        print_r($tin);
+        //        die();
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    function category($param) {
+    function category($param)
+    {
         $id = $param[0];
         $this->load->model("category_model");
         $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->with_products()->as_object()->get();
         $tin = json_decode(json_encode($tin), true);
-//        print_r($tin['products']);
-//        die();
+        //        print_r($tin['products']);
+        //        die();
         $tin['products'] = isset($tin['products']) ? array_values($tin['products']) : array();
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
+        //        echo "<pre>";
+        //        print_r($tin);
+        //        die();
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    function product($param) {
+    function product($param)
+    {
         $id = $param[0];
         $this->load->model("product_model");
         $this->load->model("productsimba_model");
@@ -375,13 +394,14 @@ class Index extends MY_Controller {
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
 
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
+        //        echo "<pre>";
+        //        print_r($tin);
+        //        die();
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    function productsimba($param) {
+    function productsimba($param)
+    {
         $id = $param[0];
         $this->load->model("productsimba_model");
         $tin = $this->productsimba_model->where(array('id' => $id))->as_object()->get();
@@ -390,14 +410,15 @@ class Index extends MY_Controller {
         $tin['preservation'] = $this->productsimba_model->preservation($tin['preservation_id']);
         $this->data['tin'] = $tin;
         $this->data['title'] = $tin[pick_language($tin, 'name_')];
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
+        //        echo "<pre>";
+        //        print_r($tin);
+        //        die();
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
     // log the user out
-    function logout() {
+    function logout()
+    {
 
         $this->data['title'] = "Logout";
 
@@ -407,11 +428,12 @@ class Index extends MY_Controller {
         exit;
     }
 
-    public function quanlypage() {
+    public function quanlypage()
+    {
         //phpinfo();die();
         $this->data['template'] = "box";
         $arr_page = $this->page_model->where(array("deleted" => 0))->as_array()->get_all();
-        $page_ava = array_map(function($item) {
+        $page_ava = array_map(function ($item) {
             return $item['link'];
         }, $arr_page);
 
@@ -423,9 +445,9 @@ class Index extends MY_Controller {
         $arr = array($arr);
         // $sortedarray2 = $this->directoryinfo->readDirectory($dirmodule, true);
         // $arr = array_merge(array($sortedarray1), $sortedarray2);
-//        echo "<pre>";
-//        print_r($arr);
-//        die();
+        //        echo "<pre>";
+        //        print_r($arr);
+        //        die();
         $dataselect = array();
         foreach ($arr as $key => $row) {
             $module = mb_strtolower($key, 'UTF-8');
@@ -446,19 +468,19 @@ class Index extends MY_Controller {
         $this->data['link'] = $dataselect;
 
         array_push($this->data['stylesheet_tag'], base_url() . "public/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css");
-//        array_push($this->data['stylesheet_tag'], base_url() . "public/css/bootstrap-editable.css");
-//        array_push($this->data['stylesheet_tag'], base_url() . "public/css/typeahead.js-bootstrap.css");
-//        array_push($this->data['javascript_tag'], base_url() . "public/js/bootstrap-editable.min.js");
+        //        array_push($this->data['stylesheet_tag'], base_url() . "public/css/bootstrap-editable.css");
+        //        array_push($this->data['stylesheet_tag'], base_url() . "public/css/typeahead.js-bootstrap.css");
+        //        array_push($this->data['javascript_tag'], base_url() . "public/js/bootstrap-editable.min.js");
         array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/jquery.dataTables.js");
         array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js");
-//        array_push($this->data['javascript_tag'], base_url() . "public/js/typeahead.js");
-//        array_push($this->data['javascript_tag'], base_url() . "public/js/typeaheadjs.js");
-//        array_push($this->data['javascript_tag'], base_url() . "public/js/combobox.js");
+        //        array_push($this->data['javascript_tag'], base_url() . "public/js/typeahead.js");
+        //        array_push($this->data['javascript_tag'], base_url() . "public/js/typeaheadjs.js");
+        //        array_push($this->data['javascript_tag'], base_url() . "public/js/combobox.js");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function success() {
+    public function success()
+    {
         echo json_encode(1);
     }
-
 }
