@@ -253,7 +253,7 @@ class Ajax extends MY_Controller
                     'charset' => "utf-8",
                     'smtp_crypto' => $conf['email_security'],
                     'wordwrap' => TRUE,
-                    'smtp_port' => 465,
+                    'smtp_port' => $conf['email_port'],
                     'starttls' => true,
                     'newline' => "\r\n"
                 );
@@ -327,7 +327,7 @@ class Ajax extends MY_Controller
                 'charset' => "utf-8",
                 'smtp_crypto' => $conf['email_security'],
                 'wordwrap' => TRUE,
-                'smtp_port' => 465,
+                'smtp_port' => $conf['email_port'],
                 'starttls' => true,
                 'newline' => "\r\n"
             );
