@@ -82,7 +82,6 @@ class Index extends MY_Controller
                 'smtp_host' => $conf['email_server'],
                 'smtp_user' => $conf['email_username'], // actual values different
                 'smtp_pass' => $conf['email_password'],
-                'charset' => "utf8",
                 'smtp_crypto' => $conf['email_security'],
                 'wordwrap' => TRUE,
                 'smtp_port' => $conf['email_port'],
@@ -138,9 +137,11 @@ class Index extends MY_Controller
                 $this->data['note'] = $logbook->note;
                 $this->data['search'] = $logbook->search;
                 $html = $this->blade->view()->make('email/baocao', $this->data)->render();
-
+                
+                $file_log = './log_' . $logbook->id . '.log';
+                file_put_contents($file_log, $html, FILE_APPEND);
                 // print_r($html);
-                // die();
+                die();
                 $this->email->message($html);
                 if (!empty($logbook->files)) {
                     foreach ($logbook->files as $row) {
@@ -172,7 +173,6 @@ class Index extends MY_Controller
                 'smtp_host' => $conf['email_server'],
                 'smtp_user' => $conf['email_username'], // actual values different
                 'smtp_pass' => $conf['email_password'],
-                'charset' => "utf8",
                 'smtp_crypto' => $conf['email_security'],
                 'wordwrap' => TRUE,
                 'smtp_port' => $conf['email_port'],

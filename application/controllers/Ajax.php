@@ -250,7 +250,6 @@ class Ajax extends MY_Controller
                     'smtp_host' => $conf['email_server'],
                     'smtp_user' => $conf['email_username'], // actual values different
                     'smtp_pass' => $conf['email_password'],
-                    'charset' => "utf-8",
                     'smtp_crypto' => $conf['email_security'],
                     'wordwrap' => TRUE,
                     'smtp_port' => $conf['email_port'],
@@ -324,7 +323,6 @@ class Ajax extends MY_Controller
                 'smtp_host' => $conf['email_server'],
                 'smtp_user' => $conf['email_username'], // actual values different
                 'smtp_pass' => $conf['email_password'],
-                'charset' => "utf-8",
                 'smtp_crypto' => $conf['email_security'],
                 'wordwrap' => TRUE,
                 'smtp_port' => $conf['email_port'],
