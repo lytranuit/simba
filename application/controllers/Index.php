@@ -139,10 +139,10 @@ class Index extends MY_Controller
                 $this->data['search'] = $logbook->search;
                 $html = $this->blade->view()->make('email/baocao', $this->data)->render();
                 
-                $file_log = './log_' . $logbook->id . '.log';
-                file_put_contents($file_log, $html, FILE_APPEND);
-                // print_r($html);
-                die();
+                // $file_log = './log_' . $logbook->id . '.log';
+                // file_put_contents($file_log, $html, FILE_APPEND);
+                // // print_r($html);
+                // die();
                 $this->email->message($html);
                 if (!empty($logbook->files)) {
                     foreach ($logbook->files as $row) {
