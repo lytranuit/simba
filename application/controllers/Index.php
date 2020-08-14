@@ -115,6 +115,7 @@ class Index extends MY_Controller
                 //            die();
 
                 $this->email->clear(TRUE);
+                $this->email->CharSet = "UTF-8"; 
                 $this->email->from($conf['email_email'], $conf['email_name']);
                 $this->email->to($email_to); /// $conf['email_contact']
                 $this->email->subject("$fullname - Báo cáo - $logbook->subject - " . date("Y/m/d", $logbook->date));
@@ -190,6 +191,7 @@ class Index extends MY_Controller
                 //            die();
 
                 $this->email->clear(TRUE);
+                $this->email->CharSet = "UTF-8"; 
                 $this->email->from($conf['email_email'], $conf['email_name']);
                 $this->email->to($conf['email_contact']); /// $conf['email_contact']
                 $this->email->subject("Báo giá Online - " . date("Y/m/d"));
