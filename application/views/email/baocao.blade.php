@@ -1,9 +1,6 @@
 <html>
     <head>
         <style>
-            .fr-view strong {
-                font-weight: 700;
-            }
             .fr-view table {
                 border: none;
                 border-collapse: collapse;
@@ -101,7 +98,6 @@
                 margin: 5px auto;
                 display: block;
                 float: none;
-                vertical-align: top;
             }
             .fr-view img.fr-dib.fr-fil {
                 margin-left: 0;
@@ -171,9 +167,7 @@
             .fr-view .fr-video.fr-dvi.fr-fvr {
                 float: right;
             }
-            .fr-view a.fr-strong {
-                font-weight: 700;
-            }
+
             .fr-view a.fr-green {
                 color: green;
             }
@@ -195,9 +189,6 @@
             /**
              * Image style.
              */
-            a.fr-view.fr-strong {
-                font-weight: 700;
-            }
             a.fr-view.fr-green {
                 color: green;
             }
@@ -212,7 +203,6 @@
                 margin: 5px auto;
                 display: block;
                 float: none;
-                vertical-align: top;
             }
             img.fr-view.fr-dib.fr-fil {
                 margin-left: 0;
