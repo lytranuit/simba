@@ -84,6 +84,7 @@ class Index extends MY_Controller
                 'smtp_pass' => $conf['email_password'],
                 'smtp_crypto' => $conf['email_security'],
                 'wordwrap' => TRUE,
+                'charset' => "iso-8859-1",
                 'smtp_port' => $conf['email_port'],
                 'starttls' => true,
                 'newline' => "\r\n"
@@ -115,7 +116,6 @@ class Index extends MY_Controller
                 //            die();
 
                 $this->email->clear(TRUE);
-                $this->email->CharSet = "iso-8859-1"; 
                 $this->email->from($conf['email_email'], $conf['email_name']);
                 $this->email->to($email_to); /// $conf['email_contact']
                 $this->email->subject("$fullname - Báo cáo - $logbook->subject - " . date("Y/m/d", $logbook->date));
@@ -138,7 +138,7 @@ class Index extends MY_Controller
                 $this->data['note'] = $logbook->note;
                 $this->data['search'] = $logbook->search;
                 $html = $this->blade->view()->make('email/baocao', $this->data)->render();
-                
+
                 // $file_log = './log_' . $logbook->id . '.log';
                 // file_put_contents($file_log, $html, FILE_APPEND);
                 // // print_r($html);
@@ -191,7 +191,7 @@ class Index extends MY_Controller
                 //            die();
 
                 $this->email->clear(TRUE);
-                $this->email->CharSet = "UTF-8"; 
+                $this->email->CharSet = "UTF-8";
                 $this->email->from($conf['email_email'], $conf['email_name']);
                 $this->email->to($conf['email_contact']); /// $conf['email_contact']
                 $this->email->subject("Báo giá Online - " . date("Y/m/d"));
