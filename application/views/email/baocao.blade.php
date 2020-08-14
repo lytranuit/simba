@@ -5,7 +5,7 @@
 
 </head>
 
-<body>
+<body style="font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;">
     <div><strong>1.Nhà cung cấp: </strong></div>
     <div class='fr-view' style="white-space: pre"><?= $ncc ?></div>
     <div><strong>2.Nhân sự tham gia: </strong></div>
