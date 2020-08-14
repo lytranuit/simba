@@ -84,9 +84,7 @@ class Index extends MY_Controller
                 'smtp_pass' => $conf['email_password'],
                 'smtp_crypto' => $conf['email_security'],
                 'wordwrap' => TRUE,
-                'charset' => "iso-8859-1",
                 'smtp_port' => $conf['email_port'],
-                'starttls' => true,
                 'newline' => "\r\n"
             );
             $this->load->library("email", $config);
