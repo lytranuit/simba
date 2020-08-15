@@ -11,7 +11,7 @@
                             @if(!empty($product))
                             @foreach($product as $row)
                             <a class="col-md-3 col-6 text-center hover_product" href="<?= get_url_seo('index/productsimba', array($row['id'], sluggable($row[pick_language($row, 'name_')]))) ?>" style="color: black;">
-                                <img class="img-fluid" src="http://www.oishii.vn{{$row['image_url']}}" alt="Card image cap" style="max-height: 180px;"> 
+                                <img class="img-fluid" src="http://www.simbaeshop.com{{$row['image_url']}}" alt="Card image cap" style="max-height: 180px;"> 
                                 <div class="">
                                     <b>{{$row['code']}}</b>
                                     <p>{{$row[pick_language($row,'name_')]}}</p>

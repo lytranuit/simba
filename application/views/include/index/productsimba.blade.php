@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-lg-6 row justify-content-center align-items-center">
                                 <div class="col-sm-6 col-8">
-                                    <a class="fancybox" href="http://www.oishii.vn{{$tin['image_url']}}"><img class="img-fluid"src="http://www.oishii.vn{{$tin['image_url']}}" /></a>
+                                    <a class="fancybox" href="http://www.simbaeshop.com{{$tin['image_url']}}"><img class="img-fluid"src="http://www.simbaeshop.com{{$tin['image_url']}}" /></a>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -40,7 +40,7 @@
                                     </li>
                                     <li>
                                         <label class="col-md-4">{{lang('product_mota')}}:</label>
-                                        <span>{{$tin[pick_language($tin,'description_')]}} <p><a href="http://www.oishii.vn/product/view/{{$tin['id']}}/{{sluggable($tin[pick_language($tin,'name_')])}}" target="_blank">{{lang('mua_hang')}}</a></p></span>
+                                        <span>{{$tin[pick_language($tin,'description_')]}} <p><a href="http://www.simbaeshop.com/product/view/{{$tin['id']}}/{{sluggable($tin[pick_language($tin,'name_')])}}" target="_blank">{{lang('mua_hang')}}</a></p></span>
                                     </li>
                                 </ul>
                             </div>

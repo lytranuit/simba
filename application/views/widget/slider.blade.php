@@ -25,7 +25,7 @@ Intro Section
             </div>
             <!--            <div class="col-lg-4">
                             <div class="row justify-content-center">
-                                <a target="_blank" href='http://www.oishii.vn/' alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/OISHII-1.jpg)" class="box-image" id="simba-web"></a>
+                                <a target="_blank" href='http://www.simbaeshop.com/' alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/OISHII-1.jpg)" class="box-image" id="simba-web"></a>
                                 <a target="_blank" href='https://itunes.apple.com/vn/app/simba-fresh/id1331294173' alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/FRESH-1.jpg);" class="box-image" id="simba-app"></a>
                                 <a target="_blank" href='#'  alt="" style="background-image:url(<?= base_url() ?>public/img/intro-carousel/SAKE_ZONE-1.jpg)" class="box-image"></a>
                             </div>
