@@ -56,7 +56,7 @@
                         App SimBa Fresh
                     </span>
                 </a>
-                <a target="_blank" style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.oishii.vn/" id="oishii-web">
+                <a target="_blank" style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.simbaeshop.com/" id="oishii-web">
                     <span class="fa fa-shopping-cart text-danger"></span>
                     <span>
                         SimBa Shop Oishii
