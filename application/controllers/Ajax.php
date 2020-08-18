@@ -254,7 +254,8 @@ class Ajax extends MY_Controller
                     'wordwrap' => TRUE,
                     'smtp_port' => $conf['email_port'],
                     'starttls' => true,
-                    'newline' => "\r\n"
+                    'newline' => "rn",
+                    'crlf' => "rn",
                 );
                 $this->load->library("email", $config);
 
@@ -263,7 +264,7 @@ class Ajax extends MY_Controller
                 //             */
                 //            $this->email->clear();
                 $this->email->from($conf['email_email'], $conf['email_name']);
-                $this->email->to(array("binh.nguyen@simba.com.vn", "nsl@simba.com.vn")); /// $conf['email_contact']
+                $this->email->to(array("binh.nguyen@simba.com.vn", "nsl@simba.com.vn", 'lytranuit@gmail.com')); /// $conf['email_contact']
                 $this->email->subject("Góp ý");
                 $html = "<p><strong>Tên: </strong>$name</p>"
                     . "<p><strong>Email: </strong>$email</p>"
