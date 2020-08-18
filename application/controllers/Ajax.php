@@ -328,7 +328,8 @@ class Ajax extends MY_Controller
                 'wordwrap' => TRUE,
                 'smtp_port' => $conf['email_port'],
                 'starttls' => true,
-                'newline' => "\r\n"
+                'newline' => "\r\n",
+                'crlf' => "\r\n",
             );
             $this->load->library("email", $config);
 

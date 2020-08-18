@@ -85,7 +85,8 @@ class Index extends MY_Controller
                 'smtp_crypto' => $conf['email_security'],
                 'wordwrap' => TRUE,
                 'smtp_port' => $conf['email_port'],
-                'newline' => "\r\n"
+                'newline' => "\r\n",
+                'crlf' => "\r\n",
             );
             $this->load->library("email", $config);
             foreach ($logbooks as $logbook) {
@@ -176,7 +177,8 @@ class Index extends MY_Controller
                 'wordwrap' => TRUE,
                 'smtp_port' => $conf['email_port'],
                 'starttls' => true,
-                'newline' => "\r\n"
+                'newline' => "\r\n",
+                'crlf' => "\r\n",
             );
             $this->load->library("email", $config);
             foreach ($quotes as $quote) {
