@@ -1,4 +1,3 @@
-
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">User</a></li>
@@ -28,6 +27,8 @@
                         </div>
 
                         <div class="form-group">
+
+                            <input type="hidden" class="input-tmp" name="active" value="0">
                             <input type="checkbox" id="basic_checkbox_2" class="filled-in" checked="" name="active" value="1">
                             <label for="basic_checkbox_2">Active</label>
                         </div>
@@ -42,9 +43,9 @@
                             </div>
                         </div>
                         <div class="col-md-12" style="margin-bottom: 20px;">
-                            <a href="#" data-target="#password-modal" data-toggle="modal"> 
+                            <a href="#" data-target="#password-modal" data-toggle="modal">
                                 <i class="material-icons" style='font-size: 20px;vertical-align: middle;'>lock</i>
-                                <span>Thay đổi mật khẩu</span> 
+                                <span>Thay đổi mật khẩu</span>
                             </a>
                         </div>
                         <input type="hidden" name="dangtin" value="1">
@@ -71,7 +72,7 @@
                 <div class="main">
                     <!--<p>Sign up once and watch any of our free demos.</p>-->
                     <form id="form-password">
-                        <input type="hidden" name="id_user" value="{{$tin->id}}"/>
+                        <input type="hidden" name="id_user" value="{{$tin->id}}" />
                         <div class="form-group">
                             <b class="form-label">Mât khẩu mới</b>
                             <div class="form-line">
@@ -92,18 +93,18 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         var tin = <?= json_encode($tin) ?>;
         $.AdminBSB.function.fillForm($("#form-dang-tin"), tin);
         $("select[name=role]").chosen();
-        $("button[name='edit_password']").click(function (e) {
+        $("button[name='edit_password']").click(function(e) {
             e.preventDefault();
             $.ajax({
                 url: path + "admin/changepasswithout",
                 data: $("#form-password").serialize(),
                 dataType: "JSON",
                 type: "POST",
-                success: function (data) {
+                success: function(data) {
                     alert(data.msg);
                     if (data.code == 400) {
                         location.reload();

@@ -1,8 +1,10 @@
 <?php
 
-class Admin extends MY_Controller {
+class Admin extends MY_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->data['is_login'] = $this->user_model->logged_in();
         $this->data['userdata'] = $this->session->userdata();
@@ -41,12 +43,13 @@ class Admin extends MY_Controller {
         );
     }
 
-    public function _remap($method, $params = array()) {
+    public function _remap($method, $params = array())
+    {
         if (!method_exists($this, $method)) {
             show_404();
         }
         if (!$this->user_model->logged_in()) {
-//redirect them to the login page
+            //redirect them to the login page
             redirect("index", "refresh");
         } elseif ($this->has_right($method, $params)) {
             $this->$method($params);
@@ -55,7 +58,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    private function has_right($method, $params = array()) {
+    private function has_right($method, $params = array())
+    {
 
         /*
          * SET PERMISSION
@@ -121,25 +125,26 @@ class Admin extends MY_Controller {
             return false;
         }
         /* Tin đăng check */
-//        $fun_tin = array(
-//            "edittin",
-//            "activate_tin",
-//            "deactivate_tin",
-//            "remove_tin",
-//        );
-//        if (in_array($method, $fun_tin)) {
-//            $id = $params[0];
-//            $id_user = $this->session->userdata('user_id');
-//            $this->load->model("tin_model");
-//            $tin = $this->tin_model->where(array('deleted' => 0, 'id_user' => $id_user, 'id_tin' => $id))->as_array()->get_all();
-//            if (!count($tin)) {
-//                return false;
-//            }
-//        }
+        //        $fun_tin = array(
+        //            "edittin",
+        //            "activate_tin",
+        //            "deactivate_tin",
+        //            "remove_tin",
+        //        );
+        //        if (in_array($method, $fun_tin)) {
+        //            $id = $params[0];
+        //            $id_user = $this->session->userdata('user_id');
+        //            $this->load->model("tin_model");
+        //            $tin = $this->tin_model->where(array('deleted' => 0, 'id_user' => $id_user, 'id_tin' => $id))->as_array()->get_all();
+        //            if (!count($tin)) {
+        //                return false;
+        //            }
+        //        }
         return true;
     }
 
-    public function index() { /////// trang ca nhan
+    public function index()
+    { /////// trang ca nhan
         $id_user = $this->session->userdata('user_id');
         $this->load->model("user_model");
         if (isset($_POST['edit_user'])) {
@@ -157,15 +162,17 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function slider() {
-//        $id_user = $this->session->userdata('user_id');
+    public function slider()
+    {
+        //        $id_user = $this->session->userdata('user_id');
         load_inputfile($this->data);
         $this->data['menu_active'] = "banner";
         array_push($this->data['javascript_tag'], base_url() . "public/admin/js/include/slider.js");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function saveslider() {
+    public function saveslider()
+    {
         if (isset($_POST['listhinh'])) {
             $this->load->model("slider_model");
             $arr_id = json_decode($this->input->post('listhinh'), true);
@@ -181,7 +188,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function changepass() {
+    function changepass()
+    {
         $id_user = $this->session->userdata('user_id');
         $this->load->model("user_model");
         $user = $this->user_model->where(array("id" => $id_user))->get();
@@ -201,7 +209,8 @@ class Admin extends MY_Controller {
         die();
     }
 
-    function changepasswithout() {
+    function changepasswithout()
+    {
         $id_user = $this->input->post('id_user');
         $this->load->model("user_model");
         if (!isset($_POST['confirmpassword']) || !isset($_POST['newpassword']) || (isset($_POST['newpassword']) && isset($_POST['confirmpassword']) && $_POST['newpassword'] != $_POST['confirmpassword'])) {
@@ -211,9 +220,9 @@ class Admin extends MY_Controller {
         $additional_data = array(
             'password' => md5($this->input->post('newpassword')),
         );
-//        print_r($additional_data);
-//        echo $id_user;
-//        die();
+        //        print_r($additional_data);
+        //        echo $id_user;
+        //        die();
         $this->user_model->update($additional_data, $id_user);
         echo json_encode(array('code' => 400, "msg" => "Thay đổi mật khẩu thành công."));
         die();
@@ -223,14 +232,15 @@ class Admin extends MY_Controller {
      * Gioithieu
      */
 
-    public function gioithieu() {
+    public function gioithieu()
+    {
         $this->load->model("about_model");
         $this->data['arr_vi'] = $this->about_model->where(array('deleted' => 0, 'language' => 'vi'))->order_by("order", "ASC")->with_hinhanh()->as_object()->get_all();
         $this->data['arr_en'] = $this->about_model->where(array('deleted' => 0, 'language' => 'en'))->order_by("order", "ASC")->with_hinhanh()->as_object()->get_all();
         $this->data['arr_jp'] = $this->about_model->where(array('deleted' => 0, 'language' => 'jp'))->order_by("order", "ASC")->with_hinhanh()->as_object()->get_all();
-//        echo "<pre>";
-//        print_r($this->data['arr_en']);
-//        die();
+        //        echo "<pre>";
+        //        print_r($this->data['arr_en']);
+        //        die();
         $this->data['menu_active'] = "about";
         array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/timeline.css");
         load_editor($this->data);
@@ -238,12 +248,13 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function savegioithieu() {
+    public function savegioithieu()
+    {
         $this->load->model("about_model");
         $this->about_model->update(array('deleted' => 1));
         $array = json_decode($this->input->post('data'), true);
-//        var_dump($array);
-//        die();
+        //        var_dump($array);
+        //        die();
         foreach ($array as $row) {
             $data = $this->about_model->create_object($row);
             $this->about_model->insert($data);
@@ -255,7 +266,8 @@ class Admin extends MY_Controller {
      * Quan ly language
      */
 
-    public function quanlylanguage() {
+    public function quanlylanguage()
+    {
         $this->data['menu_active'] = "language";
         load_datatable($this->data);
         $translations = $this->_load_language();
@@ -263,7 +275,8 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function savelanguage() {
+    public function savelanguage()
+    {
         $data = json_decode($_POST['data'], true);
         foreach ($data as $lang => $row) {
             $path = APPPATH . "language/" . $lang . "/home_lang.php";
@@ -292,8 +305,8 @@ class Admin extends MY_Controller {
             }
             // Check syntax and attempt to save file
             $php = implode($master);
-//            echo $php;
-//            die();
+            //            echo $php;
+            //            die();
             if (!$this->_invalid_php_syntax($php)) {
                 $fp = @fopen($path, 'w');
                 if (fwrite($fp, $php) !== FALSE) {
@@ -308,7 +321,8 @@ class Admin extends MY_Controller {
      * PAge
      */
 
-    public function quanlypage() {
+    public function quanlypage()
+    {
         $this->load->model("pageweb_model");
         $this->data['menu_active'] = "page";
         $this->data['arr_tin'] = $this->pageweb_model->where(array('deleted' => 0))->order_by('date', "DESC")->as_object()->get_all();
@@ -316,7 +330,8 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function thempage() { ////////// Trang dang tin
+    public function thempage()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $this->load->model("pageweb_model");
             $data = $_POST;
@@ -333,7 +348,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function editpage($param) {
+    function editpage($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("pageweb_model");
@@ -351,7 +367,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updatepage($params) {
+    function updatepage($params)
+    {
         $this->load->model("pageweb_model");
         $id = $params[0];
         $this->pageweb_model->update(array("date" => time()), $id);
@@ -359,7 +376,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removepage($params) {
+    function removepage($params)
+    {
         $this->load->model("pageweb_model");
         $id = $params[0];
         $this->pageweb_model->update(array("deleted" => 1), $id);
@@ -371,7 +389,8 @@ class Admin extends MY_Controller {
      * Loai Tin Tức
      */
 
-    public function quanlytype() {
+    public function quanlytype()
+    {
         $this->data['menu_active'] = "type";
         $id_user = $this->session->userdata('user_id');
         $this->load->model("typetintuc_model");
@@ -380,7 +399,8 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themtype() { ////////// Trang dang tin
+    public function themtype()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $name_vi = $_POST['name_vi'];
             $name_en = isset($_POST['name_en']) ? $_POST['name_en'] : "";
@@ -401,7 +421,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function edittype($param) {
+    function edittype($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $name_vi = $_POST['name_vi'];
@@ -426,7 +447,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function removetype($params) {
+    function removetype($params)
+    {
         $this->load->model("typetintuc_model");
         $id = $params[0];
         $this->typetintuc_model->update(array("deleted" => 1), $id);
@@ -438,17 +460,19 @@ class Admin extends MY_Controller {
      * Category
      */
 
-    public function quanlycategory() {
+    public function quanlycategory()
+    {
         $this->data['menu_active'] = "category";
         $this->load->model("category_model");
         $this->data['arr_tin'] = $this->category_model->where(array('deleted' => 0))->with_hinhanh()->order_by('date', "DESC")->as_object()->get_all();
-//        print_r($this->data['arr_tin']);
-//        die();
+        //        print_r($this->data['arr_tin']);
+        //        die();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themcategory() { ////////// Trang dang tin
+    public function themcategory()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("category_model");
@@ -469,7 +493,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function editcategory($param) {
+    function editcategory($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
@@ -496,7 +521,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updatecategory($params) {
+    function updatecategory($params)
+    {
         $this->load->model("category_model");
         $id = $params[0];
         $this->category_model->update(array("date" => time()), $id);
@@ -504,7 +530,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removecategory($params) {
+    function removecategory($params)
+    {
         $this->load->model("category_model");
         $id = $params[0];
         $this->category_model->update(array("deleted" => 1), $id);
@@ -516,12 +543,13 @@ class Admin extends MY_Controller {
      * Product
      */
 
-    public function quanlyproduct() {
+    public function quanlyproduct()
+    {
         $this->data['menu_active'] = "product";
-//        $this->load->model("product_model");
+        //        $this->load->model("product_model");
         $this->data['arr_tin'] = array();
-//        print_r($this->data['arr_tin']);
-//        die();
+        //        print_r($this->data['arr_tin']);
+        //        die();
         $this->load->model("role_model");
         $this->load->model("option_model");
 
@@ -531,7 +559,8 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themproduct() { ////////// Trang dang tin
+    public function themproduct()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("product_model");
@@ -542,7 +571,7 @@ class Admin extends MY_Controller {
             $id = $this->product_model->insert($data_up);
             $files = $this->input->post('id_files');
             $role_download = is_array($this->input->post('role_download')) ? implode(",", $this->input->post('role_download')) : "";
-//            $this->productfile_model->where('id_product', $id)->delete();
+            //            $this->productfile_model->where('id_product', $id)->delete();
             if (count($files) > 0) {
                 foreach ($files as $file) {
                     $this->productfile_model->insert(array('id_product' => $id, 'id_file' => $file));
@@ -564,7 +593,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function editproduct($param) {
+    function editproduct($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
@@ -602,7 +632,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updateproduct($params) {
+    function updateproduct($params)
+    {
         $this->load->model("product_model");
         $id = $params[0];
         $this->product_model->update(array("date" => time()), $id);
@@ -610,7 +641,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function updatedownload() {
+    function updatedownload()
+    {
         if (isset($_POST['updatedownload'])) {
             $this->load->model("option_model");
             $role_download = implode(",", $this->input->post('role_download'));
@@ -621,7 +653,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removeproduct($params) {
+    function removeproduct($params)
+    {
         $this->load->model("product_model");
         $id = $params[0];
         $this->product_model->update(array("deleted" => 1), $id);
@@ -633,17 +666,19 @@ class Admin extends MY_Controller {
      * Client
      */
 
-    public function quanlyclient() {
+    public function quanlyclient()
+    {
         $this->data['menu_active'] = "client";
         $this->load->model("client_model");
         $this->data['arr_tin'] = $this->client_model->where(array('deleted' => 0))->with_hinhanh()->order_by('order', "DESC")->as_object()->get_all();
-//        print_r($this->data['arr_tin']);
-//        die();
+        //        print_r($this->data['arr_tin']);
+        //        die();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themclient() { ////////// Trang dang tin
+    public function themclient()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("client_model");
@@ -658,7 +693,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function editclient($param) {
+    function editclient($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
@@ -676,7 +712,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updateclient($params) {
+    function updateclient($params)
+    {
         $this->load->model("client_model");
         $id = $params[0];
         $this->client_model->update(array("order" => time()), $id);
@@ -684,7 +721,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removeclient($params) {
+    function removeclient($params)
+    {
         $this->load->model("client_model");
         $id = $params[0];
         $this->client_model->update(array("deleted" => 1), $id);
@@ -696,17 +734,19 @@ class Admin extends MY_Controller {
      * Happy Client
      */
 
-    public function quanlyhappy() {
+    public function quanlyhappy()
+    {
         $this->data['menu_active'] = "happy";
         $this->load->model("happy_model");
         $this->data['arr_tin'] = $this->happy_model->where(array('deleted' => 0))->with_hinhanh()->order_by(array('order' => "ASC", 'date' => "DESC"))->as_object()->get_all();
-//        print_r($this->data['arr_tin']);
-//        die();
+        //        print_r($this->data['arr_tin']);
+        //        die();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themhappy() { ////////// Trang dang tin
+    public function themhappy()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
             $this->load->model("happy_model");
@@ -721,7 +761,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function edithappy($param) {
+    function edithappy($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $data = $_POST;
@@ -739,7 +780,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updatehappy($params) {
+    function updatehappy($params)
+    {
         $this->load->model("happy_model");
         $id = $params[0];
         $this->happy_model->update(array("date" => time()), $id);
@@ -747,7 +789,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removehappy($params) {
+    function removehappy($params)
+    {
         $this->load->model("happy_model");
         $id = $params[0];
         $this->happy_model->update(array("deleted" => 1), $id);
@@ -759,7 +802,8 @@ class Admin extends MY_Controller {
      * Tin Tuc
      */
 
-    public function quanlytintuc() {
+    public function quanlytintuc()
+    {
         $this->data['menu_active'] = "tintuc";
         $this->load->model("tintuc_model");
         $this->load->model("hinhanh_model");
@@ -772,13 +816,14 @@ class Admin extends MY_Controller {
             $tin->obj_hinh = isset($hinh[0]) ? $hinh[0] : array();
             $tin->obj_type = isset($type[0]) ? $type[0] : array();
         }
-//        print_r($this->data['arr_tin']);
-//        die();
+        //        print_r($this->data['arr_tin']);
+        //        die();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themtintuc() { ////////// Trang dang tin
+    public function themtintuc()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $this->load->model("tintuc_model");
             $this->load->model("tintucfile_model");
@@ -790,7 +835,7 @@ class Admin extends MY_Controller {
             $data_up = $this->tintuc_model->create_object($data);
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
-//            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
+            //            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
             if (count($files) > 0) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
@@ -807,7 +852,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function edittintuc($param) {
+    function edittintuc($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("tintuc_model");
@@ -833,9 +879,9 @@ class Admin extends MY_Controller {
             $this->data['arr_type'] = $this->typetintuc_model->where(array('deleted' => 0))->as_array()->get_all();
 
             $tin = $this->tintuc_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
+            //            echo "<pre>";
+            //            print_r($tin);
+            //            die();
             $this->data['tin'] = $tin;
             load_inputfile($this->data);
             load_editor($this->data);
@@ -843,7 +889,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updatetintuc($params) {
+    function updatetintuc($params)
+    {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->update(array("date" => time()), $id);
@@ -851,7 +898,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removetintuc($params) {
+    function removetintuc($params)
+    {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->update(array("deleted" => 1), $id);
@@ -863,7 +911,8 @@ class Admin extends MY_Controller {
      * Tin Tuc noi bat
      */
 
-    public function quanlynoibat() {
+    public function quanlynoibat()
+    {
         $this->data['menu_active'] = "noibat";
         $this->load->model("tintuc_model");
         $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_highlight' => 1))->order_by('date', "DESC")->with_hinhanh()->as_object()->get_all();
@@ -871,7 +920,8 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themnoibat() { ////////// Trang dang tin
+    public function themnoibat()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $this->load->model("tintuc_model");
             $this->load->model("tintucfile_model");
@@ -884,7 +934,7 @@ class Admin extends MY_Controller {
             $data_up = $this->tintuc_model->create_object($data);
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
-//            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
+            //            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
             if (count($files) > 0) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
@@ -899,7 +949,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function editnoibat($param) { ////////// Trang dang tin
+    public function editnoibat($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("tintuc_model");
@@ -924,9 +975,9 @@ class Admin extends MY_Controller {
         } else {
             $this->load->model("tintuc_model");
             $tin = $this->tintuc_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
+            //            echo "<pre>";
+            //            print_r($tin);
+            //            die();
             $this->data['tin'] = $tin;
             load_inputfile($this->data);
             load_editor($this->data);
@@ -934,7 +985,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updatenoibat($params) {
+    function updatenoibat($params)
+    {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->update(array("date" => time()), $id);
@@ -942,7 +994,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removenoibat($params) {
+    function removenoibat($params)
+    {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->where(array('is_highlight' => 1, 'id' => $id))->update(array("deleted" => 1));
@@ -954,7 +1007,8 @@ class Admin extends MY_Controller {
      * Tin Tuc noi bo
      */
 
-    public function quanlynoibo() {
+    public function quanlynoibo()
+    {
         $this->data['menu_active'] = "noibo";
         $this->load->model("tintuc_model");
         $this->data['arr_tin'] = $this->tintuc_model->where(array('deleted' => 0, 'is_private' => 1))->order_by('date', "DESC")->with_hinhanh()->as_object()->get_all();
@@ -962,7 +1016,8 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themnoibo() { ////////// Trang dang tin
+    public function themnoibo()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $this->load->model("tintuc_model");
             $this->load->model("tintucfile_model");
@@ -975,7 +1030,7 @@ class Admin extends MY_Controller {
             $data_up = $this->tintuc_model->create_object($data);
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
-//            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
+            //            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
             if (count($files) > 0) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
@@ -990,7 +1045,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function editnoibo($param) { ////////// Trang dang tin
+    public function editnoibo($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("tintuc_model");
@@ -1014,9 +1070,9 @@ class Admin extends MY_Controller {
         } else {
             $this->load->model("tintuc_model");
             $tin = $this->tintuc_model->with_hinhanh()->with_files()->where(array('id' => $id))->as_object()->get();
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
+            //            echo "<pre>";
+            //            print_r($tin);
+            //            die();
             $this->data['tin'] = $tin;
             load_inputfile($this->data);
             load_editor($this->data);
@@ -1024,7 +1080,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function updatenoibo($params) {
+    function updatenoibo($params)
+    {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->update(array("date" => time()), $id);
@@ -1032,7 +1089,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function removenoibo($params) {
+    function removenoibo($params)
+    {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->where(array('is_private' => 1, 'id' => $id))->update(array("deleted" => 1));
@@ -1040,21 +1098,23 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function viewtin($param) {
+    function viewtin($param)
+    {
         $id = $param[0];
         $this->load->model("tintuc_model");
         $tin = $this->tintuc_model->where(array('id' => $id))->with_hinhanh()->with_files()->as_array()->get();
         $this->data['tin'] = $tin;
-//        echo "<pre>";
-//        print_r($tin);
-//        die();
+        //        echo "<pre>";
+        //        print_r($tin);
+        //        die();
         array_push($this->data['stylesheet_tag'], base_url() . "public/admin/css/fileicon.css");
         array_push($this->data['stylesheet_tag'], base_url() . "public/lib/froala_editor/css/froala_style.min.css");
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-// deactivate the tin
-    function deactivate_tintuc($params) {
+    // deactivate the tin
+    function deactivate_tintuc($params)
+    {
         $this->load->model("tintuc_model");
         $id = $params[0];
         $this->tintuc_model->update(array("active" => 0), $id);
@@ -1066,19 +1126,21 @@ class Admin extends MY_Controller {
      * MENU
      */
 
-    public function quanlymenu() {
+    public function quanlymenu()
+    {
         $this->load->model("pageweb_model");
         $this->load->model("menu_model");
         $this->data['menu_active'] = "menu";
         $all_menu = $this->menu_model->where("deleted", 0)->order_by("order")->as_object()->get_all();
-//        $data = recursive_menu_data($all_menu, 0);
-//        array_unshift($data, array('id' => 0, 'id_page' => 0, 'text' => "Trang chủ", 'expanded' => false, 'enabled' => false));
+        //        $data = recursive_menu_data($all_menu, 0);
+        //        array_unshift($data, array('id' => 0, 'id_page' => 0, 'text' => "Trang chủ", 'expanded' => false, 'enabled' => false));
         $this->data['data'] = $all_menu;
-//        $this->data['page'] = $this->pageweb_model->where("deleted", 0)->as_array()->get_all();
+        //        $this->data['page'] = $this->pageweb_model->where("deleted", 0)->as_array()->get_all();
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    function editmenu($param) {
+    function editmenu($param)
+    {
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $text_vi = $_POST['text_vi'];
@@ -1105,7 +1167,8 @@ class Admin extends MY_Controller {
      * GOP Y
      */
 
-    public function quanlycomment() {
+    public function quanlycomment()
+    {
         $this->load->model("comment_model");
         $this->data['menu_active'] = "comment";
         $all_menu = $this->comment_model->where("deleted", 0)->order_by("date", "DESC")->as_object()->get_all();
@@ -1118,19 +1181,21 @@ class Admin extends MY_Controller {
      * GOP ý khác
      */
 
-    public function quanlyfeedback() {
+    public function quanlyfeedback()
+    {
         $this->load->model("feedback_model");
         $this->data['menu_active'] = "feedback";
         $all_menu = $this->feedback_model->where("deleted", 0)->with_product()->with_customer()->order_by("date", "DESC")->as_object()->get_all();
-//        echo "<pre>";
-//        print_r($all_menu);
-//        die();
+        //        echo "<pre>";
+        //        print_r($all_menu);
+        //        die();
         $this->data['data'] = $all_menu;
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function editfeedback($param) { ////////// Trang dang tin
+    public function editfeedback($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("feedback_model");
@@ -1141,9 +1206,9 @@ class Admin extends MY_Controller {
         } else {
             $this->load->model("feedback_model");
             $tin = $this->feedback_model->with_product()->with_customer()->where(array('id' => $id))->as_object()->get();
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
+            //            echo "<pre>";
+            //            print_r($tin);
+            //            die();
             $this->load->model("customersimba_model");
             $this->load->model("productsimba_model");
             $this->data['customers'] = $this->customersimba_model->where(array('deleted' => 0))->as_array()->get_all();
@@ -1153,7 +1218,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function removefeedback($params) {
+    function removefeedback($params)
+    {
         $this->load->model("feedback_model");
         $id = $params[0];
         $this->feedback_model->update(array("deleted" => 1), $id);
@@ -1165,7 +1231,8 @@ class Admin extends MY_Controller {
      * Logbook
      */
 
-    public function quanlylogbook() {
+    public function quanlylogbook()
+    {
         $this->load->model("logbook_model");
         $this->data['menu_active'] = "logbook";
         load_datatable($this->data);
@@ -1173,7 +1240,8 @@ class Admin extends MY_Controller {
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function editlogbook($param) { ////////// Trang dang tin
+    public function editlogbook($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['status'])) {
             $this->load->model("logbook_model");
@@ -1185,9 +1253,9 @@ class Admin extends MY_Controller {
             $this->load->model("logbook_model");
             $tin = $this->logbook_model->where(array('id' => $id))->with_customers()->with_products()->with_files()->with_nccObject()->as_object()->get();
             $this->data['customers'] = implode(",", array_keys((array) $tin->customers));
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
+            //            echo "<pre>";
+            //            print_r($tin);
+            //            die();
             $this->data['tin'] = $tin;
 
             load_editor($this->data);
@@ -1195,7 +1263,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function removelogbook($params) {
+    function removelogbook($params)
+    {
         $this->load->model("logbook_model");
         $id = $params[0];
         $this->logbook_model->update(array("deleted" => 1), $id);
@@ -1207,7 +1276,8 @@ class Admin extends MY_Controller {
      * TABLE Logbook
      */
 
-    function tablelogbook() {
+    function tablelogbook()
+    {
         $this->load->model("logbook_model");
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -1218,7 +1288,7 @@ class Admin extends MY_Controller {
         $totalFiltered = $totalData;
 
         if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
+            //            $max_page = ceil($totalFiltered / $limit);
 
             $where = $this->logbook_model->where("deleted", 0);
         } else {
@@ -1230,9 +1300,9 @@ class Admin extends MY_Controller {
         }
 
         $posts = $where->with_customers()->with_products()->with_nccObject()->order_by("id", "DESC")->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);f
-//        die();
+        //        echo "<pre>";
+        //        print_r($posts);f
+        //        die();
         $data = array();
         if (!empty($posts)) {
             foreach ($posts as $post) {
@@ -1261,15 +1331,15 @@ class Admin extends MY_Controller {
                 $action = "";
                 if (is_permission("editfeedback")) {
                     $action .= '<a href="' . base_url() . 'admin/editlogbook/' . $post->id . '" class="btn btn-default" title="edit">'
-                            . '<i class="ace-icon fa fa-pencil bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-pencil bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 if (is_permission("removefeedback")) {
                     $action .= '<a href="' . base_url() . 'admin/removelogbook/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 $nestedData['action'] = $action;
                 $data[] = $nestedData;
@@ -1290,15 +1360,17 @@ class Admin extends MY_Controller {
      * Nhà sản xuất
      */
 
-    public function quanlyncc() {
+    public function quanlyncc()
+    {
         $this->load->model("supplier_model");
         $this->data['menu_active'] = "supplier";
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themncc() { ////////// Trang dang tin
-//        $id = $param[0];
+    public function themncc()
+    { ////////// Trang dang tin
+        //        $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("supplier_model");
             $data = $_POST;
@@ -1310,7 +1382,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function editncc($param) { ////////// Trang dang tin
+    public function editncc($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("supplier_model");
@@ -1326,7 +1399,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function removencc($params) {
+    function removencc($params)
+    {
         $this->load->model("supplier_model");
         $id = $params[0];
         $this->supplier_model->update(array("deleted" => 1), $id);
@@ -1334,7 +1408,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function tablencc() {
+    function tablencc()
+    {
         $this->load->model("supplier_model");
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -1345,7 +1420,7 @@ class Admin extends MY_Controller {
         $totalFiltered = $totalData;
 
         if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
+            //            $max_page = ceil($totalFiltered / $limit);
 
             $where = $this->supplier_model->where("deleted", 0);
         } else {
@@ -1357,9 +1432,9 @@ class Admin extends MY_Controller {
         }
 
         $posts = $where->supplier_model->order_by("id", "DESC")->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);f
-//        die();
+        //        echo "<pre>";
+        //        print_r($posts);f
+        //        die();
         $data = array();
         if (!empty($posts)) {
             foreach ($posts as $post) {
@@ -1374,15 +1449,15 @@ class Admin extends MY_Controller {
                 $action = "";
                 if (is_permission("editncc")) {
                     $action .= '<a href="' . base_url() . 'admin/editncc/' . $post->id . '" class="btn btn-default" title="edit">'
-                            . '<i class="ace-icon fa fa-pencil bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-pencil bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 if (is_permission("removencc")) {
                     $action .= '<a href="' . base_url() . 'admin/removencc/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 $nestedData['action'] = $action;
                 $data[] = $nestedData;
@@ -1403,15 +1478,17 @@ class Admin extends MY_Controller {
      * Ncc real
      */
 
-    public function quanlynccv2() {
+    public function quanlynccv2()
+    {
         $this->load->model("ncc_model");
         $this->data['menu_active'] = "ncc";
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themnccv2() { ////////// Trang dang tin
-//        $id = $param[0];
+    public function themnccv2()
+    { ////////// Trang dang tin
+        //        $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("ncc_model");
             $data = $_POST;
@@ -1423,7 +1500,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function editnccv2($param) { ////////// Trang dang tin
+    public function editnccv2($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("ncc_model");
@@ -1439,7 +1517,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function removenccv2($params) {
+    function removenccv2($params)
+    {
         $this->load->model("ncc_model");
         $id = $params[0];
         $this->ncc_model->update(array("deleted" => 1), $id);
@@ -1447,7 +1526,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function tablenccv2() {
+    function tablenccv2()
+    {
         $this->load->model("ncc_model");
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -1458,7 +1538,7 @@ class Admin extends MY_Controller {
         $totalFiltered = $totalData;
 
         if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
+            //            $max_page = ceil($totalFiltered / $limit);
 
             $where = $this->ncc_model->where("deleted", 0);
         } else {
@@ -1470,9 +1550,9 @@ class Admin extends MY_Controller {
         }
 
         $posts = $where->ncc_model->order_by("id", "DESC")->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);f
-//        die();
+        //        echo "<pre>";
+        //        print_r($posts);f
+        //        die();
         $data = array();
         if (!empty($posts)) {
             foreach ($posts as $post) {
@@ -1487,15 +1567,15 @@ class Admin extends MY_Controller {
                 $action = "";
                 if (is_permission("editnccv2")) {
                     $action .= '<a href="' . base_url() . 'admin/editnccv2/' . $post->id . '" class="btn btn-default" title="edit">'
-                            . '<i class="ace-icon fa fa-pencil bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-pencil bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 if (is_permission("removenccv2")) {
                     $action .= '<a href="' . base_url() . 'admin/removenccv2/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 $nestedData['action'] = $action;
                 $data[] = $nestedData;
@@ -1516,15 +1596,17 @@ class Admin extends MY_Controller {
      * Sản phẩm chào hàng
      */
 
-    public function quanlysp() {
+    public function quanlysp()
+    {
         $this->load->model("supplier_model");
         $this->data['menu_active'] = "supplier_product";
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themsp() { ////////// Trang dang tin
-//        $id = $param[0];
+    public function themsp()
+    { ////////// Trang dang tin
+        //        $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("supplierproduct_model");
             $this->load->model("supplierproductfile_model");
@@ -1550,7 +1632,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function editsp($param) { ////////// Trang dang tin
+    public function editsp($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("supplierproduct_model");
@@ -1579,7 +1662,7 @@ class Admin extends MY_Controller {
             $htmlconf = $html = array();
             if (isset($tin->files)) {
                 foreach ($tin->files as $file) {
-//                    $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
+                    //                    $hinh = $this->hinhanh_model->where(array('id_hinhanh' => $slider['id_hinhanh']))->as_array()->get_all();
                     array_push($html, "<img src='" . base_url() . $file->src . "' class='file-preview-image img-fluid' alt='" . $file->ten_hinhanh . "' title='" . $file->ten_hinhanh . "'>");
                     array_push($htmlconf, array(
                         'caption' => $file->ten_hinhanh,
@@ -1596,7 +1679,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    function removesp($params) {
+    function removesp($params)
+    {
         $this->load->model("supplierproduct_model");
         $id = $params[0];
         $this->supplierproduct_model->update(array("deleted" => 1), $id);
@@ -1604,7 +1688,8 @@ class Admin extends MY_Controller {
         exit;
     }
 
-    function tablesp() {
+    function tablesp()
+    {
         $this->load->model("supplierproduct_model");
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -1615,7 +1700,7 @@ class Admin extends MY_Controller {
         $totalFiltered = $totalData;
 
         if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
+            //            $max_page = ceil($totalFiltered / $limit);
 
             $where = $this->supplierproduct_model->where("deleted", 0);
         } else {
@@ -1627,9 +1712,9 @@ class Admin extends MY_Controller {
         }
 
         $posts = $where->supplierproduct_model->with_supplier()->order_by("id", "DESC")->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);
-//        die();
+        //        echo "<pre>";
+        //        print_r($posts);
+        //        die();
         $data = array();
         if (!empty($posts)) {
             foreach ($posts as $post) {
@@ -1640,15 +1725,15 @@ class Admin extends MY_Controller {
                 $action = "";
                 if (is_permission("editsp")) {
                     $action .= '<a href="' . base_url() . 'admin/editsp/' . $post->id . '" class="btn btn-default" title="edit">'
-                            . '<i class="ace-icon fa fa-pencil bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-pencil bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 if (is_permission("removesp")) {
                     $action .= '<a href="' . base_url() . 'admin/removesp/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 $nestedData['action'] = $action;
                 $data[] = $nestedData;
@@ -1669,21 +1754,23 @@ class Admin extends MY_Controller {
      * Role
      */
 
-    public function quanlyrole() {
+    public function quanlyrole()
+    {
         $this->data['menu_active'] = "role";
         $this->load->model("role_model");
-//        $this->data['arr_tin'] = $this->role_model->where(array('deleted' => 0))->as_object()->get_all();
+        //        $this->data['arr_tin'] = $this->role_model->where(array('deleted' => 0))->as_object()->get_all();
 
         $category = $this->role_model->where(array('deleted' => 0))->order_by('sort', "ASC")->as_array()->get_all();
         $this->data['html_nestable'] = html_nestable($category, 'parent_id', 0);
-//        load_datatable($this->data);
+        //        load_datatable($this->data);
         array_push($this->data['javascript_tag'], base_url() . "public/admin/plugins/jquery/jquery-ui.min.js");
         load_sort_nest($this->data);
 
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themrole() { ////////// Trang dang tin
+    public function themrole()
+    { ////////// Trang dang tin
         if (isset($_POST['dangtin'])) {
             $this->load->model("role_model");
             $this->load->model("rolepermission_model");
@@ -1692,15 +1779,15 @@ class Admin extends MY_Controller {
             $id = $this->role_model->insert($data_up);
             if (isset($_POST['permission'])) {
                 $permission = $_POST['permission'];
-//            $this->rolepermission_model->where('id_role', $id)->delete();
+                //            $this->rolepermission_model->where('id_role', $id)->delete();
                 foreach ($permission as $row) {
                     $this->rolepermission_model->insert(array('id_role' => $id, 'id_permission' => $row));
                 }
             }
             redirect('admin/quanlyrole', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
-//            load_inputfile($this->data);
-//            load_editor($this->data);
+            //            load_inputfile($this->data);
+            //            load_editor($this->data);
             $this->load->model("permission_model");
             $permission = $this->permission_model->where(array('deleted' => 0))->group_by("module")->as_array()->get_all();
             foreach ($permission as &$row) {
@@ -1711,7 +1798,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function editrole($param) { ////////// Trang dang tin
+    public function editrole($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("role_model");
@@ -1731,25 +1819,26 @@ class Admin extends MY_Controller {
             $this->load->model("role_model");
             $this->load->model("permission_model");
             $tin = $this->role_model->where(array('id' => $id))->with_permission()->as_array()->get();
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
+            //            echo "<pre>";
+            //            print_r($tin);
+            //            die();
             $this->data['tin'] = $tin;
             $permission = $this->permission_model->where(array('deleted' => 0))->group_by("module")->as_array()->get_all();
             foreach ($permission as &$row) {
                 $row['child'] = $this->permission_model->where(array('module' => $row['module'], 'deleted' => 0))->as_array()->get_all();
             }
             $this->data['permission'] = $permission;
-//            echo "<pre>";
-//            print_r($permission);
-//            die();
-//            load_inputfile($this->data);
-//            load_editor($this->data);
+            //            echo "<pre>";
+            //            print_r($permission);
+            //            die();
+            //            load_inputfile($this->data);
+            //            load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();
         }
     }
 
-    function removerole($params) {
+    function removerole($params)
+    {
         $this->load->model("role_model");
         $id = $params[0];
         $this->role_model->update(array("deleted" => 1), $id);
@@ -1761,18 +1850,20 @@ class Admin extends MY_Controller {
      * USER
      */
 
-    public function quanlyuser() {
+    public function quanlyuser()
+    {
         $this->data['menu_active'] = "user";
-//        $this->load->model("user_model");
-//        $this->data['arr_tin'] = $this->user_model->limit(10)->with_role_user()->as_object()->get_all();
-//        echo "<pre>";
-//        print_r($this->data['arr_tin']);
-//        die();
+        //        $this->load->model("user_model");
+        //        $this->data['arr_tin'] = $this->user_model->limit(10)->with_role_user()->as_object()->get_all();
+        //        echo "<pre>";
+        //        print_r($this->data['arr_tin']);
+        //        die();
         load_datatable($this->data);
         echo $this->blade->view()->make('page/page', $this->data)->render();
     }
 
-    public function themuser() {
+    public function themuser()
+    {
         if (isset($_POST['dangtin'])) {
             $this->load->model("user_model");
             $data = $_POST;
@@ -1789,20 +1880,24 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function edituser($param) { ////////// Trang dang tin
+    public function edituser($param)
+    { ////////// Trang dang tin
         $id = $param[0];
         if (isset($_POST['dangtin'])) {
             $this->load->model("user_model");
             $data = $_POST;
             $data_up = $this->user_model->create_object($data);
+
+            // print_r($data_up);
+            // die();
             $id_tintuc = $this->user_model->update($data_up, $id);
             redirect('admin/quanlyuser', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->load->model("user_model");
             $tin = $this->user_model->where(array('id' => $id))->as_object()->get();
-//            echo "<pre>";
-//            print_r($tin);
-//            die();
+            //            echo "<pre>";
+            //            print_r($tin);
+            //            die();
             $this->load->model("role_model");
             $this->data['role'] = $this->role_model->as_array()->get_all();
             $this->data['tin'] = $tin;
@@ -1812,11 +1907,20 @@ class Admin extends MY_Controller {
         }
     }
 
+    function removeuser($params)
+    {
+        $this->load->model("user_model");
+        $id = $params[0];
+        $this->user_model->where('id', $id)->delete();
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
     /*
      * TABLE USER
      */
 
-    function tableuser() {
+    function tableuser()
+    {
         $this->load->model("user_model");
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -1827,7 +1931,7 @@ class Admin extends MY_Controller {
         $totalFiltered = $totalData;
 
         if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
+            //            $max_page = ceil($totalFiltered / $limit);
 
             $where = $this->user_model;
         } else {
@@ -1838,9 +1942,9 @@ class Admin extends MY_Controller {
         }
 
         $posts = $where->order_by("id", "DESC")->with_role_user()->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);
-//        die();
+        //        echo "<pre>";
+        //        print_r($posts);
+        //        die();
         $data = array();
         if (!empty($posts)) {
             foreach ($posts as $post) {
@@ -1849,13 +1953,13 @@ class Admin extends MY_Controller {
                 $nestedData['role_name'] = $post->role_user->name;
                 $nestedData['active'] = $post->active ? "Có" : "Không";
                 $nestedData['action'] = '<a href="' . base_url() . 'admin/edituser/' . $post->id . '" class="btn btn-default" title="edit">'
-                        . '<i class="ace-icon fa fa-pencil bigger-120">'
-                        . '</i>'
-                        . '</a>'
-                        . '<a href="' . base_url() . 'admin/removeuser/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                        . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                        . '</i>'
-                        . '</a>';
+                    . '<i class="ace-icon fa fa-pencil bigger-120">'
+                    . '</i>'
+                    . '</a>'
+                    . '<a href="' . base_url() . 'admin/removeuser/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
+                    . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                    . '</i>'
+                    . '</a>';
 
                 $data[] = $nestedData;
             }
@@ -1875,7 +1979,8 @@ class Admin extends MY_Controller {
      * TABLE Product
      */
 
-    function tableproduct() {
+    function tableproduct()
+    {
         $this->load->model("product_model");
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -1886,7 +1991,7 @@ class Admin extends MY_Controller {
         $totalFiltered = $totalData;
 
         if (empty($this->input->post('search')['value'])) {
-//            $max_page = ceil($totalFiltered / $limit);
+            //            $max_page = ceil($totalFiltered / $limit);
 
             $where = $this->product_model->where("deleted", 0);
         } else {
@@ -1897,9 +2002,9 @@ class Admin extends MY_Controller {
         }
 
         $posts = $where->order_by("date", "DESC")->with_hinhanh()->paginate($limit, NULL, $page);
-//        echo "<pre>";
-//        print_r($posts);
-//        die();
+        //        echo "<pre>";
+        //        print_r($posts);
+        //        die();
         $data = array();
         if (!empty($posts)) {
             foreach ($posts as $post) {
@@ -1914,15 +2019,15 @@ class Admin extends MY_Controller {
                                     </i>
                                 </a>
                                 <a href="' . base_url() . 'admin/editproduct/' . $post->id . '" class="btn btn-default" title="edit">'
-                            . '<i class="ace-icon fa fa-pencil bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-pencil bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 if (is_permission("removeproduct")) {
                     $action .= '<a href="' . base_url() . 'admin/removeproduct/' . $post->id . '" class="btn btn-default" data-type="confirm" title="remove">'
-                            . '<i class="ace-icon fa fa-trash-o bigger-120">'
-                            . '</i>'
-                            . '</a>';
+                        . '<i class="ace-icon fa fa-trash-o bigger-120">'
+                        . '</i>'
+                        . '</a>';
                 }
                 $nestedData['action'] = $action;
                 $data[] = $nestedData;
@@ -1943,7 +2048,8 @@ class Admin extends MY_Controller {
      * UPload hình ảnh
      */
 
-    public function uploadimage() {
+    public function uploadimage()
+    {
         ini_set('post_max_size', '64M');
         ini_set('upload_max_filesize', '64M');
         $this->load->helper('file');
@@ -2077,7 +2183,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function uploadhinhanh() {
+    public function uploadhinhanh()
+    {
         ini_set('post_max_size', '64M');
         ini_set('upload_max_filesize', '64M');
         $this->load->helper('file');
@@ -2229,7 +2336,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function uploadfile() {
+    public function uploadfile()
+    {
         ini_set('post_max_size', '64M');
         ini_set('upload_max_filesize', '64M');
         $this->load->helper('file');
@@ -2246,9 +2354,9 @@ class Admin extends MY_Controller {
         $files = $_FILES;
 
         $file_count = count($_FILES['file_up']['name']);
-//        echo "<pre>";
-//        print_r($_FILES['file_up']);
-//        die();
+        //        echo "<pre>";
+        //        print_r($_FILES['file_up']);
+        //        die();
         for ($i = 0; $i < $file_count; $i++) {
 
             $ext = pathinfo($_FILES['file_up']['name'][$i], PATHINFO_EXTENSION);
@@ -2329,7 +2437,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function checkusername() {
+    public function checkusername()
+    {
         $username = $this->input->get('username');
         $this->load->model("user_model");
         $check = $this->user_model->where(array("username" => $username))->as_array()->get_all();
@@ -2340,7 +2449,8 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function deleteImage($params) {//gets the job done but you might want to add error checking and security
+    public function deleteImage($params)
+    { //gets the job done but you might want to add error checking and security
         $this->load->model('hinhanh_model');
         $id = $params[0];
         $file = $this->hinhanh_model->where('id_hinhanh', $id)->as_array()->get();
@@ -2362,52 +2472,53 @@ class Admin extends MY_Controller {
         }
         $data = array('deleted' => 1);
         $this->hinhanh_model->update($data, $id);
-//        $info = new StdClass;
-//        $info->sucess = $success;
-//        if (IS_AJAX) {
-////I don't think it matters if this is set but good for error checking in the console/firebug
-//            echo json_encode(array($info));
-//        } else {
-////here you will need to decide what you want to show for a successful delete        
-//            $file_data['delete_data'] = $file;
-////$this->load->view('admin/delete_success', $file_data);
-//        }
+        //        $info = new StdClass;
+        //        $info->sucess = $success;
+        //        if (IS_AJAX) {
+        ////I don't think it matters if this is set but good for error checking in the console/firebug
+        //            echo json_encode(array($info));
+        //        } else {
+        ////here you will need to decide what you want to show for a successful delete        
+        //            $file_data['delete_data'] = $file;
+        ////$this->load->view('admin/delete_success', $file_data);
+        //        }
         echo json_encode(1);
     }
 
-//    public function renameimage() {//gets the job done but you might want to add error checking and security
-////        echo 1;die();
-//        error_reporting(1);
-//        error_reporting('On');
-//        $this->load->model('hinhanh_model');
-//        $files = $this->hinhanh_model->as_array()->get_all();
-//        $success = 0;
-//        if (!file_exists("public/uploads/2018-08-01/")) {
-//            mkdir("public/uploads/2018-08-01/", 0777, true);
-//        }
-//        foreach ($files as $file) {
-//            $ext = pathinfo($file['ten_hinhanh'], PATHINFO_EXTENSION);
-//            $id = $file['id_hinhanh'];
-//            $data = array();
-//            $date = date("Y-m-d", strtotime($file['date']));
-////            print_r($file);
-////            die();
-////            $success
-//            if ($file['src'] != "" && file_exists(FCPATH . "public/uploads/$date/" . $file['ten_hinhanh'])) {
-//                $name = "public/uploads/2018-08-01/$id.$ext";
-//                $success = copy("public/uploads/$date/" . $file['ten_hinhanh'], FCPATH . $name);
-//                $data['src'] = $name;
-//            }
-//            if (count($data))
-//                $this->hinhanh_model->update($data, $id);
-//        }
+    //    public function renameimage() {//gets the job done but you might want to add error checking and security
+    ////        echo 1;die();
+    //        error_reporting(1);
+    //        error_reporting('On');
+    //        $this->load->model('hinhanh_model');
+    //        $files = $this->hinhanh_model->as_array()->get_all();
+    //        $success = 0;
+    //        if (!file_exists("public/uploads/2018-08-01/")) {
+    //            mkdir("public/uploads/2018-08-01/", 0777, true);
+    //        }
+    //        foreach ($files as $file) {
+    //            $ext = pathinfo($file['ten_hinhanh'], PATHINFO_EXTENSION);
+    //            $id = $file['id_hinhanh'];
+    //            $data = array();
+    //            $date = date("Y-m-d", strtotime($file['date']));
+    ////            print_r($file);
+    ////            die();
+    ////            $success
+    //            if ($file['src'] != "" && file_exists(FCPATH . "public/uploads/$date/" . $file['ten_hinhanh'])) {
+    //                $name = "public/uploads/2018-08-01/$id.$ext";
+    //                $success = copy("public/uploads/$date/" . $file['ten_hinhanh'], FCPATH . $name);
+    //                $data['src'] = $name;
+    //            }
+    //            if (count($data))
+    //                $this->hinhanh_model->update($data, $id);
+    //        }
 
-    function _load_language() {
+    function _load_language()
+    {
         $translations = array();
         $arrray_lang = $this->config->item("language_list");
         foreach ($arrray_lang as $k => $row) {
             $path = APPPATH . "language/" . $k . "/home_lang.php";
-//            echo $path;
+            //            echo $path;
             $masterModule = $this->_load_module($path);
             foreach ($masterModule as $lineNumber => $line) {
                 // Extract each key and value
@@ -2420,7 +2531,8 @@ class Admin extends MY_Controller {
         return $translations;
     }
 
-    function _load_module($modulePath) {
+    function _load_module($modulePath)
+    {
 
         /* TODO: Add error checking for non-existent files? */
 
@@ -2435,7 +2547,8 @@ class Admin extends MY_Controller {
      * @param $line string
      * @return boolean
      */
-    function _is_lang_key($line) {
+    function _is_lang_key($line)
+    {
         $line = trim($line);
         if (empty($line) || mb_stripos($line, '$lang[') === FALSE) {
             return FALSE;
@@ -2449,7 +2562,8 @@ class Admin extends MY_Controller {
      * @param $line string
      * @return string
      */
-    function _get_lang_key($line) {
+    function _get_lang_key($line)
+    {
         // Trim forward to the first quote mark
         $line = trim(mb_substr($line, mb_strpos($line, '[') + 1));
         // Trim forward to the second quote mark
@@ -2463,7 +2577,8 @@ class Admin extends MY_Controller {
      * @param $line string
      * @return string
      */
-    function _get_lang($line) {
+    function _get_lang($line)
+    {
 
         /* Agricultural solution */
         // Trim forward to the first quote mark
@@ -2497,7 +2612,8 @@ class Admin extends MY_Controller {
      *
      * @return string
      */
-    function _escape_templates($line) {
+    function _escape_templates($line)
+    {
         return preg_replace('/{(.*)}/', '\\{$1\\}', $line);
     }
 
@@ -2506,7 +2622,8 @@ class Admin extends MY_Controller {
      *
      * @return string
      */
-    function _unescape_templates($line) {
+    function _unescape_templates($line)
+    {
         return preg_replace('/\\\{(.*)\\\}/', '{$1}', $line);
     }
 
@@ -2519,7 +2636,8 @@ class Admin extends MY_Controller {
      * @param $php string
      * @return int
      */
-    function _invalid_php_syntax($php, &$err = '', &$bad_code = '') {
+    function _invalid_php_syntax($php, &$err = '', &$bad_code = '')
+    {
 
         // Remove opening and closing PHP tags
         $php = str_replace('<?php', '', $php);
@@ -2548,5 +2666,4 @@ class Admin extends MY_Controller {
 
         return $line;
     }
-
 }
