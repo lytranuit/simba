@@ -152,7 +152,6 @@ class Index extends MY_Controller
 
                 if ($this->email->send()) {
                     //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
-
                     $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
                 } else {
                     $file_log = './log_' . $logbook->id . '.log';
@@ -160,6 +159,9 @@ class Index extends MY_Controller
                 }
             }
         }
+
+        echo 1;
+        die();
         /*
          * Quote
          */
