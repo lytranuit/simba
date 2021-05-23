@@ -224,7 +224,7 @@ if (!function_exists('sendmaillogbok')) {
             );
             $email_to = explode(",", $logbook->email_send);
             if (empty($email_to)) {
-                return
+                return False;
             }
 
             $products = $customers = array();
