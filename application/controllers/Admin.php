@@ -1328,8 +1328,12 @@ class Admin extends MY_Controller
                 $nestedData['content'] = "<div class='fr-view'>$post->content</div>";
                 $nestedData['date'] = date("Y-m-d", $post->date);
                 $nestedData['stauts'] = $post->status == 1 ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>';
-                $nestedData['is_send'] = $post->is_send == 1 ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>';
+                $nestedData['is_send'] = $post->is_sent == 1 ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>';
                 $action = "";
+                $action .= '<a href="' . base_url() . 'admin/sendmaillogbook/' . $post->id . '" class="btn btn-default" data-type="confirm" title="Gửi mail">'
+                . '<i class="ace-icon fa fa-envelope bigger-120">'
+                . '</i>'
+                . '</a>';
                 if (is_permission("editfeedback")) {
                     $action .= '<a href="' . base_url() . 'admin/editlogbook/' . $post->id . '" class="btn btn-default" title="edit">'
                         . '<i class="ace-icon fa fa-pencil bigger-120">'
@@ -1357,6 +1361,14 @@ class Admin extends MY_Controller
         echo json_encode($json_data);
     }
 
+    /*
+    * Send mail Logbook
+    */
+
+    public function sendmaillogbook($id)
+    {
+        sendmaillogbok($id);
+    }
     /*
      * Nhà sản xuất
      */

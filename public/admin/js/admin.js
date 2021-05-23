@@ -405,12 +405,13 @@ $.AdminBSB.Custom = {
         $(document).off("click", "a[data-type=confirm]").on("click", "a[data-type=confirm]", function (e) {
             e.preventDefault();
             var href = $(this).attr("href");
+            var title = $(this).attr("title");
             swal({
                 title: "Are you sure?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
+                confirmButtonText: title,
                 closeOnConfirm: false
             }, function () {
                 location.href = href;
