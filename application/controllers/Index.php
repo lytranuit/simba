@@ -71,6 +71,8 @@ class Index extends MY_Controller
 
     public function cronjonsendmail()
     {
+        set_time_limit(0);
+        ini_set('max_execution_time', 0);
         $this->load->model("logbook_model");
         $this->load->model("option_model");
         $logbooks = $this->logbook_model->where(array("is_sent" => 0))->with_author()->with_customers()->with_products()->with_nccObject()->with_files()->as_object()->get_all();
@@ -148,9 +150,8 @@ class Index extends MY_Controller
                         $this->email->attach(base_url() . $row->src);
                     }
                 }
-
-
                 $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
+
                 if ($this->email->send()) {
                     //                echo json_encode(array('code' => 400, 'msg' => lang('alert_400')));
                 } else {
@@ -159,6 +160,9 @@ class Index extends MY_Controller
                 }
             }
         }
+
+        echo 1;
+        die();
         /*
          * Quote
          */
