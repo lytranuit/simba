@@ -1,4 +1,3 @@
-
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">Báo cáo nội bộ</a></li>
@@ -20,6 +19,7 @@
                             <th>Nội dung</th>
                             <th>Ngày</th>
                             <th>Tình trạng</th>
+                            <th>Gửi mail</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -31,7 +31,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         var table = $('#quanlytin').DataTable({
             "processing": true,
             "serverSide": true,
@@ -40,22 +40,46 @@
                 "dataType": "json",
                 "type": "POST",
             },
-            "columns": [
-                {"data": "id"},
-                {"data": "ncc"},
-                {"data": "products"},
-                {"data": "customers"},
-                {"data": "content"},
-                {"data": "date"},
-                {"data": "stauts", "className": "text-center"},
-                {"data": "action"},
+            "columns": [{
+                    "data": "id"
+                },
+                {
+                    "data": "ncc"
+                },
+                {
+                    "data": "products"
+                },
+                {
+                    "data": "customers"
+                },
+                {
+                    "data": "content"
+                },
+                {
+                    "data": "date"
+                },
+                {
+                    "data": "stauts",
+                    "className": "text-center"
+                },
+                {
+                    "data": "is_send",
+                    "className": "text-center"
+                },
+                {
+                    "data": "action"
+                },
             ]
 
         });
-        table.on('draw', function () {
+        table.on('draw', function() {
             var body = $(table.table().body());
-            body.unhighlight({className: "bg-danger"});
-            body.highlight(table.search(), {className: "bg-danger"});
+            body.unhighlight({
+                className: "bg-danger"
+            });
+            body.highlight(table.search(), {
+                className: "bg-danger"
+            });
         });
     });
 </script>
