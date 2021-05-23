@@ -131,7 +131,7 @@ Footer
                 <div class="col-lg-3 col-sm-12">
                     <a href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=52435" target="_blank" class="bocongthuong">
                         <p>Chứng nhận SGD TMĐT</p>
-                        <img src="/img/bct.png" alt="TMĐT">
+                        <img src="/public/img/bct.png" alt="TMĐT">
                     </a>
                 </div>
             </div>
