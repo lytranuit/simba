@@ -1368,7 +1368,7 @@ class Admin extends MY_Controller
     public function sendmaillogbook($id)
     {
         sendmaillogbok($id);
-        redirect('admin/quanlylogbook', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+        // redirect('admin/quanlylogbook', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
        
     }
     /*
