@@ -1331,9 +1331,9 @@ class Admin extends MY_Controller
                 $nestedData['is_send'] = $post->is_sent == 1 ? '<i class="fa fa-check text-success" aria-hidden="true"></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"></i>';
                 $action = "";
                 $action .= '<a href="' . base_url() . 'admin/sendmaillogbook/' . $post->id . '" class="btn btn-default" data-type="confirm" title="Gửi mail">'
-                . '<i class="ace-icon fa fa-envelope bigger-120">'
-                . '</i>'
-                . '</a>';
+                    . '<i class="ace-icon fa fa-envelope bigger-120">'
+                    . '</i>'
+                    . '</a>';
                 if (is_permission("editfeedback")) {
                     $action .= '<a href="' . base_url() . 'admin/editlogbook/' . $post->id . '" class="btn btn-default" title="edit">'
                         . '<i class="ace-icon fa fa-pencil bigger-120">'
@@ -1369,7 +1369,7 @@ class Admin extends MY_Controller
     {
         sendmaillogbok($id);
         redirect('admin/quanlylogbook', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
-       
+
     }
     /*
      * Nhà sản xuất
@@ -1888,7 +1888,7 @@ class Admin extends MY_Controller
             redirect('admin/quanlyuser', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
         } else {
             $this->load->model("role_model");
-            $this->data['role'] = $this->role_model->as_array()->get_all();
+            $this->data['role'] = $this->role_model->where("deleted", 0)->as_array()->get_all();
             load_inputfile($this->data);
             load_editor($this->data);
             echo $this->blade->view()->make('page/page', $this->data)->render();
@@ -1914,7 +1914,7 @@ class Admin extends MY_Controller
             //            print_r($tin);
             //            die();
             $this->load->model("role_model");
-            $this->data['role'] = $this->role_model->as_array()->get_all();
+            $this->data['role'] = $this->role_model->where("deleted", 0)->as_array()->get_all();
             $this->data['tin'] = $tin;
             load_inputfile($this->data);
             load_editor($this->data);
