@@ -276,14 +276,17 @@ if (!function_exists('sendmaillogbok')) {
             // // print_r($html);
             // die();
             $CI->email->message($html);
-            echo "<pre>";
-            print_r($logbook->files);
-            die();
+            // echo "<pre>";
+            // print_r($logbook->files);
+            // die();
             if (!empty($logbook->files)) {
                 foreach ($logbook->files as $row) {
+                    print_r(APPPATH . $row->src);
                     $CI->email->attach(APPPATH . $row->src);
                 }
             }
+            
+            die();
             $CI->logbook_model->update(array("is_sent" => 1), $logbook->id);
 
             if ($CI->email->send()) {
