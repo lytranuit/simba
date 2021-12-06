@@ -276,6 +276,9 @@ if (!function_exists('sendmaillogbok')) {
             // // print_r($html);
             // die();
             $CI->email->message($html);
+            echo "<pre>";
+            print_r($logbook->files);
+            die();
             if (!empty($logbook->files)) {
                 foreach ($logbook->files as $row) {
                     $CI->email->attach(APPPATH . $row->src);
