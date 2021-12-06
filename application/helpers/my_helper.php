@@ -281,12 +281,11 @@ if (!function_exists('sendmaillogbok')) {
             // die();
             if (!empty($logbook->files)) {
                 foreach ($logbook->files as $row) {
-                    print_r(APPPATH . $row->src);
-                    $CI->email->attach(APPPATH . $row->src);
+                    $CI->email->attach(APPPATH . "../" . $row->src);
                 }
             }
-            
-            die();
+
+            // die();
             $CI->logbook_model->update(array("is_sent" => 1), $logbook->id);
 
             if ($CI->email->send()) {
