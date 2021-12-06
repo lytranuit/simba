@@ -147,7 +147,7 @@ class Index extends MY_Controller
                 $this->email->message($html);
                 if (!empty($logbook->files)) {
                     foreach ($logbook->files as $row) {
-                        $this->email->attach(base_url() . $row->src);
+                        $this->email->attach(APPPATH . "../" . $row->src);
                     }
                 }
                 $this->logbook_model->update(array("is_sent" => 1), $logbook->id);
@@ -205,7 +205,7 @@ class Index extends MY_Controller
                 $this->email->message($html);
                 if (!empty($quote->files)) {
                     foreach ($quote->files as $row) {
-                        $this->email->attach(base_url() . $row->src);
+                        $this->email->attach(APPPATH . "../" . $row->src);
                     }
                 }
 
