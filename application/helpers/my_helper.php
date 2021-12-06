@@ -278,7 +278,7 @@ if (!function_exists('sendmaillogbok')) {
             $CI->email->message($html);
             if (!empty($logbook->files)) {
                 foreach ($logbook->files as $row) {
-                    $CI->email->attach(base_url() . $row->src);
+                    $CI->email->attach(APPPATH . $row->src);
                 }
             }
             $CI->logbook_model->update(array("is_sent" => 1), $logbook->id);
