@@ -1965,7 +1965,7 @@ class Admin extends MY_Controller
             foreach ($posts as $post) {
 
                 $nestedData['username'] = $post->username;
-                $nestedData['role_name'] = $post->role_user->name;
+                $nestedData['role_name'] = isset($post->role_user) ? $post->role_user->name : "";
                 $nestedData['active'] = $post->active ? "Có" : "Không";
                 $nestedData['action'] = '<a href="' . base_url() . 'admin/edituser/' . $post->id . '" class="btn btn-default" title="edit">'
                     . '<i class="ace-icon fa fa-pencil bigger-120">'
