@@ -572,7 +572,7 @@ class Admin extends MY_Controller
             $files = $this->input->post('id_files');
             $role_download = is_array($this->input->post('role_download')) ? implode(",", $this->input->post('role_download')) : "";
             //            $this->productfile_model->where('id_product', $id)->delete();
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->productfile_model->insert(array('id_product' => $id, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0, 'role_download' => $role_download), $file);
@@ -606,7 +606,7 @@ class Admin extends MY_Controller
             $files = $this->input->post('id_files');
             $role_download = is_array($this->input->post('role_download')) ? implode(",", $this->input->post('role_download')) : "";
             $this->productfile_model->where('id_product', $id)->delete();
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->productfile_model->insert(array('id_product' => $id, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0, 'role_download' => $role_download), $file);
@@ -836,7 +836,7 @@ class Admin extends MY_Controller
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
             //            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
@@ -866,7 +866,7 @@ class Admin extends MY_Controller
             $this->tintuc_model->update($data_up, $id);
             $files = $this->input->post('id_files');
             $this->tintucfile_model->where('id_tintuc', $id)->delete();
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
@@ -935,7 +935,7 @@ class Admin extends MY_Controller
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
             //            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
@@ -965,7 +965,7 @@ class Admin extends MY_Controller
             $this->tintuc_model->update($data_up, $id);
             $files = $this->input->post('id_files');
             $this->tintucfile_model->where('id_tintuc', $id)->delete();
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
@@ -1031,7 +1031,7 @@ class Admin extends MY_Controller
             $id_tintuc = $this->tintuc_model->insert($data_up);
             $files = $this->input->post('id_files');
             //            $this->tintucfile_model->where('id_tintuc', $id_tintuc)->update(array('deleted' => 0));
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id_tintuc, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
@@ -1060,7 +1060,7 @@ class Admin extends MY_Controller
             $this->tintuc_model->update($data_up, $id);
             $files = $this->input->post('id_files');
             $this->tintucfile_model->where('id_tintuc', $id)->delete();
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->tintucfile_model->insert(array('id_tintuc' => $id, 'id_file' => $file));
                     $this->hinhanh_model->update(array('deleted' => 0), $file);
@@ -1633,7 +1633,7 @@ class Admin extends MY_Controller
              * FILE HINH ANH
              */
             $files = $this->input->post('id_files');
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->supplierproductfile_model->insert(array('supplier_product_id' => $id, 'file_id' => $file));
                 }
@@ -1662,7 +1662,7 @@ class Admin extends MY_Controller
              */
             $files = $this->input->post('id_files');
             $this->supplierproductfile_model->where('supplier_product_id', $id)->delete();
-            if (count($files) > 0) {
+            if (!empty($files)) {
                 foreach ($files as $file) {
                     $this->supplierproductfile_model->insert(array('supplier_product_id' => $id, 'file_id' => $file));
                 }
