@@ -39,10 +39,10 @@ Footer
                         </i>
                         {{lang("diachi")}}
                         <br>
-                        <i class="ion-ios-telephone-outline">
+                        <!-- <i class="ion-ios-telephone-outline">
                         </i>
                         {{$phone}}
-                        <br>
+                        <br> -->
                     </p>
                     <div class="social-links">
                         <a class="facebook" href="#">
