@@ -24,7 +24,7 @@ class Option_model extends MY_Model
 
     function get_phone()
     {
-        $sql = "SELECT opt_value FROM settings where group_name = 'system_phone' and opt_key = 'phone'";
+        $sql = "SELECT opt_value FROM settings where group_name = 'common' and opt_key = 'phone'";
         //        echo $sql;
         //        die();
         $query = $this->db->query($sql);
