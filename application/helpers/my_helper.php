@@ -266,7 +266,7 @@ if (!function_exists('sendmaillogbok')) {
             $data['date'] = date("Y-m-d H:i:s", $logbook->date);
             $data['date_end'] = date("Y-m-d H:i:s", $logbook->date_end);
             $data['email_send'] = $logbook->email_send;
-            $data['content'] = str_replace( "<!--[if !supportLineBreakNewLine]-->", "", $$logbook->content );
+            $data['content'] = str_replace( "<!--[if !supportLineBreakNewLine]-->", "", $logbook->content );
             $data['note'] = $logbook->note;
             $data['search'] = $logbook->search;
             $html = $CI->blade->view()->make('email/baocao', $data)->render();
