@@ -543,9 +543,16 @@ $config['proxy_ips'] = '';
  */
 
 $config['modules_locations'] = array(APPPATH . 'modules/');
-
-
-$config['base_url'] = "http://simba.com.vn/";
+function isSecure() {
+  return
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || $_SERVER['SERVER_PORT'] == 443;
+}
+$http = "http";
+if(isSecure()){
+  $http = "https";
+}
+$config['base_url'] = $http . "://".$_SERVER['HTTP_HOST']."/";
 
 $config['project_name'] = "Sim Ba Trading Co., LTD";
 
