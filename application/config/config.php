@@ -545,13 +545,9 @@ $config['proxy_ips'] = '';
 $config['modules_locations'] = array(APPPATH . 'modules/');
 
 
-$config['base_url'] = "http://simba.local/";
-
-$config['hotline'] = "0938 727 846";
+$config['base_url'] = "http://simba.com.vn/";
 
 $config['project_name'] = "Sim Ba Trading Co., LTD";
 
-$config['email_dk'] = "tqviet209@gmail.com";
-
-$config['version'] = "1.1";
+$config['version'] = "1.2";
 
