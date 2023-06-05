@@ -553,5 +553,5 @@ $config['project_name'] = "Sim Ba Trading Co., LTD";
 
 $config['email_dk'] = "tqviet209@gmail.com";
 
-$config['version'] = "1.0";
+$config['version'] = "1.1";
 
