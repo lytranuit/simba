@@ -50,16 +50,16 @@
                 <img alt="" src="<?= base_url(); ?>public/img/logo.png" title=""/>
             </a>
             <div class="hidden-sm-down pull-left">
-                <a target="_blank" style="font-size: 12px;margin-right: 5px;" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://itunes.apple.com/vn/app/simba-fresh/id1331294173" id="simba-app">
+                <a target="_blank" style="font-size: 12px;margin-right: 5px;" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://simbafresh.vn/" id="simba-app">
                     <span class="fa fa-shopping-cart text-danger"></span>
                     <span>
-                        App SimBa Fresh
+                        Simba Fresh Market
                     </span>
                 </a>
-                <a target="_blank" style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="http://www.simbaeshop.com/" id="oishii-web">
+                <a target="_blank" style="font-size: 12px" class="btn btn-light btn-outline-success btn-sm mt-2" href="https://www.simbaeshop.com/" id="oishii-web">
                     <span class="fa fa-shopping-cart text-danger"></span>
                     <span>
-                        SimBa Shop Oishii
+                        Simba E-shop
                     </span>
                 </a>
             </div>
