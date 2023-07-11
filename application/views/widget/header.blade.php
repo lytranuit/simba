@@ -77,7 +77,7 @@
                         </a>
                     </li>
                     @endforeach
-                    <li class="pull-right dropdown hidden-md-down"> 
+                    <!-- <li class="pull-right dropdown hidden-md-down"> 
                         <a href="#" class="toggle-search">
                             <i class="fa fa-search"></i> 
                         </a>
@@ -99,7 +99,7 @@
                                 </span>
                             </div>
                         </form>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
             <!-- #nav-menu-container -->
