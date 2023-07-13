@@ -1,4 +1,3 @@
-
 <ol class="breadcrumb breadcrumb-bg-grey">
     <li><a href="javascript:void(0);">Home</a></li>
     <li class="active"><a href="javascript:void(0);">Language</a></li>
@@ -46,14 +45,36 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#quanlytin').DataTable({
-            "lengthMenu": [[-1], ["All"]]
+    $(document).ready(function() {
+        var table = $('#quanlytin').DataTable({
+            "lengthMenu": [
+                [-1],
+                ["All"]
+            ]
         });
-        $("#Save").click(function (e) {
+        $("#Save").click(function(e) {
             e.preventDefault();
-            var data = {vietnamese: {}, english: {}, japanese: {}};
-            $("#quanlytin tbody tr").each(function () {
+            var data = {
+                vietnamese: {},
+                english: {},
+                japanese: {}
+            };
+            var datatable = table
+                .rows()
+                .data();
+            // consoleog(datatable);
+            // return;.l
+            for (var i = 0; i < datatable.length; i++) {
+                var row = datatable[i];
+                var key = row[1];
+                var vietnamese = $(row[2]).val();
+                var english = $(row[3]).val();
+                var japanese = $(row[4]).val();
+                data['vietnamese'][key] = vietnamese;
+                data['english'][key] = english;
+                data['japanese'][key] = japanese;
+            }
+            $("#quanlytin tbody tr").each(function() {
                 var key = $(".key", $(this)).text();
                 var vietnamese = $(".vietnamese", $(this)).val();
                 var english = $(".english", $(this)).val();
@@ -62,18 +83,19 @@
                 data['english'][key] = english;
                 data['japanese'][key] = japanese;
             });
-//            console.log(data);
-//           return false;
+            //            console.log(data);
+            //           return false;
             $.ajax({
                 url: path + "admin/savelanguage",
                 type: "POST",
                 dataType: "JSON",
-                data: {data: JSON.stringify(data)},
-                success: function (res) {
+                data: {
+                    data: JSON.stringify(data)
+                },
+                success: function(res) {
                     location.reload();
                 }
             })
         })
-    }
-    );
+    });
 </script>
