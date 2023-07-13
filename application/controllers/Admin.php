@@ -309,7 +309,8 @@ class Admin extends MY_Controller
             //            die();
             if (!$this->_invalid_php_syntax($php)) {
                 echo $path;
-                $fp = @fopen($path, 'w');
+                $fp = fopen($path, 'w');
+                print_r($fp);
                 if (fwrite($fp, $php) !== FALSE) {
                     fclose($fp);
                 }
