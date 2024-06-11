@@ -376,6 +376,7 @@ class Index extends MY_Controller
 
     function category($param)
     {
+        redirect("index", "refresh");
         $id = $param[0];
         $this->load->model("category_model");
         $tin = $this->category_model->where(array('id' => $id))->with_hinhanh()->with_products()->as_object()->get();
@@ -393,6 +394,7 @@ class Index extends MY_Controller
 
     function product($param)
     {
+        redirect("index", "refresh");
         $id = $param[0];
         $this->load->model("product_model");
         $this->load->model("productsimba_model");
@@ -410,7 +412,8 @@ class Index extends MY_Controller
     }
 
     function productsimba($param)
-    {
+    { 
+        redirect("index", "refresh");
         $id = $param[0];
         $this->load->model("productsimba_model");
         $tin = $this->productsimba_model->where(array('id' => $id))->as_object()->get();
