@@ -394,7 +394,7 @@ class Index extends MY_Controller
 
     function product($param)
     {
-        redirect("index", "refresh");
+        // redirect("index", "refresh");
         $id = $param[0];
         $this->load->model("product_model");
         $this->load->model("productsimba_model");

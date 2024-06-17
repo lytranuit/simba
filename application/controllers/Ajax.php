@@ -108,7 +108,7 @@ class Ajax extends MY_Controller
                 $this->db->escape_like_str($search) . "%' ESCAPE '!' OR (name_vi like '%" .
                 $this->db->escape_like_str($search) . "%' ESCAPE '!' AND name_" . $short_language . " IN(NULL,'')))";
         }
-
+        // echo $sql_where;die();
         /*
          * TINH COUNT
          */
